@@ -5,6 +5,7 @@ public class TestKlasse1 {
 		System.out.println("Ich bin ein Testprojekt");
 		System.out.println("Eigene Änderung. Hochladen diesmal ohne PushBranch, sondern via Upstream");
 		System.out.println("uuund ein weiterer Test. Wie greife ich konkret auf eine ältere Funktion zu");
+		System.out.println("Direkter Edit über github.com als vorschub vor der Geschichte mit der Version..");
 
 	}
 
