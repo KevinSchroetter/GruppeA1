@@ -5,6 +5,7 @@ public class HalloGit {
 		System.out.println("Hallo, ich bin ganz neuer Code...");
 		System.out.println("Hallo neuer Code <3");
 		System.out.println("Brückner kann jetzt auch pushen!");
+	    System.out.println("Rosa ist auch am Start");
 	}
 
 }
