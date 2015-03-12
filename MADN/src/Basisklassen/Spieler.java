@@ -1,5 +1,5 @@
 package Basisklassen;
 
-public class Spielfigur {
+public class Spieler {
 
 }
