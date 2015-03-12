@@ -1,5 +1,5 @@
 package Basisklassen;
 
-public class Würfel {
+public class WÃ¼rfel {
 
 }
