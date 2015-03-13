@@ -65,9 +65,16 @@ public class TestSpieler {
 	@Ignore
 	@Test
 	public void nächsterZug(){
-		spieler[0].ziehen();
-		spieler[1].ziehen();
-		assertTrue(spieler[2].getAmZug()==true);
+		spieler[0].würfeln();
+		spieler[0].kannIchZiehen();
+		spieler[0].ziehen(1);
+		assertFalse(spieler[0].getAmZug()==true);
+	}
+	@Ignore
+	@Test
+	public void kiSpieler(){
+		Spieler KI = new Spieler("Kevin",gelb,meinWürfel,"aggressiv");
+		assertTrue(KI.getBedienung() instanceof Spieler.KI);
 	}
 
 }
