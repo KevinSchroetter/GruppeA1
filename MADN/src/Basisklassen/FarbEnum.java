@@ -1,6 +1,6 @@
 package Basisklassen;
 
-enum FarbEnum {
+public enum FarbEnum {
 	ROT,BLAU,GRÜN,GELB;
 
 }
