@@ -9,7 +9,18 @@ import org.junit.Ignore;
 import org.junit.After;
 import org.junit.AfterClass;
 import Basisklassen.*;
-
+/**
+ * 
+ * @author Kevin Schrötter
+ * @version 1.0
+ * JUnit Testklasse zum Testen der Java Klasse "Spieler" im MADN Projekt
+ * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalität von "Spieler" zu gewärleisten.
+ * 
+ * @Attributes 
+ * -> spieler[] - Array zum Speichern von bis zu 4 Spieler-Objekten
+ * -> Farbenums rot, blau, grün, gelb - angelegt zum einfacheren zuweisen einer Farbe an einen Spieler 
+ * 
+ */
 
 public class TestSpieler {
 	static Spieler spieler[] = new Spieler[3];
@@ -20,6 +31,9 @@ public class TestSpieler {
 	static FarbEnum grün = FarbEnum.GRÜN;
 	static FarbEnum gelb = FarbEnum.GELB;
 
+	/**
+	 * Bevor die Tests starten, werden 3 Spieler angelegt.	
+	 */
 	@BeforeClass
 	public static void erstelleSpieler(){
 		
@@ -28,15 +42,24 @@ public class TestSpieler {
 		spieler[2] = new Spieler("Alex",grün,meinWürfel);
 	}
 	
+	/**
+	 * Vor jedem Test wird eine Ausgabe auf der Konsole dargestellt. Sie signalisiert den Start jedes Testfalls.
+	 */
 	@Before
 	public void startAnzeige(){
 		System.out.println("Teststart");
 	}
+	/**
+	 * Für jedes Ende eines Tests wird ebenfalls eine Ausgabe dargestellt.
+	 */
 	@After
 	public void endAnzeige(){
 		System.out.println("Testende");
 		System.out.println("");
 	}
+	/**
+	 * Erster Test. Hierbei wird überprüft, ob ein Spieler tatsächlich im Besitz von 4 Spielfiguren ist
+	 */
 	@Ignore
 	@Test
 	public void trivialTestAnzahlFiguren(){
@@ -46,22 +69,39 @@ public class TestSpieler {
 		}
 		assertTrue(anzFiguren == 4);
 	}
+	/**
+	 * Dieser Test kontrolliert, ob jeder Spielername einzigartig ist.
+	 * Dazu wird bewusst ein Spieler mit einem Namen angelegt, den es bereits gibt.
+	 * Erwartet wird hierbei eine Exception.
+	 */
 	@Ignore
 	@Test(expected=Exception.class)
 	public void gleicheNamen() {
 		Spieler s4 = new Spieler("Alex",gelb,meinWürfel);
 	}
+	/**
+	 * Kontrolle, das nicht mehr als 4 Spieler erstellt werden können.
+	 * Dies soll wird in "Spieler" über ein statisches Attribut zur Spieleranzahl geregelt.
+	 * Im Test wird bewusst ein zusätzlicher Spieler angelegt, der die maximale Anzahl übersteigt. 
+	 * Erwartet wird eine Exception.
+	 */
 	@Ignore
 	@Test(expected=Exception.class)
 	public void SpielerOverload() {
 		Spieler s4 = new Spieler("Kevin",gelb,meinWürfel);
 		Spieler overload = new Spieler("Bonus",rot,meinWürfel);
 	}
+	/**
+	 * Ähnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe überprüft.
+	 */
 	@Ignore
 	@Test(expected=Exception.class)
 	public void FarbOverload(){
 		Spieler s4 = new Spieler("Kevin",rot,meinWürfel);
 	}
+	/**
+	 * Hier wird getestet, ob das Spieler-Attribut amZug tatsächlich auf False gesetzt wird, nachdem ein Spieler einen Zug ausgeführt hat.
+	 */
 	@Ignore
 	@Test
 	public void nächsterZug(){
@@ -70,6 +110,9 @@ public class TestSpieler {
 		spieler[0].ziehen(1);
 		assertFalse(spieler[0].getAmZug()==true);
 	}
+	/**
+	 * Kontrolle, ob einem Spieler erfolgreich eine KI der Elementklasse KI zugewiesen wurde.
+	 */
 	@Ignore
 	@Test
 	public void kiSpieler(){
