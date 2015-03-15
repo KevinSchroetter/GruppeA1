@@ -34,6 +34,7 @@ public class WürfelTest {
 	public void test() {
 			int erg=würfel.werfen();
 			assertTrue(erg==1|erg==2|erg==3|erg==4|erg==5|erg==6);
+			assertFalse(erg<1 | erg>6);
 		
 		
 	}
