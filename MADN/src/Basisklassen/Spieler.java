@@ -103,8 +103,7 @@ public class Spieler {
 	 * @param meinWürfel - Würfel des Spielers vom Typ Würfel
 	 * @param bedienung - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,
-			String bedienung) {
+	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,String bedienung) {
 		// Anweisungen einfügen
 	}
 	/**
