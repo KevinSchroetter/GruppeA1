@@ -101,7 +101,7 @@ public class Spielfigur {
 
 	// Konstruktor
 
-	public Spielfigur(int farbID) {
+	public Spielfigur(int farbID, int augenZahl) {
 
 		if (farbID == 1) {
 			this.farbe = FarbEnum.ROT;
@@ -114,14 +114,13 @@ public class Spielfigur {
 		} else
 			throw new IllegalArgumentException(
 					"Ungültige Farbe! 1 = Rot, 2 = Blau, 3 = Grün, 4 = Gelb!");
-		
+
 		if (anzahlFiguren >= 16)
 			throw new RuntimeException(
 					"Zu viele Figuren! max. 16 (4 pro Spieler!");
 		else {
 			this.setID(++Spielfigur.anzahlFiguren);
 		}
-
 
 	}
 
@@ -136,27 +135,27 @@ public class Spielfigur {
 
 	public void spawn() {
 
-		/*
-		 * Warte auf Implementierung von Klasse Spielfeld
-		 */
 	}
 
+	// True wenn meinFeld KEIN Startfeld ist ODER ein normales Feld ist ODER ein
+	// Zielfeld ist
 	public boolean binIchGespawnt() {
-		return false;
-		/*
-		 * Warte auf Implementierung von Klasse Spielfeld
-		 */
+		if ((this.getMeinFeld() != null)
+				&& ((!(this.getMeinFeld() instanceof Spielfeld.Startfeld))
+						|| this.getMeinFeld() instanceof Spielfeld.Endfeld || this
+							.getMeinFeld() instanceof Spielfeld.Standardfeld)) {
+			return true;
+		} else
+			return false;
+
 	}
 
 	public boolean binIchImZiel() {
-		/*
-		 * Warte auf Implementierung von Klasse Spielfeld
-		 */
 
 		return false;
 	}
 
-	public boolean kannIchZiehen() {
+	public boolean kannIchZiehen(int augenZahl) {
 
 		if ((this.binIchGespawnt() && (!(this.binIchImZiel())))
 				|| this.getKannSchlagen()) {

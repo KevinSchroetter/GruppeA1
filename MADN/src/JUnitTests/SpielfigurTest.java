@@ -59,7 +59,6 @@ public class SpielfigurTest {
 	public void UngültigeFarbe() {
 		figurenGelb[0] = new Spielfigur(0);
 		System.out.println(figurenGelb[0]);
-		System.gc();
 	}
 
 	@Test
