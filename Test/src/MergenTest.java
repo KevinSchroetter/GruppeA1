@@ -6,6 +6,7 @@ public class MergenTest {
 		System.out.println("Wer ist der weltbeste Merger?");
 		System.out.println("Felix ist es");
 		  System.out.println("Mergen ist toll");
+		  System.out.println("supergut");
 	}
 
 }
