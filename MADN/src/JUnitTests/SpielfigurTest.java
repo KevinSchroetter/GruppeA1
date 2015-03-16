@@ -82,5 +82,23 @@ public class SpielfigurTest {
 		Spielfigur overflow = new Spielfigur(1);
 		overflow = null;
 	}
+	
+	
+	@Test(expected = RuntimeException.class)
+	public void fehlerhafterSpawn(){
+		figurenGelb[0].spawn(null);
+	}
+	
+	@Test
+	public void spawnEineFigur(){
+		Spielfeld feld;
+		feld = new Standardfeld(1);
+		figurenRot[0].spawn((Standardfeld)feld);
+		System.out.println(figurenRot[0].toString());
+		if(!figurenRot[0].getIstGespawnt()){
+			fail();
+		} 
+	}
+	
 
 }

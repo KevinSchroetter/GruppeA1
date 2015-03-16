@@ -127,12 +127,13 @@ public class Spielfigur {
 	
 	/**
 	 * Öffentlicher Setter für Feld der Figur                       
-	 * @param Spielfeld meinFeld
+	 * @param meinFeld - Spielfeld
 	 */
 
 
 	public void setMeinFeld(Spielfeld meinFeld) {
 		this.meinFeld = meinFeld;
+		this.meinFeld.setFigur(this);
 	}
 	
 	/**
@@ -147,7 +148,7 @@ public class Spielfigur {
 	/**
 	 * Öffentlicher Setter für Schrittzähler - inkrementiert um Anzahl der Felder die die Figur gelaufen ist
 	 * wird bei Kill der Figur resetted (Deshalb Public, erfolgt später in Klasse Spiel)                       
-	 * @param felderGelaufen 
+	 * @param felderGelaufen - int
 	 */
 
 	public void setFelderGelaufen(int felderGelaufen) {
@@ -234,9 +235,10 @@ public class Spielfigur {
 
 	/**
 	 * Konstruktor für Klasse Spielfigur                 
-	 * @param farbID
-	 * @throws RuntimeException
-	 * @throws IllegalArgumentException
+	 * @param farbID - int
+	 * @exception RuntimeException Wenn Anzahl Figuren größer gleich 16
+	 * @exception  IllegalArgumentException Wenn FarbID kleiner gleich Null oder größer 4 ist
+	 * 
 	 * Generiert aus anzahlFiguren eine ID, prüft ob eine gültige Farbe übergeben wurde, falls nicht, 
 	 * wirft eine IllegalArgumentException. Gibt es bereits 16 Figuren, wirft er eine RuntimeException.
 	 * ! Im Verlauf der Implementierung von Klasse Spiel werden eigene Exceptions generiert - Runtime - und
@@ -265,6 +267,15 @@ public class Spielfigur {
 		}
 
 	}
+	
+	/**
+	 * Ermittelt, ob das Targetfeld gültig ist, und ob eine Figur darauf steht. Gehört die Figur zur gleichen Farbe,
+	 * kann sie nicht geschlagen werden. Ist die Figur feindlich gesinnt, kann sie erledigt werden.              
+	 * @param zielFeld - Spielfeld
+	 * @return boolean
+	 * @exception  RuntimeException Wenn Zielfeld ungültig
+
+	 */
 
 	public boolean kannSchlagen(Standardfeld zielFeld) {
 
@@ -282,6 +293,16 @@ public class Spielfigur {
 
 		return false;
 	}
+	
+	/**
+	 * Ermittelt, ob das jeweilige Startfeld frei ist. Wenn nicht, RuntimeException.
+	 * Ist das Spawnfeld ungültig, RuntimeException.
+	 * Handelt es sich bei dem Argument nicht um ein Standardfeld, RuntimeException.
+	 * Prüft die Farbe des spawnpoints und setzt die Figur an die Entsprechende Spawnlocation.    
+	 * @param spawnpoint - Spielfeld
+	 * @exception  RuntimeException Wenn Spawnpoint null, belegt oder kein Standardfeld ist
+
+	 */
 
 	public void spawn(Standardfeld spawnpoint) {
 		if (spawnpoint == null)
@@ -324,9 +345,14 @@ public class Spielfigur {
 		}
 
 	}
+	
+	/**
+	 * Prüft, ob die Figur im Spiel ist.. Gibt True zurück, wenn sie NICHT auf einem Startfeld steht, nicht
+	 * im Ziel ist (kann aber auf einem Endfeld stehen) und das Feld gültig ist. Gibt sonst false zurück.
+	 * @return boolean
 
-	// True wenn meinFeld KEIN Startfeld ist ODER ein normales Feld ist ODER ein
-	// Zielfeld ist
+	 */
+
 	public boolean binIchGespawnt() {
 		if ((this.getMeinFeld() != null)
 				&& ((!(this.getMeinFeld() instanceof Startfeld))
@@ -338,6 +364,17 @@ public class Spielfigur {
 			return false;
 
 	}
+	
+	/**
+	 * Prüft, mittels der übergebenen Augenzahl, ob die Figur im Stande ist, einen Zug auf ein Standardfeld durchzuführen. True wenn
+	 * meinFeld instanz von Standardfeld ist und die Nummer des aktuellen Feldes plus der Augenzahl kleiner gleich 40 ist.
+	 * Wirft bei ungültiger Feldzahl (kleiner gleich Null, größer 40) eine RuntimeException.
+	 * @return boolean
+	 * @param augenZahl - Integer, gewürfelte Zahl
+	 * @exception  RuntimeException Wenn FeldID kleiner gleich Null oder größer 40 ist.
+
+	 */
+
 
 	public boolean kannIchZiehen(int augenZahl) {
 
@@ -347,7 +384,7 @@ public class Spielfigur {
 			if (this.getMeinFeld() instanceof Standardfeld) {
 
 				Standardfeld meep = (Standardfeld) this.getMeinFeld();
-				if ((meep.getID() + augenZahl) > 40) {
+				if ((meep.getID() + augenZahl) > 40 || (meep.getID() + augenZahl) <= 0 ) {
 					throw new RuntimeException("Targetfeld out of bounds");
 				} else if (meep.getID() + augenZahl <= 40) {
 					return true;
@@ -361,6 +398,11 @@ public class Spielfigur {
 		return false;
 
 	}
+	
+	/**
+	 * Prüft, ob aktuelles Feld ein Standardfeld ist.
+	 * @return boolean
+	 */
 
 	public boolean istAufStandardfeld() {
 		if (this.getMeinFeld() instanceof Standardfeld)
@@ -368,6 +410,11 @@ public class Spielfigur {
 		else
 			return false;
 	}
+	
+	/**
+	 * Prüft, ob aktuelles Feld ein Endfeld ist.
+	 * @return boolean
+	 */
 
 	public boolean istAufEndfeld() {
 		if (this.getMeinFeld() instanceof Endfeld)
@@ -376,6 +423,13 @@ public class Spielfigur {
 			return false;
 	}
 
+	
+	/**
+	 * Klassische toString Methode. Gibt ID, meinFeld und Farbe zurück
+	 * @return String
+	 */
+	
+	@Override
 	public String toString() {
 		return String.format("Figur %d auf Feld %s mit Farbe %s --\n ",
 				this.getID(), this.getMeinFeld(), (this.getFarbe().toString()));
