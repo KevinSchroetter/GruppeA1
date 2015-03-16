@@ -1,98 +1,230 @@
 package Basisklassen;
 
+/**
+ * @author      Alexander Brückner (Alexander.Brueckner@Student-Reutlingen-University.de)
+ * @version     1                 
+ * @since       2015-03-12          
+ */
+
 public class Spielfigur {
-
+	/**
+	 * Figurenzähler, dient als Verifikation der korrekten Anzahl an Figuren und zur Erstellung der FigurID
+	 */
 	private static int anzahlFiguren = 0;
-
+	/**
+	 * FigurenID - 1-16;
+	 */
 	private int ID;
+	/**
+	 * Feld, auf dem Figur steht
+	 */
 	private Spielfeld meinFeld;
+	/**
+	 * Farbe der Figur
+	 */
 	private FarbEnum farbe;
+	/**
+	 * "Schrittzähler" - um genaue Position von Figur nachzuvollziehen
+	 */
 	private int felderGelaufen;
 
 	// Für Zug
+	/**
+	 * True, wenn Kill möglich
+	 */
 	private boolean kannSchlagen;
+	/**
+	 * True wenn NICHT auf Startfeld und NICHT auf finaler Zielposition
+	 */
 	private boolean istGespawnt;
+	/**
+	 * True wenn Figur auf Zielfeld angekommen (Also "aus dem Spiel" ist)
+	 */
 	private boolean istImZiel;
+	/**
+	 * True wenn Zug in Zielfelder möglich
+	 */
 	private boolean kannInsZiel;
+	/**
+	 * True, wenn Zug auf Standardfeld möglich
+	 */
 	private boolean kannZiehen;
 
 	// Getter/Setter
-
+/**
+	 * Gibt meinFeld zurück                      
+	 * @return Spielfeld meinFeld
+	 */
 	public Spielfeld getMeinFeld() {
 		return meinFeld;
 	}
+	
+	/**
+	 * Gibt Farbe zurück                      
+	 * @return FarbEnum farbe
+	 */
 
 	public FarbEnum getFarbe() {
 		return farbe;
 	}
+	
+	/**
+	 * Gibt Anzahl gelaufener Felder zurück                      
+	 * @return int felderGelaufen
+	 */
 
 	public int getFelderGelaufen() {
 		return felderGelaufen;
 	}
+	
+	/**
+	 * Gibt Aufschluss ob Kill möglich ist                      
+	 * @return boolean kannSchlagen
+	 */
+	
 
 	public boolean getKannSchlagen() {
 		return kannSchlagen;
 	}
+	
+	/**
+	 * Gibt Aufschluss ob Figur im Spiel ist                      
+	 * @return boolean istGespawnt
+	 */
 
 	public boolean getIstGespawnt() {
 		return istGespawnt;
 	}
+	
+	/**
+	 * Gibt Aufschluss ob Figur aus dem Spiel ist (Auf Endfeld)                      
+	 * @return boolean istImZiel
+	 */
+
 
 	public boolean getIstImZiel() {
 		return istImZiel;
 	}
+	
+	/**
+	 * Gibt Aufschluss ob Figur sich auf ein Endfeld bewegen kann                      
+	 * @return boolean istImZiel
+	 */
+
 
 	public boolean getKannInsZiel() {
 		return kannInsZiel;
 	}
+	
+	/**
+	 * Gibt Aufschluss ob Figur auf ein Standardfeld ziehen kann                      
+	 * @return boolean istImZiel
+	 */
 
 	public boolean getKannZiehen() {
 		return kannZiehen;
 	}
+	
+	/**
+	 * Öffentlicher Setter für Feld der Figur                       
+	 * @param Spielfeld meinFeld
+	 */
 
-	private void setMeinFeld(Spielfeld meinFeld) {
+
+	public void setMeinFeld(Spielfeld meinFeld) {
 		this.meinFeld = meinFeld;
 	}
+	
+	/**
+	 * Privater Setter für Farbe der Figur                       
+	 * @param FarbEnum farbe
+	 */
 
 	private void setFarbe(FarbEnum farbe) {
 		this.farbe = farbe;
 	}
+	
+	/**
+	 * Öffentlicher Setter für Schrittzähler - inkrementiert um Anzahl der Felder die die Figur gelaufen ist
+	 * wird bei Kill der Figur resetted (Deshalb Public, erfolgt später in Klasse Spiel)                       
+	 * @param felderGelaufen 
+	 */
 
 	public void setFelderGelaufen(int felderGelaufen) {
 		this.felderGelaufen += felderGelaufen;
 	}
+	
+	/**
+	 * Privater Setter für kannSchlagen                  
+	 * @param boolean kannSchlagen
+	 */
 
 	private void setKannSchlagen(boolean kannSchlagen) {
 		this.kannSchlagen = kannSchlagen;
 	}
+	
+	/**
+	 * Privater Setter für istGespawnt                  
+	 * @param boolean istGespawnt
+	 */
 
 	private void setIstGespawnt(boolean istGespawnt) {
 		this.istGespawnt = istGespawnt;
 	}
+	
+	/**
+	 * Privater Setter für istimZiel                  
+	 * @param boolean istImZiel
+	 */
 
 	private void setIstImZiel(boolean istImZiel) {
 		this.istImZiel = istImZiel;
 	}
+	
+	/**
+	 * Privater Setter für kannInsZiel                  
+	 * @param boolean kannInsZiel
+	 */
 
 	private void setKannInsZiel(boolean kannInsZiel) {
 		this.kannInsZiel = kannInsZiel;
 	}
+	
+	/**
+	 * Privater Setter für kannZiehen                  
+	 * @param boolean kannZiehen
+	 */
 
 	private void setKannZiehen(boolean kannZiehen) {
 		this.kannZiehen = kannZiehen;
 	}
+	
+	/**
+	 * Öffentlicher, Statischer Getter für Anzahl der Figuren                  
+	 * @return int Spielfigur.anzahlFiguren
+	 */
 
 	public static int getAnzFiguren() {
 		return Spielfigur.anzahlFiguren;
 
 	}
 
+	/**
+	 * Privater Setter für ID - Prüft auf Gültigkeit                  
+	 * @param int ID
+	 */
+	
 	private void setID(int ID) {
 		if (ID <= 0)
 			throw new RuntimeException("ID einer Figur kann nicht 0 sein!");
 		else
 			this.ID = ID;
 	}
+	
+	/**
+	 * Öffentlicher Getter für ID der Figur                  
+	 * @return int ID
+	 */
 
 	public int getID() {
 		return this.ID;
@@ -100,6 +232,17 @@ public class Spielfigur {
 
 	// Konstruktor Spielfigur
 
+	/**
+	 * Konstruktor für Klasse Spielfigur                 
+	 * @param farbID
+	 * @throws RuntimeException
+	 * @throws IllegalArgumentException
+	 * Generiert aus anzahlFiguren eine ID, prüft ob eine gültige Farbe übergeben wurde, falls nicht, 
+	 * wirft eine IllegalArgumentException. Gibt es bereits 16 Figuren, wirft er eine RuntimeException.
+	 * ! Im Verlauf der Implementierung von Klasse Spiel werden eigene Exceptions generiert - Runtime - und
+	 * IllegalArgumentException dienen lediglich als Platzhalter !
+	 */
+	
 	public Spielfigur(int farbID) {
 
 		if (farbID == 1) {

@@ -2,6 +2,7 @@ package JUnitTests;
 
 import static org.junit.Assert.*;
 
+
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
@@ -9,7 +10,14 @@ import org.junit.Ignore;
 import org.junit.After;
 import org.junit.AfterClass;
 
+
 import Basisklassen.*;
+
+/**
+ * @author      Alexander Brückner (Alexander.Brueckner@Student-Reutlingen-University.de)
+ * @version     1                 
+ * @since       2015-03-15          
+ */
 
 public class SpielfigurTest {
 
