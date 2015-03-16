@@ -33,7 +33,7 @@ public class Spieler {
 	/** 
 	 * Ein Spieler hat immer Kenntnis über einen würfel vom Typ Würfel, mit dem er sein Spiel bestreitet
 	 */
-	private Würfel würfel = null;
+	private Würfel meinWürfel = null;
 	/**
 	 * Ein Spieler kann von einem Menschen gesteuert werden. In dem Fall nimmt das Attribut bedienung den Wert null an.
 	 * Er kann jedoch auch von einer Künstlichen Intelligenz KI gesteuert werden, die als Elementklasse der Klasse Spieler existiert.
@@ -187,6 +187,21 @@ public class Spieler {
 		return zugFigur;
 	}
 	/**
+	 * Setter für den Würfel
+	 * @param meinWürfel - Ein Würfelobjekt, das einem Spieler zugewiesen wird 
+	 */
+	public void setMeinWürfel(Würfel meinWürfel){
+		if (!(meinWürfel instanceof Würfel)) throw new RuntimeException("Es muss ein WürfelObjekt übergeben werden!");
+		this.meinWürfel=meinWürfel;
+	}
+	/**
+	 * Getter für den Würfel des Spielers, mit dem er seinen Zug ausführen kann.
+	 * @return meinWürfel - Der Würfel eines Spielers vom Typ Würfel
+	 */
+	public Würfel getMeinWürfel(){
+		return meinWürfel;
+	}
+	/**
 	 * Setter für das boolean Attribut amZug
 	 * @param amZug - boolean um festzulegen, ob ein Spieler gerade ziehen darfo der nicht.
 	 */
@@ -254,13 +269,14 @@ public class Spieler {
 	}
 	/**
 	 * Methode um zu ermitteln, ob ein Spieler vor seinem Zug direkt übersprungen werden kann.
-	 * Sie nutzt dazu die Methode kannIchZiehen() der Klasse Spielfigur und geht diese für jede Figur aus dem Attribu figuren durch.
+	 * Sie nutzt dazu die Methode kannIchZiehen(int) der Klasse Spielfigur und geht diese für jede Figur aus dem Attribut figuren durch.
 	 * @return  - TRUE, falls mindestens eine Figur ziehen kann, FALSE, falls keine einzige Figur ziehen kann.
 	 */
 	public boolean kannIchZiehen(){
+		int augenzahl = getMeinWürfel().werfen();
 		int check = 0;
 		for(int i = 0; i<4;i++){
-			if (figuren[i].kannIchZiehen()==true) check++;
+			if (figuren[i].kannIchZiehen(augenzahl)==true) check++;
 		}
 		if (check > 0) return true;
 		else{
