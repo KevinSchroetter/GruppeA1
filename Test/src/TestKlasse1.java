@@ -9,6 +9,7 @@ public class TestKlasse1 {
 		System.out.println("Was hast du geänadert?");
 		System.out.println("noch ma n push-test. Alex hat probleme mit dem pushen und pullen geht bei ihm auch nicht");
 		System.out.printf("Alles gelogen - funzt wunderbar! %d",1337);
+		System.out.println("testcommit...");
 
 	}
 
