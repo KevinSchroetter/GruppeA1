@@ -7,7 +7,7 @@ package Basisklassen;
  * ihre Elementarklassen vererbt.
  * 
  * @author Felix Rosa
- * @version 1.1
+ * @version 1.2
  * */
 
 public abstract class Spielfeld {
@@ -19,7 +19,6 @@ public abstract class Spielfeld {
 	 * Das Spielfeld besitzt ein Attribut des Typs figur.
 	 * */
 	public Spielfeld() {
-		this.figur = null;
 	}
 
 	/**
@@ -51,7 +50,7 @@ public abstract class Spielfeld {
 	 * 
 	 * */
 	static class Startfeld extends Spielfeld {
-		private static int iD;
+		private String iD;
 		private FarbEnum farbe;
 
 		/**
@@ -63,11 +62,16 @@ public abstract class Spielfeld {
 		 * @param farbe
 		 * 
 		 * */
-		public Startfeld(FarbEnum farbe) {
+		public Startfeld(String iD, FarbEnum farbe) {
 			super();
-			this.iD = ++Startfeld.iD;
-			this.farbe = farbe;
+			if (iD.contains("S1") || iD.contains("S2") || iD.contains("S3")
+					|| iD.contains("S4")) {
+				this.iD = iD;
+			} else {
+				throw new RuntimeException("Muss S1-S4 sein!");
+			}
 
+			this.farbe = farbe;
 		}
 
 		/**
@@ -75,7 +79,7 @@ public abstract class Spielfeld {
 		 * 
 		 * @return iD
 		 * */
-		public int getID() {
+		public String getID() {
 			return this.iD;
 		}
 
@@ -102,7 +106,8 @@ public abstract class Spielfeld {
 			Startfeld f = null;
 			if (obj instanceof Startfeld)
 				f = (Startfeld) obj;
-			return f.getID() == this.getID();
+			return f.getID() == this.getID()
+					&& f.getFarbe().equals(this.getFarbe());
 		}
 
 		/**
@@ -140,7 +145,11 @@ public abstract class Spielfeld {
 		 * */
 		public Standardfeld() {
 			super();
-			this.iD = ++Standardfeld.iD;
+			if (this.iD < 40) {
+				this.iD = ++Standardfeld.iD;
+			} else {
+				throw new RuntimeException("!FEHLER!");
+			}
 		}
 
 		/**
@@ -192,115 +201,39 @@ public abstract class Spielfeld {
 	 * identifizierbar ist sowie eine Farbe.
 	 * 
 	 * */
-	static class Inventarfeld extends Spielfeld {
-		private static int iD;
-		private FarbEnum farbe;
-
-		/**
-		 * Konstruktor der es ermöglicht ein Objekt des Typs Inventarfeld zu
-		 * erstellen. Das Feld besitzt ein Attribut des Typs figur, welches es
-		 * von der Superklasse Spielfeld erbt. Übergeben wird die Farbe des
-		 * Feldes.
-		 * 
-		 * @param farbe
-		 * */
-		public Inventarfeld(FarbEnum farbe) {
-			super();
-			this.iD = ++Inventarfeld.iD;
-		}
-
-		/**
-		 * Methode vom Typ int welche die ID des Feldes zurückgibt.
-		 * 
-		 * @return iD
-		 * */
-		public int getID() {
-			return this.iD;
-		}
-
-		/**
-		 * Methode welche die Farbe des Feldes zurückgibt.
-		 * 
-		 * @return farbe
-		 * */
-		public FarbEnum getFarbe() {
-			return farbe;
-		}
-
-		/**
-		 * Überschriebene equals Methode, welche ein übergebenes Objekt in ein
-		 * Objekt des Typs Inventarfeld castet und dieses mit dem bestehenden
-		 * Objekt vergleicht. Der Vergleich erfolgt über die ID.
-		 * 
-		 * @param Object
-		 *            obj
-		 * @return f.getID() == this.getID()
-		 * */
-		@Override
-		public boolean equals(Object obj) {
-			Inventarfeld f = null;
-			if (obj instanceof Inventarfeld)
-				f = (Inventarfeld) obj;
-			return f.getID() == this.getID();
-		}
-
-		/**
-		 * Überschriebene toString angepasst für die Klasse Inventarfeld.
-		 * Wandelt die Farbe, die ID und die Figur in einen String und gibt
-		 * diesen aus.
-		 * 
-		 * @return String.valueOf(this.getFarbe()) + " " +
-		 *         String.valueOf(this.getID()) + " " +
-		 *         String.valueOf(this.getFigur())
-		 * */
-		@Override
-		public String toString() {
-			return String.valueOf(this.getFarbe()) + " "
-					+ String.valueOf(this.getID()) + " "
-					+ String.valueOf(this.getFigur());
-		}
-
-	}
 
 	/**
 	 * Dies ist die Elementarklasse Zielfeld für das MADN-Spiel. Über diese
 	 * Klasse werden die Objekte des Typs Zielfeld für MADN erstellt, in welchen
 	 * sich die Spielfiguren einer Farbe sammeln um das Spielziel zu erreichen
 	 * Die Klasse hat die Attribute iD über die jedes Feld identifizierbar ist
-	 * sowie eine Farbe und die Boolean-Abfrage ob es sich um das letzte Feld
-	 * der Zielreihe handelt.
+	 * sowie eine Farbe.
 	 * 
 	 * */
 
-	static class Zielfeld extends Spielfeld {
-		private static int iD;
+	static class Endfeld extends Spielfeld {
+		private String iD;
 		private FarbEnum farbe;
-		private boolean letztes;
 
 		/**
-		 * Konstruktor der es ermöglicht ein Objekt des Typs Zielfeld zu
+		 * Konstruktor der es ermöglicht ein Objekt des Typs Endfeld zu
 		 * erstellen. Das Feld besitzt ein Attribut des Typs figur, welches es
 		 * von der Superklasse Spielfeld erbt. Übergeben werden die farbe des
-		 * feldes sowie der boolean ob es sich um das letzte Feld handelt.
+		 * Spielfeldes.
 		 * 
 		 * @param farbe
-		 *            , letzte
-		 * */
-		public Zielfeld(FarbEnum farbe, boolean letztes) {
-			super();
-			this.iD = ++Zielfeld.iD;
-			this.farbe = farbe;
-			this.letztes = letztes;
-		}
-
-		/**
-		 * Methode vom Typ boolean welche zurückgibt ob es sich bei dem Zielfeld
-		 * um das letzte in der Reihe handelt.
 		 * 
-		 * @return letztes
 		 * */
-		public boolean isLetztes() {
-			return letztes;
+		public Endfeld(String iD, FarbEnum farbe) {
+			super();
+			if (iD.contains("E1") || iD.contains("E2") || iD.contains("E3")
+					|| iD.contains("E4")) {
+				this.iD = iD;
+			} else {
+				throw new RuntimeException("Muss E1-E4 sein!");
+			}
+
+			this.farbe = farbe;
 		}
 
 		/**
@@ -308,7 +241,7 @@ public abstract class Spielfeld {
 		 * 
 		 * @return iD
 		 * */
-		public int getID() {
+		public String getID() {
 			return this.iD;
 		}
 
@@ -323,7 +256,7 @@ public abstract class Spielfeld {
 
 		/**
 		 * Überschriebene equals Methode, welche ein übergebenes Objekt in ein
-		 * Objekt des Typs Zielfeld castet und dieses mit dem bestehenden Objekt
+		 * Objekt des Typs Endfeld castet und dieses mit dem bestehenden Objekt
 		 * vergleicht. Der Vergleich erfolgt über die ID.
 		 * 
 		 * @param Object
@@ -332,16 +265,16 @@ public abstract class Spielfeld {
 		 * */
 		@Override
 		public boolean equals(Object obj) {
-			Zielfeld f = null;
-			if (obj instanceof Zielfeld)
-				f = (Zielfeld) obj;
+			Endfeld f = null;
+			if (obj instanceof Endfeld)
+				f = (Endfeld) obj;
 			return f.getID() == this.getID();
 		}
 
 		/**
-		 * Überschriebene toString angepasst für die Klasse Zielfeld. Wandelt
-		 * die Farbe, die ID, die Figur und Letztes in einen String und gibt
-		 * diesen aus.
+		 * Überschriebene toString angepasst für die Klasse Endfeld. Wandelt die
+		 * Farbe, die ID, die Figur und Letztes in einen String und gibt diesen
+		 * aus.
 		 * 
 		 * @return String.valueOf(this.getFarbe()) + " " +
 		 *         String.valueOf(this.getID()) + " " +
@@ -352,8 +285,7 @@ public abstract class Spielfeld {
 		public String toString() {
 			return String.valueOf(this.getFarbe()) + " "
 					+ String.valueOf(this.getID()) + " "
-					+ String.valueOf(this.getFigur()) + " "
-					+ String.valueOf(this.isLetztes());
+					+ String.valueOf(this.getFigur());
 		}
 
 	}
