@@ -8,6 +8,7 @@ public class MergenTest {
 		System.out.println("Wobei wir nicht so toll wie Mergen sind.");
 		System.out.println("Felix ist es");
 		  System.out.println("Mergen ist toll");
+		  System.out.println("ich liebe Mergen");
 	}
 
 }
