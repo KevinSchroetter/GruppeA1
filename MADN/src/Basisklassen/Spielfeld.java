@@ -268,7 +268,8 @@ public abstract class Spielfeld {
 			Endfeld f = null;
 			if (obj instanceof Endfeld)
 				f = (Endfeld) obj;
-			return f.getID() == this.getID();
+			return f.getID() == this.getID()
+					&& f.getFarbe().equals(this.getFarbe());
 		}
 
 		/**
