@@ -98,7 +98,7 @@ public class Spielfigur {
 		return this.ID;
 	}
 
-	// Konstruktor
+	// Konstruktor Spielfigur
 
 	public Spielfigur(int farbID) {
 
