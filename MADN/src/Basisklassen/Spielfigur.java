@@ -6,7 +6,6 @@ public class Spielfigur {
 
 	private int ID;
 	private Spielfeld meinFeld;
-	private Spielfeld zielFeld;
 	private FarbEnum farbe;
 	private int felderGelaufen;
 
@@ -59,8 +58,8 @@ public class Spielfigur {
 		this.farbe = farbe;
 	}
 
-	private void setFelderGelaufen(int felderGelaufen) {
-		this.felderGelaufen = felderGelaufen;
+	public void setFelderGelaufen(int felderGelaufen) {
+		this.felderGelaufen += felderGelaufen;
 	}
 
 	private void setKannSchlagen(boolean kannSchlagen) {
@@ -99,9 +98,9 @@ public class Spielfigur {
 		return this.ID;
 	}
 
-	// Konstruktor
+	// Konstruktor Spielfigur
 
-	public Spielfigur(int farbID, int augenZahl) {
+	public Spielfigur(int farbID) {
 
 		if (farbID == 1) {
 			this.farbe = FarbEnum.ROT;
@@ -124,16 +123,62 @@ public class Spielfigur {
 
 	}
 
-	public boolean kannSchlagen() {
+	public boolean kannSchlagen(Standardfeld zielFeld) {
 
-		/*
-		 * Warte auf Implementierung von Klasse Spielfeld
-		 */
+		if (zielFeld == null) {
+			throw new RuntimeException("Zielfeld ungültig!");
+		} else if (zielFeld.getFigur() == null) {
+			return false;
+		} else if (zielFeld.getFigur() != null) {
+			if (zielFeld.getFigur().getFarbe() == this.getFarbe()) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 
 		return false;
 	}
 
-	public void spawn() {
+	public void spawn(Standardfeld spawnpoint) {
+		if (spawnpoint == null)
+			throw new RuntimeException("Argument ist kein Spawnpoint!");
+		if (spawnpoint.getFigur() != null)
+			throw new RuntimeException("Spawnpoint belegt!");
+		if (!(spawnpoint instanceof Standardfeld))
+			throw new RuntimeException("Argument kein Spawnpoint!");
+		else {
+
+			switch (this.getFarbe()) {
+
+			case ROT:
+				if (spawnpoint.getID() == 1) {
+					this.setMeinFeld(spawnpoint);
+					this.setIstGespawnt(true);
+				}
+				break;
+			case BLAU:
+				if (spawnpoint.getID() == 11) {
+					this.setMeinFeld(spawnpoint);
+					this.setIstGespawnt(true);
+				}
+				break;
+			case GRÜN:
+				if (spawnpoint.getID() == 21) {
+					this.setMeinFeld(spawnpoint);
+					this.setIstGespawnt(true);
+				}
+				break;
+			case GELB:
+				if (spawnpoint.getID() == 31) {
+					this.setMeinFeld(spawnpoint);
+					this.setIstGespawnt(true);
+				}
+				break;
+
+			}
+
+		}
 
 	}
 
@@ -141,31 +186,49 @@ public class Spielfigur {
 	// Zielfeld ist
 	public boolean binIchGespawnt() {
 		if ((this.getMeinFeld() != null)
-				&& ((!(this.getMeinFeld() instanceof Spielfeld.Startfeld))
-						|| this.getMeinFeld() instanceof Spielfeld.Endfeld || this
-							.getMeinFeld() instanceof Spielfeld.Standardfeld)) {
+				&& ((!(this.getMeinFeld() instanceof Startfeld))
+						|| this.getMeinFeld() instanceof Endfeld || this
+							.getMeinFeld() instanceof Standardfeld)) {
 			return true;
+
 		} else
 			return false;
 
 	}
 
-	public boolean binIchImZiel() {
-
-		return false;
-	}
-
 	public boolean kannIchZiehen(int augenZahl) {
 
-		if ((this.binIchGespawnt() && (!(this.binIchImZiel())))
+		if ((this.binIchGespawnt() && (!(this.istAufEndfeld())))
 				|| this.getKannSchlagen()) {
-			return true;
+
+			if (this.getMeinFeld() instanceof Standardfeld) {
+
+				Standardfeld meep = (Standardfeld) this.getMeinFeld();
+				if ((meep.getID() + augenZahl) > 40) {
+					throw new RuntimeException("Targetfeld out of bounds");
+				} else if (meep.getID() + augenZahl <= 40) {
+					return true;
+				}
+			} else {
+				return false;
+			}
+
 		}
 
-		/*
-		 * Hier Algorithmus einfügen um zu ermitteln, ob innerhalb eines
-		 * Zielfelds, wenn ja, ist Zug innerhalb des Ziels möglich?
-		 */
+		return false;
+
+	}
+
+	public boolean istAufStandardfeld() {
+		if (this.getMeinFeld() instanceof Standardfeld)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean istAufEndfeld() {
+		if (this.getMeinFeld() instanceof Endfeld)
+			return true;
 		else
 			return false;
 	}
