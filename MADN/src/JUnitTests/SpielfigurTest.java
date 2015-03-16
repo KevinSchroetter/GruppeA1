@@ -2,7 +2,6 @@ package JUnitTests;
 
 import static org.junit.Assert.*;
 
-
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
@@ -10,21 +9,38 @@ import org.junit.Ignore;
 import org.junit.After;
 import org.junit.AfterClass;
 
-
 import Basisklassen.*;
 
 /**
- * @author      Alexander Brückner (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version     1                 
- * @since       2015-03-15          
+ * @author Alexander Brückner
+ *         (Alexander.Brueckner@Student-Reutlingen-University.de)
+ * @version 1
+ * @since 2015-03-15
  */
 
 public class SpielfigurTest {
 
+	/**
+	 * 4 Rote Figuren
+	 */
+
 	static Spielfigur[] figurenRot;
+	/**
+	 * 4 Blaue Figuren
+	 */
 	static Spielfigur[] figurenBlau;
+	/**
+	 * 4 Grüne Figuren
+	 */
 	static Spielfigur[] figurenGrün;
+	/**
+	 * 4 Gelbe Figuren
+	 */
 	static Spielfigur[] figurenGelb;
+
+	/**
+	 * Referenzen erstellen, alle ausser gelbe Figuren erzeugen
+	 */
 
 	@BeforeClass
 	public static void erstelleFiguren() {
@@ -51,11 +67,19 @@ public class SpielfigurTest {
 
 	}
 
+	/**
+	 * Ausgabe dass Test startet
+	 */
+
 	@Before
 	public void sayStart() {
 		System.out.println("Test beginnt..");
 
 	}
+
+	/**
+	 * Ausgabe dass Test endet
+	 */
 
 	@After
 	public void sayEnd() {
@@ -63,11 +87,19 @@ public class SpielfigurTest {
 
 	}
 
+	/**
+	 * Prüft ob Instanziierung abbricht falls ungültige Farbe gegeben
+	 */
+
 	@Test(expected = IllegalArgumentException.class)
 	public void UngültigeFarbe() {
 		figurenGelb[0] = new Spielfigur(0);
 		System.out.println(figurenGelb[0]);
 	}
+
+	/**
+	 * Gelbe Figuren erstellen
+	 */
 
 	@Test
 	public void gelbErstellen() {
@@ -77,28 +109,83 @@ public class SpielfigurTest {
 		}
 	}
 
+	/**
+	 * Verifizieren, dass nur 16 Figuren existieren dürfen
+	 * */
+
 	@Test(expected = RuntimeException.class)
 	public void zuVieleFiguren() {
 		Spielfigur overflow = new Spielfigur(1);
 		overflow = null;
 	}
-	
-	
+
+	/**
+	 * Verifikation dass illegaler Spawn nicht durchgeht
+	 */
+
 	@Test(expected = RuntimeException.class)
-	public void fehlerhafterSpawn(){
+	public void fehlerhafterSpawn() {
 		figurenGelb[0].spawn(null);
 	}
-	
+
+	/**
+	 * Sicherstellen dass Figuren spawnen können
+	 */
+
 	@Test
-	public void spawnEineFigur(){
+	public void spawnEineFigur() {
 		Spielfeld feld;
 		feld = new Standardfeld(1);
-		figurenRot[0].spawn((Standardfeld)feld);
-		System.out.println(figurenRot[0].toString());
-		if(!figurenRot[0].getIstGespawnt()){
+		figurenRot[0].spawn((Standardfeld) feld);
+		if (!figurenRot[0].getIstGespawnt()) {
 			fail();
-		} 
+		}
 	}
-	
+
+	/**
+	 * Prüfen ob die kannSchlagen Methode funktioniert
+	 */
+
+	@Test
+	public void kannIchEtwasTöten() {
+		Spielfeld feld1;
+		Spielfeld feld2;
+		feld1 = new Standardfeld(5);
+		feld2 = new Standardfeld(7);
+
+		figurenGelb[2].setMeinFeld(feld1);
+		figurenGrün[1].setMeinFeld(feld2);
+
+		if (!figurenGelb[2].kannSchlagen((Standardfeld) feld2)) {
+			fail();
+		}
+	}
+
+	/**
+	 * Sicherstellen dass keine Teamkills möglich sind
+	 */
+
+	@Test
+	public void sollteNichtTeamkillen() {
+
+		Spielfeld feld1 = new Standardfeld(5);
+		Spielfeld feld2 = new Standardfeld(6);
+		figurenGrün[2].setMeinFeld(feld1);
+		figurenGrün[3].setMeinFeld(feld2);
+		if (figurenGrün[2].kannSchlagen((Standardfeld) feld2)) {
+			fail();
+		}
+	}
+
+	/**
+	 * Sicherstellen dass man nur auf Standardfeldern spawnt, die gültig sind
+	 */
+
+	@Test(expected = RuntimeException.class)
+	public void sollteNichtSpawnen() {
+		Spielfeld feld = new Endfeld("E1", FarbEnum.ROT);
+		figurenRot[4].setMeinFeld((Endfeld) feld);
+		figurenRot[4].spawn(new Standardfeld(2));
+	}
 
 }

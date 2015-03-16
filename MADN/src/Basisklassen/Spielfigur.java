@@ -126,7 +126,7 @@ public class Spielfigur {
 	}
 	
 	/**
-	 * Öffentlicher Setter für Feld der Figur                       
+	 * Öffentlicher Setter für Feld der Figur, stellt Kenntnisbeziehung zwischen Figur und Feld her                       
 	 * @param meinFeld - Spielfeld
 	 */
 
@@ -432,7 +432,7 @@ public class Spielfigur {
 	@Override
 	public String toString() {
 		return String.format("Figur %d auf Feld %s mit Farbe %s --\n ",
-				this.getID(), this.getMeinFeld(), (this.getFarbe().toString()));
+			this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
 
 }
