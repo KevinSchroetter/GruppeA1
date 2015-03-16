@@ -10,15 +10,15 @@ package Basisklassen;
  *
  */
 public class Spielbrett {
-	private Spielfeld [] startFelderRot= new Spielfeld[4];
-	private Spielfeld [] startFelderBlau= new Spielfeld[4];
-	private Spielfeld [] startFelderGrün= new Spielfeld[4];
-	private Spielfeld [] startFelderGelb= new Spielfeld[4];
-	private Spielfeld [] endFelderRot= new Spielfeld [4];
-	private Spielfeld [] endFelderBlau= new Spielfeld [4];
-	private Spielfeld [] endFelderGrün= new Spielfeld [4];
-	private Spielfeld [] endFelderGelb= new Spielfeld [4];
-	private Spielfeld [] standardFelder= new Spielfeld[40];
+	private Startfeld [] startFelderRot= new Startfeld[4];
+	private Startfeld [] startFelderBlau= new Startfeld[4];
+	private Startfeld [] startFelderGrün= new Startfeld[4];
+	private Startfeld [] startFelderGelb= new Startfeld[4];
+	private Endfeld [] endFelderRot= new Endfeld [4];
+	private Endfeld [] endFelderBlau= new Endfeld [4];
+	private Endfeld [] endFelderGrün= new Endfeld [4];
+	private Endfeld [] endFelderGelb= new Endfeld [4];
+	private Standardfeld [] standardFelder= new Standardfeld[40];
 	
 	
 	/**
@@ -34,9 +34,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der roten Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index 
-	 * @return Spielfeld 
+	 * @return Startfeld 
 	 */
-	public Spielfeld getStartFelderRot(int index){
+	public Startfeld getStartFelderRot(int index){
 		if(index<0|index>startFelderRot.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return startFelderRot[index];
@@ -45,9 +45,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der blauen Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld 
+	 * @return Startfeld
 	 */
-	public Spielfeld getStartFelderBlau(int index){
+	public Startfeld getStartFelderBlau(int index){
 		if(index<0|index>startFelderBlau.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return startFelderBlau[index];
@@ -56,9 +56,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der grünen Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld
+	 * @return Startfeld
 	 */
-	public Spielfeld getStartFelderGrün(int index){
+	public Startfeld getStartFelderGrün(int index){
 		if(index<0|index>startFelderGrün.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return startFelderGrün[index];
@@ -67,9 +67,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der gelben Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld
+	 * @return Startfeld
 	 */
-	public Spielfeld getStartFelderGelb(int index){
+	public Startfeld getStartFelderGelb(int index){
 		if(index<0|index>startFelderGelb.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return startFelderGelb[index];
@@ -78,9 +78,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der Standardfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld 
+	 * @return Standardfeld 
 	 */
-	public Spielfeld getStandardFelder(int index){
+	public Standardfeld getStandardFelder(int index){
 		if(index<0|index>standardFelder.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		
@@ -90,9 +90,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der roten Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld
+	 * @return Endfeld
 	 */
-	public Spielfeld  getEndFelderRot(int index){
+	public Endfeld getEndFelderRot(int index){
 		if(index<0|index>endFelderRot.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return endFelderRot[index];
@@ -101,9 +101,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der blauen Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld
+	 * @return Endfeld
 	 */
-	public Spielfeld getEndFelderBlau(int index){
+	public Endfeld getEndFelderBlau(int index){
 		if(index<0|index>endFelderBlau.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return endFelderBlau[index];
@@ -112,9 +112,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der grünen Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld
+	 * @return Endfeld
 	 */
-	public Spielfeld getEndFelderGrün(int index){
+	public Endfeld getEndFelderGrün(int index){
 		if(index<0|index>endFelderGrün.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return endFelderGrün[index];
@@ -123,9 +123,9 @@ public class Spielbrett {
 	/**
 	 * Getter für die Inhalte des Arrays der gelben Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index
-	 * @return Spielfeld
+	 * @return Endfeld
 	 */
-	public Spielfeld getEndFelderGelb(int index){
+	public Endfeld getEndFelderGelb(int index){
 		if(index<0|index>endFelderGelb.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return endFelderGelb[index];
