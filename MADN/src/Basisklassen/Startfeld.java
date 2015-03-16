@@ -36,7 +36,7 @@ public class Startfeld extends Spielfeld {
 	}
 
 	/**
-	 * Methode vom Typ int welche die ID des Feldes zurückgibt.
+	 * Öffentlicher Getter der ID des Feldes zurückgibt
 	 * 
 	 * @return iD
 	 * */
@@ -45,9 +45,9 @@ public class Startfeld extends Spielfeld {
 	}
 
 	/**
-	 * Methode welche die Farbe des Feldes zurückgibt.
+	 * Öffentlicher Getter der Farbe des Feldes zurückgibt.
 	 * 
-	 * @return farbe
+	 * @return FarbEnum farbe
 	 * */
 	public FarbEnum getFarbe() {
 		return this.farbe;
@@ -81,8 +81,7 @@ public class Startfeld extends Spielfeld {
 	 * */
 	@Override
 	public String toString() {
-		return String.valueOf(this.getFarbe()) + " " + this.getID() + " "
-				+ String.valueOf(this.getFigur());
+		return String.valueOf(this.getFarbe()) + " " + this.getID();
 	}
 
 }

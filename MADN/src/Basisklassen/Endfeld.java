@@ -82,8 +82,7 @@ public class Endfeld extends Spielfeld {
 	 * */
 	@Override
 	public String toString() {
-		return String.valueOf(this.getFarbe()) + " " + this.getID() + " "
-				+ String.valueOf(this.getFigur());
+		return String.valueOf(this.getFarbe()) + " " + this.getID();
 	}
 
 }

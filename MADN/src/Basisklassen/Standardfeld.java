@@ -62,8 +62,7 @@ public class Standardfeld extends Spielfeld {
 	 * */
 	@Override
 	public String toString() {
-		return String.valueOf(this.getID()) + " "
-				+ String.valueOf(this.getFigur());
+		return String.valueOf(this.getID());
 	}
 
 }
