@@ -1,7 +1,5 @@
 package Basisklassen;
 
-import Basisklassen.Spielfeld.Startfeld;
-
 /**
  * Die Klasse Spieler für das MADN-Projekt
  * Sie beinhaltet alle Attribute und Methoden, auf die ein Spieler später im Spiel Zugriff erhält.
