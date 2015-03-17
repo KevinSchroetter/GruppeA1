@@ -14,13 +14,13 @@ public abstract class Spielfeld {
 
 	/**
 	 * Beinhaltet Figur die momentan auf dem Feld steht oder null.
-	 * */
+	 */
 	private Spielfigur figur;
 
 	/**
 	 * Konstruktor für ein Spielfeld. Spielfeld kennt die Belegung durch eine
 	 * Figur.
-	 * */
+	 */
 	public Spielfeld() {
 	}
 
@@ -28,7 +28,7 @@ public abstract class Spielfeld {
 	 * Öffentlicher Getter der Figur des Feldes zurückgibt
 	 * 
 	 * @return Spielfigur figur - Figur die auf Feld sitzt
-	 * */
+	 */
 	public Spielfigur getFigur() {
 		return figur;
 	}
@@ -41,8 +41,8 @@ public abstract class Spielfeld {
 	 *            figur - Figur die auf Feld gesetzt wird
 	 * @exception RuntimeException
 	 *                Wenn Feld belegt.
-	 * */
-	protected void setFigur(Spielfigur figur) {
+	 */
+	 public void setFigur(Spielfigur figur) {
 		if (this.getFigur() == null) {
 			this.figur = figur;
 		} else {

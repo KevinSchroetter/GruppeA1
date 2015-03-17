@@ -15,7 +15,7 @@ import Basisklassen.*;
  * Es werden verschiedene Tests erstellt um zu gewährleisten, dass sich die Objekte korrekt erstellen lassen.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 1.0
+ * @version 1.1
  * @since 2015-03-14
  */
 
@@ -24,7 +24,7 @@ public class TestSpielfeld {
 	
 	/**
 	 * Gibt vor jedem Test eine Information aus der Konsole aus, dass der Test gestartet wird.
-	 * */
+	 */
 	@Before
 	public void vorTest() {
 		System.out.println("Test beginnt.");
@@ -32,7 +32,7 @@ public class TestSpielfeld {
 
 	/**
 	 * Gibt nach jedem Test eine Information aus der Konsole aus, dass der Test beendet wurde.
-	 * */
+	 */
 	@After
 	public void nachTest() {
 		System.out.println("Test beendet.");
@@ -42,7 +42,7 @@ public class TestSpielfeld {
 	 * Kontrolle, das Startfeld nicht unter falscher ID erstellt werden kann.
 	 * Wird unter "Startfeld" mit einer Einschränkung der Eingabemöglichkeiten geregelt.
 	 * Exception erwartet
-	 * */
+	 */
 	
 	@Test (expected=Exception.class)
 	public void falscherNameStartfeld(){
@@ -54,7 +54,7 @@ public class TestSpielfeld {
 	 * Kontrolle, das Endfeld nicht unter falscher ID erstellt werden kann.
 	 * Wird unter "Endfeld" mit einer Einschränkung der Eingabemöglichkeiten geregelt.
 	 * Exception erwartet
-	 * */
+	 */
 	@Test (expected=Exception.class)
 	public void falscherNameEndfeld(){
 		Endfeld s2 = new Endfeld("S1", FarbEnum.BLAU);
@@ -64,7 +64,7 @@ public class TestSpielfeld {
 	 * Kontrolle, das Standardfeld nicht mit einer zu hohen ID erstellt werden kann.
 	 * Wird unter "Endfeld" mit einer Einschränkung des Wertebereichs auf 1-40 geregelt.
 	 * Exception erwartet
-	 * */
+	 */
 	@Test (expected=Exception.class)
 	public void zuHoheID(){
 		Standardfeld f = new Standardfeld(50);
@@ -74,10 +74,35 @@ public class TestSpielfeld {
 	 * Kontrolle, das Standardfeld nicht mit einer zu niedrigen ID erstellt werden kann.
 	 * Wird unter "Endfeld" mit einer Einschränkung des Wertebereichs auf 1-40 geregelt.
 	 * Exception erwartet
-	 * */
+	 */
 	@Test (expected=Exception.class)
 	public void zuNiedrigeID(){
 		Standardfeld f = new Standardfeld(-1);
+	}
+	
+	/**
+	 *  Testet ob eine Spielfigur auf ein Feld gesetzt werden kann und die Spielfigur einem Feld zugewiesen!
+	 */
+	@Test 
+	public void setzeAufFeld(){
+		Spielfeld testFeld;
+		testFeld = new Standardfeld(34);
+		Spielfigur testFigur = new Spielfigur(2);
+		testFigur.setMeinFeld(testFeld);
+	}
+	
+	/**
+	 *  Testet ob eine neue Figur auf ein belegtes Feld gesetzt werden kann!
+	 *  Exception erwartet
+	 */
+	@Test (expected=Exception.class)
+	public void feldIstBelegt(){
+		Spielfeld testFeld;
+		testFeld = new Standardfeld(34);
+		Spielfigur testFigur1 = new Spielfigur(2);
+		testFigur1.setMeinFeld(testFeld);
+		Spielfigur testFigur2 = new Spielfigur(2);
+		testFigur2.setMeinFeld(testFeld);
 	}
 
 }

@@ -9,16 +9,16 @@ package Basisklassen;
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
  * @version 1.3
  * @since 2015-03-16
- * */
+ */
 
 public class Startfeld extends Spielfeld {
 	/**
 	 * FeldID dient der Zurordnung und Identifizierung des Feldes "E1-E4"
-	 * */
+	 */
 	private String iD;
 	/**
 	 * Farbe des Feldes über das es einem Spieler zugeordnet wird
-	 * */
+	 */
 	private FarbEnum farbe;
 
 	/**
@@ -29,14 +29,11 @@ public class Startfeld extends Spielfeld {
 	 * Liegt die Eingabe der ID nicht im Wertebereich S1-S4 wird eine
 	 * RuntimeException geworfen!
 	 * 
-	 * @param FarbEnum
-	 *            farbe - Farbe des Feldes
-	 * @param String
-	 *            iD - ID des Feldes
-	 * @exception RuntimeException
-	 *                Muss im Wertebereich S1-S4 liegen
+	 * @param FarbEnum farbe - Farbe des Feldes
+	 * @param String  iD - ID des Feldes
+	 * @exception RuntimeException  Muss im Wertebereich S1-S4 liegen
 	 * 
-	 * */
+	 */
 	public Startfeld(String iD, FarbEnum farbe) {
 		super();
 		if (iD.contains("S1") || iD.contains("S2") || iD.contains("S3")
@@ -53,7 +50,7 @@ public class Startfeld extends Spielfeld {
 	 * Öffentlicher Getter der ID des Feldes zurückgibt
 	 * 
 	 * @return iD - die ID des Feldes
-	 * */
+	 */
 	public String getID() {
 		return this.iD;
 	}
@@ -62,7 +59,7 @@ public class Startfeld extends Spielfeld {
 	 * Öffentlicher Getter der Farbe des Feldes zurückgibt.
 	 * 
 	 * @return FarbEnum farbe - Farbe des Feldes
-	 * */
+	 */
 	public FarbEnum getFarbe() {
 		return this.farbe;
 	}
@@ -71,8 +68,7 @@ public class Startfeld extends Spielfeld {
 	 * Überschreiben der Equals. Zwei Objekte der Klasse Startfeld sind nur
 	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
-	 * @param Object
-	 *            obj - Übergebenes Startfeld-Objekt - wird mit this verglichen
+	 * @param Object obj - Übergebenes Startfeld-Objekt - wird mit this verglichen
 	 * @return boolean - gibt zurück ob zwei verglichene Startfelder gleich sind
 	 */
 	@Override
@@ -89,7 +85,7 @@ public class Startfeld extends Spielfeld {
 	 * die Farbe und die ID in einen String und gibt diesen aus.
 	 * 
 	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurück
-	 * */
+	 */
 	@Override
 	public String toString() {
 		return String.valueOf(this.getFarbe()) + " " + this.getID();

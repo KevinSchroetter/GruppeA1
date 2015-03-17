@@ -8,7 +8,7 @@ package Basisklassen;
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
  * @version 1.3
  * @since 2015-03-16
- * */
+ */
 public class Standardfeld extends Spielfeld {
 	/**
 	 * FeldID 1-40 dient der Identifizierung des Standardfeldes
@@ -22,10 +22,9 @@ public class Standardfeld extends Spielfeld {
 	 * RuntimeException geworfen.
 	 * 
 	 * @param int iD - die iD des Feldes
-	 * @exception RuntimeException
-	 *                Wenn iD <1 o. >40
+	 * @exception RuntimeException Wenn iD <1 o. >40
 	 * 
-	 * */
+	 */
 	public Standardfeld(int iD) {
 		super();
 		if (iD >= 1 && iD <= 40) {
@@ -39,7 +38,7 @@ public class Standardfeld extends Spielfeld {
 	 * Öffentlicher Getter der FeldID zurückgibt.
 	 * 
 	 * @return int iD - die ID des Feldes
-	 * */
+	 */
 	public int getID() {
 		return this.iD;
 	}
@@ -47,10 +46,9 @@ public class Standardfeld extends Spielfeld {
 	/**
 	 * Überschreiben der Equals. Zwei Objekte der Klasse Standardfeld sind nur dann gleich, wenn ihre Ihre ID die gleiche ist.
 	 * 
-	 * @param Object
-	 *            obj - Übergebenes Standardfeld-Objekt - wird mit this verglichen
+	 * @param Object obj - Übergebenes Standardfeld-Objekt - wird mit this verglichen
 	 * @return boolean - gibt zurück ob zwei verglichene Standardfelder gleich sind
-	 * */
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Standardfeld f = null;
@@ -64,7 +62,7 @@ public class Standardfeld extends Spielfeld {
 	 * die ID in einen String und gibt diesen aus.
 	 * 
 	 * @return String - gibt String mit Inhalt ID des Feldes zurück
-	 * */
+	 */
 	@Override
 	public String toString() {
 		return String.valueOf(this.getID());

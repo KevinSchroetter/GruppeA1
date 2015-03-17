@@ -9,16 +9,16 @@ package Basisklassen;
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
  * @version 1.3
  * @since 2015-03-16
- * */
+ */
 
 public class Endfeld extends Spielfeld {
 	/**
 	 * FeldID dient der Zurordnung und Identifizierung des Feldes "E1-E4"
-	 * */
+	 */
 	private String iD;
 	/**
 	 * Farbe des Feldes über das es einem Spieler zugeordnet wird
-	 * */
+	 */
 	private FarbEnum farbe;
 
 	/**
@@ -29,14 +29,11 @@ public class Endfeld extends Spielfeld {
 	 * Liegt die Eingabe der ID nicht im Wertebereich E1-E4 wird eine
 	 * RuntimeException geworfen!
 	 * 
-	 * @param FarbEnum
-	 *            farbe - Farbe des Feldes
-	 * @param String
-	 *            iD - ID des Feldes
-	 * @exception RuntimeException
-	 *                Wenn Feld nicht im Wertebereich E1-E4
+	 * @param FarbEnum farbe - Farbe des Feldes
+	 * @param String iD - ID des Feldes
+	 * @exception RuntimeException Wenn Feld nicht im Wertebereich E1-E4
 	 * 
-	 * */
+	 */
 	public Endfeld(String iD, FarbEnum farbe) {
 		super();
 		if (iD.contains("E1") || iD.contains("E2") || iD.contains("E3")
@@ -52,7 +49,7 @@ public class Endfeld extends Spielfeld {
 	 * Öffentlicher Getter der die FeldID zurückgibt.
 	 * 
 	 * @return int iD - die ID des Feldes
-	 * */
+	 */
 	public String getID() {
 		return this.iD;
 	}
@@ -61,7 +58,7 @@ public class Endfeld extends Spielfeld {
 	 * Öffentlicher Getter der die Farbe des Feldes zurückgibt
 	 * 
 	 * @return FarbEnum farbe - Farbe des Feldes
-	 * */
+	 */
 	public FarbEnum getFarbe() {
 		return farbe;
 	}
@@ -70,10 +67,9 @@ public class Endfeld extends Spielfeld {
 	 * Überschreiben der Equals. Zwei Objekte der Klasse Endfeld sind nur
 	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
-	 * @param Object
-	 *            obj - Übergebenes Endfeld-Objekt - wird mit this verglichen
+	 * @param Object obj - Übergebenes Endfeld-Objekt - wird mit this verglichen
 	 * @return boolean - gibt zurück ob zwei verglichene Endfelder gleich sind
-	 * */
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Endfeld f = null;
@@ -88,7 +84,7 @@ public class Endfeld extends Spielfeld {
 	 * Farbe und die ID in einen String und gibt diesen aus.
 	 * 
 	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurück
-	 * */
+	 */
 	@Override
 	public String toString() {
 		return String.valueOf(this.getFarbe()) + " " + this.getID();
