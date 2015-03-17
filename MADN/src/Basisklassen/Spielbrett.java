@@ -6,7 +6,7 @@ package Basisklassen;
  *
  * 
  * @author Anna Rosa
- * @version 1.3
+ * @version 1.4
  *
  */
 public class Spielbrett {
@@ -31,6 +31,76 @@ public class Spielbrett {
 		
 	}
 	
+	/**
+	 * Ein Getter, der das Startfelder-Array der roten Startfelder zurückgibt.
+	 * @return startFelderRot
+	 */
+	public Startfeld[] getAlleStartFelderRot(){
+		return  startFelderRot;
+	}
+	
+	/**
+	 * Ein Getter, der das Startfelder-Array der blauen Startfelder zurückgibt.
+	 * @return startFelderBlau
+	 */
+	public Startfeld[] getAlleStartFelderBlau(){
+		return  startFelderBlau;
+	}
+	
+	/**
+	 * Ein Getter, der das Startfelder-Array der grünen Startfelder zurückgibt.
+	 * @return startFelderGrün
+	 */
+	public Startfeld[] getAlleStartFelderGrün(){
+		return  startFelderGrün;
+	}
+	
+	/**
+	 * Ein Getter, der das Startfelder-Array der gelben Startfelder zurückgibt.
+	 * @return startFelderGelb
+	 */
+	public Startfeld[] getAlleStartFelderGelb(){
+		return  startFelderGelb;
+	}
+	
+	/**
+	 * Ein Getter, der das Endfelder-Array der roten Endfelder zurückgibt.
+	 * @return endFelderRot
+	 */
+	public Endfeld[] getAlleEndFelderRot(){
+		return  endFelderRot;
+	}
+	/**
+	 * Ein Getter, der das Endfelder-Array der blauen Endfelder zurückgibt.
+	 * @return endFelderRot
+	 */
+	public Endfeld[] getAlleEndFelderBlau(){
+		return  endFelderBlau;
+	}
+	
+	/**
+	 * Ein Getter, der das Endfelder-Array der grünen Endfelder zurückgibt.
+	 * @return endFelderGrün
+	 */
+	public Endfeld[] getAlleEndFelderGrün(){
+		return  endFelderGrün;
+	}
+	
+	/**
+	 * Ein Getter, der das Endfelder-Array der gelben Endfelder zurückgibt.
+	 * @return endFelderGelb
+	 */
+	public Endfeld[] getAlleEndFelderGelb(){
+		return  endFelderGelb;
+	}
+	
+	/**
+	 * Ein Getter, der das Standardfelder-Array zurückgibt.
+	 * @return standardFelderRot
+	 */
+	public Standardfeld[] getAlleStandardFelder(){
+		return standardFelder;
+	}
 	/**
 	 * Getter für die Inhalte des Arrays der roten Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index 
