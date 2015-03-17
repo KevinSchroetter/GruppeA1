@@ -6,6 +6,7 @@ public class TestAbgabe1 {
 		System.out.println("Es geht los!");
 		System.out.println("Push Kevin");
 		System.out.println("Alex rockt!");
+		System.out.println("ich auch!");
 	}
 
 }
