@@ -1,21 +1,29 @@
 package Basisklassen;
 
 /**
- * Dies ist die Klasse Standardfeld für das MADN-Spiel. Sie erbt von der
- * Parent-Klasse Spielfeld. Über diese Klasse werden die Objekte des Typs
- * Standardfeld für MADN erstellt, welche die regulären Felder des Spiels bilden
- * Die Klasse hat die Attribute iD über die jedes Feld identifizierbar.
+ * Klasse Standardfeld erbt von Spielfeld - über diese Klasse werden die 40
+ * Standardfelder von MADN erstellt. Jedes Standardfeld hat eine ID über die
+ * identifizierbar ist - diese liegt im Wertebereich 1-40
  * 
- * @author Felix Rosa
+ * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
  * @version 1.3
+ * @since 2015-03-16
  * */
 public class Standardfeld extends Spielfeld {
+	/**
+	 * FeldID 1-40 dient der Identifizierung des Standardfeldes
+	 */
 	private int iD;
 
 	/**
-	 * Konstruktor der es ermöglicht ein Objekt des Typs Standardfeld zu
-	 * erstellen. Das Feld besitzt ein Attribut des Typs figur, welches es von
-	 * der Superklasse Spielfeld erbt.
+	 * Konstruktor für ein Standardfeld. Über das Attribut iD wird dem Feld
+	 * eine genaue ID zugewiesen über die das Feld identifizierbar ist Liegt die
+	 * Eingabe nicht innerhalb des Wertebereiches 1-40 wird eine
+	 * RuntimeException geworfen.
+	 * 
+	 * @param int iD - die iD des Feldes
+	 * @exception RuntimeException
+	 *                Wenn iD <1 o. >40
 	 * 
 	 * */
 	public Standardfeld(int iD) {
@@ -23,27 +31,25 @@ public class Standardfeld extends Spielfeld {
 		if (iD >= 1 && iD <= 40) {
 			this.iD = iD;
 		} else {
-			throw new RuntimeException("!FEHLER!");
+			throw new RuntimeException("iD muss im Bereich 1-40 liegen!");
 		}
 	}
 
 	/**
-	 * Methode vom Typ int welche die ID des Feldes zurückgibt.
+	 * Öffentlicher Getter der FeldID zurückgibt.
 	 * 
-	 * @return iD
+	 * @return int iD - die ID des Feldes
 	 * */
 	public int getID() {
 		return this.iD;
 	}
 
 	/**
-	 * Überschriebene equals Methode, welche ein übergebenes Objekt in ein
-	 * Objekt des Typs Standardfeld castet und dieses mit bestehenden Objekt
-	 * vergleicht. Der Vergleich erfolgt über die ID.
+	 * Überschreiben der Equals. Zwei Objekte der Klasse Standardfeld sind nur dann gleich, wenn ihre Ihre ID die gleiche ist.
 	 * 
 	 * @param Object
-	 *            obj
-	 * @return f.getID() == this.getID()
+	 *            obj - Übergebenes Standardfeld-Objekt - wird mit this verglichen
+	 * @return boolean - gibt zurück ob zwei verglichene Standardfelder gleich sind
 	 * */
 	@Override
 	public boolean equals(Object obj) {
@@ -55,10 +61,9 @@ public class Standardfeld extends Spielfeld {
 
 	/**
 	 * Überschriebene toString angepasst für die Klasse Standardfeld. Wandelt
-	 * die ID und die Figur in einen String und gibt diesen aus.
+	 * die ID in einen String und gibt diesen aus.
 	 * 
-	 * @return String.valueOf(this.getID()) + " " +
-	 *         String.valueOf(this.getFigur())
+	 * @return String - gibt String mit Inhalt ID des Feldes zurück
 	 * */
 	@Override
 	public String toString() {

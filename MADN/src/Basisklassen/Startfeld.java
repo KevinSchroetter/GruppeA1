@@ -1,26 +1,40 @@
 package Basisklassen;
 
 /**
- * Dies ist die Klasse Startfeld für das MADN-Spiel. Sie erbt von der
- * Parent-Klasse Spielfeld. Über diese Klasse werden die Objekte des Typs
- * Startfeld für MADN erstellt, von welcher die Spielfiguren auf dem Spielbrett
- * in das Spiel starten. Die Klasse hat die Attribute iD über die jedes Feld
- * identifizierbar ist sowie eine Farbe.
+ * Klasse Startfeld erbt von Spielfeld. Über diese Klasse werden die Startfelder
+ * von MADN erstellt. Auf diesen stehen die Figuren bevor Sie auf das
+ * eigentliche Spielbrett treten. Die Klasse hat die Attribute iD über die jedes
+ * Feld identifizierbar ist sowie eine Farbe.
  * 
- * @author Felix Rosa
+ * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
  * @version 1.3
+ * @since 2015-03-16
  * */
 
 public class Startfeld extends Spielfeld {
+	/**
+	 * FeldID dient der Zurordnung und Identifizierung des Feldes "E1-E4"
+	 * */
 	private String iD;
+	/**
+	 * Farbe des Feldes über das es einem Spieler zugeordnet wird
+	 * */
 	private FarbEnum farbe;
 
 	/**
-	 * Konstruktor der es ermöglicht ein Objekt des Typs Startfeld zu erstellen.
-	 * Das Feld besitzt ein Attribut des Typs figur, welches es von der
-	 * Superklasse Spielfeld erbt. Übergeben werden die Farbe des Feldes.
+	 * Konstruktor für ein Startfeld. Über das Attribut iD wird dem Feld eine
+	 * genaue ID zugewiesen über die das Feld in Kombination mit seiner Farbe
+	 * identifizierbar ist. Mit dem Attribut Farbe wird dem Feld eine Farbe
+	 * zugewiesen über die das Feld im Spiel einem Spieler zugewiesen wird!
+	 * Liegt die Eingabe der ID nicht im Wertebereich S1-S4 wird eine
+	 * RuntimeException geworfen!
 	 * 
-	 * @param farbe
+	 * @param FarbEnum
+	 *            farbe - Farbe des Feldes
+	 * @param String
+	 *            iD - ID des Feldes
+	 * @exception RuntimeException
+	 *                Muss im Wertebereich S1-S4 liegen
 	 * 
 	 * */
 	public Startfeld(String iD, FarbEnum farbe) {
@@ -38,7 +52,7 @@ public class Startfeld extends Spielfeld {
 	/**
 	 * Öffentlicher Getter der ID des Feldes zurückgibt
 	 * 
-	 * @return iD
+	 * @return iD - die ID des Feldes
 	 * */
 	public String getID() {
 		return this.iD;
@@ -47,21 +61,20 @@ public class Startfeld extends Spielfeld {
 	/**
 	 * Öffentlicher Getter der Farbe des Feldes zurückgibt.
 	 * 
-	 * @return FarbEnum farbe
+	 * @return FarbEnum farbe - Farbe des Feldes
 	 * */
 	public FarbEnum getFarbe() {
 		return this.farbe;
 	}
 
 	/**
-	 * Überschriebene equals Methode, welche ein übergebenes Objekt in ein
-	 * Objekt des Typs Startfeld castet und dieses mit dem bestehenden Objekt
-	 * vergleicht. Der Vergleich erfolgt über die ID.
+	 * Überschreiben der Equals. Zwei Objekte der Klasse Startfeld sind nur
+	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
 	 * @param Object
-	 *            obj
-	 * @return f.getID() == this.getID()
-	 * */
+	 *            obj - Übergebenes Startfeld-Objekt - wird mit this verglichen
+	 * @return boolean - gibt zurück ob zwei verglichene Startfelder gleich sind
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		Startfeld f = null;
@@ -72,12 +85,10 @@ public class Startfeld extends Spielfeld {
 	}
 
 	/**
-	 * Überschriebene toString angepasst für die Klasse Startfeld. Wandelt die
-	 * Farbe, die ID und die Figur in einen String und gibt diesen aus.
+	 * Überschriebene toString angepasst für die Klasse Standardfeld. Wandelt
+	 * die Farbe und die ID in einen String und gibt diesen aus.
 	 * 
-	 * @return String.valueOf(this.getFarbe()) + " " +
-	 *         String.valueOf(this.getID()) + " " +
-	 *         String.valueOf(this.getFigur())
+	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurück
 	 * */
 	@Override
 	public String toString() {

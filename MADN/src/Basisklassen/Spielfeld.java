@@ -1,40 +1,46 @@
 package Basisklassen;
 
 /**
- * Dies ist die abstrakte Klasse Spielfeld für das MADN-Spiel. Die Klasse
- * beinhaltet die Elementarklassen Startfeld, Standardfeld und Zielfeld. Die
- * Klasse Spielfeld besitzt das Attribut figur, welches Sie an ihre
- * Elementarklassen vererbt.
+ * Abstrakte Klasse Spielfeld - vererbt ihre Attribute an Startfeld,
+ * Standardfeld, Endfeld. Spielfeld kann von genau einer Spielfigur belegt
+ * werden und kennt diese dann.
  * 
- * @author Felix Rosa
+ * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
  * @version 1.3
+ * @since 2015-03-14
  */
 
 public abstract class Spielfeld {
 
+	/**
+	 * Beinhaltet Figur die momentan auf dem Feld steht oder null.
+	 * */
 	private Spielfigur figur;
 
 	/**
-	 * Konstruktor der es ermöglicht ein Objekt des Typs Spielfeld zu erstellen.
-	 * Das Spielfeld besitzt ein Attribut des Typs figur.
+	 * Konstruktor für ein Spielfeld. Spielfeld kennt die Belegung durch eine
+	 * Figur.
 	 * */
 	public Spielfeld() {
 	}
 
 	/**
-	 * Methode welche die Figur zurückgibt, die sich auf dem Spielfeld befindet
+	 * Öffentlicher Getter der Figur des Feldes zurückgibt
 	 * 
-	 * @return figur
+	 * @return Spielfigur figur - Figur die auf Feld sitzt
 	 * */
 	public Spielfigur getFigur() {
 		return figur;
 	}
 
 	/**
-	 * Methode über die ein Objekt des Typs figur auf das Feld gesetzt werden
-	 * kann.
+	 * Geschützter Setter über den eine Spielfigur auf das Feld gesetzt werden
+	 * kann. Wirft Runtime wenn Feld bereits durch eine Figur belegt ist.
 	 * 
-	 * @param figur
+	 * @param Spielfigur
+	 *            figur - Figur die auf Feld gesetzt wird
+	 * @exception RuntimeException
+	 *                Wenn Feld belegt.
 	 * */
 	protected void setFigur(Spielfigur figur) {
 		if (this.getFigur() == null) {
