@@ -12,6 +12,7 @@ public class MergenTest {
 		  System.out.println("Es geht weiter, bunt und heiter!");
 		  System.out.println("Wir werden immer breiter!");
 		  System.out.println("Was du nicht alles heiter nennst, du Grasdaggel!");
+		  System.out.println("Huhu Alex");
 	}
 
 }
