@@ -4,7 +4,7 @@ package Basisklassen;
  * Die Klasse Spieler für das MADN-Projekt
  * Sie beinhaltet alle Attribute und Methoden, auf die ein Spieler später im Spiel Zugriff erhält.
  * @author Kevin Schrötter
- * @version 1.0
+ * @version 1.2
  *
  */
 public class Spieler {
@@ -87,6 +87,7 @@ public class Spieler {
 	 * @param meinWürfel - Der Würfel (Typ Würfel), mit dem sich ein Spieler auf dem Spielfeld bewegen kann.
 	 */
 	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startfelder) {
+		setMeinWürfel(meinWürfel);
 		setSpielernummer();
 		setName(name);
 		setFarbe(farbe);
@@ -195,7 +196,7 @@ public class Spieler {
 	 */
 	public Spielfigur getFiguren(int figur){
 		if(figur<1 | figur>4) throw new RuntimeException("Spielfiguren können nur mit den Zahlen 1,2,3 und 4 angesprochen werden!");
-		return figuren[figur];
+		return figuren[figur-1];
 	}
 	/**
 	 * Setter für eine Spielfigur, mit der gezogen werden soll.
@@ -205,7 +206,7 @@ public class Spieler {
 	 */
 	public void setZugFigur(int figurID){
 		if(figurID<1 | figurID>4) throw new RuntimeException("Spielfiguren können nur mit den Zahlen 1,2,3 und 4 angesprochen werden!");
-		this.zugFigur = getFiguren(figurID-1);	
+		this.zugFigur = getFiguren(figurID);	
 	}
 	/**
 	 * Getter für die Spielfigur, mit der ein Spielzug ausgeführt werden soll.
@@ -317,7 +318,7 @@ public class Spieler {
 	 * @return - Ein String, der die toString() der Klasse Figur für jede Figur des Spielers zurückgibt.
 	 */
 	public String figurPositionen(){
-		return " Figuren: "+getFiguren(1).toString()+" "+getFiguren(2).toString()+" "+getFiguren(3).toString()+" "+getFiguren(4).toString();
+		return getFiguren(1).toString()+" "+getFiguren(2).toString()+" "+getFiguren(3).toString()+" "+getFiguren(4).toString();
 	}
 	/**
 	 * Diese Methode nimmt die gespeicherte zugFigur und führt einen Zug aus. Das heisst konkret, dass Sie kontrolliert, ob überhaupt eine
@@ -326,9 +327,10 @@ public class Spieler {
 	 */
 	public void ziehen(){
 		if (getZugFigur()==null)throw new RuntimeException("Keine Figur ausgewählt");
-		int augenzahl = getMeinWürfel().werfen();
+		int augenzahl = getMeinWürfel().testWurf(6);
 		if (getZugFigur().kannIchZiehen(augenzahl)==false)throw new RuntimeException("Diese Figur kann nicht ziehen. Bitte wählen Sie eine andere aus!");
 		//getZugFigur().laufen(augenzahl); Methode der Spielfigur fehlt nocH!;	
+		setAmZug(false);
 	}
 	/**
 	 * Hilfsmethode mit der das Figuren-Array zurückgegeben werden kann.

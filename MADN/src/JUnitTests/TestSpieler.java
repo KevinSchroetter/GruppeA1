@@ -8,11 +8,12 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.After;
 import org.junit.AfterClass;
+
 import Basisklassen.*;
 /**
  * 
  * @author Kevin Schrötter
- * @version 1.0
+ * @version 1.2
  * JUnit Testklasse zum Testen der Java Klasse "Spieler" im MADN Projekt
  * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalität von "Spieler" zu gewärleisten.
  * 
@@ -25,7 +26,12 @@ import Basisklassen.*;
 public class TestSpieler {
 	static Spieler spieler[] = new Spieler[3];
 	static Würfel meinWürfel = new Würfel();
+	static Spielbrett b = new Spielbrett();
 	static Spielfigur figuren[] = new Spielfigur[4];
+	static Startfeld rotStart[] = {b.getStartFelderRot(0),b.getStartFelderRot(1),b.getStartFelderRot(2),b.getStartFelderRot(3)};
+	static Startfeld blauStart[] = {b.getStartFelderBlau(0),b.getStartFelderBlau(1),b.getStartFelderBlau(2),b.getStartFelderBlau(3)};
+	static Startfeld grünStart[] = {b.getStartFelderGrün(0),b.getStartFelderGrün(1),b.getStartFelderGrün(2),b.getStartFelderGrün(3)};
+	static Startfeld gelbStart[] = {b.getStartFelderGelb(0),b.getStartFelderGelb(1),b.getStartFelderGelb(2),b.getStartFelderGelb(3)};
 
 	/**
 	 * Bevor die Tests starten, werden 3 Spieler angelegt.	
@@ -33,9 +39,11 @@ public class TestSpieler {
 	@BeforeClass
 	public static void erstelleSpieler(){
 		
-		spieler[0] = new Spieler("Anna",FarbEnum.ROT,meinWürfel);
-		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,meinWürfel);
-		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,meinWürfel);
+		
+		
+		spieler[0] = new Spieler("Anna",FarbEnum.ROT,meinWürfel,rotStart);
+		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,meinWürfel,blauStart);
+		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,meinWürfel,grünStart);
 	}
 	
 	/**
@@ -56,24 +64,15 @@ public class TestSpieler {
 	/**
 	 * Erster Test. Hierbei wird überprüft, ob ein Spieler tatsächlich im Besitz von 4 Spielfiguren ist
 	 */
-	@Ignore
+
 	@Test
 	public void trivialTestAnzahlFiguren(){
 		int anzFiguren=0;
-		for (int i = 1; i <= 4; i++){
-			if (spieler[0].getFiguren()!=null) anzFiguren++;
+		for (int i = 1;i <= 4;i++){
+			if(spieler[0].getFiguren(i)!=null) anzFiguren++;
 		}
-		assertTrue(anzFiguren == 4);
-	}
-	/**
-	 * Dieser Test kontrolliert, ob jeder Spielername einzigartig ist.
-	 * Dazu wird bewusst ein Spieler mit einem Namen angelegt, den es bereits gibt.
-	 * Erwartet wird hierbei eine Exception.
-	 */
-	@Ignore
-	@Test(expected=Exception.class)
-	public void gleicheNamen() {
-		Spieler s4 = new Spieler("Alex",FarbEnum.GELB,meinWürfel);
+		
+		assertTrue(anzFiguren==4);
 	}
 	/**
 	 * Kontrolle, das nicht mehr als 4 Spieler erstellt werden können.
@@ -81,38 +80,65 @@ public class TestSpieler {
 	 * Im Test wird bewusst ein zusätzlicher Spieler angelegt, der die maximale Anzahl übersteigt. 
 	 * Erwartet wird eine Exception.
 	 */
-	@Ignore
+
 	@Test(expected=Exception.class)
 	public void SpielerOverload() {
-		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,meinWürfel);
-		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,meinWürfel);
+		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,gelbStart);
+		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,meinWürfel,rotStart);
 	}
 	/**
 	 * Ähnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe überprüft.
 	 */
-	@Ignore
 	@Test(expected=Exception.class)
 	public void FarbOverload(){
-		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,meinWürfel);
+		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,meinWürfel,rotStart);
 	}
 	/**
-	 * Hier wird getestet, ob das Spieler-Attribut amZug tatsächlich auf False gesetzt wird, nachdem ein Spieler einen Zug ausgeführt hat.
+	 * Hier wird getestet, ob eine Fehlermeldung erscheint, wenn eine Figur nicht ausgewählt ist.
+	 */
+	@Test(expected=RuntimeException.class)
+	public void kannSpielerZiehen(){
+		spieler[0].kannIchZiehen();
+		spieler[0].setZugFigur(1);
+		spieler[0].ziehen();
+	}
+	/**
+	 * Hier wird getestet, ob eine Figur ziehen kann. Da bislang noch keine Figur laufen kann, wird ein False erwartet
+	 */
+	@Test
+	public void kannEinzelneFIgurZiehen(){
+		assertTrue(spieler[0].kannIchZiehen()==false);
+	}
+	/**
+	 * Dieser Test kontrolliert, ob das Attribut amZug eines Spielers nach einem Zug korrekterweise auf false gesetzt wird.
+	 * Dies kann erst getestet werden, wenn eine Figur laufen kann.
 	 */
 	@Ignore
 	@Test
 	public void nächsterZug(){
-		spieler[0].kannIchZiehen();
+		spieler[0].setZugFigur(1);
 		spieler[0].ziehen();
-		assertFalse(spieler[0].getAmZug()==true);
+		assertTrue(spieler[0].getAmZug()==false);
 	}
 	/**
-	 * Kontrolle, ob einem Spieler erfolgreich eine KI der Elementklasse KI zugewiesen wurde.
+	 * Kontrolle, ob sowol der Spieler, seine Spielfiguren und deren Startfelder die selbe Farbe besitzen.
+	 */
+	@Test 
+	public void farbenTest(){
+		boolean farbe = false;
+		Startfeld x = (Startfeld)spieler[0].getFiguren(1).getMeinFeld();
+		if (spieler[0].getFarbe()==spieler[0].getFiguren(1).getFarbe() && spieler[0].getFarbe()==x.getFarbe())farbe = true;
+		assertTrue(farbe == true);
+	}
+	/**
+	 * Kontrolle, ob einem Spieler erfolgreich eine KI der Elementklasse KI zugewiesen wurde und diese eine Instanz der Klasse Spieler ist.
+	 * Dieser Test wird später vollendet, wenn eine KI implementiert wurde.
 	 */
 	@Ignore
 	@Test
 	public void kiSpieler(){
-		Spieler KI = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,"aggressiv");
-		//assertTrue(KI.getBedienung() instanceof Spieler.KI);
+		Spieler KI = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,gelbStart,"aggressiv");
+		assertTrue(KI instanceof Spieler.KI);
 	}
 
 }
