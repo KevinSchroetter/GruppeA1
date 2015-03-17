@@ -10,6 +10,7 @@ public class MergenTest {
 		System.out.println("supergut");
 		System.out.println("Ich mag immer noch Kekse, selbst wenn es ein neuer Tag ist.");
 		  System.out.println("Es geht weiter, bunt und heiter!");
+		  System.out.println("Wir werden immer breiter!");
 	}
 
 }
