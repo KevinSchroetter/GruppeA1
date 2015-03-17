@@ -21,6 +21,10 @@ public class Spieler {
 	 */
 	private FarbEnum farbe = null;
 	/**
+	 * Ein Spieler erhält Kenntnis darüber, was seine Startfelder sind um diese den Figuren zuzuweisen.
+	 */
+	private Startfeld[] startFelder = null;
+	/**
 	 * Ein Spieler kennt zu jedem Zeitpunkt immer genau 4 figuren vom Typ Spielfigur
 	 */
 	private Spielfigur figuren[] = new Spielfigur[4];
@@ -53,7 +57,7 @@ public class Spieler {
 	 * @author Kevin Schrötter
 	 * @version 1.0
 	 */
-	public class KI {
+	public class KI extends Spieler {
 	/**
 	 * Konstruktor für einen Spieler mit "Künstlicher Intelligenz", der entweder aggressiv oder passiv sein kann.
 	 * Mit dem Attribut bedienung soll später im Spiel ausgewählt werden können, ob ein menschlicher Spieler über die Klasse Spieler
@@ -61,17 +65,15 @@ public class Spieler {
 	 * @param Name - Der Name der KI vom Typ String.
 	 * @param farbe - Die Farbe des KI-Spielers vom Typ FarbEnum.
 	 * @param meinWürfel - Der Würfel meinWürfel zum interagieren mit dem Spielfeld vom Typ Würfel.
+	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
 	 * @param bedienung - ein String, über den das Verhalten der KI festgelegt werden soll.
 	 */
-		public KI(String Name, FarbEnum farbe, Würfel meinWürfel,String bedienung) {
+		public KI(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder, String bedienung) {
+			super(name,farbe,meinWürfel,startFelder);
 			setBedienung(bedienung);
 			if(getBedienung().equals("aggressiv")) System.out.println("aggressive KI");
 			else if(getBedienung().equals("defensiv")) System.out.println("defensive KI");
 			// Bitte KI einfügen
-			setSpielernummer();
-			setName(name);
-			setFarbe(farbe);
-			setFiguren();
 		}
 
 	}
@@ -80,16 +82,16 @@ public class Spieler {
 	 * Ein Spieler kann nicht ohne Name, Spielerfarbe und Würfel existieren. Zusätzlich wird
 	 * eine statische Spielernummer beim erstellen eines Objektes inkrementiert, durch diee in Spieler identifiziert werden kann.
 	 * @param name - Der Name vom Typ String, den sich ein Spieler geben darf.
-	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf. 
+	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf.
+	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden. 
 	 * @param meinWürfel - Der Würfel (Typ Würfel), mit dem sich ein Spieler auf dem Spielfeld bewegen kann.
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel) {
+	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startfelder) {
 		setSpielernummer();
 		setName(name);
 		setFarbe(farbe);
-		setFiguren();
-		
-		// Anweisungen einfügen
+		setStartFelder(startfelder);
+		setFiguren(startfelder);
 	}
 	/**
 	 * Zweiter Konstruktor, über den ein KI Spieler erstellt werden kann.
@@ -99,9 +101,13 @@ public class Spieler {
 	 * @param name - Name des Spielers vom Typ String
 	 * @param farbe - Farbe des Spielers vom Typ FarbEnum
 	 * @param meinWürfel - Würfel des Spielers vom Typ Würfel
+	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
 	 * @param bedienung - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,String bedienung) {
+	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder,String bedienung) {
+		if(getBedienung().equals("aggressiv")) System.out.println("aggressive KI");
+		else if(getBedienung().equals("defensiv")) System.out.println("defensive KI");
+		Spieler KI = new KI(name,farbe,meinWürfel,startFelder,bedienung);
 		// Anweisungen einfügen
 	}
 	/**
@@ -123,7 +129,7 @@ public class Spieler {
 	 * @param name - Der Name des Spielers vom Typ String
 	 */
 	public void setName(String name){
-		if (name.length() < 2 | name.length()<10) throw new RuntimeException("Ungültiger Spielername");
+		if (name.length() < 2 && name.length()<10) throw new RuntimeException("Ungültiger Spielername");
 		this.name = name;		
 	}
 	/**
@@ -147,25 +153,49 @@ public class Spieler {
 	public FarbEnum getFarbe(){
 		return farbe;
 	}
+	/**
+	 * Setter für die Startfelder, die benötigt werden, um den Spielfiguren bei der Erstellung das korrekte Startfeld mit der Spielerfarbe zuzuweisen.
+	 * @param startFelder - Array vom Typ Startfeld.
+	 */
+	public void setStartFelder(Startfeld[] startFelder){
+		for (Startfeld sf: startFelder){
+			if(getFarbe()!=sf.getFarbe())throw new RuntimeException("Ein Spieler kennt nur die Startfelder seiner Farbe!");
+		}
+		this.startFelder = startFelder;
+	}
+	/**
+	 * Getter für ein Startfeld. Hiermit kann auf die bekannten Startfelder zugegriffen werden.
+	 * @param startFeld - Typ int als Index zur Rückgabe eines bestimmten Startfeldes.
+	 * @return Startfeld
+	 */
+	public Startfeld getStartFelder(int startFeld){
+		if(startFeld <1 | startFeld > 4) throw new RuntimeException("Es können nur Startfelder 1-4 angesprochen werden!");
+		return startFelder[startFeld-1];
+	}
 	/** 
 	 * Setter für die Spielfiguren eines Spielers.
-	 * Hierbei wird der Konstruktor der Spielfiguren mit der Farbe des Spielers aufgerufen.
+	 * Hierbei wird der Konstruktor der Spielfiguren mit der Farbe des Spielers aufgerufen und den Spielfiguren ein zugehöriges Startfeld zugewiesen.
 	 */
-	public void setFiguren(){
+	public void setFiguren(Startfeld[] startFelder){
 		if (getFarbe() == null) throw new RuntimeException("Es muss eine Farbe vergeben sein!");
 		int farbID = 0;
 		if (getFarbe()==FarbEnum.ROT) farbID = 1;
 		else if (getFarbe()==FarbEnum.BLAU) farbID = 2;
 		else if (getFarbe()==FarbEnum.GRÜN) farbID = 3;
 		else if (getFarbe()==FarbEnum.GELB) farbID = 4; 
-		for (int i = 0; i <4; i++) figuren[i] = new Spielfigur(farbID);
+			
+		for (int i = 0; i <4; i++){
+			figuren[i] = new Spielfigur(farbID);
+			figuren[i].setMeinFeld(startFelder[i]);
+		}
 	}
 	/**
 	 * Getter für die Spielfiguren.
 	 * @return figuren - Gibt ein Spielfigurarray zurück, in dem alle Spielfiguren des Spielers gespeichert sind.
 	 */
-	public Spielfigur[] getFiguren(){
-		return figuren;
+	public Spielfigur getFiguren(int figur){
+		if(figur<1 | figur>4) throw new RuntimeException("Spielfiguren können nur mit den Zahlen 1,2,3 und 4 angesprochen werden!");
+		return figuren[figur];
 	}
 	/**
 	 * Setter für eine Spielfigur, mit der gezogen werden soll.
@@ -175,7 +205,7 @@ public class Spieler {
 	 */
 	public void setZugFigur(int figurID){
 		if(figurID<1 | figurID>4) throw new RuntimeException("Spielfiguren können nur mit den Zahlen 1,2,3 und 4 angesprochen werden!");
-		this.zugFigur = getFiguren()[figurID];	
+		this.zugFigur = getFiguren(figurID-1);	
 	}
 	/**
 	 * Getter für die Spielfigur, mit der ein Spielzug ausgeführt werden soll.
@@ -250,7 +280,7 @@ public class Spieler {
 	 */
 	@Override
 	public String toString(){
-		return "Spieler " + getSpielernummer() + " Name: " + getName() + " Farbe: "+getFarbe() + " Figuren: "+getFiguren()[0].toString()+" "+getFiguren()[1].toString()+" "+getFiguren()[2].toString()+" "+getFiguren()[3].toString();
+		return "Spieler " + getSpielernummer() + " Name: " + getName() + " Farbe: "+getFarbe();
 	}
 	@Override
 	/**
@@ -274,7 +304,7 @@ public class Spieler {
 		int augenzahl = getMeinWürfel().werfen();
 		int check = 0;
 		for(int i = 0; i<4;i++){
-			if (figuren[i].kannIchZiehen(augenzahl)==true) check++;
+			if (alleFiguren()[i].kannIchZiehen(augenzahl)==true) check++;
 		}
 		if (check > 0) return true;
 		else{
@@ -282,8 +312,29 @@ public class Spieler {
 			return false;
 		}
 	}
+	/**
+	 * Methode, die die toString der Figuren aufruft, um die Positionen der Figuren eines Spielers anzuzeigen.
+	 * @return - Ein String, der die toString() der Klasse Figur für jede Figur des Spielers zurückgibt.
+	 */
+	public String figurPositionen(){
+		return " Figuren: "+getFiguren(1).toString()+" "+getFiguren(2).toString()+" "+getFiguren(3).toString()+" "+getFiguren(4).toString();
+	}
+	/**
+	 * Diese Methode nimmt die gespeicherte zugFigur und führt einen Zug aus. Das heisst konkret, dass Sie kontrolliert, ob überhaupt eine
+	 * Spielfigur in zugFigur ausgewählt wurde. Falls dies nicht so ist, wirft sie eine RuntimeException.
+	 * Anschließend wird geprüft, ob die ausgewählte Figur selbst ziehen kann. Wenn dem so ist, wird die Methode laufen(int) der Klasse Spielfigur aufgerufen.
+	 */
 	public void ziehen(){
-		//toGo
-		
+		if (getZugFigur()==null)throw new RuntimeException("Keine Figur ausgewählt");
+		int augenzahl = getMeinWürfel().werfen();
+		if (getZugFigur().kannIchZiehen(augenzahl)==false)throw new RuntimeException("Diese Figur kann nicht ziehen. Bitte wählen Sie eine andere aus!");
+		//getZugFigur().laufen(augenzahl); Methode der Spielfigur fehlt nocH!;	
+	}
+	/**
+	 * Hilfsmethode mit der das Figuren-Array zurückgegeben werden kann.
+	 * @return figuren - Array vom Typ Spielfigur
+	 */
+	private Spielfigur[] alleFiguren(){
+		return figuren;
 	}
 }
