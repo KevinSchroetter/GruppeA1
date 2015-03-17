@@ -14,6 +14,7 @@ public class MergenTest {
 		  System.out.println("Was du nicht alles heiter nennst, du Grasdaggel!");
 		System.out.println("HEY! Hier kommt Alex... Vorhang auf! Für seine Horrowshooohooow!");
 		
+		  System.out.println("Huhu Alex");
 	}
 
 }
