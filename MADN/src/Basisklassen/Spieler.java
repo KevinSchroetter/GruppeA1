@@ -4,7 +4,7 @@ package Basisklassen;
  * Die Klasse Spieler für das MADN-Projekt
  * Sie beinhaltet alle Attribute und Methoden, auf die ein Spieler später im Spiel Zugriff erhält.
  * @author Kevin Schrötter
- * @version 1.2
+ * @version 1.3
  *
  */
 public class Spieler {
@@ -41,7 +41,7 @@ public class Spieler {
 	 * Er kann jedoch auch von einer Künstlichen Intelligenz KI gesteuert werden, die als Elementklasse der Klasse Spieler existiert.
 	 * Eine KI kann entweder aggressives oder defensives Verhalten aufweisen.
 	 */
-	private String bedienung = null;
+	private KI bedienung = null;
 	/**
 	 * Ein Spieler hat kenntnis darüber, ob er gerade an einem Spielzug teilnimmt oder nicht.
 	 */
@@ -57,23 +57,29 @@ public class Spieler {
 	 * @author Kevin Schrötter
 	 * @version 1.0
 	 */
-	public class KI extends Spieler {
+	public class KI {
 	/**
 	 * Konstruktor für einen Spieler mit "Künstlicher Intelligenz", der entweder aggressiv oder passiv sein kann.
 	 * Mit dem Attribut bedienung soll später im Spiel ausgewählt werden können, ob ein menschlicher Spieler über die Klasse Spieler
 	 * oder ein Computergegener mit einer künstlichen Intelligenz ober die Elementklasse Spieler.KI erstellt wird.
-	 * @param Name - Der Name der KI vom Typ String.
-	 * @param farbe - Die Farbe des KI-Spielers vom Typ FarbEnum.
-	 * @param meinWürfel - Der Würfel meinWürfel zum interagieren mit dem Spielfeld vom Typ Würfel.
-	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
-	 * @param bedienung - ein String, über den das Verhalten der KI festgelegt werden soll.
+	 * @param meinSpieler - Spielerobjekt, das der KI zugewiesen wird.
+	 * @param verhalten - String, über den die Art der KI später bestimmt wird.
 	 */
-		public KI(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder, String bedienung) {
-			super(name,farbe,meinWürfel,startFelder);
-			setBedienung(bedienung);
-			if(getBedienung().equals("aggressiv")) System.out.println("aggressive KI");
-			else if(getBedienung().equals("defensiv")) System.out.println("defensive KI");
-			// Bitte KI einfügen
+		private Spieler meinSpieler = null;
+		public String verhalten = null;
+		/**
+		 * Konstruktor für eine Künstliche Intelligenz mit speziellem Verhalten
+		 * @param s - Typ Spieler, setzt eine Referenz auf den Spieler
+		 * @param verhalten - Typ String, wird verwendet, um das Verhalten der KI zu spezifizieren.
+		 */
+		public KI(Spieler s,String verhalten) {
+			if (s==null)throw new RuntimeException("Kein Spieler übergeben!");
+			if(!(verhalten.equals("aggressiv")) && verhalten.equals("defensiv")) throw new RuntimeException("KI kann nur aggressiv oder defensiv sein!");
+			this.meinSpieler = s;
+			this.verhalten = verhalten;
+			//Anweisungen für KI aggressiv und defensiv.
+			meinSpieler.setBedienung(this);
+			
 		}
 
 	}
@@ -103,12 +109,11 @@ public class Spieler {
 	 * @param farbe - Farbe des Spielers vom Typ FarbEnum
 	 * @param meinWürfel - Würfel des Spielers vom Typ Würfel
 	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
-	 * @param bedienung - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
+	 * @param verhalten - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder,String bedienung) {
-		if(getBedienung().equals("aggressiv")) System.out.println("aggressive KI");
-		else if(getBedienung().equals("defensiv")) System.out.println("defensive KI");
-		Spieler KI = new KI(name,farbe,meinWürfel,startFelder,bedienung);
+	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder,String verhalten) {
+	//	this(name,farbe,meinWürfel,startFelder);
+		KI k = new KI(this,verhalten);
 		// Anweisungen einfügen
 	}
 	/**
@@ -264,15 +269,14 @@ public class Spieler {
 	 * Setter für bedienung. 
 	 * @param KI - String, der angibt, ob es sich um einen menschlichen Spieler, eine aggressive KI oder eine defensive KI handelt.
 	 */
-	public void setBedienung(String KI){
-		if (KI.equals("aggressiv")|KI.equals("defensiv")) this.bedienung=KI;
-		else this.bedienung=null;
+	public void setBedienung(KI ki){
+		this.bedienung = ki;
 	}
 	/**
 	 * Getter für bedienung.
 	 * @return
 	 */
-	public String getBedienung() {
+	public KI getBedienung() {
 		return bedienung;
 	}
 	/**

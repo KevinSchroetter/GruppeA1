@@ -13,7 +13,7 @@ import Basisklassen.*;
 /**
  * 
  * @author Kevin Schrötter
- * @version 1.2
+ * @version 1.3
  * JUnit Testklasse zum Testen der Java Klasse "Spieler" im MADN Projekt
  * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalität von "Spieler" zu gewärleisten.
  * 
@@ -132,13 +132,11 @@ public class TestSpieler {
 	}
 	/**
 	 * Kontrolle, ob einem Spieler erfolgreich eine KI der Elementklasse KI zugewiesen wurde und diese eine Instanz der Klasse Spieler ist.
-	 * Dieser Test wird später vollendet, wenn eine KI implementiert wurde.
 	 */
-	@Ignore
 	@Test
 	public void kiSpieler(){
-		Spieler KI = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,gelbStart,"aggressiv");
-		assertTrue(KI instanceof Spieler.KI);
+		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,gelbStart,"aggressiv");
+		assertTrue(ki.getBedienung() instanceof Spieler.KI);
 	}
 
 }
