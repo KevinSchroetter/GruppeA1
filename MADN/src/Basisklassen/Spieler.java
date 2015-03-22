@@ -35,7 +35,7 @@ public class Spieler {
 	/** 
 	 * Ein Spieler hat immer Kenntnis über einen würfel vom Typ Würfel, mit dem er sein Spiel bestreitet
 	 */
-	private Würfel meinWürfel = null;
+	private Würfel meinWürfel = new Würfel();
 	/**
 	 * Ein Spieler kann von einem Menschen gesteuert werden. In dem Fall nimmt das Attribut bedienung den Wert null an.
 	 * Er kann jedoch auch von einer Künstlichen Intelligenz KI gesteuert werden, die als Elementklasse der Klasse Spieler existiert.
@@ -89,11 +89,9 @@ public class Spieler {
 	 * eine statische Spielernummer beim erstellen eines Objektes inkrementiert, durch diee in Spieler identifiziert werden kann.
 	 * @param name - Der Name vom Typ String, den sich ein Spieler geben darf.
 	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf.
-	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden. 
-	 * @param meinWürfel - Der Würfel (Typ Würfel), mit dem sich ein Spieler auf dem Spielfeld bewegen kann.
+	 * @param startfelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden. 
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startfelder) {
-		setMeinWürfel(meinWürfel);
+	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder) {
 		setSpielernummer();
 		setName(name);
 		setFarbe(farbe);
@@ -107,11 +105,10 @@ public class Spieler {
 	 * zugewiesen werden kann.
 	 * @param name - Name des Spielers vom Typ String
 	 * @param farbe - Farbe des Spielers vom Typ FarbEnum
-	 * @param meinWürfel - Würfel des Spielers vom Typ Würfel
-	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
+	 * @param startfelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
 	 * @param verhalten - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder,String verhalten) {
+	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder,String verhalten) {
 	//	this(name,farbe,meinWürfel,startFelder);
 		KI k = new KI(this,verhalten);
 		// Anweisungen einfügen
@@ -181,6 +178,7 @@ public class Spieler {
 	/** 
 	 * Setter für die Spielfiguren eines Spielers.
 	 * Hierbei wird der Konstruktor der Spielfiguren mit der Farbe des Spielers aufgerufen und den Spielfiguren ein zugehöriges Startfeld zugewiesen.
+	 * @param startFelder - Array mit den Startfeldern der zugehörigen Farbe für die Figuren des Spielers
 	 */
 	public void setFiguren(Startfeld[] startFelder){
 		if (getFarbe() == null) throw new RuntimeException("Es muss eine Farbe vergeben sein!");
@@ -197,6 +195,7 @@ public class Spieler {
 	}
 	/**
 	 * Getter für die Spielfiguren.
+	 * @param figur - Index vom Typ int, um eine bestimmte Spielfigur anzusprechen.
 	 * @return figuren - Gibt ein Spielfigurarray zurück, in dem alle Spielfiguren des Spielers gespeichert sind.
 	 */
 	public Spielfigur getFiguren(int figur){
@@ -221,14 +220,6 @@ public class Spieler {
 		return zugFigur;
 	}
 	/**
-	 * Setter für den Würfel
-	 * @param meinWürfel - Ein Würfelobjekt, das einem Spieler zugewiesen wird 
-	 */
-	public void setMeinWürfel(Würfel meinWürfel){
-		if (!(meinWürfel instanceof Würfel)) throw new RuntimeException("Es muss ein WürfelObjekt übergeben werden!");
-		this.meinWürfel=meinWürfel;
-	}
-	/**
 	 * Getter für den Würfel des Spielers, mit dem er seinen Zug ausführen kann.
 	 * @return meinWürfel - Der Würfel eines Spielers vom Typ Würfel
 	 */
@@ -251,8 +242,8 @@ public class Spieler {
 	}
 	/**
 	 * Setter für das boolean Attribut imSpiel.
-	 * TRUE -> Spieler ist teil der MADN-Sitzung
-	 * FALSE -> Spieler hat bereits alle Figuren in die Zielfelder gebracht
+	 * TRUE - Spieler ist teil der MADN-Sitzung
+	 * FALSE - Spieler hat bereits alle Figuren in die Zielfelder gebracht
 	 * @param imSpiel - Boolean Wert, mit dem festgelegt werden kann, ob ein Spieler generell bei einem Zug übersprungen wird oder nicht.
 	 */
 	public void setImSpiel(boolean imSpiel){
@@ -267,14 +258,14 @@ public class Spieler {
 	}
 	/**
 	 * Setter für bedienung. 
-	 * @param KI - String, der angibt, ob es sich um einen menschlichen Spieler, eine aggressive KI oder eine defensive KI handelt.
+	 * @param ki - String, der angibt, ob es sich um einen menschlichen Spieler, eine aggressive KI oder eine defensive KI handelt.
 	 */
 	public void setBedienung(KI ki){
 		this.bedienung = ki;
 	}
 	/**
 	 * Getter für bedienung.
-	 * @return
+	 * @return bedienung - gibt zurück, welche KI eingestellt wurde. Gibt es keine KI, so ist die Rückgabe null.
 	 */
 	public KI getBedienung() {
 		return bedienung;

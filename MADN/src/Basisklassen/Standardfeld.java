@@ -21,8 +21,8 @@ public class Standardfeld extends Spielfeld {
 	 * Eingabe nicht innerhalb des Wertebereiches 1-40 wird eine
 	 * RuntimeException geworfen.
 	 * 
-	 * @param int iD - die iD des Feldes
-	 * @exception RuntimeException Wenn iD <1 o. >40
+	 * @param iD - Die iD des Feldes vom Typ int
+	 * @exception RuntimeException Wenn iD kleiner 1 oder größer 40
 	 * 
 	 */
 	public Standardfeld(int iD) {
@@ -46,7 +46,7 @@ public class Standardfeld extends Spielfeld {
 	/**
 	 * Überschreiben der Equals. Zwei Objekte der Klasse Standardfeld sind nur dann gleich, wenn ihre Ihre ID die gleiche ist.
 	 * 
-	 * @param Object obj - Übergebenes Standardfeld-Objekt - wird mit this verglichen
+	 * @param obj - Übergebenes Standardfeld-Objekt vom Typ Object - wird mit this verglichen
 	 * @return boolean - gibt zurück ob zwei verglichene Standardfelder gleich sind
 	 */
 	@Override
