@@ -6,7 +6,7 @@ package Basisklassen;
  *
  * 
  * @author Anna Rosa
- * @version 1.4
+ * @version 1.5
  *
  */
 public class Spielbrett {
@@ -31,6 +31,22 @@ public class Spielbrett {
 		
 	}
 	
+	/** 
+	 * Ein Getter, der alle Startfelder der gewünschten, übergebenen Farbe zurückgibt.
+	 * @param farbe
+	 * @return []Startfeld -> Array der Startfelder der jeweiligen Farbe
+	 */
+	public Startfeld[] getAlleStartFelderEinerFarbe(FarbEnum farbe){
+		if(farbe.equals(FarbEnum.ROT))
+			return getAlleStartFelderRot();
+		if( farbe.equals(FarbEnum.BLAU))
+			return getAlleStartFelderBlau();
+		if(farbe.equals(FarbEnum.GRÜN))
+			return getAlleStartFelderGrün();
+		if( farbe.equals(FarbEnum.GELB))
+				return getAlleStartFelderGelb();
+		else return null;
+	}
 	/**
 	 * Ein Getter, der das Startfelder-Array der roten Startfelder zurückgibt.
 	 * @return startFelderRot
