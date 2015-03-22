@@ -29,8 +29,8 @@ public class Startfeld extends Spielfeld {
 	 * Liegt die Eingabe der ID nicht im Wertebereich S1-S4 wird eine
 	 * RuntimeException geworfen!
 	 * 
-	 * @param FarbEnum farbe - Farbe des Feldes
-	 * @param String  iD - ID des Feldes
+	 * @param farbe - Farbe vom Typ FarbEnum des Feldes
+	 * @param iD - ID vom Typ int des Feldes
 	 * @exception RuntimeException  Muss im Wertebereich S1-S4 liegen
 	 * 
 	 */
@@ -68,7 +68,7 @@ public class Startfeld extends Spielfeld {
 	 * Überschreiben der Equals. Zwei Objekte der Klasse Startfeld sind nur
 	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
-	 * @param Object obj - Übergebenes Startfeld-Objekt - wird mit this verglichen
+	 * @param obj - Übergebenes Startfeld-Objekt vom Typ Object - wird mit this verglichen
 	 * @return boolean - gibt zurück ob zwei verglichene Startfelder gleich sind
 	 */
 	@Override

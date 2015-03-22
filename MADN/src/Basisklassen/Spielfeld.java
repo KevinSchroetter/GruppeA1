@@ -37,8 +37,7 @@ public abstract class Spielfeld {
 	 * Geschützter Setter über den eine Spielfigur auf das Feld gesetzt werden
 	 * kann. Wirft Runtime wenn Feld bereits durch eine Figur belegt ist.
 	 * 
-	 * @param Spielfigur
-	 *            figur - Figur die auf Feld gesetzt wird
+	 * @param figur - Figur die auf Feld gesetzt wird
 	 * @exception RuntimeException
 	 *                Wenn Feld belegt.
 	 */

@@ -17,9 +17,9 @@ import Basisklassen.*;
  * JUnit Testklasse zum Testen der Java Klasse "Spieler" im MADN Projekt
  * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalität von "Spieler" zu gewärleisten.
  * 
- * @Attributes 
- * -> spieler[] - Array zum Speichern von bis zu 4 Spieler-Objekten
- * -> Farbenums rot, blau, grün, gelb - angelegt zum einfacheren zuweisen einer Farbe an einen Spieler 
+ * Attribute
+ * spieler[] - Array zum Speichern von bis zu 4 Spieler-Objekten
+ * Farbenums rot, blau, grün, gelb - angelegt zum einfacheren zuweisen einer Farbe an einen Spieler 
  * 
  */
 
@@ -139,7 +139,7 @@ public class TestSpieler {
 		assertTrue(ki.getBedienung() instanceof Spieler.KI);
 	}
 	/**
-	 * Trivial-Test nach Änderung am Attribut "meinWürfel" -> wurde ein Würfel korrekt angelegt?
+	 * Trivial-Test nach Änderung am Attribut "meinWürfel". Wurde ein Würfel korrekt angelegt?
 	 */
 	@Test
 	public void würfelTrivial(){

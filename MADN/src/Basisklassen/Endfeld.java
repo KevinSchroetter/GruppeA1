@@ -29,8 +29,8 @@ public class Endfeld extends Spielfeld {
 	 * Liegt die Eingabe der ID nicht im Wertebereich E1-E4 wird eine
 	 * RuntimeException geworfen!
 	 * 
-	 * @param FarbEnum farbe - Farbe des Feldes
-	 * @param String iD - ID des Feldes
+	 * @param farbe - Farbe vom Typ FarbEnum des Feldes
+	 * @param iD - ID vom Typ String des Feldes
 	 * @exception RuntimeException Wenn Feld nicht im Wertebereich E1-E4
 	 * 
 	 */
@@ -67,7 +67,7 @@ public class Endfeld extends Spielfeld {
 	 * Überschreiben der Equals. Zwei Objekte der Klasse Endfeld sind nur
 	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
-	 * @param Object obj - Übergebenes Endfeld-Objekt - wird mit this verglichen
+	 * @param obj - Übergebenes Endfeld-Objekt - wird mit this verglichen
 	 * @return boolean - gibt zurück ob zwei verglichene Endfelder gleich sind
 	 */
 	@Override

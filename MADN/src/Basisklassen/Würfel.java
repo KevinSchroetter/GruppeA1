@@ -28,8 +28,8 @@ public class Würfel {
 	
 	/**
 	 * Eine Methode, die die übergebene Zahl zurückgibt. Diese dient als Testmethode für spezifisch gewollte Züge.
-	 * @param zahl
-	 * @return zahl, die gewünschte Testzahl
+	 * @param zahl - Zahl vom Typ int, über die eine konkrete Augenzahl übergeben wird.
+	 * @return zahl, die gewünschte Testzahl.
 	 */
 	public int testWurf(int zahl){
 		return zahl;

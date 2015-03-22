@@ -103,7 +103,7 @@ public class Spielbrett {
 	}
 	/**
 	 * Getter für die Inhalte des Arrays der roten Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index 
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Startfeld 
 	 */
 	public Startfeld getStartFelderRot(int index){
@@ -114,7 +114,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der blauen Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Startfeld
 	 */
 	public Startfeld getStartFelderBlau(int index){
@@ -125,7 +125,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der grünen Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Startfeld
 	 */
 	public Startfeld getStartFelderGrün(int index){
@@ -136,7 +136,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der gelben Startfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Startfeld
 	 */
 	public Startfeld getStartFelderGelb(int index){
@@ -147,7 +147,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der Standardfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Standardfeld 
 	 */
 	public Standardfeld getStandardFelder(int index){
@@ -159,7 +159,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der roten Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Endfeld
 	 */
 	public Endfeld getEndFelderRot(int index){
@@ -170,7 +170,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der blauen Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Endfeld
 	 */
 	public Endfeld getEndFelderBlau(int index){
@@ -181,7 +181,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der grünen Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Endfeld
 	 */
 	public Endfeld getEndFelderGrün(int index){
@@ -192,7 +192,7 @@ public class Spielbrett {
 	
 	/**
 	 * Getter für die Inhalte des Arrays der gelben Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
-	 * @param index
+	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
 	 * @return Endfeld
 	 */
 	public Endfeld getEndFelderGelb(int index){
