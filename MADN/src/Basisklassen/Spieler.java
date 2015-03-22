@@ -35,7 +35,7 @@ public class Spieler {
 	/** 
 	 * Ein Spieler hat immer Kenntnis über einen würfel vom Typ Würfel, mit dem er sein Spiel bestreitet
 	 */
-	private Würfel meinWürfel = null;
+	private Würfel meinWürfel = new Würfel();
 	/**
 	 * Ein Spieler kann von einem Menschen gesteuert werden. In dem Fall nimmt das Attribut bedienung den Wert null an.
 	 * Er kann jedoch auch von einer Künstlichen Intelligenz KI gesteuert werden, die als Elementklasse der Klasse Spieler existiert.
@@ -92,8 +92,7 @@ public class Spieler {
 	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden. 
 	 * @param meinWürfel - Der Würfel (Typ Würfel), mit dem sich ein Spieler auf dem Spielfeld bewegen kann.
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startfelder) {
-		setMeinWürfel(meinWürfel);
+	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder) {
 		setSpielernummer();
 		setName(name);
 		setFarbe(farbe);
@@ -111,7 +110,7 @@ public class Spieler {
 	 * @param startFelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
 	 * @param verhalten - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
 	 */
-	public Spieler(String name, FarbEnum farbe, Würfel meinWürfel,Startfeld[] startFelder,String verhalten) {
+	public Spieler(String name, FarbEnum farbe,Startfeld[] startFelder,String verhalten) {
 	//	this(name,farbe,meinWürfel,startFelder);
 		KI k = new KI(this,verhalten);
 		// Anweisungen einfügen
@@ -219,14 +218,6 @@ public class Spieler {
 	 */
 	public Spielfigur getZugFigur(){
 		return zugFigur;
-	}
-	/**
-	 * Setter für den Würfel
-	 * @param meinWürfel - Ein Würfelobjekt, das einem Spieler zugewiesen wird 
-	 */
-	public void setMeinWürfel(Würfel meinWürfel){
-		if (!(meinWürfel instanceof Würfel)) throw new RuntimeException("Es muss ein WürfelObjekt übergeben werden!");
-		this.meinWürfel=meinWürfel;
 	}
 	/**
 	 * Getter für den Würfel des Spielers, mit dem er seinen Zug ausführen kann.

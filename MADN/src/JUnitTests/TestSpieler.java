@@ -41,9 +41,9 @@ public class TestSpieler {
 		
 		
 		
-		spieler[0] = new Spieler("Anna",FarbEnum.ROT,meinWürfel,rotStart);
-		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,meinWürfel,blauStart);
-		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,meinWürfel,grünStart);
+		spieler[0] = new Spieler("Anna",FarbEnum.ROT,rotStart);
+		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,blauStart);
+		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,grünStart);
 	}
 	
 	/**
@@ -83,15 +83,15 @@ public class TestSpieler {
 
 	@Test(expected=Exception.class)
 	public void SpielerOverload() {
-		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,gelbStart);
-		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,meinWürfel,rotStart);
+		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart);
+		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart);
 	}
 	/**
 	 * Ähnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe überprüft.
 	 */
 	@Test(expected=Exception.class)
 	public void FarbOverload(){
-		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,meinWürfel,rotStart);
+		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart);
 	}
 	/**
 	 * Hier wird getestet, ob eine Fehlermeldung erscheint, wenn eine Figur nicht ausgewählt ist.
@@ -135,8 +135,18 @@ public class TestSpieler {
 	 */
 	@Test
 	public void kiSpieler(){
-		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,meinWürfel,gelbStart,"aggressiv");
+		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,gelbStart,"aggressiv");
 		assertTrue(ki.getBedienung() instanceof Spieler.KI);
 	}
+	/**
+	 * Trivial-Test nach Änderung am Attribut "meinWürfel" -> wurde ein Würfel korrekt angelegt?
+	 */
+	@Test
+	public void würfelTrivial(){
+		int erg=spieler[0].getMeinWürfel().werfen();
+		assertTrue(erg==1|erg==2|erg==3|erg==4|erg==5|erg==6);
+		assertFalse(erg<1 | erg>6);
+	}
+	
 
 }
