@@ -70,7 +70,7 @@ public class Spiel {
 				return true;
 			}
 		}
-		if(zuLaufen==4){
+		if(zuZiehen==4){
 			if(endfelderIstAmZug[3].getFigur()==null&&kannZiehenEndfelder(figur,3)==true){
 				return true;
 			}
