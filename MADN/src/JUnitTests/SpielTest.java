@@ -53,7 +53,7 @@ public class SpielTest {
 	@Test
 	
 	public void vierterTest(){
-		s.get
+		//s.get
 	}
 	
 
