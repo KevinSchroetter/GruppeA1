@@ -1,7 +1,6 @@
 package Spiel;
 
 import Basisklassen.*;
-import MADNTry.Standardfeld;
 
 public class Spiel {
 	private Spieler[] spieler = new Spieler[4];
