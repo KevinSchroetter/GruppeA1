@@ -26,12 +26,12 @@ public class Spiel {
 	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
 	 *            übergebenen Verhalten;
 	 */
-	private void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
+	public void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
 		if (hatBegonnen == true)
 			throw new RuntimeException("Spiel hat schon begonnen");
 		for (int i = 0; i <= 3; i++) {
 			if (spieler[i] != null) {
-				if (!(farbe.equals(spieler[i])))
+				if (farbe.equals(spieler[i].getFarbe()))
 					throw new RuntimeException("Farbe schon vorhanden");
 			}
 		}
@@ -53,7 +53,7 @@ public class Spiel {
 	 * werden können. Sie setzt den ersten Spieler im Spieler Array als den
 	 * Spieler, der am Zug ist.
 	 */
-	private void startSpiel() {
+	public void startSpiel() {
 		hatBegonnen = true;
 		spieler[0].setAmZug(true);
 		istAmZug = spieler[0];
@@ -66,7 +66,7 @@ public class Spiel {
 	 * @return
 	 */
 	/*
-	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
+	public boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
 		if (figur.getMeinFeld() instanceof Standardfeld) {
 			if (zuZiehen > 4)
 				return false;
@@ -113,7 +113,7 @@ public class Spiel {
 	 * @param zuZiehen - Anzahl der Züge, die Figur ziehen soll
 	 */
 	/*
-	private void ziehenEndfelder(Spielfigur figur, int zuZiehen) {
+	public void ziehenEndfelder(Spielfigur figur, int zuZiehen) {
 		if (kannZiehenEndfelder(figur, zuZiehen) != true) {
 			throw new RuntimeException("Figur kann nicht ziehen!");
 		}
