@@ -7,11 +7,11 @@ public class Spiel {
 	private Spieler istAmZug;
 	private Spielbrett spielbrett;
 	private int anzahlSpieler;
-	private boolean hatBegonnen = false;
-	private boolean istBeendet = false;
-
-	public Spiel() {
-		spielbrett = new Spielbrett();
+	private boolean hatBegonnen=false;
+	private boolean istBeendet=false;
+	
+	public Spiel(){
+		spielbrett= new Spielbrett();
 	}
 
 	/**
