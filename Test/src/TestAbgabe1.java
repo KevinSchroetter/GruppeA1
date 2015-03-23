@@ -8,6 +8,7 @@ public class TestAbgabe1 {
 		System.out.println("Alex rockt!");
 		System.out.println("Es geht immer noch weiter!");
 		System.out.println("ich auch!");
+		
 	}
 
 }
