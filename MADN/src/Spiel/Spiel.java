@@ -42,9 +42,10 @@ public class Spiel {
 		} else if (verhalten != null) {
 			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder,endfelder,verhalten);
 		}
-		anzahlSpieler++;
 		if (anzahlSpieler == 3)
 			hatBegonnen = true;
+		anzahlSpieler++;
+		
 
 	}
 
