@@ -1,6 +1,7 @@
 package Spiel;
 
 import Basisklassen.*;
+import MADNTry.Standardfeld;
 
 public class Spiel {
 	private Spieler[] spieler = new Spieler[4];
@@ -67,10 +68,10 @@ public class Spiel {
 	 */
 	/*
 	public boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
+		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 		if (figur.getMeinFeld() instanceof Standardfeld) {
 			if (zuZiehen > 4)
 				return false;
-			Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 			if (zuZiehen == 1) {
 				if (endfelderIstAmZug[0].getFigur() == null)
 					return true;
@@ -98,11 +99,55 @@ public class Spiel {
 		}
 		
 		else if(figur.getMeinFeld() instanceof Endfeld){
+			if(figur.getMeinFeld().equals(endfelderIstAmZug[0])){
+				if(zuZiehen>3)
+					return false;
+				if(zuZiehen==1){
+					if(endfelderIstAmZug[1].getFigur()==null)
+						return true;
+					else 
+						return false;
+				}
+				if(zuZiehen==2){
+					if(kannZiehenEndfelder(figur, 1)==true && endfelderIstAmZug[2]==null)
+						return true;
+					else return false;
+				}
+				if(zuZiehen==3){
+					if(kannZiehenEndfelder(figur, 2)==true&&endfelderIstAmZug[3]==null)
+						return true;
+					else return false;
+				}
+			}
+			if(figur.getMeinFeld().equals(endfelderIstAmZug[1])){
+				if(zuZiehen>2)
+					return false;
+				if(zuZiehen==1){
+					if(endfelderIstAmZug[2].getFigur()==null)
+						return true;
+					else return false;
+				}
+				if(zuZiehen==2)
+					if(kannZiehenEndfelder(figur, 1)==true&& endfelderIstAmZug[2]==null)
+						return true;
+			}
+			
+			if(figur.getMeinFeld().equals(endfelderIstAmZug[2])){
+				if(zuZiehen>1)
+					return false;
+				if(endfelderIstAmZug[3].getFigur()==null)
+					return true;
+				else
+					return false;
+			}
+		}
+		
+			
+		
 		return true;	
 			
 			
 		}
-	}
 */
 	
 	/**
