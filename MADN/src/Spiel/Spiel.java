@@ -1,30 +1,81 @@
 package Spiel;
 
+import java.util.ArrayList;
+
 import Basisklassen.*;
 
 public class Spiel {
+	/**
+	 * Array, in dem alle am Spiel teilnehmenden Spieler gespeichert werden
+	 */
 	private Spieler[] spieler = new Spieler[4];
+	/**
+	 * Hier wird der Spieler gespeichert, der gerade ziehen darf
+	 */
 	private Spieler istAmZug;
+	/**
+	 * Zeigt an, ob der Spieler tatsächlich ziehen kann
+	 */
+	private boolean zugMöglich = false;
+	/**
+	 * Hier wird das Spielbrett gespeichert, auf dem gespielt wird
+	 */
 	private Spielbrett spielbrett;
+	/**
+	 * Anzahl der Spieler, die gerade an einem Spiel teilnehmen
+	 */
 	private int anzahlSpieler;
+	/**
+	 * Zeigt an, ob ein Spiel bereits begonnen hat, falls TRUE
+	 */
 	private boolean hatBegonnen=false;
+	/**
+	 * Zeigt an, ob ein Spiel bereits beendet ist, falls TRUE
+	 */
 	private boolean istBeendet=false;
+	/**
+	 * Speichert die Anzahl an Würfel-Würfen, die ein Spieler während eines Zuges ausgeführt hat.
+	 * Relevant für den Fall, dass mehrmals hintereinander eine 6 gewürfelt wird.
+	 */
+	private int anzWürfe = 0;
+	/**
+	 * Speichert die zuletzt gewürfelte Augenzahl während eines Zuges
+	 */
+	private int augenzahl = 0;
+	/**
+	 * ArrayList, in der die Figuren gespeichert werden, mit denen ein Zug ausgeführt werden kann
+	 */
+	private ArrayList<Spielfigur> zugFiguren = new ArrayList<Spielfigur>(0);
+	/**
+	 * Speichert die Anzahl der Figuren, die laufen können
+	 */
+	private int anzZugFiguren = 0;
+	/**
+	 * Zeigt an, ob sich ALLE Figuren auf ihren Startfeldern befinden.
+	 */
+	private boolean alleAufSpawn;
 	
+	/**
+	 * Konstruktor für ein Spiel. Er schreibt ein Spielbrett direkt in das Attribut spielbrett.
+	 */
 	public Spiel(){
 		spielbrett= new Spielbrett();
+	}
+	public void setIstAmZug(Spieler sIAZ){
+		if(!(sIAZ instanceof Spieler)) throw new RuntimeException("Es kann nur ein Spielerobjekt am Zug sein!");
+		this.setIstAmZug(sIAZ);
+	}
+	public Spieler getIstAmZug(){
+		return this.istAmZug;
 	}
 
 	/**
 	 * Methode zum Hinzufügen eines neuen Spielers, solange das Spiel noch nicht
 	 * gestartet ist. Sind Spieler im Spiel, so wird Spiel automatisch begonnen.
 	 * 
-	 * @param name
-	 *            - gewünschter Name des Spielers
-	 * @param farbe
-	 *            - gewünschte Farbe des Spielers
-	 * @param verhalten
-	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
-	 *            übergebenen Verhalten;
+	 * @param name - gewünschter Name des Spielers
+	 * @param farbe - gewünschte Farbe des Spielers
+	 * @param verhalten - Falls null: Menschlicher Spieler, sonst: KI mit dem übergebenen Verhalten;
 	 */
 	public void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
 		if (hatBegonnen == true)
