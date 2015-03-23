@@ -1,5 +1,7 @@
 package Basisklassen;
 
+
+
 /**
  * Die Klasse Spieler für das MADN-Projekt
  * Sie beinhaltet alle Attribute und Methoden, auf die ein Spieler später im Spiel Zugriff erhält.
@@ -24,6 +26,10 @@ public class Spieler {
 	 * Ein Spieler erhält Kenntnis darüber, was seine Startfelder sind um diese den Figuren zuzuweisen.
 	 */
 	private Startfeld[] startFelder = null;
+	/**
+	 * Ein Spieler erhält Kenntnis darüber, was seine Endfelder sind um diese den Figuren zuzuweisen.
+	 */
+	private Endfeld[] endFelder = null;
 	/**
 	 * Ein Spieler kennt zu jedem Zeitpunkt immer genau 4 figuren vom Typ Spielfigur
 	 */
@@ -90,12 +96,14 @@ public class Spieler {
 	 * @param name - Der Name vom Typ String, den sich ein Spieler geben darf.
 	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf.
 	 * @param startfelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden. 
+	 * @param endfelder - Die Zugehörigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
 	 */
-	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder) {
+	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder, Endfeld[] endfelder) {
 		setSpielernummer();
 		setName(name);
 		setFarbe(farbe);
 		setStartFelder(startfelder);
+		setEndFelder(endfelder);
 		setFiguren(startfelder);
 	}
 	/**
@@ -106,9 +114,10 @@ public class Spieler {
 	 * @param name - Name des Spielers vom Typ String
 	 * @param farbe - Farbe des Spielers vom Typ FarbEnum
 	 * @param startfelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
+	 * @param endfelder - Die Zugehörigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
 	 * @param verhalten - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
 	 */
-	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder,String verhalten) {
+	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder, Endfeld[] endfelder, String verhalten) {
 	//	this(name,farbe,meinWürfel,startFelder);
 		KI k = new KI(this,verhalten);
 		// Anweisungen einfügen
@@ -169,12 +178,33 @@ public class Spieler {
 	/**
 	 * Getter für ein Startfeld. Hiermit kann auf die bekannten Startfelder zugegriffen werden.
 	 * @param startFeld - Typ int als Index zur Rückgabe eines bestimmten Startfeldes.
-	 * @return Startfeld
+	 * @return Startfeld - das gewählte Startfeld
 	 */
 	public Startfeld getStartFelder(int startFeld){
-		if(startFeld <1 | startFeld > 4) throw new RuntimeException("Es können nur Startfelder 1-4 angesprochen werden!");
+		if(startFeld <1 | startFeld > 4) throw new RuntimeException("Es können nur startfelder 1-4 angesprochen werden!");
 		return startFelder[startFeld-1];
 	}
+	
+	/**
+	 * Setter für die Endfelder, die benötigt werden, um den Spielfiguren ins Ziel der korrekten Farbe zu bringen.
+	 * @param endFelder - Array vom Typ Endfeld.
+	 */
+	public void setEndFelder(Endfeld[] endFelder){
+		for (Endfeld ef: endFelder){
+			if(getFarbe()!=ef.getFarbe())throw new RuntimeException("Ein Spieler kennt nur die Endfelder seiner Farbe!");
+		}
+		this.endFelder = endFelder;
+	}
+	/**
+	 * Getter für alle Endfelder eines Spielers der zugehörigen Farbe.
+	 * @return endFelder - Das Endfelder array vom Typ Endfeld. 
+	 */
+	public Endfeld[] getEndFelder(){
+		return this.endFelder;
+	}
+	
+	
+	
 	/** 
 	 * Setter für die Spielfiguren eines Spielers.
 	 * Hierbei wird der Konstruktor der Spielfiguren mit der Farbe des Spielers aufgerufen und den Spielfiguren ein zugehöriges Startfeld zugewiesen.

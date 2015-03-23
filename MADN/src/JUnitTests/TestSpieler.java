@@ -32,7 +32,10 @@ public class TestSpieler {
 	static Startfeld blauStart[] = {b.getStartFelderBlau(0),b.getStartFelderBlau(1),b.getStartFelderBlau(2),b.getStartFelderBlau(3)};
 	static Startfeld grünStart[] = {b.getStartFelderGrün(0),b.getStartFelderGrün(1),b.getStartFelderGrün(2),b.getStartFelderGrün(3)};
 	static Startfeld gelbStart[] = {b.getStartFelderGelb(0),b.getStartFelderGelb(1),b.getStartFelderGelb(2),b.getStartFelderGelb(3)};
-
+	static Endfeld rotEnd[] = {b.getEndFelderRot(0),b.getEndFelderRot(1),b.getEndFelderRot(2),b.getEndFelderRot(3)};
+	static Endfeld blauEnd[] = {b.getEndFelderBlau(0),b.getEndFelderBlau(1),b.getEndFelderBlau(2),b.getEndFelderBlau(3)};
+	static Endfeld grünEnd[] = {b.getEndFelderGrün(0),b.getEndFelderGrün(1),b.getEndFelderGrün(2),b.getEndFelderGrün(3)};
+	static Endfeld gelbEnd[] = {b.getEndFelderGelb(0),b.getEndFelderGelb(1),b.getEndFelderGelb(2),b.getEndFelderGelb(3)};
 	/**
 	 * Bevor die Tests starten, werden 3 Spieler angelegt.	
 	 */
@@ -41,9 +44,9 @@ public class TestSpieler {
 		
 		
 		
-		spieler[0] = new Spieler("Anna",FarbEnum.ROT,rotStart);
-		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,blauStart);
-		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,grünStart);
+		spieler[0] = new Spieler("Anna",FarbEnum.ROT,rotStart,rotEnd);
+		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,blauStart,blauEnd);
+		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,grünStart,grünEnd);
 	}
 	
 	/**
@@ -83,15 +86,15 @@ public class TestSpieler {
 
 	@Test(expected=Exception.class)
 	public void SpielerOverload() {
-		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart);
-		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart);
+		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd);
+		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart,rotEnd);
 	}
 	/**
 	 * Ähnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe überprüft.
 	 */
 	@Test(expected=Exception.class)
 	public void FarbOverload(){
-		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart);
+		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart,rotEnd);
 	}
 	/**
 	 * Hier wird getestet, ob eine Fehlermeldung erscheint, wenn eine Figur nicht ausgewählt ist.
@@ -135,7 +138,7 @@ public class TestSpieler {
 	 */
 	@Test
 	public void kiSpieler(){
-		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,gelbStart,"aggressiv");
+		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd,"aggressiv");
 		assertTrue(ki.getBedienung() instanceof Spieler.KI);
 	}
 	/**

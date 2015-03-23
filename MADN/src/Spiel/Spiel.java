@@ -28,11 +28,12 @@ public class Spiel {
 			}
 		}
 		Startfeld[] startfelder=spielbrett.getAlleStartFelderEinerFarbe(farbe);
+		Endfeld[] endfelder=spielbrett.getAlleEndFelderEinerFarbe(farbe);
 		if(verhalten==null){
-			spieler[anzahlSpieler]= new Spieler(name, farbe, startfelder); 
+			spieler[anzahlSpieler]= new Spieler(name, farbe, startfelder,endfelder); 
 		}
 		else if(verhalten!=null){
-			spieler[anzahlSpieler]=new Spieler(name, farbe, startfelder, verhalten);
+			spieler[anzahlSpieler]=new Spieler(name, farbe, startfelder,endfelder, verhalten);
 		}
 		anzahlSpieler++;
 		if(anzahlSpieler==3)
@@ -56,7 +57,7 @@ public class Spiel {
 	private boolean kannZiehenEndfelder( Spielfigur figur, int zuZiehen){
 		if(zuZiehen>4)
 			return false;
-		Endfelder[] endfelderIstAmZug= istAmZug.getEndfelder();
+		Endfeld[] endfelderIstAmZug= istAmZug.getEndFelder();
 		if(zuZiehen==1){
 			if(endfelderIstAmZug[0].getFigur()== null)
 				return true;
@@ -89,7 +90,7 @@ public class Spiel {
 		if(kannZiehenEndfelder(figur, zuZiehen)!=true){
 			throw new RuntimeException("Figur kann nicht ziehen!");
 		}
-		Endfelder[] endfelderIstAmZug= istAmZug.getEndfelder();
+		Endfeld[] endfelderIstAmZug= istAmZug.getEndFelder();
 		endfelderIstAmZug[zuZiehen-1].setFigur(figur);
 		figur.setMeinFeld(endfelderIstAmZug[zuZiehen-1]);
 		

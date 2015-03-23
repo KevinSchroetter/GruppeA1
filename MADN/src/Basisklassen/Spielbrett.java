@@ -33,8 +33,8 @@ public class Spielbrett {
 	
 	/** 
 	 * Ein Getter, der alle Startfelder der gewünschten, übergebenen Farbe zurückgibt.
-	 * @param farbe
-	 * @return []Startfeld -> Array der Startfelder der jeweiligen Farbe
+	 * @param farbe - Übergebene Farb vom Typ FarbEnum.
+	 * @return Startfeld[] - Array der Startfelder der jeweiligen Farbe
 	 */
 	public Startfeld[] getAlleStartFelderEinerFarbe(FarbEnum farbe){
 		if(farbe.equals(FarbEnum.ROT))
@@ -45,6 +45,22 @@ public class Spielbrett {
 			return getAlleStartFelderGrün();
 		if( farbe.equals(FarbEnum.GELB))
 				return getAlleStartFelderGelb();
+		else return null;
+	}
+	/**
+	 * Ein Getter, der alle Endfelder der gewünschten, übergebenen Farbe zurückgibt.
+	 * @param farbe - Übergebene Farbe vom Typ FarbEnum.
+	 * @return Endfeld[] - Array der Endfelder.
+	 */
+	public Endfeld[] getAlleEndFelderEinerFarbe(FarbEnum farbe) {
+		if(farbe.equals(FarbEnum.ROT))
+			return getAlleEndFelderRot();
+		if( farbe.equals(FarbEnum.BLAU))
+			return getAlleEndFelderBlau();
+		if(farbe.equals(FarbEnum.GRÜN))
+			return getAlleEndFelderGrün();
+		if( farbe.equals(FarbEnum.GELB))
+				return getAlleEndFelderGelb();
 		else return null;
 	}
 	/**
@@ -319,7 +335,4 @@ public class Spielbrett {
 		return(rückgabe);
 		
 	}
-	
-	
-
 }
