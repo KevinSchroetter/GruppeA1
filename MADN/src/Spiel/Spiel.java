@@ -35,13 +35,12 @@ public class Spiel {
 					throw new RuntimeException("Farbe schon vorhanden");
 			}
 		}
-		Startfeld[] startfelder = spielbrett
-				.getAlleStartFelderEinerFarbe(farbe);
+		Startfeld[] startfelder = spielbrett.getAlleStartFelderEinerFarbe(farbe);
+		Endfeld[] endfelder = spielbrett.getAlleEndFelderEinerFarbe(farbe);
 		if (verhalten == null) {
-			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder);
+			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder,endfelder);
 		} else if (verhalten != null) {
-			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder,
-					verhalten);
+			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder,endfelder,verhalten);
 		}
 		anzahlSpieler++;
 		if (anzahlSpieler == 3)
@@ -61,20 +60,17 @@ public class Spiel {
 	}
 
 	/**
-	 * Methode, die prüft, ob eine Figur innerhalb der Endfelder um die gewollte
-	 * Anzahl der Züge ziehen kann.
-	 * 
-	 * @param figur
-	 *            - Die Figur, die ziehen soll
-	 * @param zuZiehen
-	 *            - Anzahl der Züge, die Figur ziehen soll
+	 * Methode, die prüft, ob eine Figur innerhalb der Endfelder um die gewollte Anzahl der Züge ziehen kann.
+	 * @param figur - Die Figur, die ziehen soll
+	 * @param zuZiehen - Anzahl der Züge, die Figur ziehen soll
 	 * @return
 	 */
+	/*
 	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
 		if (figur.getMeinFeld() instanceof Standardfeld) {
 			if (zuZiehen > 4)
 				return false;
-			Endfelder[] endfelderIstAmZug = istAmZug.getEndfelder();
+			Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 			if (zuZiehen == 1) {
 				if (endfelderIstAmZug[0].getFigur() == null)
 					return true;
@@ -102,29 +98,29 @@ public class Spiel {
 		}
 		
 		else if(figur.getMeinFeld() instanceof Endfeld){
-			
+		return true;	
 			
 			
 		}
 	}
-
+*/
+	
 	/**
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
 	 * Endfeld ziehen lässt.
 	 * 
-	 * @param figur
-	 *            - Die Figur, die ziehen soll
-	 * @param zuZiehen
-	 *            - Anzahl der Züge, die Figur ziehen soll
+	 * @param figur - Die Figur, die ziehen soll
+	 * @param zuZiehen - Anzahl der Züge, die Figur ziehen soll
 	 */
+	/*
 	private void ziehenEndfelder(Spielfigur figur, int zuZiehen) {
 		if (kannZiehenEndfelder(figur, zuZiehen) != true) {
 			throw new RuntimeException("Figur kann nicht ziehen!");
 		}
-		Endfelder[] endfelderIstAmZug = istAmZug.getEndfelder();
+		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 		endfelderIstAmZug[zuZiehen - 1].setFigur(figur);
 		figur.setMeinFeld(endfelderIstAmZug[zuZiehen - 1]);
 
 	}
-
+*/
 }
