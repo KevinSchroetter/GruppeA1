@@ -226,7 +226,7 @@ public class Spieler {
 		for (int i = 0; i <4; i++){
 			figuren[i] = new Spielfigur(farbID);
 			figuren[i].setMeinFeld(startFelder[i]);
-			figuren[i].setIstGespawnt(true);
+			figuren[i].setIstGespawnt(false);
 		}
 	}
 	/**
