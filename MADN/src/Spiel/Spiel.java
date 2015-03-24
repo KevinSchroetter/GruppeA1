@@ -286,40 +286,32 @@ public class Spiel {
 		istAmZug = spieler[0];
 	}
 
-	// Standardfeld[] standardFelder -> auf public gesetzt
-	// Spielfigur - setKannInsZiel -> auf public gesetzt
-	// Methode binIchAufEndposition() muss in Klasse Spielfigur geschrieben werden
-	@SuppressWarnings("unused")
+
 	public boolean kannIchZiehen(Spielfigur figur, int augenZahl){
 		if (figur.binIchGespawnt() == true && (!(figur.getBinIchAufEndpostion()))){
-			if (figur.getIstImZiel() == true){
-				  if (kannZiehenEndfelder(figur, augenZahl) == true){
+			if (figur.getIstImZiel() == true)
+				  if (kannZiehenEndfelder(figur, augenZahl) == true)
 					  return true; 
-					  }
-				  }
 				if ((figur.getFelderGelaufen() + augenZahl) > 39){
 					if (((figur.getFelderGelaufen() + augenZahl) - 39 <= 4)){
 						int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
 						 if (kannZiehenEndfelder(figur, tempSchritte) == true){
 							 figur.setKannInsZiel(true); 
 							 return true; 
-						 } else{
+						 } else
 							 return false; 
-							 }
-						  //muss später weg
 					}
 				}
 				Standardfeld Zielfeld = spielbrett.standardFelder[figur.getFelderGelaufen() + augenZahl];
-				if (Zielfeld.getFigur() == null){
+				if (Zielfeld.getFigur() == null)
 					return true;
-				} else if (figur.kannSchlagen(Zielfeld) == true){
+				else if (figur.kannSchlagen(Zielfeld) == true)
 					return true;
-				} else {
+			    else 
 					return false;
-				}
-			} else {
+			} else
 				return false;
-			}
+
 		
 
 	}
@@ -340,25 +332,20 @@ public class Spiel {
 		  	if(augenZahl > 4) 
 		  		return false; 
 		  	Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder(); 
-		  		if (augenZahl == 1){ 
+		  		if (augenZahl == 1)
 		  			if(endfelderIstAmZug[0].getFigur() == null) 
-		  						return true;
-		  			} 
-		  		if (augenZahl == 2){ 
+		  				return true;
+		  		if (augenZahl == 2)
 		  			if (endfelderIstAmZug[1].getFigur() == null && kannZiehenEndfelder(figur, 1) == true) 
 		  				return true; 
-		  			} 
-		  		if (augenZahl == 3){ 
-		  			if (endfelderIstAmZug[2].getFigur() == null && kannZiehenEndfelder(figur, 2) == true){
+		  		if (augenZahl == 3)
+		  			if (endfelderIstAmZug[2].getFigur() == null && kannZiehenEndfelder(figur, 2) == true)
+		  				return true; 		
+		  		if (augenZahl == 4) 
+		  			if (endfelderIstAmZug[3].getFigur() == null && kannZiehenEndfelder(figur, 3) == true)
 		  				return true; 
-		  			} 
-		  		} 
-		  		if (augenZahl == 4){ 
-		  			if (endfelderIstAmZug[3].getFigur() == null && kannZiehenEndfelder(figur, 3) == true){
-		  				return true; 
-		  			} 
-		  		}
-		  		else {return false;}
+		  		else 
+		  			return false;
 		  		return false;
 	  
 	  }
