@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import Spiel.Spiel;
@@ -22,7 +23,11 @@ public class SpielTest {
 	public void vorTest() {
 		System.out.println("Test beginnt");
 	}
-
+	
+	@Test
+	public void setterTestSpielfeld(){
+		assertTrue(s.getSpielbrett() instanceof Spielbrett);
+	}
 	@Test(expected = Exception.class)
 	public void ersterTest() {
 		s.spielerHinzufügen("Kevin", FarbEnum.ROT, null);
@@ -55,6 +60,19 @@ public class SpielTest {
 	public void vierterTest(){
 		//s.get
 	}
-	
 
+	@Test
+	/**
+	 * Kontrolle, ob die ArrayList wie erwartet funktioniert und ob Farbe von zugFiguren und Spieler übereinstimmen.
+	 */
+	public void TesteGetZugFigur(){
+		s.spielerHinzufügen("Test",FarbEnum.GRÜN,null);
+		System.out.println(s.DebugGetSpieler(1));
+		System.out.println(s.getIstAmZug());
+		s.startSpiel();
+		s.DebugGetSpieler(1).setZugFigur(1);
+		Spielfigur Test = s.DebugGetSpieler(1).getZugFigur();
+		s.setZugFiguren(s.DebugGetSpieler(1).getFiguren(1));
+		assertTrue(s.getZugFiguren(s.getIstAmZug().getZugFigur()).equals(s.DebugGetSpieler(1).getZugFigur()));
+	}
 }
