@@ -189,7 +189,7 @@ public class Spielfigur {
 	 * @param boolean istGespawnt
 	 */
 
-	private void setIstGespawnt(boolean istGespawnt) {
+	public void setIstGespawnt(boolean istGespawnt) {
 		this.istGespawnt = istGespawnt;
 	}
 
@@ -424,7 +424,7 @@ public class Spielfigur {
 	 * @exception RuntimeException
 	 *                Wenn FeldID kleiner gleich Null oder größer 40 ist.
 	 */
-
+/*
 	public boolean kannIchZiehen(int augenZahl) {
 
 		if (this.binIchGespawnt() && (!(this.istAufEndfeld()))
@@ -447,58 +447,8 @@ public class Spielfigur {
 
 		return false;
 
-	}
-
-	/**
-	 * Prüft, mittels der übergebenen Augenzahl, ob die Figur im Stande ist,
-	 * einen Zug auf ein Standardfeld durchzuführen. True wenn meinFeld instanz
-	 * von Standardfeld ist und die Nummer des aktuellen Feldes plus der
-	 * Augenzahl kleiner gleich 40 ist. Wirft bei ungültiger Feldzahl (kleiner
-	 * gleich Null, größer 40) eine RuntimeException.
-	 * 
-	 * @return boolean
-	 * @param augenZahl
-	 *            - Integer, gewürfelte Zahl
-	 
-	private boolean kannIchZiehenNew(int augenZahl) {
-		if (this.binIchGespawnt() == true) {
-			Standardfeld temp = (Standardfeld) this.getMeinFeld();
-			if (this.getIstImZiel() == true) {
-				if (this.kannZiehenEndfelder(augenZahl)) {
-					return true;
-				}
-			}
-			if ((this.getFelderGelaufen() + augenZahl) > 39) {
-				if (((this.getFelderGelaufen() + augenZahl) - 39 <= 4)) {
-					this.setKannInsZiel(true);
-					int tempSchritte = (this.getFelderGelaufen() + augenZahl) - 39;
-					if (this.kannZiehenEndfelder(tempSchritte) == true) {
-						return true;
-					} else {
-						return false;
-					}
-				}
-			}
-			int tempZielfeld = standardFelder[this.getFelderGelaufen()
-					+ augenZahl];
-			Standardfeld Zielfeld = this.setMeinFeld(temp.getID() + augenZahl);
-			if (this.setMeinFeld(this.getMeinFeld() + augenZahl)) {
-				if (Zielfeld.getFigur() == null) {
-					return true;
-				}
-
-			}
-			if (Sta) {
-				if (this.kannSchlagen(Zielfeld) == true) {
-					return true;
-				}
-			}
-		} else {
-			return false;
-		}
-
-		return false;
 	}*/
+
 
 	/**
 	 * Prüft, ob aktuelles Feld ein Standardfeld ist.

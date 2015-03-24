@@ -18,8 +18,11 @@ public class Spielbrett {
 	private Endfeld [] endFelderBlau= new Endfeld [4];
 	private Endfeld [] endFelderGrün= new Endfeld [4];
 	private Endfeld [] endFelderGelb= new Endfeld [4];
-	public Standardfeld [] standardFelder= new Standardfeld[40];
+	private Standardfeld [] standardFelder= new Standardfeld[40];
 	
+	public Standardfeld[] getStandardFelder(){
+		return standardFelder;
+	}
 	
 	/**
 	 * Der Konstruktor erstellt mit Hilfe der Methoden erstelleStartFelder, erstelleEndFelder und erstelleStandardFelder das Spielbrett.
