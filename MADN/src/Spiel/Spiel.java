@@ -9,7 +9,7 @@ import Basisklassen.*;
  * Sie beinhaltet alle notwendigen Methoden, um einen reibnungslosen Spielfluss zu gewährleisten.
  * In dieser Klasse sind DebugMethoden implementiert, sie sind ganz am Endeder Datei zu finden.
  * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
- * @Version 1.1
+ * @version 1.1
  *
  */
 
@@ -205,7 +205,7 @@ public class Spiel {
 	 * Übergabeparameter muss vom Typ Figur sein
 	 * Die Farbe der übergebenen Figur muss mit der Farbe des Spielers übereinstimmen, der gerade am Zug ist.
 	 * Es können maximal 4 Figuren in der Lage sein, zu ziehen.
-	 * @param figur
+	 * @param figur - Objekt vom Typ Figur
 	 */
 	public void setZugFiguren(Spielfigur figur){
 		if(!(figur instanceof Spielfigur)) throw new RuntimeException("Keine Spielfigur ausgewählt");
