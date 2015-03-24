@@ -15,6 +15,13 @@ import Basisklassen.*;
 
 public class Spiel {
 	private Spieler[] spieler = new Spieler[4];
+	/**
+	 * Array, in dem alle am Spiel teilnehmenden Spieler gespeichert werden
+	 */
+	private Spieler[] spieler = new Spieler[4];
+	/**
+	 * Hier wird der Spieler gespeichert, der gerade ziehen darf
+	 */
 	private Spieler istAmZug;
 	private Spielbrett spielbrett;
 	private int anzahlSpieler;
