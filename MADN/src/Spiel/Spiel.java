@@ -46,6 +46,8 @@ public class Spiel {
 	public void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
 		if (hatBegonnen == true)
 			throw new RuntimeException("Spiel hat schon begonnen");
+		if(farbe==null)
+			throw new RuntimeException("Spieler braucht eine Farbe");
 		for (int i = 0; i <= 3; i++) {
 			if (spieler[i] != null) {
 				if (!(farbe.equals(spieler[i])))
