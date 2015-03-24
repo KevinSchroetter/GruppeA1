@@ -24,10 +24,10 @@ public class SpielTest {
 		System.out.println("Test beginnt");
 	}
 	
-	@Test
-	public void setterTestSpielfeld(){
+	//@Test
+	/*public void setterTestSpielfeld(){
 		assertTrue(s.getSpielbrett() instanceof Spielbrett);
-	}
+	}*/
 	@Test(expected = Exception.class)
 	public void ersterTest() {
 		s.spielerHinzufügen("Kevin", FarbEnum.ROT, null);
@@ -61,9 +61,9 @@ public class SpielTest {
 	}
 	
 	
-	public void testeObSpielGestartet(){
+	/*public void testeObSpielGestartet(){
 		assertTrue(s.getHatGestartet());
-	}
+	}*/
 
 	//@Test
 	/**
