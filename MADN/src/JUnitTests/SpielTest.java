@@ -66,12 +66,12 @@ public class SpielTest {
 
 	}
 	
-	
-	/*public void testeObSpielGestartet(){
-		assertTrue(s.getHatGestartet());
-	}*/
+	@Test
+	public void testeObSpielGestartet(){
+		assertTrue(s.getHatBegonnen());
+	}
 
-	//@Test
+	@Test
 	/**
 	 * Kontrolle, ob die ArrayList wie erwartet funktioniert und ob Farbe von zugFiguren und Spieler übereinstimmen.
 	 */

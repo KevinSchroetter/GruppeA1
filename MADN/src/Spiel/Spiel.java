@@ -287,31 +287,82 @@ public class Spiel {
 	}
 
 
-	public boolean kannIchZiehen(Spielfigur figur, int augenZahl){
-		if (figur.binIchGespawnt() == true && (!(figur.getBinIchAufEndpostion()))){
-			if (figur.getIstImZiel() == true)
-				  if (kannZiehenEndfelder(figur, augenZahl) == true)
-					  return true; 
-				if ((figur.getFelderGelaufen() + augenZahl) > 39){
-					if (((figur.getFelderGelaufen() + augenZahl) - 39 <= 4)){
-						int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
-						 if (kannZiehenEndfelder(figur, tempSchritte) == true){
-							 figur.setKannInsZiel(true); 
-							 return true; 
-						 } else
-							 return false; 
-					}
-				}
-				Standardfeld Zielfeld = spielbrett.standardFelder[figur.getFelderGelaufen() + augenZahl];
-				if (Zielfeld.getFigur() == null)
-					return true;
-				else if (figur.kannSchlagen(Zielfeld) == true)
-					return true;
-			    else 
-					return false;
-			} else
+	public boolean kannIchZiehen(Spielfigur figur, int zuZiehen){
+		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
+		if (figur.getMeinFeld() instanceof Standardfeld) {
+			if (zuZiehen > 4)
 				return false;
+			if (zuZiehen == 1) {
+				if (endfelderIstAmZug[0].getFigur() == null)
+					return true;
+			}
+			if (zuZiehen == 2) {
+				if (endfelderIstAmZug[1].getFigur() == null
+						&& kannZiehenEndfelder(figur, 1) == true)
+					return true;
+			}
+			if (zuZiehen == 3) {
+				if (endfelderIstAmZug[2].getFigur() == null
+						&& kannZiehenEndfelder(figur, 2) == true) {
+					return true;
+				}
+			}
+			if (zuZiehen == 4) {
+				if (endfelderIstAmZug[3].getFigur() == null
+						&& kannZiehenEndfelder(figur, 3) == true) {
+					return true;
+				}
+			}
 
+			else
+				return false;
+		}
+		
+		else if(figur.getMeinFeld() instanceof Endfeld){
+			if(figur.getMeinFeld().equals(endfelderIstAmZug[0])){
+				if(zuZiehen>3)
+					return false;
+				if(zuZiehen==1){
+					if(endfelderIstAmZug[1].getFigur()==null)
+						return true;
+					else 
+						return false;
+				}
+				if(zuZiehen==2){
+					if(kannZiehenEndfelder(figur, 1)==true && endfelderIstAmZug[2]==null)
+						return true;
+					else return false;
+				}
+				if(zuZiehen==3){
+					if(kannZiehenEndfelder(figur, 2)==true&&endfelderIstAmZug[3]==null)
+						return true;
+					else return false;
+				}
+			}
+			if(figur.getMeinFeld().equals(endfelderIstAmZug[1])){
+				if(zuZiehen>2)
+					return false;
+				if(zuZiehen==1){
+					if(endfelderIstAmZug[2].getFigur()==null)
+						return true;
+					else return false;
+				}
+				if(zuZiehen==2)
+					if(kannZiehenEndfelder(figur, 1)==true&& endfelderIstAmZug[2]==null)
+						return true;
+			}
+			
+			if(figur.getMeinFeld().equals(endfelderIstAmZug[2])){
+				if(zuZiehen>1)
+					return false;
+				if(endfelderIstAmZug[3].getFigur()==null)
+					return true;
+				else
+					return false;
+			}
+			
+		}
+		return false;
 		
 
 	}
