@@ -82,9 +82,10 @@ public class Spiel {
 
 	// Standardfeld[] standardFelder -> auf public gesetzt
 	// Spielfigur - setKannInsZiel -> auf public gesetzt
+	// Methode binIchAufEndposition() muss in Klasse Spielfigur geschrieben werden
 	@SuppressWarnings("unused")
 	private boolean kannIchZiehen(Spielfigur figur, int augenZahl) {
-		if (figur.binIchGespawnt() == true) {
+		if (figur.binIchGespawnt() == true && (!(figur.binIchAufEndpostion()))) {
 			Standardfeld Zielfeld = spielbrett.standardFelder[figur
 					.getFelderGelaufen() + augenZahl];
 			if (figur.getIstImZiel() == true) {
@@ -94,11 +95,11 @@ public class Spiel {
 				 */ //muss später weg
 				if ((figur.getFelderGelaufen() + augenZahl) > 39) {
 					if (((figur.getFelderGelaufen() + augenZahl) - 39 <= 4)) {
-						figur.setKannInsZiel(true);
 						int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
 						/**
 						 * if (kannZiehenEndfelder(figur, tempSchritte) == true)
-						 * { return true; } else { return false; }
+						 * {figur.setKannInsZiel(true); 
+						 * return true; } else { return false; }
 						 */ //muss später weg
 					}
 				}
