@@ -46,14 +46,8 @@ public class SpielTest {
 		s.spielerHinzufügen("Alex", FarbEnum.GRÜN, "aggressiv");
 		s.spielerHinzufügen("Kevin", FarbEnum.GELB, null);
 		s.spielerHinzufügen("Anna", FarbEnum.BLAU, null);
-		s.spielerHinzufügen("Nala", FarbEnum.ROT, null);
+		s.spielerHinzufügen("Nala", null, null);
 
-	}
-	
-	@Test
-	
-	public void vierterTest(){
-		//s.get
 	}
 	
 
