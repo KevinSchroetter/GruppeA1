@@ -357,29 +357,29 @@ public class Spielfigur {
 		if (!(spawnpoint instanceof Standardfeld))
 			throw new RuntimeException("Argument kein Spawnpoint!");
 		else {
-
+			
 			switch (this.getFarbe()) {
 
 			case ROT:
-				if (spawnpoint.getID() == 1) {
+				if (spawnpoint.getID().equals("1")) {
 					this.setMeinFeld(spawnpoint);
 					this.setIstGespawnt(true);
 				}
 				break;
 			case BLAU:
-				if (spawnpoint.getID() == 11) {
+				if (spawnpoint.getID().equals("11")) {
 					this.setMeinFeld(spawnpoint);
 					this.setIstGespawnt(true);
 				}
 				break;
 			case GRÜN:
-				if (spawnpoint.getID() == 21) {
+				if (spawnpoint.getID().equals("21")) {
 					this.setMeinFeld(spawnpoint);
 					this.setIstGespawnt(true);
 				}
 				break;
 			case GELB:
-				if (spawnpoint.getID() == 31) {
+				if (spawnpoint.getID().equals("31")) {
 					this.setMeinFeld(spawnpoint);
 					this.setIstGespawnt(true);
 				}

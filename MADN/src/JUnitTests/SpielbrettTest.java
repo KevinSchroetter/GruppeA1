@@ -41,7 +41,7 @@ public class SpielbrettTest {
 		Standardfeld s1=s.getStandardFelder(0);
 		Standardfeld s2=s.getStandardFelder(15);
 		Standardfeld s3=s.getStandardFelder(39);
-		assertTrue(s1.getID()==1 & s2.getID()==16 & s3.getID()==40);
+		assertTrue(s1.getID().equals("1") & s2.getID().equals("16") & s3.getID().equals("40"));
 	}
 	
 	@Test

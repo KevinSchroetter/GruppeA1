@@ -439,5 +439,16 @@ public class Spiel {
 		if (augenzahl >40 || augenzahl<1) throw new RuntimeException("Fehlerhaftes Würfelergebnis");
 		this.augenzahl = augenzahl;
 	}
+	
+	public Spielfigur wähleFigur(String id){
+		FarbEnum farbeIstAmZug=istAmZug.getFarbe();
+		Spielfeld f= spielbrett.getFeld(id, farbeIstAmZug);
+		Spielfigur figur= f.getFigur();
+		if(kannIchZiehen(figur, augenzahl)!=true)
+			throw new RuntimeException("Figur kann nicht ziehen");
+		else 
+			return figur;
+	}
+	
 
 }

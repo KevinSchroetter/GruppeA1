@@ -13,7 +13,7 @@ public class Standardfeld extends Spielfeld {
 	/**
 	 * FeldID 1-40 dient der Identifizierung des Standardfeldes
 	 */
-	private int iD;
+	private String iD;
 
 	/**
 	 * Konstruktor für ein Standardfeld. Über das Attribut iD wird dem Feld
@@ -28,7 +28,8 @@ public class Standardfeld extends Spielfeld {
 	public Standardfeld(int iD) {
 		super();
 		if (iD >= 1 && iD <= 40) {
-			this.iD = iD;
+			String idString=iD+"";
+			this.iD = idString;
 		} else {
 			throw new RuntimeException("iD muss im Bereich 1-40 liegen!");
 		}
@@ -39,7 +40,7 @@ public class Standardfeld extends Spielfeld {
 	 * 
 	 * @return int iD - die ID des Feldes
 	 */
-	public int getID() {
+	public String getID() {
 		return this.iD;
 	}
 

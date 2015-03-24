@@ -238,13 +238,6 @@ public class Spielbrett {
 		return endFelderGelb[index];
 	}
 	
-	public Standardfeld getFeld(int id){
-		if(id<1 | id>40)
-			throw new RuntimeException("ID gehört zu keinem Feld");
-		return standardFelder[id-1];
-		
-	}
-	
 	public Spielfeld getFeld( String id, FarbEnum farbe){
 		if(id.startsWith("S")){
 			Startfeld[] felder= getAlleStartFelderEinerFarbe(farbe);
@@ -262,6 +255,15 @@ public class Spielbrett {
 			}
 			
 		}
+		else if(id.matches("[0-9]+")){
+			int iD=Integer.parseInt(id);
+			if(iD<1| iD>40)
+				throw new RuntimeException("ID nicht gültig");
+			else
+				return standardFelder[iD-1];
+		}
+		else
+			throw new RuntimeException("Falsche ID");
 		return null;
 	}
 	
@@ -276,10 +278,7 @@ public class Spielbrett {
 		case GELB:
 			return standardFelder[30];
 		default:
-			throw new RuntimeException("Falsche Farbe gewählt");
-			
-			
-		
+			throw new RuntimeException("Falsche Farbe gewählt");		
 		}
 	}
 	/**
