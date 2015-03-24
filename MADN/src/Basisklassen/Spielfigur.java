@@ -528,4 +528,9 @@ public class Spielfigur {
 				this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
 
+	public boolean binIchAufEndpostion() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -11,6 +11,12 @@ import org.junit.Test;
 import Spiel.Spiel;
 import Basisklassen.*;
 
+/**
+ * JUnit Tests für die Klasse Spiel
+ * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
+ * @version 1.2
+ *
+ */
 public class SpielTest {
 	static Spiel s;
 
@@ -69,7 +75,7 @@ public class SpielTest {
 	/**
 	 * Kontrolle, ob die ArrayList wie erwartet funktioniert und ob Farbe von zugFiguren und Spieler übereinstimmen.
 	 */
-	/*public void TesteGetZugFigur(){
+	public void TesteGetZugFigur(){
 		s.spielerHinzufügen("Test",FarbEnum.GRÜN,null);
 		System.out.println(s.DebugGetSpieler(1));
 		System.out.println(s.getIstAmZug());
@@ -78,5 +84,5 @@ public class SpielTest {
 		Spielfigur Test = s.DebugGetSpieler(1).getZugFigur();
 		s.setZugFiguren(s.DebugGetSpieler(1).getFiguren(1));
 		assertTrue(s.getZugFiguren(s.getIstAmZug().getZugFigur()).equals(s.DebugGetSpieler(1).getZugFigur()));
-	}*/
+	}
 }
