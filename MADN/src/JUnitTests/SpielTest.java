@@ -47,19 +47,29 @@ public class SpielTest {
 	}*/
 	
 	@Test(expected=Exception.class)
-	public void dritterTest(){
+	public void FarbeNull(){
+		s.spielerHinzufügen("Päddi", null, null);
+	}
+	
+	@Test(expected=Exception.class)
+	public void spielerZuViel(){
 		s.spielerHinzufügen("Alex", FarbEnum.GRÜN, "aggressiv");
 		s.spielerHinzufügen("Kevin", FarbEnum.GELB, null);
 		s.spielerHinzufügen("Anna", FarbEnum.BLAU, null);
 		s.spielerHinzufügen("Nala", null, null);
 
 	}
+	
+	
+	public void testeObSpielGestartet(){
+		assertTrue(s.getHatGestartet());
+	}
 
-	@Test
+	//@Test
 	/**
 	 * Kontrolle, ob die ArrayList wie erwartet funktioniert und ob Farbe von zugFiguren und Spieler übereinstimmen.
 	 */
-	public void TesteGetZugFigur(){
+	/*public void TesteGetZugFigur(){
 		s.spielerHinzufügen("Test",FarbEnum.GRÜN,null);
 		System.out.println(s.DebugGetSpieler(1));
 		System.out.println(s.getIstAmZug());
@@ -68,5 +78,5 @@ public class SpielTest {
 		Spielfigur Test = s.DebugGetSpieler(1).getZugFigur();
 		s.setZugFiguren(s.DebugGetSpieler(1).getFiguren(1));
 		assertTrue(s.getZugFiguren(s.getIstAmZug().getZugFigur()).equals(s.DebugGetSpieler(1).getZugFigur()));
-	}
+	}*/
 }
