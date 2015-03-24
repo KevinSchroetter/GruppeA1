@@ -51,6 +51,10 @@ public class Spielfigur {
 	 * True, wenn Zug auf Standardfeld möglich
 	 */
 	private boolean kannZiehen;
+	/**
+	 * Wird TRUE, wenn die Figur auf Ihrer Endposition ist.
+	 */
+	private boolean binIchAufEndposition=false;
 
 	// Getter/Setter
 	/**
@@ -252,26 +256,34 @@ public class Spielfigur {
 	public int getID() {
 		return this.ID;
 	}
-
-	// Konstruktor Spielfigur
-
+	/**
+	 * Setter für das Attribut binIchAufEndposition
+	 * @param bIAE - boolean
+	 */
+	public void setBinIchAufEndposition(boolean bIAE){
+		this.binIchAufEndposition=bIAE;
+	}
+	/**
+	 * Getter für binIchAufEndposition
+	 * @return binIchAufEndposition - boolean 
+	 */
+	public boolean getBinIchAufEndpostion() {
+		return this.binIchAufEndposition;
+	}
 	/**
 	 * Konstruktor für Klasse Spielfigur
 	 * 
-	 * @param farbID
-	 *            - int
-	 * @exception RuntimeException
-	 *                Wenn Anzahl Figuren größer gleich 16
-	 * @exception IllegalArgumentException
-	 *                Wenn FarbID kleiner gleich Null oder größer 4 ist
+	 * @param farbID - int
+	 * @exception RuntimeException - wenn Anzahl Figuren größer gleich 16
+	 * @exception IllegalArgumentException - wenn FarbID kleiner gleich Null oder größer 4 ist
 	 * 
-	 *                Generiert aus anzahlFiguren eine ID, prüft ob eine gültige
-	 *                Farbe übergeben wurde, falls nicht, wirft eine
-	 *                IllegalArgumentException. Gibt es bereits 16 Figuren,
-	 *                wirft er eine RuntimeException. ! Im Verlauf der
-	 *                Implementierung von Klasse Spiel werden eigene Exceptions
-	 *                generiert - Runtime - und IllegalArgumentException dienen
-	 *                lediglich als Platzhalter !
+	 * Generiert aus anzahlFiguren eine ID, prüft ob eine gültige
+	 * Farbe übergeben wurde, falls nicht, wirft eine
+	 * IllegalArgumentException. Gibt es bereits 16 Figuren,
+	 * wirft er eine RuntimeException. ! Im Verlauf der
+	 * Implementierung von Klasse Spiel werden eigene Exceptions
+	 * generiert - Runtime - und IllegalArgumentException dienen
+	 * lediglich als Platzhalter !
 	 */
 
 	public Spielfigur(int farbID) {
@@ -333,10 +345,8 @@ public class Spielfigur {
 	 * Prüft die Farbe des spawnpoints und setzt die Figur an die Entsprechende
 	 * Spawnlocation.
 	 * 
-	 * @param spawnpoint
-	 *            - Spielfeld
-	 * @exception RuntimeException
-	 *                Wenn Spawnpoint null, belegt oder kein Standardfeld ist
+	 * @param spawnpoint - Spielfeld
+	 * @exception RuntimeException - wenn Spawnpoint null, belegt oder kein Standardfeld ist
 	 */
 
 	public void spawn(Standardfeld spawnpoint) {
@@ -527,10 +537,4 @@ public class Spielfigur {
 		return String.format("Figur %d auf Feld %s mit Farbe %s --\n ",
 				this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
-
-	public boolean binIchAufEndpostion() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

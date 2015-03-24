@@ -290,28 +290,29 @@ public class Spiel {
 	// Spielfigur - setKannInsZiel -> auf public gesetzt
 	// Methode binIchAufEndposition() muss in Klasse Spielfigur geschrieben werden
 	@SuppressWarnings("unused")
-	public boolean kannIchZiehen(Spielfigur figur, int augenZahl) {
-		if (figur.binIchGespawnt() == true && (!(figur.binIchAufEndpostion()))) {
-			Standardfeld Zielfeld = spielbrett.standardFelder[figur.getFelderGelaufen() + augenZahl];
-			if (figur.getIstImZiel() == true) {
-				/**
-				 * if (kannZiehenEndfelder(figur, augenZahl) == true) { return
-				 * true; } }
-				 */ //muss später weg
-				if ((figur.getFelderGelaufen() + augenZahl) > 39) {
-					if (((figur.getFelderGelaufen() + augenZahl) - 39 <= 4)) {
+	public boolean kannIchZiehen(Spielfigur figur, int augenZahl){
+		if (figur.binIchGespawnt() == true && (!(figur.getBinIchAufEndpostion()))){
+			if (figur.getIstImZiel() == true){
+				  if (kannZiehenEndfelder(figur, augenZahl) == true){
+					  return true; 
+					  }
+				  }
+				if ((figur.getFelderGelaufen() + augenZahl) > 39){
+					if (((figur.getFelderGelaufen() + augenZahl) - 39 <= 4)){
 						int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
-						/**
-						 * if (kannZiehenEndfelder(figur, tempSchritte) == true)
-						 * {figur.setKannInsZiel(true); 
-						 * return true; } else { return false; }
-						 */ //muss später weg
+						 if (kannZiehenEndfelder(figur, tempSchritte) == true){
+							 figur.setKannInsZiel(true); 
+							 return true; 
+						 } else{
+							 return false; 
+							 }
+						  //muss später weg
 					}
 				}
-
-				if (Zielfeld.getFigur() == null) {
+				Standardfeld Zielfeld = spielbrett.standardFelder[figur.getFelderGelaufen() + augenZahl];
+				if (Zielfeld.getFigur() == null){
 					return true;
-				} else if (figur.kannSchlagen(Zielfeld) == true) {
+				} else if (figur.kannSchlagen(Zielfeld) == true){
 					return true;
 				} else {
 					return false;
@@ -319,9 +320,8 @@ public class Spiel {
 			} else {
 				return false;
 			}
-		}//muss später weg
 		
-		return false; //muss später weg
+
 	}
 
 	/**
@@ -330,41 +330,53 @@ public class Spiel {
 	 * 
 	 * @param figur
 	 *            - Die Figur, die ziehen soll
-	 * @param zuZiehen
+	 * @param augenZahl
 	 *            - Anzahl der Züge, die Figur ziehen soll
 	 * @return
 	 */
 
-	/*
-	 * private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) { if
-	 * (zuZiehen > 4) return false; Endfeld[] endfelderIstAmZug =
-	 * istAmZug.getEndFelder(); if (zuZiehen == 1) { if
-	 * (endfelderIstAmZug[0].getFigur() == null) return true; } if (zuZiehen ==
-	 * 2) { if (endfelderIstAmZug[1].getFigur() == null &&
-	 * kannZiehenEndfelder(figur, 1) == true) return true; } if (zuZiehen == 3)
-	 * { if (endfelderIstAmZug[2].getFigur() == null &&
-	 * kannZiehenEndfelder(figur, 2) == true) { return true; } } if (zuZiehen ==
-	 * 4) { if (endfelderIstAmZug[3].getFigur() == null &&
-	 * kannZiehenEndfelder(figur, 3) == true) { return true; } }
-	 * 
-	 * else return false;
-	 * 
-	 * }*
-	 */
+	
+	  private boolean kannZiehenEndfelder(Spielfigur figur, int augenZahl){ 	
+		  	if(augenZahl > 4) 
+		  		return false; 
+		  	Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder(); 
+		  		if (augenZahl == 1){ 
+		  			if(endfelderIstAmZug[0].getFigur() == null) 
+		  						return true;
+		  			} 
+		  		if (augenZahl == 2){ 
+		  			if (endfelderIstAmZug[1].getFigur() == null && kannZiehenEndfelder(figur, 1) == true) 
+		  				return true; 
+		  			} 
+		  		if (augenZahl == 3){ 
+		  			if (endfelderIstAmZug[2].getFigur() == null && kannZiehenEndfelder(figur, 2) == true){
+		  				return true; 
+		  			} 
+		  		} 
+		  		if (augenZahl == 4){ 
+		  			if (endfelderIstAmZug[3].getFigur() == null && kannZiehenEndfelder(figur, 3) == true){
+		  				return true; 
+		  			} 
+		  		}
+		  		else {return false;}
+		  		return false;
+	  
+	  }
+	 
 	/**
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
 	 * Endfeld ziehen lässt.
 	 * 
 	 * @param figur - Die Figur, die ziehen soll
-	 * @param zuZiehen - Anzahl der Züge, die Figur ziehen soll
+	 * @param augenZahl - Anzahl der Züge, die Figur ziehen soll
 	 */
-	public void ziehenEndfelder(Spielfigur figur, int zuZiehen) {
-		/**if (kannZiehenEndfelder(figur, zuZiehen) != true) {
+	public void ziehenEndfelder(Spielfigur figur, int augenZahl) {
+		/**if (kannZiehenEndfelder(figur, augenZahl) != true) {
 			throw new RuntimeException("Figur kann nicht ziehen!");
 		}*/ //muss später weg
 		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
-		endfelderIstAmZug[zuZiehen - 1].setFigur(figur);
-		figur.setMeinFeld(endfelderIstAmZug[zuZiehen - 1]);
+		endfelderIstAmZug[augenZahl - 1].setFigur(figur);
+		figur.setMeinFeld(endfelderIstAmZug[augenZahl - 1]);
 	}
 	/**
 	 * Methode zu DebugZwecken.
