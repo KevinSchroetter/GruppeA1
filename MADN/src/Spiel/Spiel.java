@@ -4,6 +4,15 @@ import java.util.ArrayList;
 
 import Basisklassen.*;
 
+/**
+ * Klasse Spiel als Regelwerk für MADN.
+ * Sie beinhaltet alle notwendigen Methoden, um einen reibnungslosen Spielfluss zu gewährleisten.
+ * In dieser Klasse sind DebugMethoden implementiert, sie sind ganz am Endeder Datei zu finden.
+ * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
+ * @version 1.1
+ *
+ */
+
 public class Spiel {
 	private Spieler[] spieler = new Spieler[4];
 	private Spieler istAmZug;
