@@ -96,33 +96,7 @@ public class TestSpieler {
 	public void FarbOverload(){
 		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart,rotEnd);
 	}
-	/**
-	 * Hier wird getestet, ob eine Fehlermeldung erscheint, wenn eine Figur nicht ausgewählt ist.
-	 */
-	@Test(expected=RuntimeException.class)
-	public void kannSpielerZiehen(){
-		spieler[0].kannIchZiehen();
-		spieler[0].setZugFigur(1);
-		spieler[0].ziehen();
-	}
-	/**
-	 * Hier wird getestet, ob eine Figur ziehen kann. Da bislang noch keine Figur laufen kann, wird ein False erwartet
-	 */
-	@Test
-	public void kannEinzelneFIgurZiehen(){
-		assertTrue(spieler[0].kannIchZiehen()==false);
-	}
-	/**
-	 * Dieser Test kontrolliert, ob das Attribut amZug eines Spielers nach einem Zug korrekterweise auf false gesetzt wird.
-	 * Dies kann erst getestet werden, wenn eine Figur laufen kann.
-	 */
-	@Ignore
-	@Test
-	public void nächsterZug(){
-		spieler[0].setZugFigur(1);
-		spieler[0].ziehen();
-		assertTrue(spieler[0].getAmZug()==false);
-	}
+
 	/**
 	 * Kontrolle, ob sowol der Spieler, seine Spielfiguren und deren Startfelder die selbe Farbe besitzen.
 	 */
@@ -149,6 +123,10 @@ public class TestSpieler {
 		int erg=spieler[0].getMeinWürfel().werfen();
 		assertTrue(erg==1|erg==2|erg==3|erg==4|erg==5|erg==6);
 		assertFalse(erg<1 | erg>6);
+	}
+	@Test
+	public void testSpawn(){
+		assertTrue(spieler[0].alleAufSpawn());
 	}
 	
 

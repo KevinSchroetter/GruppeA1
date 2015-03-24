@@ -68,7 +68,7 @@ public class Spiel {
 	 * Konstruktor für ein Spiel. Er schreibt ein Spielbrett direkt in das Attribut spielbrett.
 	 */
 	public Spiel() {
-		spielbrett = new Spielbrett();
+		setSpielbrett(new Spielbrett());
 	}
 	/**
 	 * Setter für IstAmZug, der den Spieler in das Attribut schreiben soll, der gerade am Zug ist.
@@ -249,7 +249,7 @@ public class Spiel {
 	 * @param verhalten - Falls null: Menschlicher Spieler, sonst: KI mit dem übergebenen Verhalten;
 	 */
 	public void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
-		if (hatBegonnen == true)
+		if (getHatBegonnen()==true)
 			throw new RuntimeException("Spiel hat schon begonnen");
 		if(farbe==null)
 			throw new RuntimeException("Spieler braucht eine Farbe");
@@ -259,19 +259,18 @@ public class Spiel {
 					throw new RuntimeException("Farbe schon vorhanden");
 			}
 		}
-		Startfeld[] startfelder = spielbrett
-				.getAlleStartFelderEinerFarbe(farbe);
-		Endfeld[] endfelder = spielbrett.getAlleEndFelderEinerFarbe(farbe);
+		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(farbe);
+		Endfeld[] endfelder = getSpielbrett().getAlleEndFelderEinerFarbe(farbe);
 		if (verhalten == null) {
-			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder,
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,
 					endfelder);
 		} else if (verhalten != null) {
-			spieler[anzahlSpieler] = new Spieler(name, farbe, startfelder,
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,
 					endfelder, verhalten);
 		}
-		anzahlSpieler++;
-		if (anzahlSpieler == 3)
-			hatBegonnen = true;
+		incAnzahlSpieler();
+		if (getAnzahlSpieler() == 3)
+			setHatBegonnen(true);
 
 	}
 
@@ -281,9 +280,9 @@ public class Spiel {
 	 * Spieler, der am Zug ist.
 	 */
 	public void startSpiel() {
-		hatBegonnen = true;
+		setHatBegonnen(true);
 		spieler[0].setAmZug(true);
-		istAmZug = spieler[0];
+		setIstAmZug(spieler[0]);
 	}
 
 
@@ -302,7 +301,7 @@ public class Spiel {
 							 return false; 
 					}
 				}
-				Standardfeld Zielfeld = spielbrett.standardFelder[figur.getFelderGelaufen() + augenZahl];
+				Standardfeld Zielfeld = getSpielbrett().getStandardFelder()[figur.getFelderGelaufen() + augenZahl];
 				if (Zielfeld.getFigur() == null)
 					return true;
 				else if (figur.kannSchlagen(Zielfeld) == true)
