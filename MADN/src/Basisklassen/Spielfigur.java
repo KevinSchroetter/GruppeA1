@@ -1,14 +1,16 @@
 package Basisklassen;
 
 /**
- * @author      Alexander Brückner (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version     1                 
- * @since       2015-03-12          
+ * @author Alexander Brückner
+ *         (Alexander.Brueckner@Student-Reutlingen-University.de)
+ * @version 1
+ * @since 2015-03-12
  */
 
 public class Spielfigur {
 	/**
-	 * Figurenzähler, dient als Verifikation der korrekten Anzahl an Figuren und zur Erstellung der FigurID
+	 * Figurenzähler, dient als Verifikation der korrekten Anzahl an Figuren und
+	 * zur Erstellung der FigurID
 	 */
 	private static int anzahlFiguren = 0;
 	/**
@@ -51,157 +53,175 @@ public class Spielfigur {
 	private boolean kannZiehen;
 
 	// Getter/Setter
-/**
-	 * Gibt meinFeld zurück                      
+	/**
+	 * Gibt meinFeld zurück
+	 * 
 	 * @return Spielfeld meinFeld
 	 */
 	public Spielfeld getMeinFeld() {
 		return meinFeld;
 	}
-	
+
 	/**
-	 * Gibt Farbe zurück                      
+	 * Gibt Farbe zurück
+	 * 
 	 * @return FarbEnum farbe
 	 */
 
 	public FarbEnum getFarbe() {
 		return farbe;
 	}
-	
+
 	/**
-	 * Gibt Anzahl gelaufener Felder zurück                      
+	 * Gibt Anzahl gelaufener Felder zurück
+	 * 
 	 * @return int felderGelaufen
 	 */
 
 	public int getFelderGelaufen() {
 		return felderGelaufen;
 	}
-	
+
 	/**
-	 * Gibt Aufschluss ob Kill möglich ist                      
+	 * Gibt Aufschluss ob Kill möglich ist
+	 * 
 	 * @return boolean kannSchlagen
 	 */
-	
 
 	public boolean getKannSchlagen() {
 		return kannSchlagen;
 	}
-	
+
 	/**
-	 * Gibt Aufschluss ob Figur im Spiel ist                      
+	 * Gibt Aufschluss ob Figur im Spiel ist
+	 * 
 	 * @return boolean istGespawnt
 	 */
 
 	public boolean getIstGespawnt() {
 		return istGespawnt;
 	}
-	
+
 	/**
-	 * Gibt Aufschluss ob Figur aus dem Spiel ist (Auf Endfeld)                      
+	 * Gibt Aufschluss ob Figur aus dem Spiel ist (Auf Endfeld)
+	 * 
 	 * @return boolean istImZiel
 	 */
-
 
 	public boolean getIstImZiel() {
 		return istImZiel;
 	}
-	
+
 	/**
-	 * Gibt Aufschluss ob Figur sich auf ein Endfeld bewegen kann                      
+	 * Gibt Aufschluss ob Figur sich auf ein Endfeld bewegen kann
+	 * 
 	 * @return boolean istImZiel
 	 */
-
 
 	public boolean getKannInsZiel() {
 		return kannInsZiel;
 	}
-	
+
 	/**
-	 * Gibt Aufschluss ob Figur auf ein Standardfeld ziehen kann                      
+	 * Gibt Aufschluss ob Figur auf ein Standardfeld ziehen kann
+	 * 
 	 * @return boolean istImZiel
 	 */
 
 	public boolean getKannZiehen() {
 		return kannZiehen;
 	}
-	
-	/**
-	 * Öffentlicher Setter für Feld der Figur, stellt Kenntnisbeziehung zwischen Figur und Feld her                       
-	 * @param meinFeld - Spielfeld
-	 */
 
+	/**
+	 * Öffentlicher Setter für Feld der Figur, stellt Kenntnisbeziehung zwischen
+	 * Figur und Feld her
+	 * 
+	 * @param meinFeld
+	 *            - Spielfeld
+	 */
 
 	public void setMeinFeld(Spielfeld meinFeld) {
 		this.meinFeld = meinFeld;
 		this.meinFeld.setFigur(this);
 	}
-	
+
 	/**
-	 * Privater Setter für Farbe der Figur                       
-	 * @param FarbEnum farbe
+	 * Privater Setter für Farbe der Figur
+	 * 
+	 * @param FarbEnum
+	 *            farbe
 	 */
 
 	private void setFarbe(FarbEnum farbe) {
 		this.farbe = farbe;
 	}
-	
+
 	/**
-	 * Öffentlicher Setter für Schrittzähler - inkrementiert um Anzahl der Felder die die Figur gelaufen ist
-	 * wird bei Kill der Figur resetted (Deshalb Public, erfolgt später in Klasse Spiel)                       
-	 * @param felderGelaufen - int
+	 * Öffentlicher Setter für Schrittzähler - inkrementiert um Anzahl der
+	 * Felder die die Figur gelaufen ist wird bei Kill der Figur resetted
+	 * (Deshalb Public, erfolgt später in Klasse Spiel)
+	 * 
+	 * @param felderGelaufen
+	 *            - int
 	 */
 
 	public void setFelderGelaufen(int felderGelaufen) {
 		this.felderGelaufen += felderGelaufen;
 	}
-	
+
 	/**
-	 * Privater Setter für kannSchlagen                  
+	 * Privater Setter für kannSchlagen
+	 * 
 	 * @param boolean kannSchlagen
 	 */
 
 	private void setKannSchlagen(boolean kannSchlagen) {
 		this.kannSchlagen = kannSchlagen;
 	}
-	
+
 	/**
-	 * Privater Setter für istGespawnt                  
+	 * Privater Setter für istGespawnt
+	 * 
 	 * @param boolean istGespawnt
 	 */
 
 	private void setIstGespawnt(boolean istGespawnt) {
 		this.istGespawnt = istGespawnt;
 	}
-	
+
 	/**
-	 * Privater Setter für istimZiel                  
+	 * Privater Setter für istimZiel
+	 * 
 	 * @param boolean istImZiel
 	 */
 
 	private void setIstImZiel(boolean istImZiel) {
 		this.istImZiel = istImZiel;
 	}
-	
+
 	/**
-	 * Privater Setter für kannInsZiel                  
+	 * Privater Setter für kannInsZiel
+	 * 
 	 * @param boolean kannInsZiel
 	 */
 
-	private void setKannInsZiel(boolean kannInsZiel) {
+	public void setKannInsZiel(boolean kannInsZiel) {
 		this.kannInsZiel = kannInsZiel;
 	}
-	
+
 	/**
-	 * Privater Setter für kannZiehen                  
+	 * Privater Setter für kannZiehen
+	 * 
 	 * @param boolean kannZiehen
 	 */
 
 	private void setKannZiehen(boolean kannZiehen) {
 		this.kannZiehen = kannZiehen;
 	}
-	
+
 	/**
-	 * Öffentlicher, Statischer Getter für Anzahl der Figuren                  
+	 * Öffentlicher, Statischer Getter für Anzahl der Figuren
+	 * 
 	 * @return int Spielfigur.anzahlFiguren
 	 */
 
@@ -211,19 +231,21 @@ public class Spielfigur {
 	}
 
 	/**
-	 * Privater Setter für ID - Prüft auf Gültigkeit                  
+	 * Privater Setter für ID - Prüft auf Gültigkeit
+	 * 
 	 * @param int ID
 	 */
-	
+
 	private void setID(int ID) {
 		if (ID <= 0)
 			throw new RuntimeException("ID einer Figur kann nicht 0 sein!");
 		else
 			this.ID = ID;
 	}
-	
+
 	/**
-	 * Öffentlicher Getter für ID der Figur                  
+	 * Öffentlicher Getter für ID der Figur
+	 * 
 	 * @return int ID
 	 */
 
@@ -234,17 +256,24 @@ public class Spielfigur {
 	// Konstruktor Spielfigur
 
 	/**
-	 * Konstruktor für Klasse Spielfigur                 
-	 * @param farbID - int
-	 * @exception RuntimeException Wenn Anzahl Figuren größer gleich 16
-	 * @exception  IllegalArgumentException Wenn FarbID kleiner gleich Null oder größer 4 ist
+	 * Konstruktor für Klasse Spielfigur
 	 * 
-	 * Generiert aus anzahlFiguren eine ID, prüft ob eine gültige Farbe übergeben wurde, falls nicht, 
-	 * wirft eine IllegalArgumentException. Gibt es bereits 16 Figuren, wirft er eine RuntimeException.
-	 * ! Im Verlauf der Implementierung von Klasse Spiel werden eigene Exceptions generiert - Runtime - und
-	 * IllegalArgumentException dienen lediglich als Platzhalter !
+	 * @param farbID
+	 *            - int
+	 * @exception RuntimeException
+	 *                Wenn Anzahl Figuren größer gleich 16
+	 * @exception IllegalArgumentException
+	 *                Wenn FarbID kleiner gleich Null oder größer 4 ist
+	 * 
+	 *                Generiert aus anzahlFiguren eine ID, prüft ob eine gültige
+	 *                Farbe übergeben wurde, falls nicht, wirft eine
+	 *                IllegalArgumentException. Gibt es bereits 16 Figuren,
+	 *                wirft er eine RuntimeException. ! Im Verlauf der
+	 *                Implementierung von Klasse Spiel werden eigene Exceptions
+	 *                generiert - Runtime - und IllegalArgumentException dienen
+	 *                lediglich als Platzhalter !
 	 */
-	
+
 	public Spielfigur(int farbID) {
 
 		if (farbID == 1) {
@@ -267,14 +296,17 @@ public class Spielfigur {
 		}
 
 	}
-	
-	/**
-	 * Ermittelt, ob das Targetfeld gültig ist, und ob eine Figur darauf steht. Gehört die Figur zur gleichen Farbe,
-	 * kann sie nicht geschlagen werden. Ist die Figur feindlich gesinnt, kann sie erledigt werden.              
-	 * @param zielFeld - Spielfeld
-	 * @return boolean
-	 * @exception  RuntimeException Wenn Zielfeld ungültig
 
+	/**
+	 * Ermittelt, ob das Targetfeld gültig ist, und ob eine Figur darauf steht.
+	 * Gehört die Figur zur gleichen Farbe, kann sie nicht geschlagen werden.
+	 * Ist die Figur feindlich gesinnt, kann sie erledigt werden.
+	 * 
+	 * @param zielFeld
+	 *            - Spielfeld
+	 * @return boolean
+	 * @exception RuntimeException
+	 *                Wenn Zielfeld ungültig
 	 */
 
 	public boolean kannSchlagen(Standardfeld zielFeld) {
@@ -293,15 +325,18 @@ public class Spielfigur {
 
 		return false;
 	}
-	
-	/**
-	 * Ermittelt, ob das jeweilige Startfeld frei ist. Wenn nicht, RuntimeException.
-	 * Ist das Spawnfeld ungültig, RuntimeException.
-	 * Handelt es sich bei dem Argument nicht um ein Standardfeld, RuntimeException.
-	 * Prüft die Farbe des spawnpoints und setzt die Figur an die Entsprechende Spawnlocation.    
-	 * @param spawnpoint - Spielfeld
-	 * @exception  RuntimeException Wenn Spawnpoint null, belegt oder kein Standardfeld ist
 
+	/**
+	 * Ermittelt, ob das jeweilige Startfeld frei ist. Wenn nicht,
+	 * RuntimeException. Ist das Spawnfeld ungültig, RuntimeException. Handelt
+	 * es sich bei dem Argument nicht um ein Standardfeld, RuntimeException.
+	 * Prüft die Farbe des spawnpoints und setzt die Figur an die Entsprechende
+	 * Spawnlocation.
+	 * 
+	 * @param spawnpoint
+	 *            - Spielfeld
+	 * @exception RuntimeException
+	 *                Wenn Spawnpoint null, belegt oder kein Standardfeld ist
 	 */
 
 	public void spawn(Standardfeld spawnpoint) {
@@ -345,12 +380,13 @@ public class Spielfigur {
 		}
 
 	}
-	
-	/**
-	 * Prüft, ob die Figur im Spiel ist.. Gibt True zurück, wenn sie NICHT auf einem Startfeld steht, nicht
-	 * im Ziel ist (kann aber auf einem Endfeld stehen) und das Feld gültig ist. Gibt sonst false zurück.
-	 * @return boolean
 
+	/**
+	 * Prüft, ob die Figur im Spiel ist.. Gibt True zurück, wenn sie NICHT auf
+	 * einem Startfeld steht, nicht im Ziel ist (kann aber auf einem Endfeld
+	 * stehen) und das Feld gültig ist. Gibt sonst false zurück.
+	 * 
+	 * @return boolean
 	 */
 
 	public boolean binIchGespawnt() {
@@ -364,43 +400,99 @@ public class Spielfigur {
 			return false;
 
 	}
-	
+
 	/**
-	 * Prüft, mittels der übergebenen Augenzahl, ob die Figur im Stande ist, einen Zug auf ein Standardfeld durchzuführen. True wenn
-	 * meinFeld instanz von Standardfeld ist und die Nummer des aktuellen Feldes plus der Augenzahl kleiner gleich 40 ist.
-	 * Wirft bei ungültiger Feldzahl (kleiner gleich Null, größer 40) eine RuntimeException.
+	 * Prüft, mittels der übergebenen Augenzahl, ob die Figur im Stande ist,
+	 * einen Zug auf ein Standardfeld durchzuführen. True wenn meinFeld instanz
+	 * von Standardfeld ist und die Nummer des aktuellen Feldes plus der
+	 * Augenzahl kleiner gleich 40 ist. Wirft bei ungültiger Feldzahl (kleiner
+	 * gleich Null, größer 40) eine RuntimeException.
+	 * 
 	 * @return boolean
-	 * @param augenZahl - Integer, gewürfelte Zahl
-	 * @exception  RuntimeException Wenn FeldID kleiner gleich Null oder größer 40 ist.
-
+	 * @param augenZahl
+	 *            - Integer, gewürfelte Zahl
+	 * @exception RuntimeException
+	 *                Wenn FeldID kleiner gleich Null oder größer 40 ist.
 	 */
-
 
 	public boolean kannIchZiehen(int augenZahl) {
 
-		if ((this.binIchGespawnt() && (!(this.istAufEndfeld())))
+		if (this.binIchGespawnt() && (!(this.istAufEndfeld()))
 				|| this.getKannSchlagen()) {
 
 			if (this.getMeinFeld() instanceof Standardfeld) {
-
-				Standardfeld meep = (Standardfeld) this.getMeinFeld();
-				if ((meep.getID() + augenZahl) > 40 || (meep.getID() + augenZahl) <= 0 ) {
-					throw new RuntimeException("Targetfeld out of bounds");
-				} else if (meep.getID() + augenZahl <= 40) {
-					return true;
+				if (this.binIchGespawnt() == true) {
+					Standardfeld meep = (Standardfeld) this.getMeinFeld();
+					if ((meep.getID() + augenZahl) > 40
+							|| (meep.getID() + augenZahl) <= 0) {
+						throw new RuntimeException("Targetfeld out of bounds");
+					} else if (meep.getID() + augenZahl <= 40) {
+						return true;
+					}
 				}
 			} else {
 				return false;
 			}
-
 		}
 
 		return false;
 
 	}
-	
+
+	/**
+	 * Prüft, mittels der übergebenen Augenzahl, ob die Figur im Stande ist,
+	 * einen Zug auf ein Standardfeld durchzuführen. True wenn meinFeld instanz
+	 * von Standardfeld ist und die Nummer des aktuellen Feldes plus der
+	 * Augenzahl kleiner gleich 40 ist. Wirft bei ungültiger Feldzahl (kleiner
+	 * gleich Null, größer 40) eine RuntimeException.
+	 * 
+	 * @return boolean
+	 * @param augenZahl
+	 *            - Integer, gewürfelte Zahl
+	 
+	private boolean kannIchZiehenNew(int augenZahl) {
+		if (this.binIchGespawnt() == true) {
+			Standardfeld temp = (Standardfeld) this.getMeinFeld();
+			if (this.getIstImZiel() == true) {
+				if (this.kannZiehenEndfelder(augenZahl)) {
+					return true;
+				}
+			}
+			if ((this.getFelderGelaufen() + augenZahl) > 39) {
+				if (((this.getFelderGelaufen() + augenZahl) - 39 <= 4)) {
+					this.setKannInsZiel(true);
+					int tempSchritte = (this.getFelderGelaufen() + augenZahl) - 39;
+					if (this.kannZiehenEndfelder(tempSchritte) == true) {
+						return true;
+					} else {
+						return false;
+					}
+				}
+			}
+			int tempZielfeld = standardFelder[this.getFelderGelaufen()
+					+ augenZahl];
+			Standardfeld Zielfeld = this.setMeinFeld(temp.getID() + augenZahl);
+			if (this.setMeinFeld(this.getMeinFeld() + augenZahl)) {
+				if (Zielfeld.getFigur() == null) {
+					return true;
+				}
+
+			}
+			if (Sta) {
+				if (this.kannSchlagen(Zielfeld) == true) {
+					return true;
+				}
+			}
+		} else {
+			return false;
+		}
+
+		return false;
+	}*/
+
 	/**
 	 * Prüft, ob aktuelles Feld ein Standardfeld ist.
+	 * 
 	 * @return boolean
 	 */
 
@@ -410,9 +502,10 @@ public class Spielfigur {
 		else
 			return false;
 	}
-	
+
 	/**
 	 * Prüft, ob aktuelles Feld ein Endfeld ist.
+	 * 
 	 * @return boolean
 	 */
 
@@ -423,16 +516,16 @@ public class Spielfigur {
 			return false;
 	}
 
-	
 	/**
 	 * Klassische toString Methode. Gibt ID, meinFeld und Farbe zurück
+	 * 
 	 * @return String
 	 */
-	
+
 	@Override
 	public String toString() {
 		return String.format("Figur %d auf Feld %s mit Farbe %s --\n ",
-			this.getID(), this.getMeinFeld(), this.getFarbe().toString());
+				this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
 
 }

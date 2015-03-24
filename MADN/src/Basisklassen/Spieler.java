@@ -15,6 +15,10 @@ public class Spieler {
 	 */
 	private static int spielernummer = 0;
 	/**
+	 * Ein Spieler hat eine Spielernummer
+	 */
+	private int meineNummer = 0;
+	/**
 	 * Jeder Spieler erhält einen namen vom Typ String
 	 */
 	private String name; 
@@ -100,6 +104,7 @@ public class Spieler {
 	 */
 	public Spieler(String name, FarbEnum farbe,Startfeld[] startfelder, Endfeld[] endfelder) {
 		setSpielernummer();
+		setMeineNummer();
 		setName(name);
 		setFarbe(farbe);
 		setStartFelder(startfelder);
@@ -294,6 +299,19 @@ public class Spieler {
 		this.bedienung = ki;
 	}
 	/**
+	 * Setzt meineNummer eines Spielers auf die jeweils aktuelle Anzahl an erstellten Spielern
+	 */
+	private void setMeineNummer(){
+		this.meineNummer=getSpielernummer();
+	}
+	/**
+	 * Getter für meineNummer
+	 * @return meineNummer - int Wert
+	 */
+	public int getMeineNummer(){
+		return this.meineNummer;
+	}
+	/**
 	 * Getter für bedienung.
 	 * @return bedienung - gibt zurück, welche KI eingestellt wurde. Gibt es keine KI, so ist die Rückgabe null.
 	 */
@@ -306,7 +324,7 @@ public class Spieler {
 	 */
 	@Override
 	public String toString(){
-		return "Spieler " + getSpielernummer() + " Name: " + getName() + " Farbe: "+getFarbe();
+		return "Spieler " + getMeineNummer() + " Name: " + getName() + " Farbe: "+getFarbe();
 	}
 	@Override
 	/**
