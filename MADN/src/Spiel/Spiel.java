@@ -14,7 +14,6 @@ import Basisklassen.*;
  */
 
 public class Spiel {
-	private Spieler[] spieler = new Spieler[4];
 	/**
 	 * Array, in dem alle am Spiel teilnehmenden Spieler gespeichert werden
 	 */
@@ -44,7 +43,7 @@ public class Spiel {
 	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
 	 *            übergebenen Verhalten;
 	 */
-	private void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
+	public void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
 		if (hatBegonnen == true)
 			throw new RuntimeException("Spiel hat schon begonnen");
 		for (int i = 0; i <= 3; i++) {
@@ -86,8 +85,7 @@ public class Spiel {
 	@SuppressWarnings("unused")
 	private boolean kannIchZiehen(Spielfigur figur, int augenZahl) {
 		if (figur.binIchGespawnt() == true && (!(figur.binIchAufEndpostion()))) {
-			Standardfeld Zielfeld = spielbrett.standardFelder[figur
-					.getFelderGelaufen() + augenZahl];
+			Standardfeld Zielfeld = spielbrett.standardFelder[figur.getFelderGelaufen() + augenZahl];
 			if (figur.getIstImZiel() == true) {
 				/**
 				 * if (kannZiehenEndfelder(figur, augenZahl) == true) { return
