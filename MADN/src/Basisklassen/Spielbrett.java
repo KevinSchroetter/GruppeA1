@@ -222,6 +222,8 @@ public class Spielbrett {
 		return endFelderGrün[index];
 	}
 	
+	
+	
 	/**
 	 * Getter für die Inhalte des Arrays der gelben Endfelder, gibt das Spielfeld an der Stelle [index] des Arrays zurück.
 	 * @param index - Auswahl eines bestimmten Feldes über einen Index vom Typ int 
@@ -231,6 +233,51 @@ public class Spielbrett {
 		if(index<0|index>endFelderGelb.length)
 			throw new RuntimeException("Gewünschte Stelle nicht vorhanden.");
 		return endFelderGelb[index];
+	}
+	
+	public Standardfeld getFeld(int id){
+		if(id<1 | id>40)
+			throw new RuntimeException("ID gehört zu keinem Feld");
+		return standardFelder[id-1];
+		
+	}
+	
+	public Spielfeld getFeld( String id, FarbEnum farbe){
+		if(id.startsWith("S")){
+			Startfeld[] felder= getAlleStartFelderEinerFarbe(farbe);
+			for( int i=0; i<felder.length; i++){
+				if(felder[i].getID().equals(id))
+					return felder[i];
+			}
+		}
+		
+		else if(id.startsWith("E")){
+			Endfeld[] efelder= getAlleEndFelderEinerFarbe(farbe);
+			for( int i=0; i<efelder.length; i++){
+				if(efelder[i].getID().equals(id))
+					return efelder[i];
+			}
+			
+		}
+		return null;
+	}
+	
+	public Standardfeld getSpawnfeld(FarbEnum farbe){
+		switch(farbe){
+		case ROT:
+			return standardFelder[0];
+		case BLAU:
+			return standardFelder[10];
+		case GRÜN:
+			return standardFelder[20];
+		case GELB:
+			return standardFelder[30];
+		default:
+			throw new RuntimeException("Falsche Farbe gewählt");
+			
+			
+		
+		}
 	}
 	/**
 	 * Die Methode erstelleStartFelder erstellt für die jeweiligen Farben je 4 Startfelder, die sie im Startfelder-Array der entsprechenden Farbe speichert.
