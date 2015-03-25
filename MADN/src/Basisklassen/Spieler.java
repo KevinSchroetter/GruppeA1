@@ -226,7 +226,8 @@ public class Spieler {
 		for (int i = 0; i <4; i++){
 			figuren[i] = new Spielfigur(farbID);
 			figuren[i].setMeinFeld(startFelder[i]);
-			figuren[i].setIstGespawnt(false);
+			figuren[i].setIstGespawnt(figuren[i].binIchGespawnt());
+			figuren[i].setBinIchAufEndposition(false);
 		}
 	}
 	/**
@@ -397,7 +398,14 @@ public class Spieler {
 	 * Hilfsmethode mit der das Figuren-Array zurückgegeben werden kann.
 	 * @return figuren - Array vom Typ Spielfigur
 	 */
-	private Spielfigur[] alleFiguren(){
+	public Spielfigur[] alleFiguren(){
 		return figuren;
+	}
+	public int getAnzFiguren(){
+		int anz = 0;
+		for(Spielfigur sf:alleFiguren())
+			if(sf!=null)
+				anz++;
+		return anz;
 	}
 }

@@ -90,13 +90,19 @@ public class SpielTest {
 	 * Kontrolle, ob die ArrayList wie erwartet funktioniert und ob Farbe von zugFiguren und Spieler übereinstimmen.
 	 */
 	public void TesteGetZugFigur(){
-		s.spielerHinzufügen("Test",FarbEnum.GRÜN,null);
-		System.out.println(s.DebugGetSpieler(1));
-		System.out.println(s.getIstAmZug());
-		s.startSpiel();
-		s.DebugGetSpieler(1).setZugFigur(1);
-		Spielfigur Test = s.DebugGetSpieler(1).getZugFigur();
-		s.setZugFiguren(s.DebugGetSpieler(1).getFiguren(1));
-		assertTrue(s.getZugFiguren(s.getIstAmZug().getZugFigur()).equals(s.DebugGetSpieler(1).getZugFigur()));
+		b.spielerHinzufügen("Test",FarbEnum.GRÜN,null);
+		System.out.println(b.DebugGetSpieler(1));
+		System.out.println(b.getIstAmZug());
+		b.startSpiel();
+		b.DebugGetSpieler(1).setZugFigur(1);
+		Spielfigur Test = b.DebugGetSpieler(1).getZugFigur();
+		b.setZugFiguren(b.DebugGetSpieler(1).getFiguren(1));
+		assertTrue(b.getZugFiguren(b.getIstAmZug().getZugFigur()).equals(b.DebugGetSpieler(1).getZugFigur()));
+	}
+	@Test
+	public void würfeln(){
+		b.startSpiel();
+		b.würfeln(6);
+		assertTrue(s.getAlleAufSpawn()==true);
 	}
 }

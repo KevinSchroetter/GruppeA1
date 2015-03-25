@@ -632,4 +632,70 @@ public class Spiel {
 		
 
 	}
+	public ArrayList<Spielfigur> alleZugFiguren(){
+		return zugFiguren;
+	}
+	//// hack wird im offiziellen Spiel ersetzt. die Methode testwurf dann durch das richtige würfeln
+	public void würfeln(int hack){
+		if (getHatBegonnen()==false)throw new RuntimeException("Spiel hat noch nicht begonnen");
+		int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
+		setAugenzahl(augenzahl);
+		for (Spielfigur sf: istAmZug.alleFiguren())
+			if (kannIchZiehen(sf, getAugenzahl())==true){
+				sf.setKannZiehen(true);
+				setZugFiguren(sf);
+			}
+			else{
+				if (kannSpawnen(sf) )
+					sf.setKannZiehen(true);
+					setZugFiguren(sf);
+			}		
+		if(!alleZugFiguren().isEmpty() && alleZugFiguren().size()==istAmZug.getAnzFiguren())
+			for(Spielfigur sf: alleZugFiguren())
+				if(sf.binIchGespawnt()==false)
+					setAlleAufSpawn(true);
+				else{
+					setAlleAufSpawn(false);
+					break;
+				}
+		if(!alleZugFiguren().isEmpty()){
+			setZugMöglich(true);
+			incAnzWürfe();
+		}
+		else{
+			setZugMöglich(false);
+			nächsterSpieler();
+		}		
+	}
+	private void nächsterSpieler() {
+		for(int i=0; i<spieler.length; i++){
+			if(i<3){
+				if(istAmZug.equals(spieler[i])){
+					istAmZug=spieler[i+1];
+					spieler[i+1].setAmZug(true);
+					spieler[i].setAmZug(false);					
+				}
+			}
+			
+			if(i==3){
+				if(istAmZug.equals(spieler[i])){
+					istAmZug=spieler[0];
+					spieler[0].setAmZug(true);
+					spieler[i].setAmZug(false);
+				}
+				
+			}
+		}
+		
+	}
+
+	public boolean kannSpawnen(Spielfigur figur){
+		if(getAugenzahl() == 6 && figur.binIchGespawnt()==false)
+			if (getSpielbrett().getSpawnfeld(getIstAmZug().getFarbe()).getFigur() == null || getSpielbrett().getSpawnfeld(getIstAmZug().getFarbe()).getFigur().getFarbe()!=getIstAmZug().getFarbe())
+				return true;
+			else 
+				return false;
+		else
+			return false;
+	}
 }
