@@ -16,7 +16,7 @@ import Hilfsklassen.*;
  *
  */
 
-public class Spiel {
+public class Spiel implements iBediener{
 	/**
 	 * Array, in dem alle am Spiel teilnehmenden Spieler gespeichert werden
 	 */
