@@ -329,7 +329,7 @@ public class Spiel {
 			throw new RuntimeException("Spieler braucht eine Farbe");
 		for (int i = 0; i <= 3; i++) {
 			if (spieler[i] != null) {
-				if (!(farbe.equals(spieler[i])))
+				if (farbe.equals(spieler[i].getFarbe()))
 					throw new RuntimeException("Farbe schon vorhanden");
 			}
 		}
@@ -344,8 +344,9 @@ public class Spiel {
 					endfelder, verhalten);
 		}
 		incAnzahlSpieler();
-		if (getAnzahlSpieler() == 4)
+		if (getAnzahlSpieler() == 4){
 			setHatBegonnen(true);
+		}
 
 	}
 
@@ -356,8 +357,15 @@ public class Spiel {
 	 */
 	public void startSpiel() {
 		setHatBegonnen(true);
-		spieler[0].setAmZug(true);
-		setIstAmZug(spieler[0]);
+		for(int i=0; i<spieler.length; i++){
+			if(spieler[i]!=null){
+				spieler[i].setAmZug(true);
+				setIstAmZug(spieler[i]);
+				return;
+			}
+		}
+		setIstBeendet(true);
+		
 	}
 
 	/** @author Felix Rosa
@@ -694,6 +702,8 @@ public class Spiel {
 			}
 
 		}
+		
+		
 
 	}
 	public ArrayList<Spielfigur> alleZugFiguren(){
@@ -729,12 +739,27 @@ public class Spiel {
 		else{
 			setZugMöglich(false);
 			nächsterSpieler();
-		}
-			
-					
+		}		
 	}
 	private void nächsterSpieler() {
-		// TODO Auto-generated method stub
+		for(int i=0; i<spieler.length; i++){
+			if(i<3){
+				if(istAmZug.equals(spieler[i])){
+					istAmZug=spieler[i+1];
+					spieler[i+1].setAmZug(true);
+					spieler[i].setAmZug(false);					
+				}
+			}
+			
+			if(i==3){
+				if(istAmZug.equals(spieler[i])){
+					istAmZug=spieler[0];
+					spieler[0].setAmZug(true);
+					spieler[i].setAmZug(false);
+				}
+				
+			}
+		}
 		
 	}
 
