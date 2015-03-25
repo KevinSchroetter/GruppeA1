@@ -35,7 +35,7 @@ public class SpielTest {
 		assertTrue(s.getSpielbrett() instanceof Spielbrett);
 	}*/
 	@Test(expected = Exception.class)
-	public void ersterTest() {
+	public void gleicheFarbe() {
 		s.spielerHinzufügen("Kevin", FarbEnum.ROT, null);
 		s.spielerHinzufügen("Anna", FarbEnum.ROT, null);
 	}
@@ -46,7 +46,7 @@ public class SpielTest {
 	}
 
 	/*@Test(expected=Exception.class)
-	public void zweiterTest() {
+	public void ungültigeKI() {
 		s.spielerHinzufügen("Tim", FarbEnum.BLAU, "Hallo");
 		
 		
@@ -62,13 +62,14 @@ public class SpielTest {
 		s.spielerHinzufügen("Alex", FarbEnum.GRÜN, "aggressiv");
 		s.spielerHinzufügen("Kevin", FarbEnum.GELB, null);
 		s.spielerHinzufügen("Anna", FarbEnum.BLAU, null);
-		s.spielerHinzufügen("Nala", null, null);
+		
+		
 
 	}
 	
 	@Test
 	public void testeObSpielGestartet(){
-		assertTrue(s.getHatBegonnen());
+		assertTrue(s.getHatBegonnen()==true);
 	}
 
 	@Test

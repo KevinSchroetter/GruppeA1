@@ -20,9 +20,8 @@ public class Spielbrett {
 	private Endfeld [] endFelderGelb= new Endfeld [4];
 	private Standardfeld [] standardFelder= new Standardfeld[40];
 	
-	public Standardfeld[] getStandardFelder(){
-		return standardFelder;
-	}
+	
+	
 	
 	/**
 	 * Der Konstruktor erstellt mit Hilfe der Methoden erstelleStartFelder, erstelleEndFelder und erstelleStandardFelder das Spielbrett.
@@ -32,6 +31,13 @@ public class Spielbrett {
 		erstelleEndFelder();
 		erstelleStandardFelder();
 		
+	}
+	/**
+	 * Methode, die das Array der Standardfelder zurückgibt
+	 * @return Standardfelder-Array
+	 */
+	public Standardfeld[] getStandardFelder(){
+		return standardFelder;
 	}
 	
 	/** 
@@ -238,6 +244,14 @@ public class Spielbrett {
 		return endFelderGelb[index];
 	}
 	
+	/** 
+	 * Methode, die ein gesuchtes Spielfeld, das über ID und unter Umständen Farbe identifiziert wird.
+	 * @param id - ID des gesuchten Felds
+	 * @param farbe - Farbe, falls Feld Start- oder Endfeld ist, bei Standartfeldern null
+	 * @return gesuchtes Spielfeld
+	 *
+	 */
+	
 	public Spielfeld getFeld( String id, FarbEnum farbe){
 		if(id.startsWith("S")){
 			Startfeld[] felder= getAlleStartFelderEinerFarbe(farbe);
@@ -267,6 +281,11 @@ public class Spielbrett {
 		return null;
 	}
 	
+	/**
+	 * Methode, die das Spawnfeld der übergebenen Farbe zurückgibt.
+	 * @param farbe - die Farbe, für die das Spawnfeld gesucht wird
+	 * @return spawnfeld der Farbe
+	 */
 	public Standardfeld getSpawnfeld(FarbEnum farbe){
 		switch(farbe){
 		case ROT:
@@ -341,7 +360,7 @@ public class Spielbrett {
 	
 	/**
 	 * Override der toString-Methode, die alle Spielfelder zurückgibt.
-	 * @return rückgabe
+	 * @return rückgabe - alle Spielfelder, geordner nach: Startfelder - Standardfelder - Endfelder
 	 */
 	@Override
 	public String toString(){

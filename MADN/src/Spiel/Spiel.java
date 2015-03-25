@@ -292,7 +292,7 @@ public class Spiel {
 	}
 
 	/**
-	 * Setter fpr alleAufSpawn
+	 * Setter für alleAufSpawn
 	 * 
 	 * @param alleAufSpawn
 	 *            - boolean
@@ -344,7 +344,7 @@ public class Spiel {
 					endfelder, verhalten);
 		}
 		incAnzahlSpieler();
-		if (getAnzahlSpieler() == 3)
+		if (getAnzahlSpieler() == 4)
 			setHatBegonnen(true);
 
 	}
@@ -389,17 +389,15 @@ public class Spiel {
 
 	}
 
+	
 	/**
-	 * Methode, die prüft, ob eine Figur innerhalb der Endfelder um die gewollte
-	 * Anzahl der Züge ziehen kann.
-	 * 
-	 * @param figur
-	 *            - Die Figur, die ziehen soll
-	 * @param augenZahl
-	 *            - Anzahl der Züge, die Figur ziehen soll
-	 * @return
+	 * Methode, die prüft, ob eine Figur, die entweder auf einem Standard- oder Endfeld steht, innerhalb der 
+	 * Endfelder ziehen kann. Sie wird nur von der kannZiehen-Methode aufgerufen, falls die Figur
+	 * in die Endfelder einziehen soll.
+	 * @param figur - Figur, deren Zug-Möglichkeiten abgefragt werden
+	 * @param zuZiehen anzahl der Züge, die innerhalb des Endfeldes noch getätigt werden sollen
+	 * @return booleanschen Wert, true falls die Figur ziehen kann, false falls nicht
 	 */
-
 	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
 		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 		if (figur.getMeinFeld() instanceof Standardfeld) {
@@ -529,7 +527,12 @@ public class Spiel {
 			throw new RuntimeException("Fehlerhaftes Würfelergebnis");
 		this.augenzahl = augenzahl;
 	}
-
+	/**
+	 * Methode zum Auswählen der Figur, die ziehen soll über eine von außen (Spieler/ KI) übergebene
+	 * Spielfeld-ID
+	 * @param id - ID des Spielfeldes, auf dem sich die Figur vor Ausführen des Zuges befindet
+	 * @return figur - gibt die Figur, die ziehen soll zurück, falls diese ziehen kann
+	 */
 	public Spielfigur wähleFigur(String id) {
 		FarbEnum farbeIstAmZug = istAmZug.getFarbe();
 		Spielfeld f = spielbrett.getFeld(id, farbeIstAmZug);
