@@ -219,7 +219,7 @@ public class Spielfigur {
 	 * @param boolean kannZiehen
 	 */
 
-	private void setKannZiehen(boolean kannZiehen) {
+	public void setKannZiehen(boolean kannZiehen) {
 		this.kannZiehen = kannZiehen;
 	}
 
