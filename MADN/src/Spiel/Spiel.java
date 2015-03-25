@@ -329,7 +329,7 @@ public class Spiel {
 			throw new RuntimeException("Spieler braucht eine Farbe");
 		for (int i = 0; i <= 3; i++) {
 			if (spieler[i] != null) {
-				if (!(farbe.equals(spieler[i])))
+				if (farbe.equals(spieler[i].getFarbe()))
 					throw new RuntimeException("Farbe schon vorhanden");
 			}
 		}
@@ -344,8 +344,9 @@ public class Spiel {
 					endfelder, verhalten);
 		}
 		incAnzahlSpieler();
-		if (getAnzahlSpieler() == 4)
+		if (getAnzahlSpieler() == 4){
 			setHatBegonnen(true);
+		}
 
 	}
 
@@ -356,8 +357,15 @@ public class Spiel {
 	 */
 	public void startSpiel() {
 		setHatBegonnen(true);
-		spieler[0].setAmZug(true);
-		setIstAmZug(spieler[0]);
+		for(int i=0; i<spieler.length; i++){
+			if(spieler[i]!=null){
+				spieler[i].setAmZug(true);
+				setIstAmZug(spieler[i]);
+				return;
+			}
+		}
+		setIstBeendet(true);
+		
 	}
 
 	public boolean kannIchZiehen(Spielfigur figur, int augenZahl) {
@@ -620,6 +628,8 @@ public class Spiel {
 			}
 
 		}
+		
+		
 
 	}
 }

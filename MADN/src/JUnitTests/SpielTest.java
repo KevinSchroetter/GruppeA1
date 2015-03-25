@@ -19,10 +19,13 @@ import Basisklassen.*;
  */
 public class SpielTest {
 	static Spiel s;
+	//static Spiel t;
 
 	@BeforeClass
 	public static void spielErstellen() {
 		s = new Spiel();
+		//t= new Spiel();
+		
 	}
 
 	@Before
@@ -30,10 +33,10 @@ public class SpielTest {
 		System.out.println("Test beginnt");
 	}
 	
-	//@Test
-	/*public void setterTestSpielfeld(){
+	@Test
+	public void setterTestSpielfeld(){
 		assertTrue(s.getSpielbrett() instanceof Spielbrett);
-	}*/
+	}
 	@Test(expected = Exception.class)
 	public void gleicheFarbe() {
 		s.spielerHinzufügen("Kevin", FarbEnum.ROT, null);
@@ -62,14 +65,24 @@ public class SpielTest {
 		s.spielerHinzufügen("Alex", FarbEnum.GRÜN, "aggressiv");
 		s.spielerHinzufügen("Kevin", FarbEnum.GELB, null);
 		s.spielerHinzufügen("Anna", FarbEnum.BLAU, null);
+		s.spielerHinzufügen("Sam", FarbEnum.ROT, null);
 		
 		
 
 	}
 	
+	/*@Test(expected=Exception.class)
+	public void zuVieleSpieler(){
+		t.spielerHinzufügen("Jana", FarbEnum.GELB, null);
+		t.spielerHinzufügen("Kevin", FarbEnum.GRÜN, null);
+		t.spielerHinzufügen("Anna", FarbEnum.BLAU, null);
+		t.spielerHinzufügen("Sam", FarbEnum.ROT, null);
+		t.spielerHinzufügen("Anna", FarbEnum.GRÜN, null);
+	}*/
+	
 	@Test
 	public void testeObSpielGestartet(){
-		assertTrue(s.getHatBegonnen()==true);
+		assertTrue(s.getHatBegonnen());
 	}
 
 	@Test
