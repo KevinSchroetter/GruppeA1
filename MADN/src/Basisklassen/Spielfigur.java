@@ -475,6 +475,18 @@ public class Spielfigur {
 		else
 			return false;
 	}
+	
+	/**
+	 * Setzt Schrittzähler zurück
+	 * 
+	 *
+	 */
+
+	
+	public void resetFelderGelaufen(){
+		//Klein aber oho: Muss aufgerufen werden, wenn die Figur geschlagen wird
+		this.felderGelaufen = 0;
+	}
 
 	/**
 	 * Klassische toString Methode. Gibt ID, meinFeld und Farbe zurück
