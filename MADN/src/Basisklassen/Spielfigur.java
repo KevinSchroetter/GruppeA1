@@ -487,6 +487,17 @@ public class Spielfigur {
 		//Klein aber oho: Muss aufgerufen werden, wenn die Figur geschlagen wird
 		this.felderGelaufen = 0;
 	}
+	
+	/**
+	 * Inkrementiert Schrittzähler um angegebene zahl
+	 * @param i - int
+	 *
+	 */
+	
+	public void incSchritteGelaufen(int i){
+		if(i <= 0) throw new RuntimeException("Ungültige Schrittzahl!");
+		else this.felderGelaufen+=i;
+	}
 
 	/**
 	 * Klassische toString Methode. Gibt ID, meinFeld und Farbe zurück
