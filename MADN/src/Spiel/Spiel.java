@@ -591,6 +591,45 @@ public class Spiel implements iBediener{
 		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 		endfelderIstAmZug[augenZahl - 1].setFigur(figur);
 		figur.setMeinFeld(endfelderIstAmZug[augenZahl - 1]);
+		aufEndposition(figur);
+	}
+	
+	/**
+	 * Methode, die überprüft, ob eine Figur in ihrer endgültigen Endposition ist und wenn dies der Fall 
+	 * das Attribut binIchAufEndposition auf true setzt.
+	 * @param figur - zu Überprüfende Figur
+	 */
+	public void aufEndposition(Spielfigur figur){
+		if(! (figur.getMeinFeld() instanceof Endfeld))
+			return;
+		else{
+			FarbEnum farbe= figur.getFarbe();
+			Endfeld[] endfelder = spielbrett.getAlleEndFelderEinerFarbe(farbe);
+			int index=0;
+			for(int i=0; i<endfelder.length; i++){
+				if(figur.equals(endfelder[i])){
+					index=i;
+				}
+			}
+			switch(index){
+				case 0:
+					if(!endfelder[1].equals(null)&& !endfelder[2].equals(null) && !endfelder[3].equals(null)){
+						figur.setBinIchAufEndposition(true);
+					}
+					break;
+				case 1: 
+					if(!endfelder[2].equals(null) && !endfelder[3].equals(null)){
+						figur.setBinIchAufEndposition(true);
+					}	
+					break;
+				case 2:
+					if(!endfelder[3].equals(null))
+						figur.setBinIchAufEndposition(true);
+					break;
+				case 3: 
+					figur.setBinIchAufEndposition(true);					
+			}
+		}
 	}
 
 	/**
@@ -756,7 +795,10 @@ public class Spiel implements iBediener{
 			nächsterSpieler();
 		}
 	}
-
+	/**
+	 * Methode, die den nächsten Spieler als am Zug seienden Spieler setzt und dem vorherigen 
+	 * die Eigenschaft, dass er am Zug ist, auf false setzt.
+	 */
 	private void nächsterSpieler() {
 		for (int i = 0; i < spieler.length; i++) {
 			if (i < 3) {
