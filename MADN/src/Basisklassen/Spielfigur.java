@@ -199,7 +199,7 @@ public class Spielfigur {
 	 * @param boolean istImZiel
 	 */
 
-	private void setIstImZiel(boolean istImZiel) {
+	public void setIstImZiel(boolean istImZiel) {
 		this.istImZiel = istImZiel;
 	}
 

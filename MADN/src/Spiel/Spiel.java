@@ -488,6 +488,71 @@ public class Spiel {
 		return false;
 
 	}
+	
+	//INARBEIT
+	/** @author Felix Rosa
+	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen.
+	 * 
+	 * @param figur
+	 * @param augenZahl
+	 */
+	public void ziehen(Spielfigur figur, int augenZahl){
+		Standardfeld aktFeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1];
+		Standardfeld Zielfeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen() + augenZahl-1];
+		Spieler istAmZug = this.istAmZug;
+		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
+			if (spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur() != null) {
+				spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(figur);
+			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
+					//hier fehlt das Schlagen der bestehenden Figur auf dem Spawnfeld
+				}
+		}else if(figur.getIstGespawnt()==true&&getAugenzahl()==6){
+			if(kannIchZiehen(figur, augenZahl)==true){
+				if(figur.kannSchlagen(Zielfeld)){
+					//hier fehlt das Schlagen der Figur auf dem Zielfeld!
+				}else if(Zielfeld.getFigur()==null){
+					Spielfigur tempFig = aktFeld.getFigur();
+					aktFeld.setFigur(null);
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1]=aktFeld;
+					Zielfeld.setFigur(tempFig);
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen() + augenZahl-1] = Zielfeld;
+					figur.setMeinFeld(Zielfeld);
+					nächsterSpieler();
+				}
+				
+			}
+			
+		}else if(figur.getIstGespawnt()==true&&getAugenzahl()!=6){
+			if(figur.getIstImZiel()==true){
+				ziehenEndfelder(figur, augenZahl);
+			}else if(figur.getKannInsZiel()==true){
+				int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
+				ziehenEndfelder(figur, tempSchritte);
+				figur.setKannInsZiel(false);
+				figur.setIstImZiel(true);
+			}else if(kannIchZiehen(figur, augenZahl)==true){
+				if(figur.kannSchlagen(Zielfeld)){
+					//hier fehlt das Schlagen der bestehenden Figur auf dem Zielfeld
+				}else if(Zielfeld.getFigur()==null){
+					Spielfigur tempFig = aktFeld.getFigur();
+					aktFeld.setFigur(null);
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1]=aktFeld;
+					Zielfeld.setFigur(tempFig);
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen() + augenZahl-1] = Zielfeld;
+					figur.setMeinFeld(Zielfeld);
+					nächsterSpieler();
+				}
+			}
+			
+		}else{
+			 nächsterSpieler();
+		}
+			
+		
+		
+		
+		
+	}
 
 	/**
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
