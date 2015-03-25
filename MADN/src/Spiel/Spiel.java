@@ -369,21 +369,32 @@ public class Spiel {
 	}
 
 	/** @author Felix Rosa
+	 *  v. 1.1(kannIchZiehen um Spawn-Abfrage erweitert!)
 	 *  Methode prüft ob übergebene Figur in Kombination mit übergebener Würfelzahl ziehen kann.
 	 *  Dabei wird überprüft ob Zug aus Spielfeld ins Endfeld oder Züge im Endfeld möglich sind!
 	 * @param figur - figur von der überprüft werden soll ob ziehen möglich ist
 	 * @param augenZahl - gewürfelte Augenzahl um die die Figur ziehen soll!
 	 * @return boolean - true wenn ziehen möglich, false wenn nicht
 	 */
-	public boolean kannIchZiehen(Spielfigur figur, int augenZahl) {
-		if (figur.binIchGespawnt() == true
+	public boolean kannIchZiehen(Spielfigur figur) {
+		Spieler istAmZug = this.getIstAmZug();
+		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
+			if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur()!=null){
+				return true;
+			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe() != istAmZug.getFarbe()){
+				return true;
+			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
+				return false;
+			}
+		}
+		else if (figur.binIchGespawnt() == true
 				&& (!(figur.getBinIchAufEndpostion()))&& figur !=null) {
 			if (figur.getIstImZiel() == true)
-				if (kannZiehenEndfelder(figur, augenZahl) == true)
+				if (kannZiehenEndfelder(figur, getAugenzahl()) == true)
 					return true;
-			if ((figur.getFelderGelaufen() + augenZahl) > 39) {
-				if (((figur.getFelderGelaufen() + augenZahl) - 39 <= 4)) {
-					int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
+			if ((figur.getFelderGelaufen() + getAugenzahl()) > 39) {
+				if (((figur.getFelderGelaufen() + getAugenzahl()) - 39 <= 4)) {
+					int tempSchritte = (figur.getFelderGelaufen() + getAugenzahl()) - 39;
 					if (kannZiehenEndfelder(figur, tempSchritte) == true) {
 						figur.setKannInsZiel(true);
 						return true;
@@ -392,15 +403,15 @@ public class Spiel {
 				}
 			}
 			Standardfeld Zielfeld = getSpielbrett().getStandardFelder()[figur
-					.getFelderGelaufen() + augenZahl-1];
+					.getFelderGelaufen()-1 + getAugenzahl()];
 			if (Zielfeld.getFigur() == null)
 				return true;
 			else if (figur.kannSchlagen(Zielfeld) == true)
 				return true;
 			else
 				return false;
-		} else
-			return false;
+		} 
+		return false;
 
 	}
 
@@ -501,29 +512,31 @@ public class Spiel {
 	/** @author Felix Rosa
 	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen.
 	 * 
-	 * @param figur
-	 * @param augenZahl
+	 * @param figur - Spielfigur mit der gezogen werden soll!
+	 * @param augenZahl - gewürfelte Zahl um die, die Spielfigur
 	 */
-	public void ziehen(Spielfigur figur, int augenZahl){
+	public void ziehen(Spielfigur figur){
 		Standardfeld aktFeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1];
-		Standardfeld Zielfeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen() + augenZahl-1];
+		Standardfeld Zielfeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()];
 		Spieler istAmZug = this.istAmZug;
 		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
 			if (spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur() != null) {
 				spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(figur);
 			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
 					//hier fehlt das Schlagen der bestehenden Figur auf dem Spawnfeld
+					nächsterSpieler();
 				}
 		}else if(figur.getIstGespawnt()==true&&getAugenzahl()==6){
-			if(kannIchZiehen(figur, augenZahl)==true){
+			if(kannIchZiehen(figur)==true){
 				if(figur.kannSchlagen(Zielfeld)){
 					//hier fehlt das Schlagen der Figur auf dem Zielfeld!
+					nächsterSpieler();
 				}else if(Zielfeld.getFigur()==null){
 					Spielfigur tempFig = aktFeld.getFigur();
 					aktFeld.setFigur(null);
 					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1]=aktFeld;
 					Zielfeld.setFigur(tempFig);
-					spielbrett.getStandardFelder()[figur.getFelderGelaufen() + augenZahl-1] = Zielfeld;
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()] = Zielfeld;
 					figur.setMeinFeld(Zielfeld);
 					nächsterSpieler();
 				}
@@ -532,21 +545,22 @@ public class Spiel {
 			
 		}else if(figur.getIstGespawnt()==true&&getAugenzahl()!=6){
 			if(figur.getIstImZiel()==true){
-				ziehenEndfelder(figur, augenZahl);
+				ziehenEndfelder(figur, getAugenzahl());
 			}else if(figur.getKannInsZiel()==true){
-				int tempSchritte = (figur.getFelderGelaufen() + augenZahl) - 39;
+				int tempSchritte = (figur.getFelderGelaufen() + getAugenzahl()) - 39;
 				ziehenEndfelder(figur, tempSchritte);
 				figur.setKannInsZiel(false);
 				figur.setIstImZiel(true);
-			}else if(kannIchZiehen(figur, augenZahl)==true){
+			}else if(kannIchZiehen(figur)==true){
 				if(figur.kannSchlagen(Zielfeld)){
 					//hier fehlt das Schlagen der bestehenden Figur auf dem Zielfeld
+					nächsterSpieler();
 				}else if(Zielfeld.getFigur()==null){
 					Spielfigur tempFig = aktFeld.getFigur();
 					aktFeld.setFigur(null);
 					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1]=aktFeld;
 					Zielfeld.setFigur(tempFig);
-					spielbrett.getStandardFelder()[figur.getFelderGelaufen() + augenZahl-1] = Zielfeld;
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()] = Zielfeld;
 					figur.setMeinFeld(Zielfeld);
 					nächsterSpieler();
 				}
@@ -619,7 +633,7 @@ public class Spiel {
 		FarbEnum farbeIstAmZug = istAmZug.getFarbe();
 		Spielfeld f = spielbrett.getFeld(id, farbeIstAmZug);
 		Spielfigur figur = f.getFigur();
-		if (kannIchZiehen(figur, augenzahl) != true)
+		if (kannIchZiehen(figur) != true)
 			throw new FigurKannNichtZiehenException(String.format(
 					"Figur %s kann nicht ziehen!", figur));
 		else
@@ -715,7 +729,7 @@ public class Spiel {
 		int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
 		setAugenzahl(augenzahl);
 		for (Spielfigur sf: istAmZug.alleFiguren())
-			if (kannIchZiehen(sf, getAugenzahl())==true){
+			if (kannIchZiehen(sf)==true){
 				sf.setKannZiehen(true);
 				setZugFiguren(sf);
 			}
