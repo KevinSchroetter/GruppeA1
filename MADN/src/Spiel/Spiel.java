@@ -360,9 +360,16 @@ public class Spiel {
 		setIstAmZug(spieler[0]);
 	}
 
+	/** @author Felix Rosa
+	 *  Methode prüft ob übergebene Figur in Kombination mit übergebener Würfelzahl ziehen kann.
+	 *  Dabei wird überprüft ob Zug aus Spielfeld ins Endfeld oder Züge im Endfeld möglich sind!
+	 * @param figur - figur von der überprüft werden soll ob ziehen möglich ist
+	 * @param augenZahl - gewürfelte Augenzahl um die die Figur ziehen soll!
+	 * @return boolean - true wenn ziehen möglich, false wenn nicht
+	 */
 	public boolean kannIchZiehen(Spielfigur figur, int augenZahl) {
 		if (figur.binIchGespawnt() == true
-				&& (!(figur.getBinIchAufEndpostion()))) {
+				&& (!(figur.getBinIchAufEndpostion()))&& figur !=null) {
 			if (figur.getIstImZiel() == true)
 				if (kannZiehenEndfelder(figur, augenZahl) == true)
 					return true;
@@ -377,7 +384,7 @@ public class Spiel {
 				}
 			}
 			Standardfeld Zielfeld = getSpielbrett().getStandardFelder()[figur
-					.getFelderGelaufen() + augenZahl];
+					.getFelderGelaufen() + augenZahl-1];
 			if (Zielfeld.getFigur() == null)
 				return true;
 			else if (figur.kannSchlagen(Zielfeld) == true)
@@ -492,15 +499,17 @@ public class Spiel {
 	 *            - Anzahl der Züge, die Figur ziehen soll
 	 */
 	public void ziehenEndfelder(Spielfigur figur, int augenZahl) {
-		/**
-		 * if (kannZiehenEndfelder(figur, augenZahl) != true) { throw new
-		 * RuntimeException("Figur kann nicht ziehen!"); }
-		 */
-		// muss später weg
+		
+		  if (kannZiehenEndfelder(figur, augenZahl) != true){ 
+			  throw new RuntimeException("Figur kann nicht ziehen!"); 
+		  }
 		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
 		endfelderIstAmZug[augenZahl - 1].setFigur(figur);
 		figur.setMeinFeld(endfelderIstAmZug[augenZahl - 1]);
 	}
+	
+	
+	
 
 	/**
 	 * Methode zu DebugZwecken. Ermöglicht es, zu Testzwecken auf Spieler
