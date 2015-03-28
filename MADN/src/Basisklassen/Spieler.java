@@ -245,9 +245,9 @@ public class Spieler {
 	 * um auf die ArrayIndizes 0-3 zuzugreifen und so ein Spielfigur zurückzugeben.
 	 * @param figurID - Eine int, bei dem die Werte 1-4 erlaubt sind, um auf eine Figur zuzugreifen.
 	 */
-	public void setZugFigur(int figurID){
-		if(figurID<1 | figurID>4) throw new RuntimeException("Spielfiguren können nur mit den Zahlen 1,2,3 und 4 angesprochen werden!");
-		this.zugFigur = getFiguren(figurID);	
+	public void setZugFigur(Spielfigur figur){
+		if(!figur.getFarbe().equals(getFarbe())) throw new RuntimeException("Spielfiguren können nur mit den Zahlen 1,2,3 und 4 angesprochen werden!");
+		this.zugFigur = figur;	
 	}
 	/**
 	 * Getter für die Spielfigur, mit der ein Spielzug ausgeführt werden soll.
@@ -353,26 +353,6 @@ public class Spieler {
 		return erg;
 						
 	}
-	/* DERZEIT UNBENUTZT
-	/**
-	 * Methode um zu ermitteln, ob ein Spieler vor seinem Zug direkt übersprungen werden kann.
-	 * Sie nutzt dazu die Methode kannIchZiehen(int) der Klasse Spielfigur und geht diese für jede Figur aus dem Attribut figuren durch.
-	 * @return  - TRUE, falls mindestens eine Figur ziehen kann, FALSE, falls keine einzige Figur ziehen kann.
-	 */
-	/*
-	public boolean kannIchZiehen(){
-		int augenzahl = getMeinWürfel().werfen();
-		int check = 0;
-		for(int i = 0; i<4;i++){
-			if (alleFiguren()[i].kannIchZiehen(augenzahl)==true) check++;
-		}
-		if (check > 0) return true;
-		else{
-			setAmZug(false);
-			return false;
-		}
-	}
-	*/
 	/**
 	 * Methode, die die toString der Figuren aufruft, um die Positionen der Figuren eines Spielers anzuzeigen.
 	 * @return - Ein String, der die toString() der Klasse Figur für jede Figur des Spielers zurückgibt.
@@ -380,20 +360,6 @@ public class Spieler {
 	public String figurPositionen(){
 		return getFiguren(1).toString()+" "+getFiguren(2).toString()+" "+getFiguren(3).toString()+" "+getFiguren(4).toString();
 	}
-	/*DERZEIT UNBENUTZT
-	/**
-	 * Diese Methode nimmt die gespeicherte zugFigur und führt einen Zug aus. Das heisst konkret, dass Sie kontrolliert, ob überhaupt eine
-	 * Spielfigur in zugFigur ausgewählt wurde. Falls dies nicht so ist, wirft sie eine RuntimeException.
-	 * Anschließend wird geprüft, ob die ausgewählte Figur selbst ziehen kann. Wenn dem so ist, wird die Methode laufen(int) der Klasse Spielfigur aufgerufen.
-	 */
-	/*
-	public void ziehen(){
-		if (getZugFigur()==null)throw new RuntimeException("Keine Figur ausgewählt");
-		int augenzahl = getMeinWürfel().testWurf(6);
-		if (getZugFigur().kannIchZiehen(augenzahl)==false)throw new RuntimeException("Diese Figur kann nicht ziehen. Bitte wählen Sie eine andere aus!");
-		//getZugFigur().laufen(augenzahl); Methode der Spielfigur fehlt nocH!;	
-		setAmZug(false);
-	}*/
 	/**
 	 * Hilfsmethode mit der das Figuren-Array zurückgegeben werden kann.
 	 * @return figuren - Array vom Typ Spielfigur

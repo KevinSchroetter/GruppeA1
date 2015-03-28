@@ -19,11 +19,13 @@ import Basisklassen.*;
  */
 public class SpielTest {
 	static Spiel s;
+	static Spiel b;
 	//static Spiel t;
 
 	@BeforeClass
 	public static void spielErstellen() {
 		s = new Spiel();
+		b = new Spiel();
 		//t= new Spiel();
 		
 	}

@@ -170,7 +170,7 @@ public class Spielfigur {
 	 */
 
 	public void setFelderGelaufen(int felderGelaufen) {
-		this.felderGelaufen += felderGelaufen;
+			this.felderGelaufen += felderGelaufen;
 	}
 
 	/**
@@ -337,60 +337,6 @@ public class Spielfigur {
 
 		return false;
 	}
-
-	/**
-	 * Ermittelt, ob das jeweilige Startfeld frei ist. Wenn nicht,
-	 * RuntimeException. Ist das Spawnfeld ungültig, RuntimeException. Handelt
-	 * es sich bei dem Argument nicht um ein Standardfeld, RuntimeException.
-	 * Prüft die Farbe des spawnpoints und setzt die Figur an die Entsprechende
-	 * Spawnlocation.
-	 * 
-	 * @param spawnpoint - Spielfeld
-	 * @exception RuntimeException - wenn Spawnpoint null, belegt oder kein Standardfeld ist
-	 */
-
-	public void spawn(Standardfeld spawnpoint) {
-		if (spawnpoint == null)
-			throw new RuntimeException("Argument ist kein Spawnpoint!");
-		if (spawnpoint.getFigur() != null)
-			throw new RuntimeException("Spawnpoint belegt!");
-		if (!(spawnpoint instanceof Standardfeld))
-			throw new RuntimeException("Argument kein Spawnpoint!");
-		else {
-			
-			switch (this.getFarbe()) {
-
-			case ROT:
-				if (spawnpoint.getID().equals("1")) {
-					this.setMeinFeld(spawnpoint);
-					this.setIstGespawnt(true);
-				}
-				break;
-			case BLAU:
-				if (spawnpoint.getID().equals("11")) {
-					this.setMeinFeld(spawnpoint);
-					this.setIstGespawnt(true);
-				}
-				break;
-			case GRÜN:
-				if (spawnpoint.getID().equals("21")) {
-					this.setMeinFeld(spawnpoint);
-					this.setIstGespawnt(true);
-				}
-				break;
-			case GELB:
-				if (spawnpoint.getID().equals("31")) {
-					this.setMeinFeld(spawnpoint);
-					this.setIstGespawnt(true);
-				}
-				break;
-
-			}
-
-		}
-
-	}
-
 	/**
 	 * Prüft, ob die Figur im Spiel ist.. Gibt True zurück, wenn sie NICHT auf
 	 * einem Startfeld steht, nicht im Ziel ist (kann aber auf einem Endfeld
