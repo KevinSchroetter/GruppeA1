@@ -68,6 +68,7 @@ public class Spiel implements iBediener{
 	 * Zeigt an, ob sich ALLE Figuren auf ihren Startfeldern befinden.
 	 */
 	private boolean alleAufSpawn;
+	private Spielfigur chosenFigur;
 
 	/**
 	 * Konstruktor für ein Spiel. Er schreibt ein Spielbrett direkt in das
@@ -98,6 +99,7 @@ public class Spiel implements iBediener{
 	 * @return istAmZug - Ein Objekt der Klasse Spieler.
 	 */
 	public Spieler getIstAmZug() {
+		if (getHatBegonnen()==false) throw new RuntimeException("Spiel hat noch nicht gestartet!");
 		return this.istAmZug;
 	}
 
@@ -267,25 +269,23 @@ public class Spiel implements iBediener{
 			throw new RuntimeException("Keine Spielfigur ausgewählt");
 		if (!(figur.getFarbe().equals(getIstAmZug().getFarbe())))
 			throw new RuntimeException("Ungültige Figur ausgewählt!");
-		if (getAnzZugFiguren() >= 4)
+		if (getAnzZugFiguren() > 4)
 			throw new RuntimeException(
 					"Maximale Anzahl an für einen Zug möglichen Figuren erreicht!");
 		this.zugFiguren.add(figur);
 		incAnzZugFiguren();
 	}
 
-	public Spielfigur getZugFiguren(Spielfigur figur) {
-		int index;
+	public Spielfigur getZugFiguren(int index) {
+		if (index <0 || index > zugFiguren.size())throw new RuntimeException("Falscher Index!");
+		
+		Spielfigur figur=zugFiguren.get(index);
 		if (!(figur instanceof Spielfigur))
 			throw new RuntimeException(
 					"FEHLER: Die angeforderte zugFigur ist keine Spielfigur!");
 		if (!(figur.getFarbe().equals(getIstAmZug().getFarbe())))
 			throw new RuntimeException(
 					"Die Angeforderte Figur gehört nicht zum ziehenden Spieler!");
-		if (zugFiguren.contains(figur) == true) {
-			index = zugFiguren.indexOf(figur);
-			return zugFiguren.get(index);
-		}
 
 		else
 			throw new RuntimeException("Angeforderte Figur existiert nicht");
@@ -357,14 +357,10 @@ public class Spiel implements iBediener{
 	 */
 	public void startSpiel() {
 		setHatBegonnen(true);
-		for (int i = 0; i < spieler.length; i++) {
-			if (spieler[i] == null) {
-				spieler[i].setAmZug(true);
-				setIstAmZug(spieler[i]);
-				return;
-			}
-		}
-		setIstBeendet(true);
+		if(spieler[0]!=null){
+			spieler[0].setAmZug(true);
+			setIstAmZug(spieler[0]);
+		}else setIstBeendet(true);
 
 	}
 
@@ -379,9 +375,9 @@ public class Spiel implements iBediener{
 	public boolean kannIchZiehen(Spielfigur figur) {
 		Spieler istAmZug = this.getIstAmZug();
 		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
-			if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur()!=null){
+			if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur()==null){
 				return true;
-			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe() != istAmZug.getFarbe()){
+			}else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
 				return true;
 			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
 				return false;
@@ -515,71 +511,234 @@ public class Spiel implements iBediener{
 
 	//INARBEIT
 	/** @author Felix Rosa
-	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen.
-	 * 
+	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) aus der Klasse Spielfigur auf um den Schrittzähler zu erhöhen und nächsterSpieler() um auf den nächsten ziehenden zu verweisen.
+	 *  1. Die Figur ist noch nicht gespawnt und es wurde eine 6 gewürfelt
+	 *  1.1 Sollte das Spawnfeld durch keine andere Figur belegt sein spawnt die Figur auf das Spawnfeld!
+	 *  1.2 Sollte das Spawnfeld durch eine Figur der eigenen Farbe belegt sein, so wird für diese Figur die Methode ziehen() aufgerufen!
+	 *  1.3 Sollte das Spawnfeld durch eine Figur der gegnerischen Farbe belegt sein, so wird diese geschlagen und die zu spawnende Figur zieht auf das Feld!
+	 *  2. Die Figur ist gespawnt und es wurde eine 6 gewürfelt!
+	 *  2.1 Sollte die Figur auf den Endfeldern stehen, wird die Methode inEndefelderZiehen() auferufen
+	 *  2.2 Sollte die Figur vor den Endfeldern stehen und in die Endfelder ziehen können, wir die Methode aufgerufen und über eine Berechnung der int zuZiehen für die Methode angepasst
+	 *  2.3 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie
+	 *  2.4 Sollte die Figur ziehen können, aber eine gegnerische Figur befindet sich auf dem Zielfeld so schläg sie die Figur und zieht auf das Zielfeld.
+	 *  3. Die Figur ist gespawnt und es wurde eine Zahl zwischen 1 und 5 gewürfelt!
+	 *  3.1 Sollte die Figur auf den Endfeldern stehen, wird die Methode inEndefelderZiehen() auferufen
+	 *  3.2 Sollte die Figur vor den Endfeldern stehen und in die Endfelder ziehen können, wir die Methode aufgerufen und über eine Berechnung der int zuZiehen für die Methode angepasst
+	 *  3.3 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie
+	 *  3.4 Sollte die Figur ziehen können, aber eine gegnerische Figur befindet sich auf dem Zielfeld so schläg sie die Figur und zieht auf das Zielfeld.
 	 * @param figur
 	 * @param augenZahl
 	 */
 	public void ziehen(Spielfigur figur, int augenZahl){
-		Standardfeld aktFeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1];
-		Standardfeld Zielfeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()];
+		setChosen();
 		Spieler istAmZug = this.istAmZug;
+		Spielfigur zuSchlagen = null;
+		Spielfeld bisherigesFeld = null;
 		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
-			if (spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur() != null) {
-				spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(figur);
-			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
-					//hier fehlt das Schlagen der bestehenden Figur auf dem Spawnfeld
-					nächsterSpieler();
+			if (spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur() == null) {
+				bisherigesFeld = (Startfeld) figur.getMeinFeld();
+				figur.setMeinFeld(spielbrett.getSpawnfeld(istAmZug.getFarbe()));
+				//spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(figur);
+				figur.setFelderGelaufen(Integer.parseInt(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getID()));
+				figur.setIstGespawnt(true);
+				bisherigesFeld.setFigur(null);
+			}//REDUNDANT
+			/*else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
+					ziehen(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur(),getAugenzahl());
+			}*/		
+			else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
+				zuSchlagen = spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur();
+				spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
+				//spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(figur);
+				figur.setMeinFeld(spielbrett.getSpawnfeld(istAmZug.getFarbe()));
+				figur.setFelderGelaufen(1);
+				if(zuSchlagen.getFarbe().equals(FarbEnum.GRÜN)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderGrün().length; i++){
+						if(spielbrett.getAlleStartFelderGrün()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGrün()[i]);
+							//spielbrett.getAlleStartFelderGrün()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderRot().length; i++){
+						if(spielbrett.getAlleStartFelderRot()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderRot()[i]);
+							//spielbrett.getAlleStartFelderRot()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}else if(zuSchlagen.getFarbe().equals(FarbEnum.BLAU)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderBlau().length; i++){
+						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
+						if(spielbrett.getAlleStartFelderBlau()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
+							//spielbrett.getAlleStartFelderBlau()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}else if(zuSchlagen.getFarbe().equals(FarbEnum.GELB)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderGelb().length; i++){
+						if(spielbrett.getAlleStartFelderGelb()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGelb()[i]);
+							//spielbrett.getAlleStartFelderGelb()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
 				}
-		}else if(figur.getIstGespawnt()==true&&getAugenzahl()==6){
-			if(kannIchZiehen(figur)==true){
-				if(figur.kannSchlagen(Zielfeld)){
-					//hier fehlt das Schlagen der Figur auf dem Zielfeld!
-					nächsterSpieler();
-				}else if(Zielfeld.getFigur()==null){
-					Spielfigur tempFig = aktFeld.getFigur();
-					aktFeld.setFigur(null);
-					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1]=aktFeld;
-					Zielfeld.setFigur(tempFig);
-					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()] = Zielfeld;
-					figur.setMeinFeld(Zielfeld);
-					nächsterSpieler();
-				}
-				
 			}
-			
-		}else if(figur.getIstGespawnt()==true&&getAugenzahl()!=6){
-			if(figur.getIstImZiel()==true){
+		
+		}else if(figur.getIstGespawnt()==true&&getAugenzahl()==6){
+			//if(kannIchZiehen(figur)==true){
+			/*if(figur.getIstImZiel()==true){
 				ziehenEndfelder(figur, getAugenzahl());
-			}else if(figur.getKannInsZiel()==true){
+				nächsterSpieler();
+			}*/
+			if(figur.getKannInsZiel()==true){
 				int tempSchritte = (figur.getFelderGelaufen() + getAugenzahl()) - 39;
 				ziehenEndfelder(figur, tempSchritte);
 				figur.setKannInsZiel(false);
 				figur.setIstImZiel(true);
-			}else if(kannIchZiehen(figur)==true){
-				if(figur.kannSchlagen(Zielfeld)){
-					//hier fehlt das Schlagen der bestehenden Figur auf dem Zielfeld
-					nächsterSpieler();
-				}else if(Zielfeld.getFigur()==null){
-					Spielfigur tempFig = aktFeld.getFigur();
-					aktFeld.setFigur(null);
-					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1]=aktFeld;
-					Zielfeld.setFigur(tempFig);
-					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()] = Zielfeld;
-					figur.setMeinFeld(Zielfeld);
-					nächsterSpieler();
+				figur.incSchritteGelaufen(getAugenzahl());
+			}else if(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()].getFigur() != null && !(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()].getFigur().getFarbe().equals(istAmZug.getFarbe()))){
+				Standardfeld aktFeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1];
+				Standardfeld Zielfeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()];
+					zuSchlagen = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()].getFigur();
+					//spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()].setFigur(figur);
+					figur.setMeinFeld(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()]);
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1].setFigur(null);
+					figur.incSchritteGelaufen(getAugenzahl());
+					if(zuSchlagen.getFarbe().equals(FarbEnum.GRÜN)){
+						for(int i = 0; i< spielbrett.getAlleStartFelderGrün().length; i++){
+							if(spielbrett.getAlleStartFelderGrün()[i].getFigur()==null){
+								zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGrün()[i]);
+								//spielbrett.getAlleStartFelderGrün()[i].setFigur(zuSchlagen);
+								zuSchlagen.resetFelderGelaufen();
+								break;
+							}
+						}
+					}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
+						for(int i = 0; i< spielbrett.getAlleStartFelderRot().length; i++){
+							if(spielbrett.getAlleStartFelderRot()[i].getFigur()==null){
+								zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderRot()[i]);
+								//spielbrett.getAlleStartFelderRot()[i].setFigur(zuSchlagen);
+								zuSchlagen.resetFelderGelaufen();
+								break;
+							}
+						}
+					}else if(zuSchlagen.getFarbe().equals(FarbEnum.BLAU)){
+						for(int i = 0; i< spielbrett.getAlleStartFelderBlau().length; i++){
+							if(spielbrett.getAlleStartFelderBlau()[i].getFigur()==null){
+								zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
+								//spielbrett.getAlleStartFelderBlau()[i].setFigur(zuSchlagen);
+								zuSchlagen.resetFelderGelaufen();
+								break;
+							}
+						}
+					}else if(zuSchlagen.getFarbe().equals(FarbEnum.GELB)){
+						for(int i = 0; i< spielbrett.getAlleStartFelderGelb().length; i++){
+							if(spielbrett.getAlleStartFelderGelb()[i].getFigur()==null){
+								zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGelb()[i]);
+								//spielbrett.getAlleStartFelderGelb()[i].setFigur(zuSchlagen);
+								zuSchlagen.resetFelderGelaufen();
+								break;
+							}
+						}
+					}
+			}/*else if(Zielfeld.getFigur().getFarbe().equals(istAmZug.getFarbe())){
+				//INHALT KOMMT SOON!
+			}*/
+			else if(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()].getFigur()==null){
+					figur.setMeinFeld(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()]);
+					spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1].setFigur(null);
+					figur.incSchritteGelaufen(getAugenzahl());
 				}
+		}else if(figur.getIstGespawnt()==true&&getAugenzahl()!=6){
+			
+			/*if(figur.getIstImZiel()==true){
+			ziehenEndfelder(figur, getAugenzahl());
+			nächsterSpieler();
+		}*/
+		Standardfeld aktFeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1];
+		Standardfeld Zielfeld = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1 + getAugenzahl()];
+		if(figur.getIstImZiel()==true){
+			ziehenEndfelder(figur, getAugenzahl());
+		}else if(figur.getKannInsZiel()==true){
+			int tempSchritte = (figur.getFelderGelaufen() + getAugenzahl()) - 39;
+			ziehenEndfelder(figur, tempSchritte);
+			figur.setKannInsZiel(false);
+			figur.setIstImZiel(true);
+			figur.incSchritteGelaufen(getAugenzahl());
+			nächsterSpieler();
+		}else if( Zielfeld.getFigur() != null &&(!(Zielfeld.getFigur().getFarbe().equals(istAmZug.getFarbe())))){
+			System.out.println("Ichbinda!");
+				zuSchlagen = spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()].getFigur();
+				//spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()].setFigur(figur);
+				figur.setMeinFeld(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()]);
+				spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1].setFigur(null);
+				figur.incSchritteGelaufen(getAugenzahl());
+				if(zuSchlagen.getFarbe().equals(FarbEnum.GRÜN)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderGrün().length; i++){
+						if(spielbrett.getAlleStartFelderGrün()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGrün()[i]);
+							//spielbrett.getAlleStartFelderGrün()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderRot().length; i++){
+						if(spielbrett.getAlleStartFelderRot()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderRot()[i]);
+							//spielbrett.getAlleStartFelderRot()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}else if(zuSchlagen.getFarbe().equals(FarbEnum.BLAU)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderBlau().length; i++){
+						if(spielbrett.getAlleStartFelderBlau()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
+							//spielbrett.getAlleStartFelderBlau()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}else if(zuSchlagen.getFarbe().equals(FarbEnum.GELB)){
+					for(int i = 0; i< spielbrett.getAlleStartFelderGelb().length; i++){
+						if(spielbrett.getAlleStartFelderGelb()[i].getFigur()==null){
+							zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGelb()[i]);
+							//spielbrett.getAlleStartFelderGelb()[i].setFigur(zuSchlagen);
+							zuSchlagen.resetFelderGelaufen();
+							break;
+						}
+					}
+				}
+				nächsterSpieler();
+		}/*else if(Zielfeld.getFigur().getFarbe().equals(istAmZug.getFarbe())){
+			//INHALT KOMMT SOON!
+		}*/
+		else if(Zielfeld.getFigur()==null){	
+				figur.setMeinFeld(spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1+getAugenzahl()]);
+				spielbrett.getStandardFelder()[figur.getFelderGelaufen()-1].setFigur(null);
+				figur.incSchritteGelaufen(getAugenzahl());
+				nächsterSpieler();
 			}
 			
-		}else{
-			 nächsterSpieler();
+		}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
+		//Unnötig?
+		 else{
+			 
 		}
-			
-		
-		
-		
-		
+		alleZugFiguren().clear();
+		anzZugFiguren=0;
 	}
+	
+	
 
 	/**
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
@@ -664,6 +823,13 @@ public class Spiel implements iBediener{
 			throw new RuntimeException("Fehlerhaftes Würfelergebnis");
 		this.augenzahl = augenzahl;
 	}
+	public void setChosen(){
+		if(getIstAmZug()!=null)
+			this.chosenFigur=getIstAmZug().getZugFigur();
+	}
+	public Spielfigur getChosen(){
+		return this.chosenFigur;
+	}
 
 	/**
 	 * Methode zum Auswählen der Figur, die ziehen soll über eine von außen
@@ -675,15 +841,28 @@ public class Spiel implements iBediener{
 	 * @return figur - gibt die Figur, die ziehen soll zurück, falls diese
 	 *         ziehen kann
 	 */
+	@SuppressWarnings("finally")
 	public Spielfigur wähleFigur(String id) {
+		if(getZugMöglich()==false)throw new RuntimeException("Zug nicht möglich!");
 		FarbEnum farbeIstAmZug = istAmZug.getFarbe();
 		Spielfeld f = spielbrett.getFeld(id, farbeIstAmZug);
 		Spielfigur figur = f.getFigur();
-		if (kannIchZiehen(figur) != true)
+		try{
+		if (!(alleZugFiguren().contains(figur)))
 			throw new FigurKannNichtZiehenException(String.format(
 					"Figur %s kann nicht ziehen!", figur));
-		else
-			return figur;
+		else{
+			getIstAmZug().setZugFigur(figur);
+			ziehen(figur,getAugenzahl());
+			return figur;}
+		}
+		catch(FigurKannNichtZiehenException e){
+			System.out.println(e);
+		}
+		finally{
+			return null;
+		}
+		
 	}
 
 	/**
@@ -703,7 +882,7 @@ public class Spiel implements iBediener{
 	 * @throws RuntimeException
 	 */
 
-	public void ersterZug() {
+/*	public void ersterZug() {
 		// Sicherheitsabfragen, Abbruchbedingung
 		Spieler s = this.getIstAmZug();
 		if (s == null)
@@ -763,71 +942,11 @@ public class Spiel implements iBediener{
 
 		}
 
-	}
+	}*/
 
 	public ArrayList<Spielfigur> alleZugFiguren() {
 		return zugFiguren;
 	}
-
-	// // hack wird im offiziellen Spiel ersetzt. die Methode testwurf dann
-	// durch das richtige würfeln
-	public void würfeln(int hack) {
-		if (getHatBegonnen() == false)
-			throw new RuntimeException("Spiel hat noch nicht begonnen");
-		int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
-		setAugenzahl(augenzahl);
-		for (Spielfigur sf : istAmZug.alleFiguren())
-			if (kannIchZiehen(sf) == true) {
-				sf.setKannZiehen(true);
-				setZugFiguren(sf);
-			} else {
-				if (kannSpawnen(sf))
-					sf.setKannZiehen(true);
-				setZugFiguren(sf);
-			}
-		if (!alleZugFiguren().isEmpty()
-				&& alleZugFiguren().size() == istAmZug.getAnzFiguren())
-			for (Spielfigur sf : alleZugFiguren())
-				if (sf.binIchGespawnt() == false)
-					setAlleAufSpawn(true);
-				else {
-					setAlleAufSpawn(false);
-					break;
-				}
-		if (!alleZugFiguren().isEmpty()) {
-			setZugMöglich(true);
-			incAnzWürfe();
-		} else {
-			setZugMöglich(false);
-			nächsterSpieler();
-		}
-	}
-	/**
-	 * Methode, die den nächsten Spieler als am Zug seienden Spieler setzt und dem vorherigen 
-	 * die Eigenschaft, dass er am Zug ist, auf false setzt.
-	 */
-	private void nächsterSpieler() {
-		for (int i = 0; i < spieler.length; i++) {
-			if (i < 3) {
-				if (istAmZug.equals(spieler[i])) {
-					istAmZug = spieler[i + 1];
-					spieler[i + 1].setAmZug(true);
-					spieler[i].setAmZug(false);
-				}
-			}
-
-			if (i == 3) {
-				if (istAmZug.equals(spieler[i])) {
-					istAmZug = spieler[0];
-					spieler[0].setAmZug(true);
-					spieler[i].setAmZug(false);
-				}
-
-			}
-		}
-
-	}
-
 	public boolean kannSpawnen(Spielfigur figur) {
 		if (getAugenzahl() == 6 && figur.binIchGespawnt() == false)
 			if (getSpielbrett().getSpawnfeld(getIstAmZug().getFarbe())
@@ -839,6 +958,106 @@ public class Spiel implements iBediener{
 				return false;
 		else
 			return false;
+	}
+	// // hack wird im offiziellen Spiel ersetzt. die Methode testwurf dann
+	// durch das richtige würfeln
+	public void würfeln(int hack) {
+		try{
+			incAnzWürfe();
+			int spawncounter = 0;
+			if (getHatBegonnen() == false)
+				throw new RuntimeException("Spiel hat noch nicht begonnen");
+			int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
+			setAugenzahl(augenzahl);
+			for (Spielfigur sf : istAmZug.alleFiguren()){
+				if (kannIchZiehen(sf) == true) {
+					sf.setKannZiehen(true);
+					setZugFiguren(sf);
+				}
+				if(sf.binIchGespawnt()==false)
+					spawncounter++;
+			}
+			if (spawncounter == getIstAmZug().getAnzFiguren())
+				setAlleAufSpawn(true);
+			
+			//DEBUG SYSO
+			System.out.println("Für Zug Mögliche Figuren: "+alleZugFiguren().size());
+		
+			if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe<=3 && getAugenzahl()!=6) {
+				setZugMöglich(false);
+			} 
+			else if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe > 3 && getAugenzahl()!= 6){
+				setZugMöglich(false);
+				nächsterSpieler();
+			}
+			else{
+				setZugMöglich(true);
+				setAlleAufSpawn(false);
+			}
+			//DEBUG SYSOS
+			System.out.println("Anzahl würfe: "+anzWürfe);
+			System.out.println("Augenzahl: "+getAugenzahl());
+			System.out.println("Am Zug: "+getIstAmZug());
+			System.out.println("Zug Möglich: "+getZugMöglich());
+			System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
+			System.out.println("");
+			}
+			catch(RuntimeException e){
+				System.out.println(e);
+			}		
+	}
+	/**
+	 * Methode, die den nächsten Spieler als am Zug seienden Spieler setzt und dem vorherigen 
+	 * die Eigenschaft, dass er am Zug ist, auf false setzt.
+	 */
+	public void nächsterSpieler() {
+		alleZugFiguren().clear();
+		anzZugFiguren=0;
+		anzWürfe=0;
+		
+		for (int i = 0; i< getAnzahlSpieler();i++){
+			if(getIstAmZug().equals(spieler[i])){
+				if(i == getAnzahlSpieler()-1){
+					setIstAmZug(spieler[0]);
+				}
+				else{
+					setIstAmZug(spieler[i+1]);
+				}
+			break;
+			}
+		}
+
+	/*	for (int i = 0; i<getAnzahlSpieler();i++){
+			if(getIstAmZug().equals(spieler[i]))
+				if (i == getAnzahlSpieler()-1){
+					setIstAmZug(spieler[0]);
+				}
+				else
+					setIstAmZug(spieler[i]);
+		}
+		
+		*/
+		/*			
+		for (int i = 0; i < getAnzahlSpieler(); i++) {
+			if (i < getAnzahlSpieler()) {
+				if (istAmZug.equals(spieler[i])) {
+					istAmZug = spieler[i + 1];
+					spieler[i + 1].setAmZug(true);
+					spieler[i].setAmZug(false);
+					break;
+				}
+			}
+
+			if (i == getAnzahlSpieler()) {
+				if (istAmZug.equals(spieler[i])) {
+					istAmZug = spieler[0];
+					spieler[0].setAmZug(true);
+					spieler[i].setAmZug(false);
+				}
+
+			}
+		}
+*/
 	}
 
 	// Interface - ausgabeFiguren: Gibt alle Figuren aller Spieler aus

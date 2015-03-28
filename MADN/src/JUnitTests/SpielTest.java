@@ -86,21 +86,6 @@ public class SpielTest {
 	public void testeObSpielGestartet(){
 		assertTrue(s.getHatBegonnen());
 	}
-
-	@Test
-	/**
-	 * Kontrolle, ob die ArrayList wie erwartet funktioniert und ob Farbe von zugFiguren und Spieler übereinstimmen.
-	 */
-	public void TesteGetZugFigur(){
-		b.spielerHinzufügen("Test",FarbEnum.GRÜN,null);
-		System.out.println(b.DebugGetSpieler(1));
-		System.out.println(b.getIstAmZug());
-		b.startSpiel();
-		b.DebugGetSpieler(1).setZugFigur(1);
-		Spielfigur Test = b.DebugGetSpieler(1).getZugFigur();
-		b.setZugFiguren(b.DebugGetSpieler(1).getFiguren(1));
-		assertTrue(b.getZugFiguren(b.getIstAmZug().getZugFigur()).equals(b.DebugGetSpieler(1).getZugFigur()));
-	}
 	@Test
 	public void würfeln(){
 		b.startSpiel();

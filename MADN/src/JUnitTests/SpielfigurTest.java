@@ -118,30 +118,6 @@ public class SpielfigurTest {
 		Spielfigur overflow = new Spielfigur(1);
 		overflow = null;
 	}
-
-	/**
-	 * Verifikation dass illegaler Spawn nicht durchgeht
-	 */
-
-	@Test(expected = RuntimeException.class)
-	public void fehlerhafterSpawn() {
-		figurenGelb[0].spawn(null);
-	}
-
-	/**
-	 * Sicherstellen dass Figuren spawnen können
-	 */
-
-	@Test
-	public void spawnEineFigur() {
-		Spielfeld feld;
-		feld = new Standardfeld(1);
-		figurenRot[0].spawn((Standardfeld) feld);
-		if (!figurenRot[0].getIstGespawnt()) {
-			fail();
-		}
-	}
-
 	/**
 	 * Prüfen ob die kannSchlagen Methode funktioniert
 	 */
@@ -176,16 +152,4 @@ public class SpielfigurTest {
 			fail();
 		}
 	}
-
-	/**
-	 * Sicherstellen dass man nur auf Standardfeldern spawnt, die gültig sind
-	 */
-
-	@Test(expected = RuntimeException.class)
-	public void sollteNichtSpawnen() {
-		Spielfeld feld = new Endfeld("E1", FarbEnum.ROT);
-		figurenRot[4].setMeinFeld((Endfeld) feld);
-		figurenRot[4].spawn(new Standardfeld(2));
-	}
-
 }
