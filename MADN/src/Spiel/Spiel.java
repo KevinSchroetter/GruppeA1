@@ -355,15 +355,12 @@ public class Spiel implements iBediener{
 					throw new RuntimeException("Farbe " + spieler[i].getFarbe() +" schon vorhanden! Bitte waehlen Sie eine andere Farbe!");
 			}
 		}
-		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(
-				farbe);
+		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(farbe);
 		Endfeld[] endfelder = getSpielbrett().getAlleEndFelderEinerFarbe(farbe);
 		if (verhalten == null) {
-			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,
-					endfelder);
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder);
 		} else if (verhalten != null) {
-			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,
-					endfelder, verhalten);
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder, verhalten);
 		}
 		incAnzahlSpieler();
 		if (getAnzahlSpieler() == 4) {
@@ -371,19 +368,18 @@ public class Spiel implements iBediener{
 		}
 
 	}
-
 	/**
 	 * Methode, die das Spiel startet, so dass keine Spieler mehr hinzugefügt
 	 * werden können. Sie setzt den ersten Spieler im Spieler Array als den
 	 * Spieler, der am Zug ist.
 	 */
 	public void startSpiel() {
+		if(spieler[0]==null)throw new RuntimeException("Ein Spiel braucht mindestens einen Spieler!");
 		setHatBegonnen(true);
 		if(spieler[0]!=null){
 			spieler[0].setAmZug(true);
 			setIstAmZug(spieler[0]);
 		}else setIstBeendet(true);
-
 	}
 
 	/**@author Felix Rosa
