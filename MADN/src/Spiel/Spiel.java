@@ -565,16 +565,21 @@ public class Spiel implements iBediener{
 			anzZugFiguren=0;
 			setChosen();
 			Spieler istAmZug = this.istAmZug;
-			Spielfeld bisherigesFeld = null;
+			Spielfeld aktFeld = null;
 			if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
 				System.out.println("1ter");
+				aktFeld = (Startfeld) figur.getMeinFeld();
+				String aktFeldIDS = aktFeld.getID();
 				if (spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur() == null) {
 					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall");
-					bisherigesFeld = (Startfeld) figur.getMeinFeld();
 					figur.setMeinFeld(spielbrett.getSpawnfeld(istAmZug.getFarbe()));
 					figur.setFelderGelaufen(1);
 					figur.setIstGespawnt(true);
-					bisherigesFeld.setFigur(null);
+					for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
+						if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID()==aktFeldIDS){
+							spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+						}
+					}
 					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall:: ENDE");
 				}else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
 					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall");
@@ -584,7 +589,7 @@ public class Spiel implements iBediener{
 			
 			}else if(figur.getIstGespawnt()==true&&getAugenzahl()==6){
 				    System.out.println("2ter");
-					Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
+					aktFeld =(Standardfeld) figur.getMeinFeld();
 					int ZielfeldID = ermittleZielfeldID(figur);
 					int EndfeldSchritte = ermittleEndfeldSchritte(figur);
 					int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
@@ -614,7 +619,7 @@ public class Spiel implements iBediener{
 						System.out.println("3ter");
 						int ZielfeldID = ermittleZielfeldID(figur);
 						int EndfeldSchritte = ermittleEndfeldSchritte(figur);
-						Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
+						aktFeld =(Standardfeld) figur.getMeinFeld();
 						int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
 						if(figur.getIstImZiel()==true){
 							System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall");
