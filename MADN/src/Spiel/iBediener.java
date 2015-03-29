@@ -13,7 +13,7 @@ public interface iBediener {
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel();
 	public ArrayList<Spielfigur> ausgabeFigurenAufStartfeld();
 	public void ausgabeSpielerListe();
-	public boolean zugDurchführen(String ID);
+	public boolean zugDurchführen(String ID, int würfelZahl);
 	public int rollTheDice();
 	
 

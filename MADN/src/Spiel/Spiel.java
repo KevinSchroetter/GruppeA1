@@ -1186,12 +1186,12 @@ public class Spiel implements iBediener{
 	 * 
 	 */
 
-	public boolean zugDurchführen(String ID) {
+	public boolean zugDurchführen(String ID, int würfelZahl) {
 
 		boolean zugErfolgreich;
 		try {
 			Spielfigur f = wähleFigur(ID);
-			ziehen(f, this.getIstAmZug().getMeinWürfel().werfen());
+			ziehen(f, würfelZahl);
 			zugErfolgreich = true;
 			System.out.println("Zug erfolgreich!");
 			return zugErfolgreich;
