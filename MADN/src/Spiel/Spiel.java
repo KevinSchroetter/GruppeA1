@@ -384,7 +384,7 @@ public class Spiel implements iBediener{
 	 * @return
 	 */
 	public int ermittleEndfeldSchritte(Spielfigur figur){
-		return figur.getFelderGelaufen()+getAugenzahl() - spielbrett.getAlleStandardFelder().length;
+		return figur.getFelderGelaufen()+getAugenzahl() - (spielbrett.getAlleStandardFelder().length-1);
 
 	}
 	/** @author Felix Rosa
@@ -791,8 +791,8 @@ public class Spiel implements iBediener{
 		}else if(aktFeld instanceof Standardfeld){
 			spielbrett.getAlleStandardFelder()[aktFeldID-1].setFigur(null);
 		}
-		//aufEndposition(figur);
-		System.out.println("Ich bin in der ziehenEndfelder");
+		aufEndposition(figur);
+		System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
 	}
 	
 	/**
@@ -805,26 +805,25 @@ public class Spiel implements iBediener{
 			return;
 		else{
 			FarbEnum farbe= figur.getFarbe();
-			Endfeld[] endfelder = spielbrett.getAlleEndFelderEinerFarbe(farbe);
 			int index=0;
-			for(int i=0; i<endfelder.length; i++){
-				if(figur.equals(endfelder[i])){
+			for(int i=0; i<spielbrett.getAlleEndFelderEinerFarbe(farbe).length; i++){
+				if(figur.equals(spielbrett.getAlleEndFelderEinerFarbe(farbe)[i])){
 					index=i;
 				}
 			}
 			switch(index){
 				case 0:
-					if(!endfelder[1].equals(null)&& !endfelder[2].equals(null) && !endfelder[3].equals(null)){
+					if(!(spielbrett.getAlleEndFelderEinerFarbe(farbe)[1]==null)&& !(spielbrett.getAlleEndFelderEinerFarbe(farbe)[2]==null) && !(spielbrett.getAlleEndFelderEinerFarbe(farbe)[3]==null)){
 						figur.setBinIchAufEndposition(true);
 					}
 					break;
 				case 1: 
-					if(!endfelder[2].equals(null) && !endfelder[3].equals(null)){
+					if(!(spielbrett.getAlleEndFelderEinerFarbe(farbe)[2]==null) && !(spielbrett.getAlleEndFelderEinerFarbe(farbe)[3]==null)){
 						figur.setBinIchAufEndposition(true);
 					}	
 					break;
 				case 2:
-					if(!endfelder[3].equals(null))
+					if(!(spielbrett.getAlleEndFelderEinerFarbe(farbe)[3]==null))
 						figur.setBinIchAufEndposition(true);
 					break;
 				case 3: 
