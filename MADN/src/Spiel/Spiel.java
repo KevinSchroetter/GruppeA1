@@ -579,7 +579,7 @@ public class Spiel implements iBediener{
 					figur.setFelderGelaufen(1);
 					figur.setIstGespawnt(true);
 					for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-						if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID()==aktFeldIDS){
+						if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
 							spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
 						}
 					}
@@ -720,7 +720,7 @@ public class Spiel implements iBediener{
 			figur.setFelderGelaufen(1);
 			figur.setIstGespawnt(true);
 			for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-				if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID()==aktFeldIDS){
+				if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
 					spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
 				}
 			}
@@ -788,7 +788,7 @@ public class Spiel implements iBediener{
 		figur.setMeinFeld(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[restSchritte]);
 		if(aktFeld instanceof Endfeld){
 			for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-				if(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].getID()==aktFeldIDS){
+				if(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
 					spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
 				}
 			}
