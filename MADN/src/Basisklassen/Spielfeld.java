@@ -42,11 +42,7 @@ public abstract class Spielfeld {
 	 *                Wenn Feld belegt.
 	 */
 	 public void setFigur(Spielfigur figur) {
-		if (this.getFigur() == null) {
 			this.figur = figur;
-		} else {
-			throw new RuntimeException("Feld belegt!");
-		}
 	}
 
 }
