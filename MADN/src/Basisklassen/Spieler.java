@@ -1,5 +1,8 @@
 package Basisklassen;
 
+import java.util.ArrayList;
+import Spiel.*;
+
 /**
  * Die Klasse Spieler für das MADN-Projekt Sie beinhaltet alle Attribute und
  * Methoden, auf die ein Spieler später im Spiel Zugriff erhält.
@@ -70,6 +73,11 @@ public class Spieler {
 	 * Figuren in die Zielfelder gebracht hat.
 	 */
 	private boolean imSpiel = true;
+	/** Ein Spieler muss das ein Interface iBediener kennen, damit die KI Zugriff auf die Methoden
+	 *  des Interfaces hat.
+	 */
+	// Spiel muss noch im Konstruktor übergeben werden!
+	private iBediener iB =new Spiel();
 
 	/**
 	 * Elementklasse der Klasse Spieler. Hier soll später der Algorithmus für
@@ -105,21 +113,133 @@ public class Spieler {
 			meinSpieler.setBedienung(this);
 
 		}
+		/**
+		 * Abstrakte Methode, die in den spezifischen KIs aggressiv und defensiv implementiert wird. 
+		 * Sie soll die Entscheidungen der KI steuern. 
+		 */
+		public abstract void zugWählen();
 
 	}
-
+	/**
+	 * Elementklasse der Klasse Spieler, erbt von KI. Dies ist die aggressiv agierende KI-Klasse.
+	 * @author Anna Rosa
+	 *
+	 */
 	public class KI_Aggressiv extends KI {
-
+		/**
+		 * Konstruktor der aggressiven KI, wird durch den Spieler-Konstruktor aufgerufen.
+		 * @param s-Spieler, der eine KI werden soll
+		 */
 		public KI_Aggressiv(Spieler s) {
 			super(s);
 		}
+		/**
+		 * Methode, die würfelt und dann nach den Prioritäten entscheidet, welche Figur laufen soll.
+		 * Mögliche Fälle:  1. Eine Figur kann schlagen und dabei spawnen, 2. Figur kann nur schlagen -> 
+		 * am weitesten gelaufene Figur läuft , 3. Keine Figur kann schlagen, aber eine Figur kann spawnen, 
+		 * 4. Keine Figur kann schlagen oder spawnen, dann läuft die Figur, die am Weitesten vorne ist.
+		 */
+		public void zugWählen() {
+			int augenzahl = iB.rollTheDice();
+			ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
+			ArrayList<Spielfigur> kannSchlagen = new<Spielfigur> ArrayList();
 
+			for (Spielfigur figur : kannZiehen) {
+				if (figur.getKannSchlagen() == true) {
+					kannSchlagen.add(figur);
+				}
+
+			}
+			if (!kannSchlagen.isEmpty()) {
+				Spielfigur[] amWeitesten = new Spielfigur[kannSchlagen.size()];
+				for (int i = 0; i < kannSchlagen.size(); i++) {
+					Spielfigur figur = kannSchlagen.get(i);
+					if (figur.getIstGespawnt() == false) {
+						String id = "" + figur.getID();
+						iB.zugDurchführen(id, augenzahl);
+						return;
+					}
+					amWeitesten[i] = figur;
+
+				}
+				for (int i = 0; i < amWeitesten.length - 1; i++) {
+					if (amWeitesten[i].getFelderGelaufen() > amWeitesten[i + 1]
+							.getFelderGelaufen()) {
+						Spielfigur temp = amWeitesten[i + 1];
+						amWeitesten[i] = amWeitesten[i + 1];
+						amWeitesten[i + 1] = temp;
+					}
+				}
+				String id = "" + amWeitesten[amWeitesten.length - 1].getID();
+				iB.zugDurchführen(id, augenzahl);
+				return;
+			} else if (kannSchlagen.isEmpty()) {
+				for (Spielfigur figur : kannZiehen) {
+					if (figur.binIchGespawnt() == false) {
+						String id = "" + figur.getID();
+						iB.zugDurchführen(id, augenzahl);
+						return;
+					}
+				}
+
+				Spielfigur[] amWeitesten = new Spielfigur[kannZiehen.size()];
+				for (int i = 0; i < kannZiehen.size(); i++) {
+					amWeitesten[i] = kannZiehen.get(i);
+				}
+				for (int i = 0; i < amWeitesten.length; i++) {
+					if (amWeitesten[i].getFelderGelaufen() > amWeitesten[i + 1]
+							.getFelderGelaufen()) {
+						Spielfigur temp = amWeitesten[i + 1];
+						amWeitesten[i] = amWeitesten[i + 1];
+						amWeitesten[i + 1] = temp;
+					}
+				}
+				String id = "" + amWeitesten[amWeitesten.length - 1].getID();
+				iB.zugDurchführen(id, augenzahl);
+			}
+
+		}
 	}
-
+	
+	/**
+	 * Elementklasse der Klasse Spieler, erbt von KI. Dies ist die defensiv agierende KI-Klasse.
+	 * @author Anna Rosa
+	 *
+	 */
 	public class KI_Defensiv extends KI {
-
+		/**
+		 * Konstruktor der defensiven KI, wird durch den Spieler-Konstruktor aufgerufen.
+		 * @param s-Spieler, der eine KI werden soll
+		 */
 		public KI_Defensiv(Spieler s) {
 			super(s);
+		}
+		/**
+		 * Methode, die würfelt und dann nach den Prioritäten entscheidet, welche Figur laufen soll.
+		 * Mögliche Fälle: 1. Es ist mindestens eine Figur im Spiel, dann läuft die Spielfigur, die noch im
+		 * Spiel und schon am Weitesten gelaufen ist, 2. es ist keine Figur aktiv im Spiel, dann wird 
+		 * gespawnt. Die dritte Priorität schlagen kann vernachlässigt werden, da entweder die weiteste
+		 * Figur zieht, egal ob sie schlagen kann oder nicht, oder irgendeinen Figur spawnt und mit Glück dabei
+		 * schlägt.
+		 */
+		public void zugWählen(){
+			int augenzahl = iB.rollTheDice();
+			ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
+			Spielfigur[] amWeitesten = new Spielfigur[kannZiehen.size()];
+			for (int i = 0; i < kannZiehen.size(); i++) {
+				amWeitesten[i] = kannZiehen.get(i);
+			}
+			for (int i = 0; i < amWeitesten.length; i++) {
+				if (amWeitesten[i].getFelderGelaufen() > amWeitesten[i + 1]
+						.getFelderGelaufen()) {
+					Spielfigur temp = amWeitesten[i + 1];
+					amWeitesten[i] = amWeitesten[i + 1];
+					amWeitesten[i + 1] = temp;
+				}
+			}
+			String id = "" + amWeitesten[amWeitesten.length - 1].getID();
+			iB.zugDurchführen(id, augenzahl);
+						
 		}
 
 	}
