@@ -456,4 +456,10 @@ public class Spielfigur {
 		return String.format("Figur %d auf Feld %s mit Farbe %s --\n ",
 				this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
+	/**
+	 * HilfsMethode zum Loeschen der static anzaglFiguren (Wird in Spiel benoetigt, daher public)
+	 */
+	public void deleteAnzahlFiguren(){
+		this.anzahlFiguren=0;
+	}
 }

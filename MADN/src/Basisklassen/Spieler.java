@@ -651,12 +651,21 @@ public class Spieler {
 	public Spielfigur[] alleFiguren() {
 		return figuren;
 	}
-
+	/**
+	 * HilfsMethode, um die Anzahl der Figuren des Spielers zu bekommen (Wird in Spiel benötigt, daher public)
+	 * @return anz - int, Anzahl der Figuren des Spielers
+	 */
 	public int getAnzFiguren() {
 		int anz = 0;
 		for (Spielfigur sf : alleFiguren())
 			if (sf != null)
 				anz++;
 		return anz;
+	}
+	/**
+	 * HilfsMethode zum Loeschen der static Spielernummer (Wird in Spiel benoetigt, daher public)
+	 */
+	public void deleteSpielernummer(){
+		this.spielernummer=0;
 	}
 }

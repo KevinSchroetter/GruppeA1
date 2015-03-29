@@ -7,14 +7,35 @@ import Spiel.iBediener;
 public class SpielTest {
 public static void main(String[]args){
 		
-		iBediener i = new Spiel();
+	/*	iBediener i = new Spiel();
 		i.neuerSpieler("Ralf", 1, 0);
 		i.neuerSpieler("Georg", 2, 0);
 		i.neuerSpieler("Peter",3,0);
 		
 		i.starteSpiel();
+		i.werfen(2);
+		i.werfen(1);
+		i.werfen(4);
+		
+		i.werfen(2);
+		i.werfen(6);
+		i.werfen(2);*/
+		
+		Spiel a = new Spiel();
+		a.neuerSpieler("Ralf", 1, 0);
+		a.neuerSpieler("Georg", 2, 0);
+		a.neuerSpieler("Peter",3,0);
+		
+		a.starteSpiel();
+		
+		a.würfeln(2);
+		a.würfeln(2);
+		a.würfeln(6);
 		
 		
+
+
+
 		
 	/*	Spiel a = new Spiel();
 		a.spielerHinzufügen("Ralf", 1, 0);
