@@ -1,6 +1,7 @@
 package Spiel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Basisklassen.*;
 import Hilfsklassen.*;
@@ -1095,37 +1096,74 @@ public class Spiel implements iBediener{
 */
 	}
 
-	// Interface - ausgabeFiguren: Gibt alle Figuren aller Spieler aus
-	public void ausgabeFiguren() {
+	/***
+	 * Methode ausgabeFiguren - gibt ArrayList aller Figuren zurück und gibt diese auf der Systemkonsole aus
+	 * @return figurenListe - ArrayList<Spielfigur>
+	 * 
+	 * 
+	 */
 
+	// Interface - ausgabeFiguren: Gibt alle Figuren aller Spieler aus
+	public ArrayList<Spielfigur> ausgabeFiguren() {
+
+		
 		Spieler s = this.getIstAmZug();
+		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(Arrays.asList(s.alleFiguren()));
 		for (Spielfigur f : s.alleFiguren()) {
 			System.out.println(f);
 		}
+		return figurenListe;
 
 	}
+	
+	/***
+	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die ziehen können und gibt diese auf der Systemkonsole aus
+	 * @return figurenListe - ArrayList<Spielfigur>
+	 * 
+	 * 
+	 */
 
-	public void ausgabeZugFiguren() {
+	public ArrayList<Spielfigur> ausgabeZugFiguren() {
 
 		Spieler s = this.getIstAmZug();
+		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getKannZiehen()) {
+				figurenListe.add(f);
 				System.out.println(f);
+				
 			}
 		}
+		return figurenListe;
 
 	}
 
-	public void ausgabeFigurenImZiel() {
+	/***
+	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die im Ziel sind und gibt diese auf der Systemkonsole aus
+	 * @return figurenListe - ArrayList<Spielfigur>
+	 * 
+	 * 
+	 */
+	
+	public ArrayList<Spielfigur> ausgabeFigurenImZiel() {
 
 		Spieler s = this.getIstAmZug();
+		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getIstImZiel()) {
+				figurenListe.add(f);
 				System.out.println(f);
 			}
 		}
+		return figurenListe;
 
 	}
+	
+	/***
+	 * Methode ausgabeSpielerListe - Gibt alle Spieler auf der System Konsole aus.
+	 * 
+	 * 
+	 */
 
 	public void ausgabeSpielerListe() {
 		for (Spieler s : spieler) {
@@ -1136,6 +1174,18 @@ public class Spiel implements iBediener{
 			}
 		}
 	}
+	
+	/***
+	 * Methode zugDurchführen
+	 * @return zugErfolgreich - boolean
+	 * @param ID String
+	 * 
+	 * Versucht einen Zug mit der gewählten Figur durchzuführen. Fängt im Falle dessen, dass 
+	 * die gewählte Figur nicht ziehen kann, die Exception ab und gibt false zurück.
+	 * War der Zug erfolgreich, gibt true zurück.
+	 * 
+	 * 
+	 */
 
 	public boolean zugDurchführen(String ID) {
 
@@ -1155,14 +1205,24 @@ public class Spiel implements iBediener{
 		}
 
 	}
+	
+	/***
+	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die auf einem Startfeld sind und gibt diese auf der Systemkonsole aus
+	 * @return figurenListe - ArrayList<Spielfigur>
+	 * 
+	 * 
+	 */
 
-	public void ausgabeFigurenAufStartfeld() {
+	public ArrayList<Spielfigur> ausgabeFigurenAufStartfeld() {
 		Spieler s = this.getIstAmZug();
+		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getMeinFeld() instanceof Startfeld) {
 				System.out.println(f);
+				figurenListe.add(f);
 			}
 		}
+		return figurenListe;
 
 	}
 }
