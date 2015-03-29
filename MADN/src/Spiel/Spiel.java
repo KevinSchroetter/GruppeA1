@@ -583,7 +583,7 @@ public class Spiel implements iBediener{
 					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall:: ENDE");
 				}else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
 					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall");
-					schlagenSpawn(figur);
+					schlagenSpawn(figur, aktFeldIDS);
 					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall :: ENDE");
 				}
 			
@@ -707,13 +707,19 @@ public class Spiel implements iBediener{
 		 * 
 		 * @param figur
 		 */
-		public void schlagenSpawn(Spielfigur figur){
+		public void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
 			Spieler istAmZug = this.istAmZug;
 			Spielfigur zuSchlagen = null;
 			zuSchlagen = spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur();
 			spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
 			figur.setMeinFeld(spielbrett.getSpawnfeld(istAmZug.getFarbe()));
 			figur.setFelderGelaufen(1);
+			figur.setIstGespawnt(true);
+			for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
+				if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID()==aktFeldIDS){
+					spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+				}
+			}
 			if(zuSchlagen.getFarbe().equals(FarbEnum.GRÜN)){
 				for(int i = 0; i< spielbrett.getAlleStartFelderGrün().length; i++){
 					if(spielbrett.getAlleStartFelderGrün()[i].getFigur()==null){
