@@ -13,7 +13,7 @@ import Hilfsklassen.*;
  * finden.
  * 
  * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
- * @version 1.2
+ * @version 2.0
  *
  */
 
