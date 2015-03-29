@@ -84,7 +84,7 @@ public class Spieler {
 		 */
 		public KI(Spieler s,String verhalten) {
 			if (s==null)throw new RuntimeException("Kein Spieler übergeben!");
-			if(!(verhalten.equals("aggressiv")) && verhalten.equals("defensiv")) throw new RuntimeException("KI kann nur aggressiv oder defensiv sein!");
+			if(!(verhalten.equals("aggressiv")) && (!verhalten.equals("defensiv"))) throw new RuntimeException("KI kann nur aggressiv oder defensiv sein!");
 			this.meinSpieler = s;
 			this.verhalten = verhalten;
 			//Anweisungen für KI aggressiv und defensiv.
