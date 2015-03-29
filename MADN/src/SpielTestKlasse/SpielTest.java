@@ -42,6 +42,7 @@ public class SpielTest {
 				System.out.println(e);
 			}
 		}
+		
 		public static void wählen(Spiel s,String feld){
 			boolean test = false;
 			try{

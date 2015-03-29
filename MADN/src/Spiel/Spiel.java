@@ -1225,4 +1225,12 @@ public class Spiel implements iBediener{
 		return figurenListe;
 
 	}
+	/** Roll the Dice - Rollt den Würfel
+	 * @return s.getMeinWürfel().werfen() - int
+	 *
+	 */
+	public int rollTheDice(){
+		Spieler s = this.getIstAmZug();
+		return s.getMeinWürfel().werfen();
+	}
 }
