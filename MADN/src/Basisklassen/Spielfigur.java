@@ -179,7 +179,7 @@ public class Spielfigur {
 	 * @param boolean kannSchlagen
 	 */
 
-	private void setKannSchlagen(boolean kannSchlagen) {
+	public void setKannSchlagen(boolean kannSchlagen) {
 		this.kannSchlagen = kannSchlagen;
 	}
 

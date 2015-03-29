@@ -405,6 +405,7 @@ public class Spiel implements iBediener{
 				return true;
 			}else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
 				System.out.println("Fall1.2");
+				figur.setKannSchlagen(true);
 				return true;
 			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
 				return false;
@@ -434,6 +435,7 @@ public class Spiel implements iBediener{
 				return true;}
 			else if (figur.kannSchlagen(Zielfeld) == true){
 				System.out.println("Fall3.2");
+				figur.setKannSchlagen(true);
 				return true;}
 			else
 				return false;
