@@ -13,11 +13,15 @@ import Hilfsklassen.*;
  * finden.
  * 
  * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
- * @version 2.0
+ * @version 2.2
  *
  */
 
 public class Spiel implements iBediener{
+	/**
+	 * KontrollAttribut fuer die Methode würfeln()
+	 */
+	private boolean sechsErhalten= false;
 	/**
 	 * Array, in dem alle am Spiel teilnehmenden Spieler gespeichert werden
 	 */
@@ -69,6 +73,9 @@ public class Spiel implements iBediener{
 	 * Zeigt an, ob sich ALLE Figuren auf ihren Startfeldern befinden.
 	 */
 	private boolean alleAufSpawn;
+	/**
+	 * Hilfsattribut, das in der Methode würfeln() vewendet wird
+	 */
 	private Spielfigur chosenFigur;
 
 	/**
@@ -151,7 +158,6 @@ public class Spiel implements iBediener{
 	public void incAnzahlSpieler() {
 		this.anzahlSpieler++;
 	}
-
 	/**
 	 * Getter für anzahlSpieler
 	 * 
@@ -205,13 +211,12 @@ public class Spiel implements iBediener{
 	public void incAnzWürfe() {
 		this.anzWürfe++;
 	}
-
 	/**
 	 * Getter für anzWürfe
 	 * 
 	 * @return anzWürfe - int
 	 */
-	public int getAnzWÜrfe() {
+	public int getAnzWürfe() {
 		return this.anzWürfe;
 	}
 
@@ -245,7 +250,12 @@ public class Spiel implements iBediener{
 			throw new RuntimeException("Fehöer: ZugFigurenLimit erreicht!");
 		this.anzZugFiguren++;
 	}
-
+	/**
+	 * ZusatzMethode zum loeschen der anzZugFiguren
+	 */
+	private void deleteAnzZugFiguren(){
+		this.anzZugFiguren=0;
+	}
 	/**
 	 * Getter für anzTugFiguren
 	 * 
@@ -254,7 +264,6 @@ public class Spiel implements iBediener{
 	public int getAnzZugFiguren() {
 		return this.anzZugFiguren;
 	}
-
 	/**
 	 * Setter, der Figuren in einer ArrayList speichert, falls sie für einen Zug
 	 * infrage kommen. Übergabeparameter muss vom Typ Figur sein Die Farbe der
@@ -291,7 +300,28 @@ public class Spiel implements iBediener{
 		else
 			throw new RuntimeException("Angeforderte Figur existiert nicht");
 	}
+	/**
+	 * Wichtige Methode fuer den Spielverlauf. Sie git alle Figuren zurueck, die ziehen koennen
+	 * @return zugFiguren - ArrayList mit allen Figuren, die Ziehen koennen
+	 */
+	public ArrayList<Spielfigur> alleZugFiguren() {
+		return zugFiguren;
+	}
+	/**
+	 * Hilfsmethode für die Mehtode würfeln()
+	 * @param figur - Spielfigur
+	 */
+	public void setChosen(Spielfigur figur){
 
+			this.chosenFigur=figur;
+	}
+	/**
+	 * Hilfsmethode für die Methode würfeln()
+	 * @return chosenFigur - Spielfigur
+	 */
+	public Spielfigur getChosen(){
+		return this.chosenFigur;
+	}
 	/**
 	 * Setter für alleAufSpawn
 	 * 
@@ -301,7 +331,6 @@ public class Spiel implements iBediener{
 	public void setAlleAufSpawn(boolean alleAufSpawn) {
 		this.alleAufSpawn = alleAufSpawn;
 	}
-
 	/**
 	 * Getter für alleAufSpawn
 	 * 
@@ -310,7 +339,6 @@ public class Spiel implements iBediener{
 	public boolean getAlleAufSpawn() {
 		return this.alleAufSpawn;
 	}
-
 	/**
 	 * Methode zum Hinzufügen eines neuen Spielers, solange das Spiel noch nicht
 	 * gestartet ist. Sind Spieler im Spiel, so wird Spiel automatisch begonnen.
@@ -374,8 +402,11 @@ public class Spiel implements iBediener{
 	 * Spieler, der am Zug ist.
 	 */
 	public void startSpiel() {
+		if(getHatBegonnen()==true)throw new RuntimeException("Spiel hat bereits begonnen!");
 		if(spieler[0]==null)throw new RuntimeException("Ein Spiel braucht mindestens einen Spieler!");
+		
 		setHatBegonnen(true);
+		
 		if(spieler[0]!=null){
 			spieler[0].setAmZug(true);
 			setIstAmZug(spieler[0]);
@@ -460,7 +491,6 @@ public class Spiel implements iBediener{
 		return false;
 
 	}
-
 	/**
 	 * Methode, die prüft, ob eine Figur, die entweder auf einem Standard- oder
 	 * Endfeld steht, innerhalb der Endfelder ziehen kann. Sie wird nur von der
@@ -556,9 +586,7 @@ public class Spiel implements iBediener{
 			}
 		}
 		return false;
-
 	}
-
 	//INARBEIT
 		/** @author Felix Rosa
 		 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) aus der Klasse Spielfigur auf um den Schrittzähler zu erhöhen und nächsterSpieler() um auf den nächsten ziehenden zu verweisen.
@@ -582,8 +610,8 @@ public class Spiel implements iBediener{
 		public void ziehen(Spielfigur figur, int augenZahl){
 			System.out.println("Bin in ziehen");
 			alleZugFiguren().clear();
-			anzZugFiguren=0;
-			setChosen();
+			deleteAnzZugFiguren();
+			setChosen(getIstAmZug().getZugFigur());
 			Spieler istAmZug = this.istAmZug;
 			Spielfeld aktFeld = null;
 			if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
@@ -645,6 +673,7 @@ public class Spiel implements iBediener{
 							System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall");
 							ziehenEndfelder(figur, getAugenzahl());
 							nächsterSpieler();
+							System.out.println("Naechster spieler gesetzt");
 							System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall :: ENDE");
 						}else if(figur.getKannInsZiel()==true){
 								System.out.println("Fall: Gespawnt + !6 gewürfelt + 2terFall");
@@ -653,11 +682,13 @@ public class Spiel implements iBediener{
 								figur.setIstImZiel(true);
 								figur.incSchritteGelaufen(getAugenzahl());
 								nächsterSpieler();
+								System.out.println("Naechster spieler gesetzt");
 								System.out.println("Fall: Gespawnt + !6 gewürfelt + 2terFall :: ENDE");
 						}else if( spielbrett.getStandardFelder()[ermittleZielfeldID(figur)].getFigur() != null &&(!(spielbrett.getStandardFelder()[ermittleZielfeldID(figur)].getFigur().getFarbe().equals(istAmZug.getFarbe())))){
 								System.out.println("Fall: Gespawnt + !6 gewürfelt + 3terFall");
 								schlagen(figur, ZielfeldID);
 								nächsterSpieler();
+								System.out.println("Naechster spieler gesetzt");
 								System.out.println("Fall: Gespawnt + !6 gewürfelt + 3terFall :: ENDE");
 							}
 						else if(spielbrett.getStandardFelder()[ermittleZielfeldID(figur)].getFigur()==null){
@@ -666,6 +697,7 @@ public class Spiel implements iBediener{
 								spielbrett.getStandardFelder()[aktFeldID].setFigur(null);
 								figur.incSchritteGelaufen(getAugenzahl());
 								nächsterSpieler();
+								System.out.println("Naechster spieler gesetzt");
 								System.out.println("Fall: Gespawnt + !6 gewürfelt + 4terFall :: ENDE");
 				}
 				
@@ -673,7 +705,6 @@ public class Spiel implements iBediener{
 			//Unnötig?
 			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
 			figur.setKannSchlagen(false);
-			
 		}
 		
 		/**@author Felix Rosa
@@ -723,7 +754,6 @@ public class Spiel implements iBediener{
 				}
 			}
 		}
-		
 		/**@author Felix Rosa
 		 * 
 		 * @param figur
@@ -777,16 +807,12 @@ public class Spiel implements iBediener{
 			}
 			
 		}
-	
-
 	/**@author Anna Rosa, Felix Rosa
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
 	 * Endfeld ziehen lässt.
 	 * 
-	 * @param figur
-	 *            - Die Figur, die ziehen soll
-	 * @param augenZahl
-	 *            - Anzahl der Züge, die Figur ziehen soll
+	 * @param figur - Die Figur, die ziehen soll
+	 * @param augenZahl - Anzahl der Züge, die Figur ziehen soll
 	 */
 	public void ziehenEndfelder(Spielfigur figur, int restSchritte) {
 		Spielfeld aktFeld = figur.getMeinFeld();
@@ -815,7 +841,6 @@ public class Spiel implements iBediener{
 		aufEndposition(figur);
 		System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
 	}
-	
 	/**
 	 * Methode, die überprüft, ob eine Figur in ihrer endgültigen Endposition ist und wenn dies der Fall 
 	 * das Attribut binIchAufEndposition auf true setzt.
@@ -852,25 +877,21 @@ public class Spiel implements iBediener{
 			}
 		}
 	}
-
 	/**
 	 * Methode zu DebugZwecken. Ermöglicht es, zu Testzwecken auf Spieler
 	 * zuzugreifen, die nicht am Zug sind.
 	 * 
-	 * @param spielerzahl
-	 *            - Bestimmter Spielerindex vom Typ int
+	 * @param spielerzahl - Bestimmter Spielerindex vom Typ int
 	 * @return spieler - Ein OPbjekt vom Typ Spieler.
 	 */
 	public Spieler DebugGetSpieler(int spielerzahl) {
 		return spieler[spielerzahl - 1];
 	}
-
 	/**
 	 * Methode zu DebugZwecken. Ermöglicht es, eine Figur mit einem Zug vor die
 	 * Endfelder zu setzen.
 	 * 
-	 * @param augenzahl
-	 *            - int Wert
+	 * @param augenzahl - int Wert
 	 */
 	public void DebugSetAugenzahl(int augenzahl) {
 		// Unterschied zur Originalmethode
@@ -878,130 +899,34 @@ public class Spiel implements iBediener{
 			throw new RuntimeException("Fehlerhaftes Würfelergebnis");
 		this.augenzahl = augenzahl;
 	}
-	public void setChosen(){
-		if(getIstAmZug()!=null)
-			this.chosenFigur=getIstAmZug().getZugFigur();
-	}
-	public Spielfigur getChosen(){
-		return this.chosenFigur;
-	}
-
 	/**
 	 * Methode zum Auswählen der Figur, die ziehen soll über eine von außen
 	 * (Spieler/ KI) übergebene Spielfeld-ID
 	 * 
-	 * @param id
-	 *            - ID des Spielfeldes, auf dem sich die Figur vor Ausführen des
-	 *            Zuges befindet
-	 * @return figur - gibt die Figur, die ziehen soll zurück, falls diese
-	 *         ziehen kann
+	 * @param id - ID des Spielfeldes, auf dem sich die Figur vor Ausführen des Zuges befindet
+	 * @return figur - gibt die Figur, die ziehen soll zurück, falls diese ziehen kann
+	 * @author Kevin Schroetter(Update v2.2), Anna Rosa
+	 * @since version 2.2
 	 */
-	@SuppressWarnings("finally")
-	public Spielfigur wähleFigur(String id) {
+	public void wähleFigur(String id) {
 		if(getZugMöglich()==false)throw new RuntimeException("Zug nicht möglich!");
 		FarbEnum farbeIstAmZug = istAmZug.getFarbe();
 		Spielfeld f = spielbrett.getFeld(id, farbeIstAmZug);
 		Spielfigur figur = f.getFigur();
-		try{
 		if (!(alleZugFiguren().contains(figur)))
-			throw new FigurKannNichtZiehenException(String.format(
-					"Figur %s kann nicht ziehen!", figur));
+			throw new FigurKannNichtZiehenException(String.format("Figur " + figur.getID()+" %s kann nicht ziehen!", figur.getFarbe()));
 		else{
 			getIstAmZug().setZugFigur(figur);
 			ziehen(figur,getAugenzahl());
-			return figur;}
 		}
-		catch(FigurKannNichtZiehenException e){
-			System.out.println(e);
-		}
-		finally{
-			return figur;
-		}
-		
 	}
-
 	/**
-	 * @author Alexander Brückner
-	 * @version 0.1 Methode für Anfangszug. Sind alle Figuren eines Spielers auf
-	 *          Startfeldern wird dreimal gewürfelt. Wird eine 6 gewürfelt, wird
-	 *          eine Figur ausgewählt, die ziehen soll. Kann die Figur nicht
-	 *          ziehen oder ist nicht auf dem Startfeld, wird solange eine neue
-	 *          gewählt, bis es möglich ist, raus aufs Feld zu gehen. Steht auf
-	 *          dem jeweiligen Spawnpoint eine feindliche Figur, wird diese
-	 *          durch die spawnende Figur geschlagen. Sind nicht alle Figuren
-	 *          eines Spielers in der Startregion (also ist mindestens eine auf
-	 *          einem Spielfeld), wird die Methode beendet.
-	 * @param s
-	 *            - Spieler
-	 * @throws FigurKannNichtZiehenException
-	 * @throws RuntimeException
+	 * Dies Methoede gibt zurueck, ob eine Figur die Moeglichkeit hat zu spawnen oder nicht
+	 * @param figur - Spielfigur bei der gecheckt werden soll, ob sie spawnen kann
+	 * @return boolean - true wenn die Figur spawnen kann, sonst false
+	 * @author Kevin Schroetter
+	 * @since version 2.1
 	 */
-
-/*	public void ersterZug() {
-		// Sicherheitsabfragen, Abbruchbedingung
-		Spieler s = this.getIstAmZug();
-		if (s == null)
-			throw new RuntimeException("Spieler darf nicht null sein");
-		if (!s.alleAufSpawn())
-			return;
-
-		// Erfolgsbool anlegen
-		boolean erfolg = false;
-
-		// Zu spawnende Figur anlegen
-		Spielfigur spawnMe = null;
-		// Figur anlegen, die ggf. das Zeitliche segnet
-		Spielfigur killMe = null;
-
-		// Drei mal würfeln und alles durchchecken
-		for (int i = 0; i < 3; i++) {
-
-			if (s.getMeinWürfel().werfen() == 6) {
-
-				// fragt ab, ob Spawnpoint der jeweiligen Farbe belegt ist
-				if (spielbrett.getSpawnfeld(s.getFarbe()).getFigur() != null) {
-					Spielfigur fig = spielbrett.getSpawnfeld(s.getFarbe())
-							.getFigur();
-
-					// falls ja, kann ich die Figur erledigen?
-					// falls ja, Figur wählen und ab dafür..
-					// falls nicht, ist der Zug nicht möglich, es wird nochmal
-					// gewürfelt
-
-					// Hab ich die gleiche Farbe wie die Figur, die auf meinem
-					// Spawn steht?
-					if (fig.getFarbe() != s.getFarbe()) {
-
-						// Ja? Dann weg damit.
-						// S1 ist mit Sicherheit belegt. (Die Methode hier kommt
-						// sowieso nur dann zum Einsatz,
-						// Wenn alle meine Figürchen auf den Startfeldern
-						// stehen.)
-
-						spawnMe = wähleFigur("S1");
-						// spawnMe wird nun zum Mörder von killMe:
-						killMe = spielbrett.getSpawnfeld(s.getFarbe())
-								.getFigur();
-						// Hier schlagen-Methode aufrufen, spawnMe erledigt
-						// killMe
-
-					}
-
-				}
-
-				// Ist das Startfeld überhaupt nicht belegt, -> Spawn!
-				spawnMe = wähleFigur("S1");
-				spawnMe.spawn(spielbrett.getSpawnfeld(s.getFarbe()));
-
-			}
-
-		}
-
-	}*/
-
-	public ArrayList<Spielfigur> alleZugFiguren() {
-		return zugFiguren;
-	}
 	public boolean kannSpawnen(Spielfigur figur) {
 		if (getAugenzahl() == 6 && figur.binIchGespawnt() == false)
 			if (getSpielbrett().getSpawnfeld(getIstAmZug().getFarbe())
@@ -1014,13 +939,28 @@ public class Spiel implements iBediener{
 		else
 			return false;
 	}
-	// // hack wird im offiziellen Spiel ersetzt. die Methode testwurf dann
-	// durch das richtige würfeln
+	/**
+	 * Diese Methode wuerfelt fuer den Spieler
+	 * Sie gibt stets die Augenzahl mit und hat ein paar Faelle zum Unterscheiden
+	 * 1. Wenn sich alle Figuren auf den Startefeldern befinden, darf ein spieler drei mal wuerfeln
+	 * 2. Wenn sich alle Figuren auf den Startfeldern befindet und bereits dreimal gewuerfelt wurde, wird ein naechster Spieler ausgewaehlt
+	 * 3. Wenn sich nicht alle Figuren auf den Startfeldern befinden, darf ein Spieler nur dann ein weiteres mal wuerfeln, wenn er eine 6 gewuerfelt hat
+	 * 4. Wenn ein Spieler mehrmals hintereinander wuerfeln will, ohne dass er vorher einen Zug ausgefuerht hat, so ist dies nicht moeglich
+	 * 
+	 * Die Methode nutzt kannIchZiehen(Spielfigur figur), um zu ermitteln, ob eine Figur ziehen kann. Wenn dies der Fall ist, 
+	 * so wird die Figur in die ArrayList alleZugFiguren geschrieben, die spaeter in der Methode waehleFigur() verwendet wird.
+	 * Sollte sich keine Figur in der ArrayList befinden, wird geprueft, ob sich die Figuren auf den Startfeldern befinden. Ja? Dann darf der Spieler drei mal wuerfeln.
+	 * Sollte sich keine Figur in der ArrayList befinden, und es befinden sich NICHT ALLE Figuren auf den Startfeldern, so ist der naechster Spieler mit seinem Zug dran.
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 * @param hack - int, der aktuell noch dazu verwendet wird, um konkrete Wuerfelergebnisse fuer Tests zu erarbeiten. Dies wird im spaeteren Verlauf herausgenommen.
+	 */
 	public void würfeln(int hack) {
-		if(anzWürfe==3 && getAlleAufSpawn()==true)
+		if(getAnzWürfe()==3 && getAlleAufSpawn()==true && getAugenzahl()!=6){
 			nächsterSpieler();
+		System.out.println("Naechster spieler gesetzt WÜRFELN");}
 		
-			if(getAlleAufSpawn()==false && anzWürfe >= 1 && getAugenzahl()!=6)throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+			if((alleZugFiguren().size()!=0) ||(getAlleAufSpawn()==false && getAnzWürfe() >= 1 && getAugenzahl()!=6))throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
 			if (getHatBegonnen() == false)
 				throw new RuntimeException("Spiel hat noch nicht begonnen");
 			
@@ -1041,25 +981,31 @@ public class Spiel implements iBediener{
 				setAlleAufSpawn(true);
 			else
 				setAlleAufSpawn(false);
-			if(getAlleAufSpawn()==false && getAugenzahl()==6) throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+			if(getAlleAufSpawn()==false && getAugenzahl()==6 && getAnzWürfe()<1) throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
 		
-			if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe > 3 && getAugenzahl()!= 6){
+			if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe() > 3 && getAugenzahl()!= 6){
 				setZugMöglich(false);
 				System.out.println("ICH KOMME HIER REIN");
 				nächsterSpieler();
+				System.out.println("Naechster spieler gesetzt WÜRFELN 2");
 			} 
-			else if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe<=3 && getAugenzahl()!=6) {
+			else if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe()<=3 && getAugenzahl()!=6) {
 				setZugMöglich(false);
 				//alleZugFiguren().clear();
 			
+			}
+			else if(getAugenzahl()==6){
+				setZugMöglich(true);
+				sechsErhalten=true;
 			}
 			else{
 				System.out.println("komm ich hier rein?");
 				setZugMöglich(true);
 				setAlleAufSpawn(false);
-			}
+			};
 			//DEBUG SYSOS
-			System.out.println("Anzahl würfe: "+anzWürfe);
+			System.out.println("ZUGFIGUREN: "+alleZugFiguren().size());
+			System.out.println("Anzahl würfe: "+getAnzWürfe());
 			System.out.println("Augenzahl: "+getAugenzahl());
 			System.out.println("Am Zug: "+getIstAmZug());
 			System.out.println("Zug Möglich: "+getZugMöglich());
@@ -1071,11 +1017,13 @@ public class Spiel implements iBediener{
 	/**
 	 * Methode, die den nächsten Spieler als am Zug seienden Spieler setzt und dem vorherigen 
 	 * die Eigenschaft, dass er am Zug ist, auf false setzt.
+	 * @author Kevin Schroetter(Update v2.2), Anna Rosa, Felix Rosa
+	 * @since version 2.2
 	 */
 	public void nächsterSpieler() {
 		alleZugFiguren().clear();
-		anzZugFiguren=0;
-		anzWürfe=0;
+		deleteAnzZugFiguren();
+		deleteAnzWürfe();
 		
 		for (int i = 0; i< getAnzahlSpieler();i++){
 			if(getIstAmZug().equals(spieler[i])){
@@ -1088,41 +1036,8 @@ public class Spiel implements iBediener{
 			break;
 			}
 		}
-
-	/*	for (int i = 0; i<getAnzahlSpieler();i++){
-			if(getIstAmZug().equals(spieler[i]))
-				if (i == getAnzahlSpieler()-1){
-					setIstAmZug(spieler[0]);
-				}
-				else
-					setIstAmZug(spieler[i]);
-		}
-		
-		*/
-		/*			
-		for (int i = 0; i < getAnzahlSpieler(); i++) {
-			if (i < getAnzahlSpieler()) {
-				if (istAmZug.equals(spieler[i])) {
-					istAmZug = spieler[i + 1];
-					spieler[i + 1].setAmZug(true);
-					spieler[i].setAmZug(false);
-					break;
-				}
-			}
-
-			if (i == getAnzahlSpieler()) {
-				if (istAmZug.equals(spieler[i])) {
-					istAmZug = spieler[0];
-					spieler[0].setAmZug(true);
-					spieler[i].setAmZug(false);
-				}
-
-			}
-		}
-*/
 	}
-
-	/***
+	/**
 	 * Methode ausgabeFiguren - gibt ArrayList aller Figuren zurück und gibt diese auf der Systemkonsole aus
 	 * @return figurenListe - ArrayList<Spielfigur>
 	 * 
@@ -1139,16 +1054,13 @@ public class Spiel implements iBediener{
 			System.out.println(f);
 		}
 		return figurenListe;
-
 	}
-	
-	/***
+	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die ziehen können und gibt diese auf der Systemkonsole aus
 	 * @return figurenListe - ArrayList<Spielfigur>
 	 * 
 	 * 
 	 */
-
 	public ArrayList<Spielfigur> ausgabeZugFiguren() {
 
 		Spieler s = this.getIstAmZug();
@@ -1157,20 +1069,16 @@ public class Spiel implements iBediener{
 			if (f.getKannZiehen()) {
 				figurenListe.add(f);
 				System.out.println(f);
-				
 			}
 		}
 		return figurenListe;
-
 	}
-
-	/***
+	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die im Ziel sind und gibt diese auf der Systemkonsole aus
 	 * @return figurenListe - ArrayList<Spielfigur>
 	 * 
 	 * 
 	 */
-	
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel() {
 
 		Spieler s = this.getIstAmZug();
@@ -1182,15 +1090,12 @@ public class Spiel implements iBediener{
 			}
 		}
 		return figurenListe;
-
 	}
-	
-	/***
+	/**
 	 * Methode ausgabeSpielerListe - Gibt alle Spieler auf der System Konsole aus.
 	 * 
 	 * 
 	 */
-
 	public void ausgabeSpielerListe() {
 		for (Spieler s : spieler) {
 			if (s == null)
@@ -1200,8 +1105,7 @@ public class Spiel implements iBediener{
 			}
 		}
 	}
-	
-	/***
+	/**
 	 * Methode zugDurchführen
 	 * @return zugErfolgreich - boolean
 	 * @param ID String
@@ -1212,13 +1116,12 @@ public class Spiel implements iBediener{
 	 * 
 	 * 
 	 */
-
-	public boolean zugDurchführen(String ID, int würfelZahl) {
+	public boolean zugDurchführen(String ID, int augenzahl) {
 
 		boolean zugErfolgreich;
 		try {
-			Spielfigur f = wähleFigur(ID);
-			ziehen(f, würfelZahl);
+			würfeln(augenzahl);
+			wähleFigur(ID);
 			zugErfolgreich = true;
 			System.out.println("Zug erfolgreich!");
 			return zugErfolgreich;
@@ -1231,14 +1134,12 @@ public class Spiel implements iBediener{
 		}
 
 	}
-	
-	/***
+	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die auf einem Startfeld sind und gibt diese auf der Systemkonsole aus
 	 * @return figurenListe - ArrayList<Spielfigur>
 	 * 
 	 * 
 	 */
-
 	public ArrayList<Spielfigur> ausgabeFigurenAufStartfeld() {
 		Spieler s = this.getIstAmZug();
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
@@ -1249,7 +1150,6 @@ public class Spiel implements iBediener{
 			}
 		}
 		return figurenListe;
-
 	}
 	/** Roll the Dice - Rollt den Würfel
 	 * @return s.getMeinWürfel().werfen() - int
@@ -1259,7 +1159,6 @@ public class Spiel implements iBediener{
 		Spieler s = this.getIstAmZug();
 		return s.getMeinWürfel().werfen();
 	}
-	
 	@Override
 	public void starteSpiel() {
 		try{
@@ -1270,7 +1169,12 @@ public class Spiel implements iBediener{
 			System.out.println(e);
 		}
 	}
-
+	/**
+	 * Zusaetzliche Methode fuer das Interface, damit dadurch konkrete Wuerfelzahlen verwendet werden koennen.
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 * @param zahl - int, die gewuenschte Augenzahl
+	 */
 	@Override
 	public void werfen(int zahl) {
 		try{
@@ -1281,7 +1185,14 @@ public class Spiel implements iBediener{
 		}
 		
 	}
-
+	/**
+	 * Interface Methode zum Hinzufuegen eines neuen Spielers
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 * @param name - String name
+	 * @param farbID - int zum Auswaehlen der Farbe
+	 * @verhalten - int zum Auswaehlen des Verhaltens
+	 */
 	@Override
 	public void neuerSpieler(String name, int farbID, int verhaltenID) {
 		try{
@@ -1292,5 +1203,50 @@ public class Spiel implements iBediener{
 			System.out.println(e);
 		}
 		
+	}
+	/**
+	 * Methode, die alle Spieleigenschaften zurücksetzt.
+	 * Sie wird aktuell nur im JUnit-Test verwendet.
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 */
+	public void neuesSpiel(){
+		if(getAnzahlSpieler()==0)throw new RuntimeException("Es kann kein neues Spiel erstellt werden!");
+		deleteSpieler();
+		for(int i =0;i<4;i++){
+			spieler[i] = null;
+		}
+		deleteAnzahlSpieler();
+		setHatBegonnen(false);
+		setIstBeendet(false);
+		alleZugFiguren().clear();
+		deleteAnzWürfe();
+		deleteAnzZugFiguren();
+	}
+	/**
+	 * HilfsMethode zum loeschen aller der static Attribute Spielernummer in Spieler und AzahlFiguren in Spielfigur
+	 * @author Kevin Schroetter
+	 * @since version 2.2	
+	 */
+	private void deleteSpieler(){
+		if(spieler[0]==null)throw new RuntimeException("Fehler beim Loeschen der Spieler");
+		spieler[0].deleteSpielernummer();
+		spieler[0].getFiguren(1).deleteAnzahlFiguren();
+	}
+	/**
+	 * HilfsMethode, die die anzahl der Spieler auf 0 zurücksetzt.
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 */
+	private void deleteAnzahlSpieler(){
+		this.anzahlSpieler=0;
+	}
+	/**
+	 * HilfsMethode zum Loeschen der anzWürfe.
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 */
+	private void deleteAnzWürfe(){
+		this.anzWürfe=0;
 	}
 }
