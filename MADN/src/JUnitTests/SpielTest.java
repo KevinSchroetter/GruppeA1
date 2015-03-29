@@ -14,7 +14,7 @@ import Basisklassen.*;
 /**
  * JUnit Tests für die Klasse Spiel
  * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
- * @version 1.2
+ * @version 2.0
  *
  */
 public class SpielTest {
@@ -41,8 +41,8 @@ public class SpielTest {
 	}
 	@Test(expected = Exception.class)
 	public void gleicheFarbe() {
-		s.spielerHinzufügen("Kevin", FarbEnum.ROT, null);
-		s.spielerHinzufügen("Anna", FarbEnum.ROT, null);
+		s.spielerHinzufügen("Kevin", 1, 0);
+		s.spielerHinzufügen("Anna", 1, 0);
 	}
 
 	@After
@@ -59,15 +59,15 @@ public class SpielTest {
 	
 	@Test(expected=Exception.class)
 	public void FarbeNull(){
-		s.spielerHinzufügen("Päddi", null, null);
+		s.spielerHinzufügen("Päddi",0, 0);
 	}
 	
 	@Test(expected=Exception.class)
 	public void spielerZuViel(){
-		s.spielerHinzufügen("Alex", FarbEnum.GRÜN, "aggressiv");
-		s.spielerHinzufügen("Kevin", FarbEnum.GELB, null);
-		s.spielerHinzufügen("Anna", FarbEnum.BLAU, null);
-		s.spielerHinzufügen("Sam", FarbEnum.ROT, null);
+		s.spielerHinzufügen("Alex", 1, 1);
+		s.spielerHinzufügen("Kevin", 2, 0);
+		s.spielerHinzufügen("Anna", 3, 0);
+		s.spielerHinzufügen("Sam", 4, 0);
 		
 		
 

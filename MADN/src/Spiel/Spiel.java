@@ -323,15 +323,36 @@ public class Spiel implements iBediener{
 	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
 	 *            übergebenen Verhalten;
 	 */
-	public void spielerHinzufügen(String name, FarbEnum farbe, String verhalten) {
+	public void spielerHinzufügen(String name, int farbID, int verhaltenID) {
 		if (getHatBegonnen() == true)
 			throw new RuntimeException("Spiel hat schon begonnen");
+		
+		FarbEnum farbe=null;
+		switch(farbID){
+		case 1: farbe = FarbEnum.ROT;break;
+		case 2: farbe = FarbEnum.BLAU;break;
+		case 3: farbe = FarbEnum.GELB;break;
+		case 4: farbe = FarbEnum.GRÜN;break;
+		default: throw new RuntimeException("Ungültige Farbe!");
+		}
+		
+		String verhalten = null;
+		switch(verhaltenID){
+			case 1: verhalten = "aggressiv";break;
+			case 2: verhalten = "defensiv";break;
+			default: verhalten = null;break;
+		}
+		
+		
+		
 		if (farbe == null)
 			throw new RuntimeException("Spieler braucht eine Farbe");
+		
+		
 		for (int i = 0; i <= 3; i++) {
 			if (spieler[i] != null) {
 				if (farbe.equals(spieler[i].getFarbe()))
-					throw new RuntimeException("Farbe schon vorhanden");
+					throw new RuntimeException("Farbe " + spieler[i].getFarbe() +" schon vorhanden! Bitte waehlen Sie eine andere Farbe!");
 			}
 		}
 		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(
@@ -1000,13 +1021,18 @@ public class Spiel implements iBediener{
 	// // hack wird im offiziellen Spiel ersetzt. die Methode testwurf dann
 	// durch das richtige würfeln
 	public void würfeln(int hack) {
-		try{
-			incAnzWürfe();
-			int spawncounter = 0;
+		if(anzWürfe==3 && getAlleAufSpawn()==true)
+			nächsterSpieler();
+		
+			if(getAlleAufSpawn()==false && anzWürfe >= 1 && getAugenzahl()!=6)throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
 			if (getHatBegonnen() == false)
 				throw new RuntimeException("Spiel hat noch nicht begonnen");
+			
+			int spawncounter = 0;
+			incAnzWürfe();
 			int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
 			setAugenzahl(augenzahl);
+			
 			for (Spielfigur sf : istAmZug.alleFiguren()){
 				if (kannIchZiehen(sf) == true) {
 					sf.setKannZiehen(true);
@@ -1017,32 +1043,34 @@ public class Spiel implements iBediener{
 			}
 			if (spawncounter == getIstAmZug().getAnzFiguren())
 				setAlleAufSpawn(true);
-			
-			//DEBUG SYSO
-			System.out.println("Für Zug Mögliche Figuren: "+alleZugFiguren().size());
+			else
+				setAlleAufSpawn(false);
+			if(getAlleAufSpawn()==false && getAugenzahl()==6) throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
 		
-			if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe<=3 && getAugenzahl()!=6) {
+			if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe > 3 && getAugenzahl()!= 6){
 				setZugMöglich(false);
-			} 
-			else if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe > 3 && getAugenzahl()!= 6){
-				setZugMöglich(false);
+				System.out.println("ICH KOMME HIER REIN");
 				nächsterSpieler();
+			} 
+			else if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && anzWürfe<=3 && getAugenzahl()!=6) {
+				setZugMöglich(false);
+				//alleZugFiguren().clear();
+			
 			}
 			else{
+				System.out.println("komm ich hier rein?");
 				setZugMöglich(true);
 				setAlleAufSpawn(false);
 			}
 			//DEBUG SYSOS
-			//System.out.println("Anzahl würfe: "+anzWürfe);
+			System.out.println("Anzahl würfe: "+anzWürfe);
 			System.out.println("Augenzahl: "+getAugenzahl());
 			System.out.println("Am Zug: "+getIstAmZug());
-			//System.out.println("Zug Möglich: "+getZugMöglich());
-			//System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
-			//System.out.println("");
-			}
-			catch(RuntimeException e){
-				System.out.println(e);
-			}		
+			System.out.println("Zug Möglich: "+getZugMöglich());
+			System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
+			System.out.println("");
+			
+				
 	}
 	/**
 	 * Methode, die den nächsten Spieler als am Zug seienden Spieler setzt und dem vorherigen 
@@ -1234,5 +1262,39 @@ public class Spiel implements iBediener{
 	public int rollTheDice(){
 		Spieler s = this.getIstAmZug();
 		return s.getMeinWürfel().werfen();
+	}
+	
+	@Override
+	public void starteSpiel() {
+		try{
+			startSpiel();
+			System.out.println("Spiel gestartet!");
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
+	}
+
+	@Override
+	public void werfen(int zahl) {
+		try{
+			würfeln(zahl);
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
+		
+	}
+
+	@Override
+	public void neuerSpieler(String name, int farbID, int verhaltenID) {
+		try{
+			spielerHinzufügen(name,farbID,verhaltenID);
+			System.out.println("Spieler "+getAnzahlSpieler()+": "+spieler[getAnzahlSpieler()-1].getName()+" "+spieler[getAnzahlSpieler()-1].getFarbe()+" wurde Hinzugefuegt!");
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
+		
 	}
 }
