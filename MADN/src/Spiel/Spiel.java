@@ -385,7 +385,7 @@ public class Spiel implements iBediener{
 	 * @return
 	 */
 	public int ermittleEndfeldSchritte(Spielfigur figur){
-		return figur.getFelderGelaufen()+getAugenzahl() - (spielbrett.getAlleStandardFelder().length-1);
+		return figur.getFelderGelaufen()+getAugenzahl() - spielbrett.getAlleStandardFelder().length;
 
 	}
 	/** @author Felix Rosa
