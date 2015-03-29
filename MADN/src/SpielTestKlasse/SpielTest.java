@@ -29,8 +29,6 @@ public class SpielTest {
 		a.würfeln(6);
 		System.out.println(a.spielbrett.getAlleStandardFelder()[36].getFigur().getKannInsZiel());
 		a.wähleFigur("37");
-			
-
 		}
 		public static void ausgabe(Spiel s, int augenzahl){
 			try{

@@ -16,7 +16,7 @@ public abstract class Spielfeld {
 	 * Beinhaltet Figur die momentan auf dem Feld steht oder null.
 	 */
 	private Spielfigur figur;
-
+	private String iD;
 	/**
 	 * Konstruktor für ein Spielfeld. Spielfeld kennt die Belegung durch eine
 	 * Figur.
@@ -43,6 +43,15 @@ public abstract class Spielfeld {
 	 */
 	 public void setFigur(Spielfigur figur) {
 			this.figur = figur;
+	}
+	 
+	public void setID(String iD){
+		this.iD = iD;
+	}
+
+	public String getID() {
+		// TODO Auto-generated method stub
+		return this.iD;
 	}
 
 }

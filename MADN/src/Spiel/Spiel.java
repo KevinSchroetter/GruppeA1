@@ -747,7 +747,7 @@ public class Spiel implements iBediener{
 		}
 	
 
-	/**
+	/**@author Anna Rosa, Felix Rosa
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
 	 * Endfeld ziehen lässt.
 	 * 
@@ -756,14 +756,32 @@ public class Spiel implements iBediener{
 	 * @param augenZahl
 	 *            - Anzahl der Züge, die Figur ziehen soll
 	 */
-	public void ziehenEndfelder(Spielfigur figur, int augenZahl) {
-		if (kannZiehenEndfelder(figur, augenZahl) != true) {
+	public void ziehenEndfelder(Spielfigur figur, int restSchritte) {
+		Spielfeld aktFeld = figur.getMeinFeld();
+		restSchritte = restSchritte - 1;
+		String aktFeldIDS = "";
+		int aktFeldID = 0;
+		if (kannZiehenEndfelder(figur, restSchritte) != true) {
+			System.out.println("Figur kann nicht ziehen!");
 			throw new RuntimeException("Figur kann nicht ziehen!");
 		}
-		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
-		endfelderIstAmZug[augenZahl - 1].setFigur(figur);
-		figur.setMeinFeld(endfelderIstAmZug[augenZahl - 1]);
-		aufEndposition(figur);
+		if(aktFeld instanceof Endfeld){
+				aktFeldIDS = figur.getMeinFeld().getID();
+		}else if(aktFeld instanceof Standardfeld){
+				aktFeldID = Integer.parseInt(figur.getMeinFeld().getID());
+		}
+		figur.setMeinFeld(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[restSchritte]);
+		if(aktFeld instanceof Endfeld){
+			for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
+				if(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].getID()==aktFeldIDS){
+					spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+				}
+			}
+		}else if(aktFeld instanceof Standardfeld){
+			spielbrett.getAlleStandardFelder()[aktFeldID-1].setFigur(null);
+		}
+		//aufEndposition(figur);
+		System.out.println("Ich bin in der ziehenEndfelder");
 	}
 	
 	/**
