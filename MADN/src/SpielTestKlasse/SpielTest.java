@@ -21,6 +21,8 @@ public static void main(String[]args){
 		i.werfen(6);
 		i.zugDurchführen("S1");
 		i.werfen(2);
+		i.zugDurchführen("11");
+		i.werfen(3);
 	}
 
 		public void starteSpiel() {

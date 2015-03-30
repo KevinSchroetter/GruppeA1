@@ -707,7 +707,7 @@ public class Spiel implements iBediener{
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
-			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
+			//System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
 		}
 		
 		/**@author Felix Rosa
@@ -1088,11 +1088,10 @@ public class Spiel implements iBediener{
 				}
 				else{
 					setIstAmZug(spieler[i+1]);
-				}
+				}			
 			break;
 			}
 		}
-		System.out.println("\n----------Zug von "+tempSpieler.getName()+" "+tempSpieler.getFarbe()+" beendet----------\n--------"+getIstAmZug().getName()+" "+getIstAmZug().getFarbe()+" ist an der Reihe!--------\n\n\n");
 	}
 	/**
 	 * Methode ausgabeFiguren - gibt ArrayList aller Figuren zurück und gibt diese auf der Systemkonsole aus
@@ -1177,10 +1176,20 @@ public class Spiel implements iBediener{
 
 		boolean zugErfolgreich;
 		try {
+			
+			
+			
+			FarbEnum farbeIstAmZug = istAmZug.getFarbe();
+			
+			Spielfeld f = getSpielbrett().getFeld(ID, farbeIstAmZug);
+			Spielfigur figur = f.getFigur();
 			wähleFigur(ID);
+			Spielfeld zielFeld = figur.getMeinFeld();
 			zugErfolgreich = true;
 			System.out.println("Zug erfolgreich!");
 			
+			Spielfeld f2 = getSpielbrett().getFeld(ID, farbeIstAmZug);
+			System.out.println(figur.getName()+" zieht von Feld "+f.getID()+" auf Feld "+zielFeld.getID()+"\n\n");
 			return zugErfolgreich;
 		}
 
@@ -1213,16 +1222,28 @@ public class Spiel implements iBediener{
 	 *
 	 */
 	public int rollTheDice(){
-		try{ 
+		try{ 	
 			würfelnOriginal();
+			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
 			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
 			if(alleZugFiguren().size()==0){
 				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
 			}
 			else{
 				System.out.println("");
-				for(Spielfigur sf:alleZugFiguren())
-					System.out.println(sf.getName()+" auf Feld: "+sf.getMeinFeld().getID()+"\n");
+				for(Spielfigur sf:alleZugFiguren()){
+					System.out.print(sf.getName()+" auf Feld: "+sf.getMeinFeld().getID());
+					if (sf.getIstGespawnt()==false && sf.getKannSchlagen()==true)
+						System.out.println(" Kann Spawnen & Killen");
+					else if(sf.getIstGespawnt()==true && sf.getKannSchlagen()==true)
+						System.out.println(" Kann Killen");
+					else if(sf.getIstGespawnt()==false && sf.getKannSchlagen()==false)
+						System.out.println(" Kann Spawnen");
+					else if(sf.getKannInsZiel()==true)
+						System.out.println(" Kann ins Ziel");
+					else 
+						System.out.println(" Kann laufen");
+				}
 			}
 			System.out.println("---------------------------------------\n");
 		}
@@ -1251,22 +1272,34 @@ public class Spiel implements iBediener{
 	@Override
 	public void werfen(int zahl) {
 		try{ 
+			
 			würfeln(zahl);
+			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
 			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
 			if(alleZugFiguren().size()==0){
 				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
 			}
 			else{
 				System.out.println("");
-				for(Spielfigur sf:alleZugFiguren())
-					System.out.println(sf.getName()+" auf Feld: "+sf.getMeinFeld().getID()+"\n");
+				for(Spielfigur sf:alleZugFiguren()){
+					System.out.print(sf.getName()+" auf Feld: "+sf.getMeinFeld().getID());
+					if (sf.getIstGespawnt()==false && sf.getKannSchlagen()==true)
+						System.out.println(" Kann Spawnen & Killen");
+					else if(sf.getIstGespawnt()==true && sf.getKannSchlagen()==true)
+						System.out.println(" Kann Killen");
+					else if(sf.getIstGespawnt()==false && sf.getKannSchlagen()==false)
+						System.out.println(" Kann Spawnen");
+					else if(sf.getKannInsZiel()==true)
+						System.out.println(" Kann ins Ziel");
+					else 
+						System.out.println(" Kann laufen");
+				}
 			}
 			System.out.println("---------------------------------------\n");
 		}
 		catch(RuntimeException e){
 			System.out.println(e);
 		}
-		
 	}
 	/**
 	 * Interface Methode zum Hinzufuegen eines neuen Spielers
