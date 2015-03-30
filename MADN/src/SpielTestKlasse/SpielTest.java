@@ -90,7 +90,7 @@ public static void main(String[]args){
 		i.werfen(6); //Georg sieht, dass eine Figur ins ZIEL kann
 		i.zugDurchführen("6");
 		i.ausgabeFiguren();
-		i.werfen(3);
+		i.werfen(2);
 		i.zugDurchführen("E2");
 		
 		//i.werfen(2);

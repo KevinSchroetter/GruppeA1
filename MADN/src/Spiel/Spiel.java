@@ -467,7 +467,7 @@ public class Spiel implements iBediener{
 			}
 		}
 		else if (figur.binIchGespawnt() == true
-				&& (!(figur.getBinIchAufEndpostion()))&& figur !=null) {
+				& (figur.getBinIchAufEndpostion()==false)& figur !=null) {
 			//System.out.println(ZielfeldID);
 			if (figur.getIstImZiel() == true){
 				if (kannZiehenEndfelder(figur, getAugenzahl()) == true){
@@ -729,7 +729,8 @@ public class Spiel implements iBediener{
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
-			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
+			//System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
+			aufEndposition(figur);
 		}
 		
 		/**@author Felix Rosa
@@ -758,7 +759,7 @@ public class Spiel implements iBediener{
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
 				for(int i = 0; i< getSpielbrett().getAlleStartFelderRot().length; i++){
 					if(getSpielbrett().getAlleStartFelderRot()[i].getFigur()==null){
-						System.out.println("Bin ich hier?");
+						//System.out.println("Bin ich hier?");
 						zuSchlagen.setIstGespawnt(false);
 						zuSchlagen.resetFelderGelaufen();
 						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderRot()[i]);
@@ -798,7 +799,7 @@ public class Spiel implements iBediener{
 			zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur();
 			getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
 			figur.setMeinFeld(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()));
-			System.out.println(figur.getMeinFeld());
+			//System.out.println(figur.getMeinFeld());
 			figur.setFelderGelaufen(1);
 			figur.setIstGespawnt(true);
 			for(int i = 0; i<getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
@@ -818,7 +819,7 @@ public class Spiel implements iBediener{
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
 				for(int i = 0; i< getSpielbrett().getAlleStartFelderRot().length; i++){
 					if(getSpielbrett().getAlleStartFelderRot()[i].getFigur()==null){
-						System.out.println("Bin ich hier?");
+						//System.out.println("Bin ich hier?");
 						zuSchlagen.setIstGespawnt(false);
 						zuSchlagen.resetFelderGelaufen();
 						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderRot()[i]);
@@ -897,7 +898,7 @@ public class Spiel implements iBediener{
 			getSpielbrett().getAlleStandardFelder()[aktFeldID-1].setFigur(null);
 		}
 		//aufEndposition(figur);
-		System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
+		//System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
 	}
 	/**@author Anna Rosa, Felix Rosa
 	 * Methode, die überprüft, ob eine Figur in ihrer endgültigen Endposition ist und wenn dies der Fall 
