@@ -690,8 +690,11 @@ public class Spiel implements iBediener{
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
-			//System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
-			//aufEndposition(figur);
+			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
+			System.out.println(figur.getBinIchAufEndpostion());
+			aufEndposition(figur);
+			System.out.println(figur.getBinIchAufEndpostion());
+			
 		}
 		
 		/**@author Felix Rosa
@@ -875,12 +878,11 @@ public class Spiel implements iBediener{
 			for(int i=0; i<getSpielbrett().getAlleEndFelderEinerFarbe(farbe).length; i++){
 				if(figur.equals(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[i].getFigur())){
 					index=i;
-					break;
 				}
 			}
 			switch(index){
 				case 0:
-					if(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[1]!=null& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2]!=null & getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]!=null)
+					if(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[1].getFigur()!=null&& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2].getFigur()!=null && getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3].getFigur()!=null)
 						figur.setBinIchAufEndposition(true);
 						break;
 				case 1: 
@@ -888,13 +890,11 @@ public class Spiel implements iBediener{
 						figur.setBinIchAufEndposition(true);}	
 						break;
 				case 2:
-					if(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]!=null)
+					if(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3].getFigur()!=null)
 						figur.setBinIchAufEndposition(true);
 					break;
 				case 3: 
 					figur.setBinIchAufEndposition(true);
-				default: 
-					figur.setBinIchAufEndposition(false);
 			}
 		}
 	}
