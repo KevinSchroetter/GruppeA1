@@ -915,7 +915,7 @@ public class Spiel implements iBediener{
 	 * @since version 2.2
 	 */
 	public void wähleFigur(String id) {
-		if(getZugMöglich()==false)throw new RuntimeException("Zug nicht möglich!");
+		if(getZugMöglich()==false)throw new FigurKannNichtZiehenException("Zug nicht möglich!");
 		FarbEnum farbeIstAmZug = getIstAmZug().getFarbe();
 		Spielfeld f = getSpielbrett().getFeld(id, farbeIstAmZug);
 		Spielfigur figur = f.getFigur();
