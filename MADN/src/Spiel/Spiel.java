@@ -690,10 +690,10 @@ public class Spiel implements iBediener{
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
-			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
-			System.out.println(figur.getBinIchAufEndpostion());
+			//System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
+			//System.out.println(figur.getBinIchAufEndpostion());
 			aufEndposition(figur);
-			System.out.println(figur.getBinIchAufEndpostion());
+			//System.out.println(figur.getBinIchAufEndpostion());
 			
 		}
 		
