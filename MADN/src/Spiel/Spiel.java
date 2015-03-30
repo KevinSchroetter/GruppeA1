@@ -37,7 +37,7 @@ public class Spiel implements iBediener{
 	/**
 	 * Hier wird das Spielbrett gespeichert, auf dem gespielt wird
 	 */
-	public Spielbrett spielbrett;
+	private Spielbrett spielbrett;
 	/**
 	 * Anzahl der Spieler, die gerade an einem Spiel teilnehmen
 	 */
@@ -94,7 +94,7 @@ public class Spiel implements iBediener{
 	 * @param sIAZ
 	 *            - Übergebener Spieler, der gespeichert werden soll.
 	 */
-	public void setIstAmZug(Spieler sIAZ) {
+	private void setIstAmZug(Spieler sIAZ) {
 		if (!(sIAZ instanceof Spieler))
 			throw new RuntimeException(
 					"Es kann nur ein Spielerobjekt am Zug sein!");
@@ -106,7 +106,7 @@ public class Spiel implements iBediener{
 	 * 
 	 * @return istAmZug - Ein Objekt der Klasse Spieler.
 	 */
-	public Spieler getIstAmZug() {
+	private Spieler getIstAmZug() {
 		if (getHatBegonnen()==false) throw new RuntimeException("Spiel hat noch nicht gestartet!");
 		return this.istAmZug;
 	}
@@ -117,7 +117,7 @@ public class Spiel implements iBediener{
 	 * @param zugMöglich
 	 *            - true oder false boolean
 	 */
-	public void setZugMöglich(boolean zugMöglich) {
+	private void setZugMöglich(boolean zugMöglich) {
 		this.zugMöglich = zugMöglich;
 	}
 
@@ -126,7 +126,7 @@ public class Spiel implements iBediener{
 	 * 
 	 * @return zugMöglich - true oder false boolean
 	 */
-	public boolean getZugMöglich() {
+	private boolean getZugMöglich() {
 		return this.zugMöglich;
 	}
 
@@ -137,7 +137,7 @@ public class Spiel implements iBediener{
 	 * @param spielbrett
 	 *            - Objekt der Klasse Spielbrett.
 	 */
-	public void setSpielbrett(Spielbrett spielbrett) {
+	private void setSpielbrett(Spielbrett spielbrett) {
 		if (!(spielbrett instanceof Spielbrett))
 			throw new RuntimeException("Kein Spielfeld gesetzt");
 		this.spielbrett = spielbrett;
@@ -155,7 +155,7 @@ public class Spiel implements iBediener{
 	/**
 	 * Setter für die Anzahl der teilnehmenden Spieler, der nur inkrementiert.
 	 */
-	public void incAnzahlSpieler() {
+	private void incAnzahlSpieler() {
 		this.anzahlSpieler++;
 	}
 	/**
@@ -173,7 +173,7 @@ public class Spiel implements iBediener{
 	 * @param hatBegonnen
 	 *            - boolean
 	 */
-	public void setHatBegonnen(boolean hatBegonnen) {
+	private void setHatBegonnen(boolean hatBegonnen) {
 		this.hatBegonnen = hatBegonnen;
 	}
 
@@ -192,7 +192,7 @@ public class Spiel implements iBediener{
 	 * @param istBeendet
 	 *            - boolean
 	 */
-	public void setIstBeendet(boolean istBeendet) {
+	private void setIstBeendet(boolean istBeendet) {
 		this.istBeendet = istBeendet;
 	}
 
@@ -208,7 +208,7 @@ public class Spiel implements iBediener{
 	/**
 	 * Setter für AnzWürfe, der die Variable inkrementiert.
 	 */
-	public void incAnzWürfe() {
+	private void incAnzWürfe() {
 		this.anzWürfe++;
 	}
 	/**
@@ -216,7 +216,7 @@ public class Spiel implements iBediener{
 	 * 
 	 * @return anzWürfe - int
 	 */
-	public int getAnzWürfe() {
+	private int getAnzWürfe() {
 		return this.anzWürfe;
 	}
 
@@ -227,7 +227,7 @@ public class Spiel implements iBediener{
 	 * @param augenzahl
 	 *            - Augenzahl als int
 	 */
-	public void setAugenzahl(int augenzahl) {
+	private void setAugenzahl(int augenzahl) {
 		if (augenzahl < 1 || augenzahl > 6)
 			throw new RuntimeException("Fehlerhaftes Würfelergebnis");
 		this.augenzahl = augenzahl;
@@ -238,14 +238,14 @@ public class Spiel implements iBediener{
 	 * 
 	 * @return augenzahl - int Wert
 	 */
-	public int getAugenzahl() {
+	private int getAugenzahl() {
 		return this.augenzahl;
 	}
 
 	/**
 	 * Setter für die Anzahl der vorhandenen zugFiguren, inkrementiert
 	 */
-	public void incAnzZugFiguren() {
+	private void incAnzZugFiguren() {
 		if (this.anzZugFiguren < 0 || this.anzZugFiguren > 4)
 			throw new RuntimeException("Fehöer: ZugFigurenLimit erreicht!");
 		this.anzZugFiguren++;
@@ -261,7 +261,7 @@ public class Spiel implements iBediener{
 	 * 
 	 * @return anzZugFiguren - int Wert
 	 */
-	public int getAnzZugFiguren() {
+	private int getAnzZugFiguren() {
 		return this.anzZugFiguren;
 	}
 	/**
@@ -274,7 +274,7 @@ public class Spiel implements iBediener{
 	 * @param figur
 	 *            - Objekt vom Typ Figur
 	 */
-	public void setZugFiguren(Spielfigur figur) {
+	private void setZugFiguren(Spielfigur figur) {
 		if (!(figur instanceof Spielfigur))
 			throw new RuntimeException("Keine Spielfigur ausgewählt");
 		if (!(figur.getFarbe().equals(getIstAmZug().getFarbe())))
@@ -286,7 +286,7 @@ public class Spiel implements iBediener{
 		incAnzZugFiguren();
 	}
 
-	public Spielfigur getZugFiguren(int index) {
+	private Spielfigur getZugFiguren(int index) {
 		if (index <0 || index > zugFiguren.size())throw new RuntimeException("Falscher Index!");
 		
 		Spielfigur figur=zugFiguren.get(index);
@@ -301,7 +301,7 @@ public class Spiel implements iBediener{
 			throw new RuntimeException("Angeforderte Figur existiert nicht");
 	}
 	/**
-	 * Wichtige Methode fuer den Spielverlauf. Sie git alle Figuren zurueck, die ziehen koennen
+	 * Wichtige Methode fuer den Spielverlauf. Sie gibt alle Figuren zurueck, die ziehen koennen
 	 * @return zugFiguren - ArrayList mit allen Figuren, die Ziehen koennen
 	 */
 	public ArrayList<Spielfigur> alleZugFiguren() {
@@ -311,7 +311,7 @@ public class Spiel implements iBediener{
 	 * Hilfsmethode für die Mehtode würfeln()
 	 * @param figur - Spielfigur
 	 */
-	public void setChosen(Spielfigur figur){
+	private void setChosen(Spielfigur figur){
 
 			this.chosenFigur=figur;
 	}
@@ -319,7 +319,7 @@ public class Spiel implements iBediener{
 	 * Hilfsmethode für die Methode würfeln()
 	 * @return chosenFigur - Spielfigur
 	 */
-	public Spielfigur getChosen(){
+	private Spielfigur getChosen(){
 		return this.chosenFigur;
 	}
 	/**
@@ -328,7 +328,7 @@ public class Spiel implements iBediener{
 	 * @param alleAufSpawn
 	 *            - boolean
 	 */
-	public void setAlleAufSpawn(boolean alleAufSpawn) {
+	private void setAlleAufSpawn(boolean alleAufSpawn) {
 		this.alleAufSpawn = alleAufSpawn;
 	}
 	/**
@@ -418,7 +418,7 @@ public class Spiel implements iBediener{
 	 * @param figur
 	 * @return ZielfeldID -
 	 */
-	public int ermittleZielfeldID(Spielfigur figur){
+	private int ermittleZielfeldID(Spielfigur figur){
 		Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 		int ZielfeldID = Integer.parseInt(aktFeld.getID())+getAugenzahl();
 		if(ZielfeldID>=getSpielbrett().getAlleStandardFelder().length){
@@ -432,7 +432,7 @@ public class Spiel implements iBediener{
 	 * @param figur
 	 * @return
 	 */
-	public int ermittleEndfeldSchritte(Spielfigur figur){
+	private int ermittleEndfeldSchritte(Spielfigur figur){
 		return figur.getFelderGelaufen()+getAugenzahl() - getSpielbrett().getAlleStandardFelder().length;
 
 	}
@@ -444,7 +444,7 @@ public class Spiel implements iBediener{
 	 * @param augenZahl - gewürfelte Augenzahl um die die Figur ziehen soll!
 	 * @return boolean - true wenn ziehen möglich, false wenn nicht
 	 */
-	public boolean kannIchZiehen(Spielfigur figur) {
+	private boolean kannIchZiehen(Spielfigur figur) {
 		Spieler istAmZug = this.getIstAmZug();
 		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
 			//System.out.println("Fall1");
@@ -607,7 +607,7 @@ public class Spiel implements iBediener{
 		 * @param figur
 		 * @param augenZahl
 		 */
-		public void ziehen(Spielfigur figur, int augenZahl){
+		private void ziehen(Spielfigur figur, int augenZahl){
 			//System.out.println("Bin in ziehen");
 			for(Spielfigur sf:alleZugFiguren()){
 				sf.setKannSchlagen(false);
@@ -714,7 +714,7 @@ public class Spiel implements iBediener{
 		 * @param figur
 		 * @param ZielfeldID
 		 */
-		public void schlagen(Spielfigur figur, int ZielfeldID){
+		private void schlagen(Spielfigur figur, int ZielfeldID){
 			Spielfigur zuSchlagen = null;
 			Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 			int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
@@ -760,7 +760,7 @@ public class Spiel implements iBediener{
 		 * 
 		 * @param figur
 		 */
-		public void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
+		private void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
 			Spieler istAmZug = this.istAmZug;
 			Spielfigur zuSchlagen = null;
 			zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur();
@@ -816,7 +816,7 @@ public class Spiel implements iBediener{
 	 * @param figur - Die Figur, die ziehen soll
 	 * @param augenZahl - Anzahl der Züge, die Figur ziehen soll
 	 */
-	public void ziehenEndfelder(Spielfigur figur, int restSchritte) {
+	private void ziehenEndfelder(Spielfigur figur, int restSchritte) {
 		Spielfeld aktFeld = figur.getMeinFeld();
 		restSchritte = restSchritte - 1;
 		String aktFeldIDS = "";
@@ -848,7 +848,7 @@ public class Spiel implements iBediener{
 	 * das Attribut binIchAufEndposition auf true setzt.
 	 * @param figur - zu Überprüfende Figur
 	 */
-	public void aufEndposition(Spielfigur figur){
+	private void aufEndposition(Spielfigur figur){
 		if(! (figur.getMeinFeld() instanceof Endfeld))
 			return;
 		else{
@@ -929,7 +929,7 @@ public class Spiel implements iBediener{
 	 * @author Kevin Schroetter
 	 * @since version 2.1
 	 */
-	public boolean kannSpawnen(Spielfigur figur) {
+	private boolean kannSpawnen(Spielfigur figur) {
 		if (getAugenzahl() == 6 && figur.binIchGespawnt() == false)
 			if (getSpielbrett().getSpawnfeld(getIstAmZug().getFarbe())
 					.getFigur() == null
@@ -1014,7 +1014,7 @@ public class Spiel implements iBediener{
 	 * @author Kevin Schroetter(Update v2.2), Anna Rosa, Felix Rosa
 	 * @since version 2.2
 	 */
-	public void nächsterSpieler() {
+	private void nächsterSpieler() {
 		alleZugFiguren().clear();
 		deleteAnzZugFiguren();
 		deleteAnzWürfe();
