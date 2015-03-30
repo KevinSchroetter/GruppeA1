@@ -84,9 +84,13 @@ public static void main(String[]args){
 		i.werfen(6);
 		i.zugDurchführen("28");//Georg läuft mit BLAU 2 auf Feld 34;
 		i.werfen(6);
-		i.zugDurchführen("34");//Georg läuft mit BLAU 2 auf Feld 1;
+		i.zugDurchführen("34");//Georg läuft mit BLAU 2 auf Feld 40;
 		i.werfen(6);
-		i.zugDurchführen("40");//Georg läuft mit BLAU 2 auf Feld 7;
+		i.zugDurchführen("40");//Georg läuft mit BLAU 2 auf Feld 6;
+		i.werfen(6); //Georg sieht, dass eine Figur ins ZIEL kann
+		i.zugDurchführen("6");
+		i.werfen(2);
+		i.zugDurchführen("E2");
 		
 		
 		
