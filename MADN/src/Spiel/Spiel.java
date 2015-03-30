@@ -19,6 +19,10 @@ import Hilfsklassen.*;
 
 public class Spiel implements iBediener{
 	/**
+	 * 
+	 */
+	private boolean endfelderErreicht=false;
+	/**
 	 * KontrollAttribut fuer die Methode würfeln()
 	 */
 	private boolean sechsErhalten= false;
@@ -508,89 +512,18 @@ public class Spiel implements iBediener{
 	 *            werden sollen
 	 * @return booleanschen Wert, true falls die Figur ziehen kann, false falls
 	 *         nicht
-	 */
-	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
-		Endfeld[] endfelderIstAmZug = getIstAmZug().getEndFelder();
-		if (figur.getMeinFeld() instanceof Standardfeld) {
-			if (zuZiehen > 4)
+	 */ 
+		public boolean kannZiehenEndfelder(Spielfigur f,int zahl){
+			if(zahl > 4)
 				return false;
-			if (zuZiehen == 1) {
-				if (endfelderIstAmZug[0].getFigur() == null)
-					return true;
-			}
-			if (zuZiehen == 2) {
-				if (endfelderIstAmZug[1].getFigur() == null
-						&& kannZiehenEndfelder(figur, 1) == true)
-					return true;
-			}
-			if (zuZiehen == 3) {
-				if (endfelderIstAmZug[2].getFigur() == null
-						&& kannZiehenEndfelder(figur, 2) == true) {
-					return true;
-				}
-			}
-			if (zuZiehen == 4) {
-				if (endfelderIstAmZug[3].getFigur() == null
-						&& kannZiehenEndfelder(figur, 3) == true) {
-					return true;
-				}
-			}
-
-			else
-				return false;
+			Endfeld[] felder = spielbrett.getAlleEndFelderEinerFarbe(f.getFarbe());
+			int nr = (ermittleEndfeldSchritte(f));
+			for (int i=(nr); i<4;i++ )
+				if(felder[i].getFigur()!=null)
+					return false;
+				else;
+			return true;
 		}
-
-		else if (figur.getMeinFeld() instanceof Endfeld) {
-			if (figur.getMeinFeld().equals(endfelderIstAmZug[0])) {
-				if (zuZiehen > 3)
-					return false;
-				if (zuZiehen == 1) {
-					if (endfelderIstAmZug[1].getFigur() == null)
-						return true;
-					else
-						return false;
-				}
-				if (zuZiehen == 2) {
-					if (kannZiehenEndfelder(figur, 1) == true
-							&& endfelderIstAmZug[2] == null)
-						return true;
-					else
-						return false;
-				}
-				if (zuZiehen == 3) {
-					if (kannZiehenEndfelder(figur, 2) == true
-							&& endfelderIstAmZug[3] == null)
-						return true;
-					else
-						return false;
-				}
-			}
-			if (figur.getMeinFeld().equals(endfelderIstAmZug[1])) {
-				if (zuZiehen > 2)
-					return false;
-				if (zuZiehen == 1) {
-					if (endfelderIstAmZug[2].getFigur() == null)
-						return true;
-					else
-						return false;
-				}
-				if (zuZiehen == 2)
-					if (kannZiehenEndfelder(figur, 1) == true
-							&& endfelderIstAmZug[2] == null)
-						return true;
-			}
-
-			if (figur.getMeinFeld().equals(endfelderIstAmZug[2])) {
-				if (zuZiehen > 1)
-					return false;
-				if (endfelderIstAmZug[3].getFigur() == null)
-					return true;
-				else
-					return false;
-			}
-		}
-		return false;
-	}
 	/** @author Felix Rosa
 	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) 
 	 * aus der Klasse Spielfigur auf um den Schrittzähler zu erhöhen und nächsterSpieler() um auf den nächsten ziehenden zu verweisen.
@@ -964,10 +897,12 @@ public class Spiel implements iBediener{
 	 * Diese Methode wuerfelt fuer den Spieler ein gewolltes Ergebnis
 	 * Description: Siehe würfelnOriginal()
 	 * @author Kevin Schroetter
-	 * @since version 2.2
+	 * @since version 2.3
 	 * @param hack - int, der aktuell noch dazu verwendet wird, um konkrete Wuerfelergebnisse fuer Tests zu erarbeiten. Dies wird im spaeteren Verlauf herausgenommen.
 	 */
 	public void würfeln(int hack) {
+		if(endfelderErreicht==true && getZugMöglich()==false && getAlleAufSpawn()==false)
+			nächsterSpieler();
 		if(getAnzWürfe()==3 && getAlleAufSpawn()==true && getAugenzahl()!=6){
 			nächsterSpieler();
 		}
@@ -979,7 +914,6 @@ public class Spiel implements iBediener{
 		incAnzWürfe();
 		int augenzahl = getIstAmZug().getMeinWürfel().testWurf(hack);
 		setAugenzahl(augenzahl);
-		
 		for (Spielfigur sf : getIstAmZug().alleFiguren()){
 			if (kannIchZiehen(sf) == true) {
 				sf.setKannZiehen(true);
@@ -1004,6 +938,11 @@ public class Spiel implements iBediener{
 		else if(getAugenzahl()==6){
 			setZugMöglich(true);
 			sechsErhalten=true;
+		}
+		else if(alleZugFiguren().isEmpty()&& getAugenzahl()!=6){
+			setZugMöglich(false);
+			setAlleAufSpawn(false);
+			endfelderErreicht=true;
 		}
 		else{
 			setZugMöglich(true);
@@ -1237,7 +1176,7 @@ public class Spiel implements iBediener{
 	 *
 	 */
 	public int rollTheDice(){
-		try{ 	
+		try{ 
 			würfelnOriginal();
 			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
 			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
@@ -1288,8 +1227,7 @@ public class Spiel implements iBediener{
 	 */
 	@Override
 	public void werfen(int zahl) {
-		//try{ 
-			
+		try{ 
 			würfeln(zahl);
 			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
 			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
@@ -1313,10 +1251,10 @@ public class Spiel implements iBediener{
 				}
 			}
 			System.out.println("---------------------------------------\n");
-		//}
-		//catch(RuntimeException e){
-		//	System.out.println(e);
-		//}
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
 	}
 	/**
 	 * Interface Methode zum Hinzufuegen eines neuen Spielers
