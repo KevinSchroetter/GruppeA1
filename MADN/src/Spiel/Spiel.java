@@ -691,7 +691,7 @@ public class Spiel implements iBediener{
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
 			//System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
-			aufEndposition(figur);
+			//aufEndposition(figur);
 		}
 		
 		/**@author Felix Rosa
