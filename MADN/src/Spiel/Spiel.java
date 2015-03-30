@@ -310,13 +310,9 @@ public class Spiel implements iBediener{
 	 * Methode zum Hinzufügen eines neuen Spielers, solange das Spiel noch nicht
 	 * gestartet ist. Sind Spieler im Spiel, so wird Spiel automatisch begonnen.
 	 * 
-	 * @param name
-	 *            - gewünschter Name des Spielers
-	 * @param farbe
-	 *            - gewünschte Farbe des Spielers
-	 * @param verhalten
-	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
-	 *            übergebenen Verhalten;
+	 * @param name - gewünschter Name des Spielers
+	 * @param farbe - gewünschte Farbe des Spielers
+	 * @param verhalten - Falls null: Menschlicher Spieler, sonst: KI mit dem übergebenen Verhalten;
 	 */
 	public void spielerHinzufügen(String name, int farbID, int verhaltenID) {
 		if (getHatBegonnen() == true)
