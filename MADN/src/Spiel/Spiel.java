@@ -1248,7 +1248,7 @@ public class Spiel implements iBediener{
 		this.anzahlSpieler=0;
 	}
 	/**
-	 * HilfsMethode zum Loeschen der anzWürfe
+	 * HilfsMethode zum Loeschen der anzWürfe.
 	 * @author Kevin Schroetter
 	 * @since version 2.2
 	 */
