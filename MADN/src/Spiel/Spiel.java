@@ -421,8 +421,8 @@ public class Spiel implements iBediener{
 	public int ermittleZielfeldID(Spielfigur figur){
 		Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 		int ZielfeldID = Integer.parseInt(aktFeld.getID())+getAugenzahl();
-		if(ZielfeldID>=spielbrett.getAlleStandardFelder().length){
-			return (ZielfeldID-1)-spielbrett.getAlleStandardFelder().length;
+		if(ZielfeldID>=getSpielbrett().getAlleStandardFelder().length){
+			return (ZielfeldID-1)-getSpielbrett().getAlleStandardFelder().length;
 		}
 		return ZielfeldID-1;
 	}
@@ -433,7 +433,7 @@ public class Spiel implements iBediener{
 	 * @return
 	 */
 	public int ermittleEndfeldSchritte(Spielfigur figur){
-		return figur.getFelderGelaufen()+getAugenzahl() - spielbrett.getAlleStandardFelder().length;
+		return figur.getFelderGelaufen()+getAugenzahl() - getSpielbrett().getAlleStandardFelder().length;
 
 	}
 	/** @author Felix Rosa
@@ -447,15 +447,15 @@ public class Spiel implements iBediener{
 	public boolean kannIchZiehen(Spielfigur figur) {
 		Spieler istAmZug = this.getIstAmZug();
 		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
-			System.out.println("Fall1");
-			if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur()==null){
-				System.out.println("Fall1.1");
+			//System.out.println("Fall1");
+			if(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur()==null){
+				//System.out.println("Fall1.1");
 				return true;
-			}else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
-				System.out.println("Fall1.2");
+			}else if(!(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
+				//System.out.println("Fall1.2");
 				figur.setKannSchlagen(true);
 				return true;
-			}else if(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
+			}else if(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
 				return false;
 			}
 		}
@@ -463,26 +463,26 @@ public class Spiel implements iBediener{
 				&& (!(figur.getBinIchAufEndpostion()))&& figur !=null) {
 			int ZielfeldID = ermittleZielfeldID(figur);
 			if (figur.getIstImZiel() == true){
-				System.out.println("Fall2");
+				//System.out.println("Fall2");
 				if (kannZiehenEndfelder(figur, ermittleEndfeldSchritte(figur)) == true){
-					System.out.println("Fall2.1");
+					//System.out.println("Fall2.1");
 					return true;}}
-			if ((figur.getFelderGelaufen() + getAugenzahl()) > spielbrett.getAlleStandardFelder().length) {
+			if ((figur.getFelderGelaufen() + getAugenzahl()) > getSpielbrett().getAlleStandardFelder().length) {
 				if (ermittleEndfeldSchritte(figur) <= 4){
 					if (kannZiehenEndfelder(figur, ermittleEndfeldSchritte(figur)) == true) {
 						figur.setKannInsZiel(true);
-						System.out.println("Fall2.2");
+						//System.out.println("Fall2.2");
 						return true;
 					} else
 						return false;
 				}
 			}
-			Standardfeld Zielfeld = spielbrett.getAlleStandardFelder()[ZielfeldID];
+			Standardfeld Zielfeld = getSpielbrett().getAlleStandardFelder()[ZielfeldID];
 			if (Zielfeld.getFigur() == null){
-				System.out.println("Fall3.1");
+				//System.out.println("Fall3.1");
 				return true;}
 			else if (figur.kannSchlagen(Zielfeld) == true){
-				System.out.println("Fall3.2");
+				//System.out.println("Fall3.2");
 				figur.setKannSchlagen(true);
 				return true;}
 			else
@@ -608,35 +608,35 @@ public class Spiel implements iBediener{
 		 * @param augenZahl
 		 */
 		public void ziehen(Spielfigur figur, int augenZahl){
-			System.out.println("Bin in ziehen");
+			//System.out.println("Bin in ziehen");
 			alleZugFiguren().clear();
 			deleteAnzZugFiguren();
 			setChosen(getIstAmZug().getZugFigur());
 			Spieler istAmZug = this.istAmZug;
 			Spielfeld aktFeld = null;
 			if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
-				System.out.println("1ter");
+				//System.out.println("1ter");
 				aktFeld = (Startfeld) figur.getMeinFeld();
 				String aktFeldIDS = aktFeld.getID();
-				if (spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur() == null) {
-					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall");
-					figur.setMeinFeld(spielbrett.getSpawnfeld(istAmZug.getFarbe()));
+				if (getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur() == null) {
+					//System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall");
+					figur.setMeinFeld(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()));
 					figur.setFelderGelaufen(1);
 					figur.setIstGespawnt(true);
-					for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-						if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
-							spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+					for(int i = 0; i<getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
+						if(getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
+							getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
 						}
 					}
-					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall:: ENDE");
-				}else if(!(spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
-					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall");
+					//System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 1terFall:: ENDE");
+				}else if(!(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
+					//System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall");
 					schlagenSpawn(figur, aktFeldIDS);
-					System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall :: ENDE");
+					//System.out.println("Fall: Nicht Gespawnt + 6 gewürfelt + 2terFall :: ENDE");
 				}
 			
 			}else if(figur.getIstGespawnt()==true&&getAugenzahl()==6){
-				    System.out.println("2ter");
+				    //System.out.println("2ter");
 					aktFeld =(Standardfeld) figur.getMeinFeld();
 					int ZielfeldID = ermittleZielfeldID(figur);
 					int EndfeldSchritte = ermittleEndfeldSchritte(figur);
@@ -646,59 +646,59 @@ public class Spiel implements iBediener{
 						nächsterSpieler();
 					}*/
 					if(figur.getKannInsZiel()==true){
-						System.out.println("Fall: Gespawnt + 6 gewürfelt + 1terFall");
+						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 1terFall");
 						ziehenEndfelder(figur, EndfeldSchritte);
 						figur.setKannInsZiel(false);
 						figur.setIstImZiel(true);
-						System.out.println("Fall: Gespawnt + 6 gewürfelt + 1terFall :: ENDE");
-					}else if(spielbrett.getStandardFelder()[ZielfeldID].getFigur() != null && !((spielbrett.getStandardFelder()[ZielfeldID].getFigur().getFarbe()).equals(istAmZug.getFarbe()))){
-						System.out.println("Fall: Gespawnt + 6 gewürfelt + 2terFall");
+						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 1terFall :: ENDE");
+					}else if(getSpielbrett().getStandardFelder()[ZielfeldID].getFigur() != null && !((getSpielbrett().getStandardFelder()[ZielfeldID].getFigur().getFarbe()).equals(istAmZug.getFarbe()))){
+						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 2terFall");
 						schlagen(figur, ZielfeldID);
-						System.out.println("Fall: Gespawnt + 6 gewürfelt + 2terFall :: ENDE");					
-					}else if(spielbrett.getStandardFelder()[ZielfeldID].getFigur()==null){	
-						System.out.println("Fall: Gespawnt + 6 gewürfelt + 3terFall");
-						figur.setMeinFeld(spielbrett.getStandardFelder()[ZielfeldID]);
-						spielbrett.getStandardFelder()[aktFeldID].setFigur(null);
+						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 2terFall :: ENDE");					
+					}else if(getSpielbrett().getStandardFelder()[ZielfeldID].getFigur()==null){	
+						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 3terFall");
+						figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
+						//getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 						figur.incSchritteGelaufen(getAugenzahl());
-						System.out.println("Fall: Gespawnt + 6 gewürfelt + 3terFall :: ENDE");
+						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 3terFall :: ENDE");
 						}
 					
 			}else if(figur.getIstGespawnt()==true&&getAugenzahl()!=6){
-						System.out.println("3ter");
+						//System.out.println("3ter");
 						int ZielfeldID = ermittleZielfeldID(figur);
 						int EndfeldSchritte = ermittleEndfeldSchritte(figur);
 						aktFeld =(Standardfeld) figur.getMeinFeld();
 						int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
 						if(figur.getIstImZiel()==true){
-							System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall");
+							//System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall");
 							ziehenEndfelder(figur, getAugenzahl());
 							nächsterSpieler();
-							System.out.println("Naechster spieler gesetzt");
-							System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall :: ENDE");
+							//System.out.println("Naechster spieler gesetzt");
+							//System.out.println("Fall: Gespawnt + !6 gewürfelt + 1terFall :: ENDE");
 						}else if(figur.getKannInsZiel()==true){
-								System.out.println("Fall: Gespawnt + !6 gewürfelt + 2terFall");
+								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 2terFall");
 								ziehenEndfelder(figur, EndfeldSchritte);
 								figur.setKannInsZiel(false);
 								figur.setIstImZiel(true);
 								figur.incSchritteGelaufen(getAugenzahl());
 								nächsterSpieler();
-								System.out.println("Naechster spieler gesetzt");
-								System.out.println("Fall: Gespawnt + !6 gewürfelt + 2terFall :: ENDE");
-						}else if( spielbrett.getStandardFelder()[ermittleZielfeldID(figur)].getFigur() != null &&(!(spielbrett.getStandardFelder()[ermittleZielfeldID(figur)].getFigur().getFarbe().equals(istAmZug.getFarbe())))){
-								System.out.println("Fall: Gespawnt + !6 gewürfelt + 3terFall");
+								//System.out.println("Naechster spieler gesetzt");
+								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 2terFall :: ENDE");
+						}else if( getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)].getFigur() != null &&(!(getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)].getFigur().getFarbe().equals(istAmZug.getFarbe())))){
+								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 3terFall");
 								schlagen(figur, ZielfeldID);
 								nächsterSpieler();
-								System.out.println("Naechster spieler gesetzt");
-								System.out.println("Fall: Gespawnt + !6 gewürfelt + 3terFall :: ENDE");
+								//System.out.println("Naechster spieler gesetzt");
+								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 3terFall :: ENDE");
 							}
-						else if(spielbrett.getStandardFelder()[ermittleZielfeldID(figur)].getFigur()==null){
-								System.out.println("Fall: Gespawnt + !6 gewürfelt + 4terFall");
-								figur.setMeinFeld(spielbrett.getStandardFelder()[aktFeldID+getAugenzahl()]);
-								spielbrett.getStandardFelder()[aktFeldID].setFigur(null);
+						else if(getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)].getFigur()==null){
+								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 4terFall");
+								figur.setMeinFeld(getSpielbrett().getStandardFelder()[aktFeldID+getAugenzahl()]);
+								getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 								figur.incSchritteGelaufen(getAugenzahl());
 								nächsterSpieler();
-								System.out.println("Naechster spieler gesetzt");
-								System.out.println("Fall: Gespawnt + !6 gewürfelt + 4terFall :: ENDE");
+								//System.out.println("Naechster spieler gesetzt");
+								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 4terFall :: ENDE");
 				}
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
@@ -716,38 +716,38 @@ public class Spiel implements iBediener{
 			Spielfigur zuSchlagen = null;
 			Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 			int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
-			zuSchlagen = spielbrett.getStandardFelder()[ZielfeldID].getFigur();
-			figur.setMeinFeld(spielbrett.getStandardFelder()[ZielfeldID]);
-			spielbrett.getStandardFelder()[aktFeldID].setFigur(null);
+			zuSchlagen = getSpielbrett().getStandardFelder()[ZielfeldID].getFigur();
+			figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
+			getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 			figur.incSchritteGelaufen(getAugenzahl());
 			if(zuSchlagen.getFarbe().equals(FarbEnum.GRÜN)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderGrün().length; i++){
-					if(spielbrett.getAlleStartFelderGrün()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGrün()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderGrün().length; i++){
+					if(getSpielbrett().getAlleStartFelderGrün()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderGrün()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderRot().length; i++){
-					if(spielbrett.getAlleStartFelderRot()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderRot()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderRot().length; i++){
+					if(getSpielbrett().getAlleStartFelderRot()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderRot()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.BLAU)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderBlau().length; i++){
-					if(spielbrett.getAlleStartFelderBlau()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderBlau().length; i++){
+					if(getSpielbrett().getAlleStartFelderBlau()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderBlau()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.GELB)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderGelb().length; i++){
-					if(spielbrett.getAlleStartFelderGelb()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGelb()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderGelb().length; i++){
+					if(getSpielbrett().getAlleStartFelderGelb()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderGelb()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
@@ -761,45 +761,45 @@ public class Spiel implements iBediener{
 		public void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
 			Spieler istAmZug = this.istAmZug;
 			Spielfigur zuSchlagen = null;
-			zuSchlagen = spielbrett.getSpawnfeld(istAmZug.getFarbe()).getFigur();
-			spielbrett.getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
-			figur.setMeinFeld(spielbrett.getSpawnfeld(istAmZug.getFarbe()));
+			zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur();
+			getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
+			figur.setMeinFeld(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()));
 			figur.setFelderGelaufen(1);
 			figur.setIstGespawnt(true);
-			for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-				if(spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
-					spielbrett.getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+			for(int i = 0; i<getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
+				if(getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
+					getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
 				}
 			}
 			if(zuSchlagen.getFarbe().equals(FarbEnum.GRÜN)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderGrün().length; i++){
-					if(spielbrett.getAlleStartFelderGrün()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGrün()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderGrün().length; i++){
+					if(getSpielbrett().getAlleStartFelderGrün()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderGrün()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.ROT)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderRot().length; i++){
-					if(spielbrett.getAlleStartFelderRot()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderRot()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderRot().length; i++){
+					if(getSpielbrett().getAlleStartFelderRot()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderRot()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.BLAU)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderBlau().length; i++){
-					zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
-					if(spielbrett.getAlleStartFelderBlau()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderBlau()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderBlau().length; i++){
+					zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderBlau()[i]);
+					if(getSpielbrett().getAlleStartFelderBlau()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderBlau()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.GELB)){
-				for(int i = 0; i< spielbrett.getAlleStartFelderGelb().length; i++){
-					if(spielbrett.getAlleStartFelderGelb()[i].getFigur()==null){
-						zuSchlagen.setMeinFeld(spielbrett.getAlleStartFelderGelb()[i]);
+				for(int i = 0; i< getSpielbrett().getAlleStartFelderGelb().length; i++){
+					if(getSpielbrett().getAlleStartFelderGelb()[i].getFigur()==null){
+						zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderGelb()[i]);
 						zuSchlagen.resetFelderGelaufen();
 						break;
 					}
@@ -828,15 +828,15 @@ public class Spiel implements iBediener{
 		}else if(aktFeld instanceof Standardfeld){
 				aktFeldID = Integer.parseInt(figur.getMeinFeld().getID());
 		}
-		figur.setMeinFeld(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[restSchritte]);
+		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[restSchritte]);
 		if(aktFeld instanceof Endfeld){
-			for(int i = 0; i<spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-				if(spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
-					spielbrett.getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+			for(int i = 0; i<getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
+				if(getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
+					getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
 				}
 			}
 		}else if(aktFeld instanceof Standardfeld){
-			spielbrett.getAlleStandardFelder()[aktFeldID-1].setFigur(null);
+			getSpielbrett().getAlleStandardFelder()[aktFeldID-1].setFigur(null);
 		}
 		aufEndposition(figur);
 		System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
@@ -852,24 +852,24 @@ public class Spiel implements iBediener{
 		else{
 			FarbEnum farbe= figur.getFarbe();
 			int index=0;
-			for(int i=0; i<spielbrett.getAlleEndFelderEinerFarbe(farbe).length; i++){
-				if(figur.equals(spielbrett.getAlleEndFelderEinerFarbe(farbe)[i])){
+			for(int i=0; i<getSpielbrett().getAlleEndFelderEinerFarbe(farbe).length; i++){
+				if(figur.equals(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[i])){
 					index=i;
 				}
 			}
 			switch(index){
 				case 0:
-					if(!(spielbrett.getAlleEndFelderEinerFarbe(farbe)[1]==null)&& !(spielbrett.getAlleEndFelderEinerFarbe(farbe)[2]==null) && !(spielbrett.getAlleEndFelderEinerFarbe(farbe)[3]==null)){
+					if(!(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[1]==null)&& !(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2]==null) && !(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]==null)){
 						figur.setBinIchAufEndposition(true);
 					}
 					break;
 				case 1: 
-					if(!(spielbrett.getAlleEndFelderEinerFarbe(farbe)[2]==null) && !(spielbrett.getAlleEndFelderEinerFarbe(farbe)[3]==null)){
+					if(!(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2]==null) && !(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]==null)){
 						figur.setBinIchAufEndposition(true);
 					}	
 					break;
 				case 2:
-					if(!(spielbrett.getAlleEndFelderEinerFarbe(farbe)[3]==null))
+					if(!(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]==null))
 						figur.setBinIchAufEndposition(true);
 					break;
 				case 3: 
@@ -911,7 +911,7 @@ public class Spiel implements iBediener{
 	public void wähleFigur(String id) {
 		if(getZugMöglich()==false)throw new RuntimeException("Zug nicht möglich!");
 		FarbEnum farbeIstAmZug = istAmZug.getFarbe();
-		Spielfeld f = spielbrett.getFeld(id, farbeIstAmZug);
+		Spielfeld f = getSpielbrett().getFeld(id, farbeIstAmZug);
 		Spielfigur figur = f.getFigur();
 		if (!(alleZugFiguren().contains(figur)))
 			throw new FigurKannNichtZiehenException(String.format("Figur " + figur.getID()+" %s kann nicht ziehen!", figur.getFarbe()));
@@ -958,61 +958,53 @@ public class Spiel implements iBediener{
 	public void würfeln(int hack) {
 		if(getAnzWürfe()==3 && getAlleAufSpawn()==true && getAugenzahl()!=6){
 			nächsterSpieler();
-		System.out.println("Naechster spieler gesetzt WÜRFELN");}
+		}
+		if((alleZugFiguren().size()!=0) ||(getAlleAufSpawn()==false && getAnzWürfe() >= 1 && getAugenzahl()!=6))throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+		if (getHatBegonnen() == false)
+			throw new RuntimeException("Spiel hat noch nicht begonnen");
 		
-			if((alleZugFiguren().size()!=0) ||(getAlleAufSpawn()==false && getAnzWürfe() >= 1 && getAugenzahl()!=6))throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
-			if (getHatBegonnen() == false)
-				throw new RuntimeException("Spiel hat noch nicht begonnen");
-			
-			int spawncounter = 0;
-			incAnzWürfe();
-			int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
-			setAugenzahl(augenzahl);
-			
-			for (Spielfigur sf : istAmZug.alleFiguren()){
-				if (kannIchZiehen(sf) == true) {
-					sf.setKannZiehen(true);
-					setZugFiguren(sf);
-				}
-				if(sf.binIchGespawnt()==false)
-					spawncounter++;
-			}
-			if (spawncounter == getIstAmZug().getAnzFiguren())
-				setAlleAufSpawn(true);
-			else
-				setAlleAufSpawn(false);
-			if(getAlleAufSpawn()==false && getAugenzahl()==6 && getAnzWürfe()<1) throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+		int spawncounter = 0;
+		incAnzWürfe();
+		int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
+		setAugenzahl(augenzahl);
 		
-			if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe() > 3 && getAugenzahl()!= 6){
-				setZugMöglich(false);
-				System.out.println("ICH KOMME HIER REIN");
-				nächsterSpieler();
-				System.out.println("Naechster spieler gesetzt WÜRFELN 2");
-			} 
-			else if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe()<=3 && getAugenzahl()!=6) {
-				setZugMöglich(false);
-				//alleZugFiguren().clear();
-			
+		for (Spielfigur sf : istAmZug.alleFiguren()){
+			if (kannIchZiehen(sf) == true) {
+				sf.setKannZiehen(true);
+				setZugFiguren(sf);
 			}
-			else if(getAugenzahl()==6){
-				setZugMöglich(true);
-				sechsErhalten=true;
-			}
-			else{
-				System.out.println("komm ich hier rein?");
-				setZugMöglich(true);
-				setAlleAufSpawn(false);
-			};
+			if(sf.binIchGespawnt()==false)
+				spawncounter++;
+		}
+		if (spawncounter == getIstAmZug().getAnzFiguren())
+			setAlleAufSpawn(true);
+		else
+			setAlleAufSpawn(false);
+		if(getAlleAufSpawn()==false && getAugenzahl()==6 && getAnzWürfe()<1) throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+	
+		if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe() > 3 && getAugenzahl()!= 6){
+			setZugMöglich(false);
+			nächsterSpieler();
+		} 
+		else if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe()<=3 && getAugenzahl()!=6) {
+			setZugMöglich(false);
+		}
+		else if(getAugenzahl()==6){
+			setZugMöglich(true);
+			sechsErhalten=true;
+		}
+		else{
+			setZugMöglich(true);
+			setAlleAufSpawn(false);
+		};
 			//DEBUG SYSOS
-			System.out.println("ZUGFIGUREN: "+alleZugFiguren().size());
-			System.out.println("Anzahl würfe: "+getAnzWürfe());
-			System.out.println("Augenzahl: "+getAugenzahl());
-			System.out.println("Am Zug: "+getIstAmZug());
-			System.out.println("Zug Möglich: "+getZugMöglich());
-			System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
-			System.out.println("");
-			
-				
+			//System.out.println("ZUGFIGUREN: "+alleZugFiguren().size());
+			//System.out.println("Anzahl würfe: "+getAnzWürfe());
+			//System.out.println("Augenzahl: "+getAugenzahl());
+			//System.out.println("Am Zug: "+getIstAmZug());
+			//System.out.println("Zug Möglich: "+getZugMöglich());
+			//System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
+			//System.out.println("");
 	}
 	/**
 	 * Methode, die den nächsten Spieler als am Zug seienden Spieler setzt und dem vorherigen 
