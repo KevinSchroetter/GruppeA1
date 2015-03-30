@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 
 import Basisklassen.*;
+import Spiel.*;
 /**
  * 
  * @author Kevin Schrötter
@@ -42,11 +43,11 @@ public class TestSpieler {
 	@BeforeClass
 	public static void erstelleSpieler(){
 		
+		Spiel s= new Spiel();
 		
-		
-		spieler[0] = new Spieler("Anna",FarbEnum.ROT,rotStart,rotEnd);
-		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,blauStart,blauEnd);
-		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,grünStart,grünEnd);
+		spieler[0] = new Spieler("Anna",FarbEnum.ROT,rotStart,rotEnd, s);
+		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,blauStart,blauEnd,s);
+		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,grünStart,grünEnd,s);
 	}
 	
 	/**
@@ -86,15 +87,17 @@ public class TestSpieler {
 
 	@Test(expected=Exception.class)
 	public void SpielerOverload() {
-		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd);
-		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart,rotEnd);
+		Spiel s= new Spiel();
+		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd,s);
+		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart,rotEnd,s);
 	}
 	/**
 	 * Ähnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe überprüft.
 	 */
 	@Test(expected=Exception.class)
 	public void FarbOverload(){
-		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart,rotEnd);
+		Spiel s= new Spiel();
+		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart,rotEnd,s);
 	}
 
 	/**
@@ -112,8 +115,9 @@ public class TestSpieler {
 	 */
 	@Test
 	public void kiSpieler(){
-		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd,"aggressiv");
-		assertTrue(ki.getBedienung() instanceof Spieler.KI);
+		Spiel s= new Spiel();
+		Spieler ki = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd,"aggressiv",s );
+		assertTrue(ki.getBedienung() instanceof KI);
 	}
 	/**
 	 * Trivial-Test nach Änderung am Attribut "meinWürfel". Wurde ein Würfel korrekt angelegt?
