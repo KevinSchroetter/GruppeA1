@@ -472,7 +472,8 @@ public class Spiel implements iBediener{
 			if (figur.getIstImZiel() == true){
 				if (kannZiehenEndfelder(figur, getAugenzahl()) == true){
 					return true;}
-					else return false;
+					else 
+						return false;
 				}
 			if ((figur.getFelderGelaufen() + getAugenzahl()) > getSpielbrett().getAlleStandardFelder().length) {
 				if (ermittleEndfeldSchritte(figur) <= 4){
