@@ -9,7 +9,7 @@ import Hilfsklassen.*;
 /**
  * Klasse Spiel als Regelwerk für MADN. Sie beinhaltet alle notwendigen
  * Methoden, um einen reibungslosen Spielfluss zu gewährleisten. In dieser
- * Klasse sind DebugMethoden implementiert, sie sind ganz am Endeder Datei zu
+ * Klasse sind DebugMethoden implementiert, sie sind ganz am Ende der Datei zu
  * finden.
  * 
  * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
