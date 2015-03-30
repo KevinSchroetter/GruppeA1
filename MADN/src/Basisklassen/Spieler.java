@@ -156,7 +156,7 @@ public class Spieler {
 					Spielfigur figur = kannSchlagen.get(i);
 					if (figur.getIstGespawnt() == false) {
 						String id = "" + figur.getID();
-						iB.zugDurchführen(id, augenzahl);
+						iB.zugDurchführen(id);
 						return;
 					}
 					amWeitesten[i] = figur;
@@ -171,13 +171,13 @@ public class Spieler {
 					}
 				}
 				String id = "" + amWeitesten[amWeitesten.length - 1].getID();
-				iB.zugDurchführen(id, augenzahl);
+				iB.zugDurchführen(id);
 				return;
 			} else if (kannSchlagen.isEmpty()) {
 				for (Spielfigur figur : kannZiehen) {
 					if (figur.binIchGespawnt() == false) {
 						String id = "" + figur.getID();
-						iB.zugDurchführen(id, augenzahl);
+						iB.zugDurchführen(id);
 						return;
 					}
 				}
@@ -195,7 +195,7 @@ public class Spieler {
 					}
 				}
 				String id = "" + amWeitesten[amWeitesten.length - 1].getID();
-				iB.zugDurchführen(id, augenzahl);
+				iB.zugDurchführen(id);
 			}
 
 		}
@@ -238,7 +238,7 @@ public class Spieler {
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getID();
-			iB.zugDurchführen(id, augenzahl);
+			iB.zugDurchführen(id);
 						
 		}
 

@@ -942,17 +942,8 @@ public class Spiel implements iBediener{
 			return false;
 	}
 	/**
-	 * Diese Methode wuerfelt fuer den Spieler
-	 * Sie gibt stets die Augenzahl mit und hat ein paar Faelle zum Unterscheiden
-	 * 1. Wenn sich alle Figuren auf den Startefeldern befinden, darf ein spieler drei mal wuerfeln
-	 * 2. Wenn sich alle Figuren auf den Startfeldern befindet und bereits dreimal gewuerfelt wurde, wird ein naechster Spieler ausgewaehlt
-	 * 3. Wenn sich nicht alle Figuren auf den Startfeldern befinden, darf ein Spieler nur dann ein weiteres mal wuerfeln, wenn er eine 6 gewuerfelt hat
-	 * 4. Wenn ein Spieler mehrmals hintereinander wuerfeln will, ohne dass er vorher einen Zug ausgefuerht hat, so ist dies nicht moeglich
-	 * 
-	 * Die Methode nutzt kannIchZiehen(Spielfigur figur), um zu ermitteln, ob eine Figur ziehen kann. Wenn dies der Fall ist, 
-	 * so wird die Figur in die ArrayList alleZugFiguren geschrieben, die spaeter in der Methode waehleFigur() verwendet wird.
-	 * Sollte sich keine Figur in der ArrayList befinden, wird geprueft, ob sich die Figuren auf den Startfeldern befinden. Ja? Dann darf der Spieler drei mal wuerfeln.
-	 * Sollte sich keine Figur in der ArrayList befinden, und es befinden sich NICHT ALLE Figuren auf den Startfeldern, so ist der naechster Spieler mit seinem Zug dran.
+	 * Diese Methode wuerfelt fuer den Spieler ein gewolltes Ergebnis
+	 * Description: Siehe würfelnOriginal()
 	 * @author Kevin Schroetter
 	 * @since version 2.2
 	 * @param hack - int, der aktuell noch dazu verwendet wird, um konkrete Wuerfelergebnisse fuer Tests zu erarbeiten. Dies wird im spaeteren Verlauf herausgenommen.
@@ -968,6 +959,72 @@ public class Spiel implements iBediener{
 		int spawncounter = 0;
 		incAnzWürfe();
 		int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
+		setAugenzahl(augenzahl);
+		
+		for (Spielfigur sf : istAmZug.alleFiguren()){
+			if (kannIchZiehen(sf) == true) {
+				sf.setKannZiehen(true);
+				setZugFiguren(sf);
+			}
+			if(sf.binIchGespawnt()==false)
+				spawncounter++;
+		}
+		if (spawncounter == getIstAmZug().getAnzFiguren())
+			setAlleAufSpawn(true);
+		else
+			setAlleAufSpawn(false);
+		if(getAlleAufSpawn()==false && getAugenzahl()==6 && getAnzWürfe()<1) throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+	
+		if(alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe() > 3 && getAugenzahl()!= 6){
+			setZugMöglich(false);
+			nächsterSpieler();
+		} 
+		else if (alleZugFiguren().isEmpty()==true && getAlleAufSpawn()==true && getAnzWürfe()<=3 && getAugenzahl()!=6) {
+			setZugMöglich(false);
+		}
+		else if(getAugenzahl()==6){
+			setZugMöglich(true);
+			sechsErhalten=true;
+		}
+		else{
+			setZugMöglich(true);
+			setAlleAufSpawn(false);
+		};
+			//DEBUG SYSOS
+			//System.out.println("ZUGFIGUREN: "+alleZugFiguren().size());
+			//System.out.println("Anzahl würfe: "+getAnzWürfe());
+			//System.out.println("Augenzahl: "+getAugenzahl());
+			//System.out.println("Am Zug: "+getIstAmZug());
+			//System.out.println("Zug Möglich: "+getZugMöglich());
+			//System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
+			//System.out.println("");
+	}
+	/**
+	 * Diese Methode wuerfelt fuer den Spieler
+	 * Sie gibt stets die Augenzahl mit und hat ein paar Faelle zum Unterscheiden
+	 * 1. Wenn sich alle Figuren auf den Startefeldern befinden, darf ein spieler drei mal wuerfeln
+	 * 2. Wenn sich alle Figuren auf den Startfeldern befindet und bereits dreimal gewuerfelt wurde, wird ein naechster Spieler ausgewaehlt
+	 * 3. Wenn sich nicht alle Figuren auf den Startfeldern befinden, darf ein Spieler nur dann ein weiteres mal wuerfeln, wenn er eine 6 gewuerfelt hat
+	 * 4. Wenn ein Spieler mehrmals hintereinander wuerfeln will, ohne dass er vorher einen Zug ausgefuerht hat, so ist dies nicht moeglich
+	 * 
+	 * Die Methode nutzt kannIchZiehen(Spielfigur figur), um zu ermitteln, ob eine Figur ziehen kann. Wenn dies der Fall ist, 
+	 * so wird die Figur in die ArrayList alleZugFiguren geschrieben, die spaeter in der Methode waehleFigur() verwendet wird.
+	 * Sollte sich keine Figur in der ArrayList befinden, wird geprueft, ob sich die Figuren auf den Startfeldern befinden. Ja? Dann darf der Spieler drei mal wuerfeln.
+	 * Sollte sich keine Figur in der ArrayList befinden, und es befinden sich NICHT ALLE Figuren auf den Startfeldern, so ist der naechster Spieler mit seinem Zug dran.
+	 * @author Kevin Schroetter
+	 * @since version 2.2
+	 */
+	public void würfelnOriginal() {
+		if(getAnzWürfe()==3 && getAlleAufSpawn()==true && getAugenzahl()!=6){
+			nächsterSpieler();
+		}
+		if((alleZugFiguren().size()!=0) ||(getAlleAufSpawn()==false && getAnzWürfe() >= 1 && getAugenzahl()!=6))throw new RuntimeException(getIstAmZug().getName()+", Sie müssen erst einen Zug ausführen, bevor nochmals gewürfelt werden kann!");
+		if (getHatBegonnen() == false)
+			throw new RuntimeException("Spiel hat noch nicht begonnen");
+		
+		int spawncounter = 0;
+		incAnzWürfe();
+		int augenzahl = istAmZug.getMeinWürfel().werfen();
 		setAugenzahl(augenzahl);
 		
 		for (Spielfigur sf : istAmZug.alleFiguren()){
@@ -1112,14 +1169,14 @@ public class Spiel implements iBediener{
 	 * 
 	 * 
 	 */
-	public boolean zugDurchführen(String ID, int augenzahl) {
+	public boolean zugDurchführen(String ID) {
 
 		boolean zugErfolgreich;
 		try {
-			würfeln(augenzahl);
 			wähleFigur(ID);
 			zugErfolgreich = true;
 			System.out.println("Zug erfolgreich!");
+			
 			return zugErfolgreich;
 		}
 
@@ -1152,8 +1209,23 @@ public class Spiel implements iBediener{
 	 *
 	 */
 	public int rollTheDice(){
-		Spieler s = this.getIstAmZug();
-		return s.getMeinWürfel().werfen();
+		try{ 
+			würfelnOriginal();
+			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
+			if(alleZugFiguren().size()==0){
+				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
+			}
+			else{
+				System.out.println("");
+				for(Spielfigur sf:alleZugFiguren())
+					System.out.println(sf.getName()+" auf Feld: "+sf.getMeinFeld().getID()+"\n");
+			}
+			System.out.println("---------------------------------------\n");
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
+		return getAugenzahl();
 	}
 	@Override
 	public void starteSpiel() {
@@ -1167,6 +1239,7 @@ public class Spiel implements iBediener{
 	}
 	/**
 	 * Zusaetzliche Methode fuer das Interface, damit dadurch konkrete Wuerfelzahlen verwendet werden koennen.
+	 * Nutzung fuer Testzwecke
 	 * @author Kevin Schroetter
 	 * @since version 2.2
 	 * @param zahl - int, die gewuenschte Augenzahl

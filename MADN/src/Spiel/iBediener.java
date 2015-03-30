@@ -16,7 +16,7 @@ public interface iBediener {
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel();
 	public ArrayList<Spielfigur> ausgabeFigurenAufStartfeld();
 	public void ausgabeSpielerListe();
-	public boolean zugDurchführen(String ID, int augenzahl);
+	public boolean zugDurchführen(String ID);
 	public int rollTheDice();
 	
 

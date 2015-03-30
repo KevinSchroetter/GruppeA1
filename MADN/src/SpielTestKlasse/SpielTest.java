@@ -19,6 +19,7 @@ public static void main(String[]args){
 		
 		i.werfen(2);
 		i.werfen(6);
+		i.zugDurchführen("S1");
 		i.werfen(2);
 	}
 
