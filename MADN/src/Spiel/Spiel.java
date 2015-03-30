@@ -423,7 +423,7 @@ public class Spiel implements iBediener{
 		Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 		int ZielfeldID = Integer.parseInt(aktFeld.getID())+getAugenzahl();
 		if(ZielfeldID>=getSpielbrett().getAlleStandardFelder().length){
-			return (ZielfeldID-1)-getSpielbrett().getAlleStandardFelder().length;
+			return (ZielfeldID)-getSpielbrett().getAlleStandardFelder().length;
 		}
 		return ZielfeldID-1;
 	}
@@ -463,6 +463,7 @@ public class Spiel implements iBediener{
 		else if (figur.binIchGespawnt() == true
 				&& (!(figur.getBinIchAufEndpostion()))&& figur !=null) {
 			int ZielfeldID = ermittleZielfeldID(figur);
+			System.out.println(ZielfeldID);
 			if (figur.getIstImZiel() == true){
 				//System.out.println("Fall2");
 				if (kannZiehenEndfelder(figur, ermittleEndfeldSchritte(figur)) == true){
@@ -708,7 +709,7 @@ public class Spiel implements iBediener{
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
-			//System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
+			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
 		}
 		
 		/**@author Felix Rosa
@@ -1119,7 +1120,7 @@ public class Spiel implements iBediener{
 		Spieler s = this.getIstAmZug();
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(Arrays.asList(s.alleFiguren()));
 		for (Spielfigur f : s.alleFiguren()) {
-			System.out.println(f);
+			System.out.println(f.getName()+" auf Feld "+f.getMeinFeld().getID());
 		}
 		return figurenListe;
 	}
@@ -1136,7 +1137,7 @@ public class Spiel implements iBediener{
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getKannZiehen()) {
 				figurenListe.add(f);
-				System.out.println(f);
+				System.out.println(f.getName()+" auf Feld "+f.getMeinFeld().getID());
 			}
 		}
 		return figurenListe;
@@ -1154,7 +1155,7 @@ public class Spiel implements iBediener{
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getIstImZiel()) {
 				figurenListe.add(f);
-				System.out.println(f);
+				System.out.println(f.getName()+" auf Feld "+f.getMeinFeld().getID());
 			}
 		}
 		return figurenListe;
@@ -1169,7 +1170,7 @@ public class Spiel implements iBediener{
 			if (s == null)
 				continue;
 			else {
-				System.out.println(s);
+				System.out.println(s.getName()+" mit Farbe: "+s.getFarbe());
 			}
 		}
 	}
@@ -1223,7 +1224,7 @@ public class Spiel implements iBediener{
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getMeinFeld() instanceof Startfeld) {
-				System.out.println(f);
+				System.out.println(f.getName()+" auf Feld "+f.getMeinFeld().getID());
 				figurenListe.add(f);
 			}
 		}
@@ -1285,7 +1286,7 @@ public class Spiel implements iBediener{
 	 */
 	@Override
 	public void werfen(int zahl) {
-		try{ 
+		//try{ 
 			
 			würfeln(zahl);
 			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
@@ -1310,10 +1311,10 @@ public class Spiel implements iBediener{
 				}
 			}
 			System.out.println("---------------------------------------\n");
-		}
-		catch(RuntimeException e){
-			System.out.println(e);
-		}
+		//}
+		//catch(RuntimeException e){
+		//	System.out.println(e);
+		//}
 	}
 	/**
 	 * Interface Methode zum Hinzufuegen eines neuen Spielers

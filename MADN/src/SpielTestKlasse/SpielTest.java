@@ -70,6 +70,26 @@ public static void main(String[]args){
 		
 		i.werfen(4);//Ralf versagt 1 mal und darf dann Spawnen
 		i.werfen(6);
+		i.zugDurchführen("S1");//Ralf spawnt eine Figur
+		i.werfen(6);
+		i.zugDurchführen("1");//Figur ROT 1 zieht auf Feld 7
+		i.werfen(5);
+		i.zugDurchführen("7");//Ralf killt mit ROT 1 eine Figur BLAU 1 von Blau
+		
+		i.ausgabeFiguren();//Georg sieht sich seine Figur Positionen an
+		i.werfen(6);
+		i.zugDurchführen("16");//Georg läuft mit BLAU 2 auf Feld 22
+		i.werfen(6);
+		i.zugDurchführen("22");//Georg läuft mit BLAU 2 auf Feld 28;
+		i.werfen(6);
+		i.zugDurchführen("28");//Georg läuft mit BLAU 2 auf Feld 34;
+		i.werfen(6);
+		i.zugDurchführen("34");//Georg läuft mit BLAU 2 auf Feld 1;
+		i.werfen(6);
+		i.zugDurchführen("1");//Georg läuft mit BLAU 2 auf Feld 7;
+		
+		
+		
 		
 		
 		
