@@ -10,9 +10,7 @@ package Basisklassen;
  * @since 2015-03-16
  */
 public class Standardfeld extends Spielfeld {
-	/**
-	 * FeldID 1-40 dient der Identifizierung des Standardfeldes
-	 */
+
 	private String iD;
 
 	/**

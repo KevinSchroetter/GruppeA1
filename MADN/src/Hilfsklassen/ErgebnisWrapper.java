@@ -15,39 +15,20 @@ import Basisklassen.FarbEnum;
 
 public class ErgebnisWrapper {
 
-	/**
-	 * ID der gewählten Figur
-	 */
 	private int figurID;
-	/**
-	 * Farbe der gewählten Figur
-	 */
+
 	private FarbEnum figurFarbe;
-	
-	/**
-	 * True, wenn Figur ziehen kann, false, wenn nicht.
-	 */
+
 	private boolean zugMöglich;
-	/**
-	 * ID des Feldes, auf das gezogen wird
-	 */
+
 	private int feldID;
-	/**
-	 * True wenn Zielfeld belegt und die Figur darauf NICHT die gleiche Farbe hat, wie die, die zieht.
-	 * Sonst false
-	 */
+
 	private boolean killMöglich;
-	/**
-	 * ID der Figur, die das Zeitliche segnen soll
-	 */
+
 	private int opferID;
-	/**
-	 * Farbe der Figur, die das Zeitliche segnen soll
-	 */
+
 	private FarbEnum opferFarbe;
-	/**
-	 * Gewürfelte Zahl.
-	 */
+
 	private int würfelzahl;
 	
 	

@@ -12,9 +12,6 @@ package Basisklassen;
 
 public abstract class Spielfeld {
 
-	/**
-	 * Beinhaltet Figur die momentan auf dem Feld steht oder null.
-	 */
 	private Spielfigur figur;
 	private String iD;
 	/**

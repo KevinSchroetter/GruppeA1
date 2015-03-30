@@ -18,68 +18,31 @@ import Hilfsklassen.*;
  */
 
 public class Spiel implements iBediener{
-	/**
-	 * 
-	 */
-	private boolean endfelderErreicht=false;
-	/**
-	 * KontrollAttribut fuer die Methode würfeln()
-	 */
-	private boolean sechsErhalten= false;
-	/**
-	 * Array, in dem alle am Spiel teilnehmenden Spieler gespeichert werden
-	 */
+
 	private Spieler[] spieler = new Spieler[4];
-	/**
-	 * Hier wird der Spieler gespeichert, der gerade ziehen darf
-	 */
+
 	private Spieler istAmZug;
-	/**
-	 * Zeigt an, ob der Spieler tatsächlich ziehen kann
-	 */
+
 	private boolean zugMöglich = false;
-	/**
-	 * Hier wird das Spielbrett gespeichert, auf dem gespielt wird
-	 */
+
 	private Spielbrett spielbrett;
-	/**
-	 * Anzahl der Spieler, die gerade an einem Spiel teilnehmen
-	 */
+
 	private int anzahlSpieler;
-	/**
-	 * Zeigt an, ob ein Spiel bereits begonnen hat, falls TRUE
-	 */
+
 	private boolean hatBegonnen = false;
-	/**
-	 * Zeigt an, ob ein Spiel bereits beendet ist, falls TRUE
-	 */
+
 	private boolean istBeendet = false;
-	/**
-	 * Speichert die Anzahl an Würfel-Würfen, die ein Spieler während eines
-	 * Zuges ausgeführt hat. Relevant für den Fall, dass mehrmals hintereinander
-	 * eine 6 gewürfelt wird.
-	 */
+
 	private int anzWürfe = 0;
-	/**
-	 * Speichert die zuletzt gewürfelte Augenzahl während eines Zuges
-	 */
+
 	private int augenzahl = 0;
-	/**
-	 * ArrayList, in der die Figuren gespeichert werden, mit denen ein Zug
-	 * ausgeführt werden kann
-	 */
+
 	private ArrayList<Spielfigur> zugFiguren = new ArrayList<Spielfigur>(0);
-	/**
-	 * Speichert die Anzahl der Figuren, die laufen können
-	 */
+
 	private int anzZugFiguren = 0;
-	/**
-	 * Zeigt an, ob sich ALLE Figuren auf ihren Startfeldern befinden.
-	 */
+
 	private boolean alleAufSpawn;
-	/**
-	 * Hilfsattribut, das in der Methode würfeln() vewendet wird
-	 */
+
 	private Spielfigur chosenFigur;
 
 	/**
@@ -1043,7 +1006,6 @@ public class Spiel implements iBediener{
 		}
 		else if(getAugenzahl()==6){
 			setZugMöglich(true);
-			sechsErhalten=true;
 		}
 		else{
 			setZugMöglich(true);
@@ -1109,7 +1071,6 @@ public class Spiel implements iBediener{
 		}
 		else if(getAugenzahl()==6){
 			setZugMöglich(true);
-			sechsErhalten=true;
 		}
 		else{
 			setZugMöglich(true);
@@ -1253,6 +1214,11 @@ public class Spiel implements iBediener{
 			System.out.println("Zug fehlgeschlagen!");
 			return zugErfolgreich;
 		}
+		catch (NullPointerException e){
+			zugErfolgreich = false;
+			System.out.println("Zug fehlgeschlafen!");
+			return zugErfolgreich;
+		}
 
 	}
 	/**
@@ -1277,12 +1243,18 @@ public class Spiel implements iBediener{
 	 *
 	 */
 	public int rollTheDice(){
-		try{ 	
+		try{ 
+			
 			würfelnOriginal();
 			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
 			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
-			if(alleZugFiguren().size()==0){
+			if(alleZugFiguren().size()==0&&getAlleAufSpawn()==false){
 				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
+				nächsterSpieler();
+			}
+			else if(alleZugFiguren().size()==0){
+				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
+				//nächsterSpieler();
 			}
 			else{
 				System.out.println("");
@@ -1307,18 +1279,6 @@ public class Spiel implements iBediener{
 		}
 		return getAugenzahl();
 	}
-	@Override
-	public void starteSpiel() {
-		try{
-			if(getHatBegonnen()==false){
-				startSpiel();
-				System.out.println("\n++++++++++Spiel gestartet!++++++++++\n\nSpieler "+getIstAmZug().getName()+" bitte wuerfeln!\n\n");
-			}
-		}
-		catch(RuntimeException e){
-			System.out.println(e);
-		}
-	}
 	/**
 	 * Zusaetzliche Methode fuer das Interface, damit dadurch konkrete Wuerfelzahlen verwendet werden koennen.
 	 * Nutzung fuer Testzwecke
@@ -1328,12 +1288,16 @@ public class Spiel implements iBediener{
 	 */
 	@Override
 	public void werfen(int zahl) {
-		//try{ 
+		try{ 
 			
 			würfeln(zahl);
 			System.out.println("Spieler "+getIstAmZug().getName()+" ist am Zug!");
 			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
-			if(alleZugFiguren().size()==0){
+			if(alleZugFiguren().size()==0&&getAlleAufSpawn()==false){
+				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
+				nächsterSpieler();
+			}
+			else if(alleZugFiguren().size()==0){
 				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
 			}
 			else{
@@ -1353,10 +1317,10 @@ public class Spiel implements iBediener{
 				}
 			}
 			System.out.println("---------------------------------------\n");
-		//}
-		//catch(RuntimeException e){
-		//	System.out.println(e);
-		//}
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
 	}
 	/**
 	 * Interface Methode zum Hinzufuegen eines neuen Spielers
@@ -1426,5 +1390,18 @@ public class Spiel implements iBediener{
 	 */
 	private void deleteAnzWürfe(){
 		this.anzWürfe=0;
+	}
+
+	@Override
+	public void starteSpiel() {
+		try{
+			if(getHatBegonnen()==false){
+				startSpiel();
+				System.out.println("\n++++++++++Spiel gestartet!++++++++++\n\nSpieler "+getIstAmZug().getName()+" bitte wuerfeln!\n\n");
+			}
+		}
+		catch(RuntimeException e){
+			System.out.println(e);
+		}
 	}
 }

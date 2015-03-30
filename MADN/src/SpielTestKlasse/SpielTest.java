@@ -5,13 +5,13 @@ import Spiel.Spiel;
 import Spiel.iBediener;
 
 public class SpielTest {
-public static void main(String[]args){
+	public static void main(String[]args){
 		
 		iBediener i = new Spiel();
 		i.neuerSpieler("Ralf", 1, 0);
 		i.neuerSpieler("Georg", 2, 0);
 		i.neuerSpieler("Peter",3,0);
-		i.neuerSpieler("Hanswurst", 4, 0);
+		i.neuerSpieler("Hanswurst", 4, 0); //starteSpiel() wird automatisch aufgerufen, da 4 Spieler hinzugefügt wurden.
 		
 		i.werfen(6);//Ralf zieht raus auf feld 1
 		i.zugDurchführen("S1");
@@ -89,21 +89,9 @@ public static void main(String[]args){
 		i.zugDurchführen("40");//Georg läuft mit BLAU 2 auf Feld 6;
 		i.werfen(6); //Georg sieht, dass eine Figur ins ZIEL kann
 		i.zugDurchführen("6");
-		i.ausgabeFiguren();
-		i.werfen(2);
-		i.zugDurchführen("E2");
-		
-		//i.werfen(2);
-		//i.zugDurchführen("E2");
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		i.werfen(6);
+		i.zugDurchführen("12");
+		i.zugDurchführen("13");
 	}
 
 		public void starteSpiel() {

@@ -8,56 +8,29 @@ package Basisklassen;
  */
 
 public class Spielfigur {
-	/**
-	 * Figurenzähler, dient als Verifikation der korrekten Anzahl an Figuren und
-	 * zur Erstellung der FigurID
-	 */
+
 	private static int anzahlFiguren = 0;
-	/**
-	 * Name der Figur
-	 */
+
 	private String name;
-	/**
-	 * FigurenID - 1-16;
-	 */
+
 	private int ID;
-	/**
-	 * Feld, auf dem Figur steht
-	 */
+
 	private Spielfeld meinFeld;
-	/**
-	 * Farbe der Figur
-	 */
+
 	private FarbEnum farbe;
-	/**
-	 * "Schrittzähler" - um genaue Position von Figur nachzuvollziehen
-	 */
+
 	private int felderGelaufen;
 
-	// Für Zug
-	/**
-	 * True, wenn Kill möglich
-	 */
 	private boolean kannSchlagen;
-	/**
-	 * True wenn NICHT auf Startfeld und NICHT auf finaler Zielposition
-	 */
+
 	private boolean istGespawnt;
-	/**
-	 * True wenn Figur auf Zielfeld angekommen (Also "aus dem Spiel" ist)
-	 */
+
 	private boolean istImZiel;
-	/**
-	 * True wenn Zug in Zielfelder möglich
-	 */
+
 	private boolean kannInsZiel;
-	/**
-	 * True, wenn Zug auf Standardfeld möglich
-	 */
+
 	private boolean kannZiehen;
-	/**
-	 * Wird TRUE, wenn die Figur auf Ihrer Endposition ist.
-	 */
+
 	private boolean binIchAufEndposition=false;
 
 	// Getter/Setter

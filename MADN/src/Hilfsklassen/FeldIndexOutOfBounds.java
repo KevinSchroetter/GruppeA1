@@ -7,10 +7,6 @@ package Hilfsklassen;
 
 public class FeldIndexOutOfBounds extends RuntimeException {
 
-	/**
-	 * 
-	 */
-
 	private static final long serialVersionUID = -7588968462757300534L;
 	
 	public FeldIndexOutOfBounds(){

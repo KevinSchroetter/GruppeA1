@@ -12,13 +12,9 @@ package Basisklassen;
  */
 
 public class Endfeld extends Spielfeld {
-	/**
-	 * FeldID dient der Zurordnung und Identifizierung des Feldes "E1-E4"
-	 */
+
 	private String iD;
-	/**
-	 * Farbe des Feldes über das es einem Spieler zugeordnet wird
-	 */
+
 	private FarbEnum farbe;
 
 	/**

@@ -12,48 +12,23 @@ import Spiel.*;
  *
  */
 public class Spieler {
-	/**
-	 * Ein Spieler bekommt eine Spielernummer zugewiesen. Diese wird statisch
-	 * über den Konstruktor inkrementiert und darf nicht größer als 4 werden.
-	 */
+
 	private static int spielernummer = 0;
-	/**
-	 * Ein Spieler hat eine Spielernummer
-	 */
+
 	private int meineNummer = 0;
-	/**
-	 * Jeder Spieler erhält einen namen vom Typ String
-	 */
+
 	private String name;
-	/**
-	 * Ein Spieler darf sich eine Spielerfarbe aus der Klasse FarbEnum
-	 * heraussuchen, um damit im Spiel MADN identifiziert werden zu können.
-	 */
+
 	private FarbEnum farbe = null;
-	/**
-	 * Ein Spieler erhält Kenntnis darüber, was seine Startfelder sind um diese
-	 * den Figuren zuzuweisen.
-	 */
+
 	private Startfeld[] startFelder = null;
-	/**
-	 * Ein Spieler erhält Kenntnis darüber, was seine Endfelder sind um diese
-	 * den Figuren zuzuweisen.
-	 */
+
 	private Endfeld[] endFelder = null;
-	/**
-	 * Ein Spieler kennt zu jedem Zeitpunkt immer genau 4 figuren vom Typ
-	 * Spielfigur
-	 */
+
 	private Spielfigur figuren[] = new Spielfigur[4];
-	/**
-	 * In diesem Attribut wird eine Figur vom Typ Spielfigur gespeichert. Sie
-	 * wird benötigt, um einen Spielzug auszuführen.
-	 */
+
 	private Spielfigur zugFigur = null;
-	/**
-	 * Ein Spieler hat immer Kenntnis über einen würfel vom Typ Würfel, mit dem
-	 * er sein Spiel bestreitet
-	 */
+
 	private Würfel meinWürfel = new Würfel();
 	/**
 	 * Ein Spieler kann von einem Menschen gesteuert werden. In dem Fall nimmt
@@ -63,15 +38,9 @@ public class Spieler {
 	 * defensives Verhalten aufweisen.
 	 */
 	private KI bedienung = null;
-	/**
-	 * Ein Spieler hat kenntnis darüber, ob er gerade an einem Spielzug
-	 * teilnimmt oder nicht.
-	 */
+
 	private boolean amZug = false;
-	/**
-	 * Ein Spieler weiß, ob er noch Teil des Spiels ist oder ob er bereits alle
-	 * Figuren in die Zielfelder gebracht hat.
-	 */
+
 	private boolean imSpiel = true;
 	/** Ein Spieler muss das ein Interface iBediener kennen, damit die KI Zugriff auf die Methoden
 	 *  des Interfaces hat.
