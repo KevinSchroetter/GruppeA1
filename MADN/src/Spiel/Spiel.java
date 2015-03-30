@@ -19,6 +19,10 @@ import Hilfsklassen.*;
 
 public class Spiel implements iBediener{
 	/**
+	 * 
+	 */
+	private boolean endfelderErreicht=false;
+	/**
 	 * KontrollAttribut fuer die Methode würfeln()
 	 */
 	private boolean sechsErhalten= false;
