@@ -414,9 +414,10 @@ public class Spiel implements iBediener{
 	}
 
 	/**@author Felix Rosa
-	 * 
-	 * @param figur
-	 * @return ZielfeldID -
+	 * Methode ermittelt die ZielfeldID des Feldes auf das die ziehenden Figur ziehen soll.
+	 * Da in Arrays gearbeitet wird, wird von Zielfeld der Wert 1 abgezogen.
+	 * @param figur - Figur von der die ID des Zielfeldes ermittelte werden soll
+	 * @return ZielfeldID - 1 - ID des Zielfeldes -1
 	 */
 	private int ermittleZielfeldID(Spielfigur figur){
 		Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
@@ -428,9 +429,9 @@ public class Spiel implements iBediener{
 	}
 	
 	/**@author Felix Rosa
-	 * 
-	 * @param figur
-	 * @return
+	 * Methode ermittelt die Schritte die eine Figur in ihren Endfeldern laufen kann. 
+	 * @param figur - Figur von der ermittelt werden soll, wie weit Sie in ihren Endfeldern laufen kann.
+	 * @return bisherige gelaufene Feld + gewürfelte Augenzahl abzüglich der Spielfeldlänge
 	 */
 	private int ermittleEndfeldSchritte(Spielfigur figur){
 		return figur.getFelderGelaufen()+getAugenzahl() - getSpielbrett().getAlleStandardFelder().length;
@@ -440,8 +441,8 @@ public class Spiel implements iBediener{
 	 *  v. 1.1(kannIchZiehen um Spawn-Abfrage erweitert!)
 	 *  Methode prüft ob übergebene Figur in Kombination mit übergebener Würfelzahl ziehen kann.
 	 *  Dabei wird überprüft ob Zug aus Spielfeld ins Endfeld oder Züge im Endfeld möglich sind!
+	 *  Desweiteren wird geprüft ob eine Figur eine Figur auf einem belegten Feld schlagen kann und setzt das Attribut figur.kannSchlagen.
 	 * @param figur - figur von der überprüft werden soll ob ziehen möglich ist
-	 * @param augenZahl - gewürfelte Augenzahl um die die Figur ziehen soll!
 	 * @return boolean - true wenn ziehen möglich, false wenn nicht
 	 */
 	private boolean kannIchZiehen(Spielfigur figur) {
@@ -491,7 +492,7 @@ public class Spiel implements iBediener{
 		return false;
 
 	}
-	/**
+	/**@author Anna Rosa
 	 * Methode, die prüft, ob eine Figur, die entweder auf einem Standard- oder
 	 * Endfeld steht, innerhalb der Endfelder ziehen kann. Sie wird nur von der
 	 * kannZiehen-Methode aufgerufen, falls die Figur in die Endfelder einziehen
@@ -506,7 +507,7 @@ public class Spiel implements iBediener{
 	 *         nicht
 	 */
 	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
-		Endfeld[] endfelderIstAmZug = istAmZug.getEndFelder();
+		Endfeld[] endfelderIstAmZug = getIstAmZug().getEndFelder();
 		if (figur.getMeinFeld() instanceof Standardfeld) {
 			if (zuZiehen > 4)
 				return false;
@@ -615,7 +616,7 @@ public class Spiel implements iBediener{
 			alleZugFiguren().clear();
 			deleteAnzZugFiguren();
 			setChosen(getIstAmZug().getZugFigur());
-			Spieler istAmZug = this.istAmZug;
+			Spieler istAmZug = this.getIstAmZug();
 			Spielfeld aktFeld = null;
 			if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
 				//System.out.println("1ter");
@@ -710,9 +711,10 @@ public class Spiel implements iBediener{
 		}
 		
 		/**@author Felix Rosa
-		 * 
-		 * @param figur
-		 * @param ZielfeldID
+		 *  Methode die mit einer übergebenen Figur eine Figur die auf dem Feld mit der ZielfeldID steht schlägt.
+		 *  Die geschlagene Figur wird auf ihr Startfeld zurückgesetzt, die schlagende Figur zieht auf das Zielfeld
+		 * @param figur - Figur die schlagen soll
+		 * @param ZielfeldID - durch gegenerische Figur belegtes Feld, auf die die übergebene Figur laufen soll
 		 */
 		private void schlagen(Spielfigur figur, int ZielfeldID){
 			Spielfigur zuSchlagen = null;
@@ -756,12 +758,15 @@ public class Spiel implements iBediener{
 				}
 			}
 		}
+		
 		/**@author Felix Rosa
-		 * 
-		 * @param figur
+		 * Methode mit der eine spawnende Figur eine gegenerische Figur die auf dem Spawnfeld steht schlägt.
+		 * Die geschlagene Figur wird auf ihr Startfeld zurückgesetzt
+		 * @param figur - Figur die schlagen soll
+		 * @param aktFeldIDS - ID des Feldes auf dem spawnende Figur steht
 		 */
 		private void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
-			Spieler istAmZug = this.istAmZug;
+			Spieler istAmZug = this.getIstAmZug();
 			Spielfigur zuSchlagen = null;
 			zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur();
 			getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
@@ -812,7 +817,6 @@ public class Spiel implements iBediener{
 	/**@author Anna Rosa, Felix Rosa
 	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
 	 * Endfeld ziehen lässt.
-	 * 
 	 * @param figur - Die Figur, die ziehen soll
 	 * @param augenZahl - Anzahl der Züge, die Figur ziehen soll
 	 */
@@ -830,11 +834,11 @@ public class Spiel implements iBediener{
 		}else if(aktFeld instanceof Standardfeld){
 				aktFeldID = Integer.parseInt(figur.getMeinFeld().getID());
 		}
-		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[restSchritte]);
+		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[restSchritte]);
 		if(aktFeld instanceof Endfeld){
-			for(int i = 0; i<getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length;i++){
-				if(getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)){
-					getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+			for(int i = 0; i<getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe()).length;i++){
+				if(getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].getID().equals(aktFeldIDS)){
+					getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].setFigur(null);
 				}
 			}
 		}else if(aktFeld instanceof Standardfeld){
@@ -843,7 +847,7 @@ public class Spiel implements iBediener{
 		aufEndposition(figur);
 		System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
 	}
-	/**
+	/**@author Anna Rosa, Felix Rosa
 	 * Methode, die überprüft, ob eine Figur in ihrer endgültigen Endposition ist und wenn dies der Fall 
 	 * das Attribut binIchAufEndposition auf true setzt.
 	 * @param figur - zu Überprüfende Figur
@@ -912,7 +916,7 @@ public class Spiel implements iBediener{
 	 */
 	public void wähleFigur(String id) {
 		if(getZugMöglich()==false)throw new RuntimeException("Zug nicht möglich!");
-		FarbEnum farbeIstAmZug = istAmZug.getFarbe();
+		FarbEnum farbeIstAmZug = getIstAmZug().getFarbe();
 		Spielfeld f = getSpielbrett().getFeld(id, farbeIstAmZug);
 		Spielfigur figur = f.getFigur();
 		if (!(alleZugFiguren().contains(figur)))
@@ -958,10 +962,10 @@ public class Spiel implements iBediener{
 		
 		int spawncounter = 0;
 		incAnzWürfe();
-		int augenzahl = istAmZug.getMeinWürfel().testWurf(hack);
+		int augenzahl = getIstAmZug().getMeinWürfel().testWurf(hack);
 		setAugenzahl(augenzahl);
 		
-		for (Spielfigur sf : istAmZug.alleFiguren()){
+		for (Spielfigur sf : getIstAmZug().alleFiguren()){
 			if (kannIchZiehen(sf) == true) {
 				sf.setKannZiehen(true);
 				setZugFiguren(sf);
@@ -1024,10 +1028,10 @@ public class Spiel implements iBediener{
 		
 		int spawncounter = 0;
 		incAnzWürfe();
-		int augenzahl = istAmZug.getMeinWürfel().werfen();
+		int augenzahl = getIstAmZug().getMeinWürfel().werfen();
 		setAugenzahl(augenzahl);
 		
-		for (Spielfigur sf : istAmZug.alleFiguren()){
+		for (Spielfigur sf : getIstAmZug().alleFiguren()){
 			if (kannIchZiehen(sf) == true) {
 				sf.setKannZiehen(true);
 				setZugFiguren(sf);
