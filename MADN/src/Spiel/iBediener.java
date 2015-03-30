@@ -2,6 +2,7 @@ package Spiel;
 
 import java.util.ArrayList;
 
+import Basisklassen.Spieler;
 import Basisklassen.Spielfigur;
 
 public interface iBediener {
@@ -18,6 +19,7 @@ public interface iBediener {
 	public void ausgabeSpielerListe();
 	public boolean zugDurchführen(String ID);
 	public int rollTheDice();
+	public Spieler ausgabeSpielerAmZug();
 	
 
 }

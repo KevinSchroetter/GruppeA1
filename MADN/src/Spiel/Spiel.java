@@ -349,9 +349,9 @@ public class Spiel implements iBediener{
 		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(farbe);
 		Endfeld[] endfelder = getSpielbrett().getAlleEndFelderEinerFarbe(farbe);
 		if (verhalten == null) {
-			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder);
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder, this);
 		} else if (verhalten != null) {
-			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder, verhalten);
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder, verhalten, this);
 		}
 		incAnzahlSpieler();
 		if (getAnzahlSpieler() == 4) {
@@ -1400,5 +1400,10 @@ public class Spiel implements iBediener{
 		catch(RuntimeException e){
 			System.out.println(e);
 		}
+	}
+	
+	@Override
+	public Spieler ausgabeSpielerAmZug(){
+		return istAmZug;
 	}
 }
