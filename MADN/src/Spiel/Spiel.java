@@ -588,26 +588,26 @@ public class Spiel implements iBediener{
 		}
 		return false;
 	}
-	//INARBEIT
-		/** @author Felix Rosa
-		 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) aus der Klasse Spielfigur auf um den Schrittzähler zu erhöhen und nächsterSpieler() um auf den nächsten ziehenden zu verweisen.
-		 *  1. Die Figur ist noch nicht gespawnt und es wurde eine 6 gewürfelt
-		 *  1.1 Sollte das Spawnfeld durch keine andere Figur belegt sein spawnt die Figur auf das Spawnfeld!
-		 *  1.2 Sollte das Spawnfeld durch eine Figur der eigenen Farbe belegt sein, so wird für diese Figur die Methode ziehen() aufgerufen!
-		 *  1.3 Sollte das Spawnfeld durch eine Figur der gegnerischen Farbe belegt sein, so wird diese geschlagen und die zu spawnende Figur zieht auf das Feld!
-		 *  2. Die Figur ist gespawnt und es wurde eine 6 gewürfelt!
-		 *  2.1 Sollte die Figur auf den Endfeldern stehen, wird die Methode inEndefelderZiehen() auferufen
-		 *  2.2 Sollte die Figur vor den Endfeldern stehen und in die Endfelder ziehen können, wir die Methode aufgerufen und über eine Berechnung der int zuZiehen für die Methode angepasst
-		 *  2.3 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie
-		 *  2.4 Sollte die Figur ziehen können, aber eine gegnerische Figur befindet sich auf dem Zielfeld so schläg sie die Figur und zieht auf das Zielfeld.
-		 *  3. Die Figur ist gespawnt und es wurde eine Zahl zwischen 1 und 5 gewürfelt!
-		 *  3.1 Sollte die Figur auf den Endfeldern stehen, wird die Methode inEndefelderZiehen() auferufen
-		 *  3.2 Sollte die Figur vor den Endfeldern stehen und in die Endfelder ziehen können, wir die Methode aufgerufen und über eine Berechnung der int zuZiehen für die Methode angepasst
-		 *  3.3 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie
-		 *  3.4 Sollte die Figur ziehen können, aber eine gegnerische Figur befindet sich auf dem Zielfeld so schläg sie die Figur und zieht auf das Zielfeld.
-		 * @param figur
-		 * @param augenZahl
-		 */
+	/** @author Felix Rosa
+	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) 
+	 * aus der Klasse Spielfigur auf um den Schrittzähler zu erhöhen und nächsterSpieler() um auf den nächsten ziehenden zu verweisen.
+	 *  1. Die Figur ist noch nicht gespawnt und es wurde eine 6 gewürfelt
+	 *  1.1 Sollte das Spawnfeld durch keine andere Figur belegt sein spawnt die Figur auf das Spawnfeld!
+	 *  1.2 Sollte das Spawnfeld durch eine Figur der gegnerischen Farbe belegt sein, so wird diese über die Methode schlagenSpawn() geschlagen und die zu spawnende Figur zieht auf das Spawnfeld!
+	 *  2. Die Figur ist gespawnt und es wurde eine 6 gewürfelt!
+	 *  2.1 Sollte die Figur vor den Endfeldern stehen und in die Endfelder ziehen können, wird über ermittleEndfeldSchritte() die Anzahl der Schritte im Endfeld ermittelt und
+	 *  	diese an die Methode ziehenEndfelder() übergeben, diese zieht mit der Figur in den Endfeldern.
+	 *  2.2 Wenn sich eine gegenerische Figur auf dem Zielfeld befindet, wird schlagen() aufgerufen und die übergebene Figur rückt auf das Zielfeld!
+	 *  2.3 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie auf das Zielfeld.
+	 *  3. Die Figur ist gespawnt und es wurde eine Zahl zwischen 1 und 5 gewürfelt!
+	 *  3.1 Sollte die Figur auf den Endfeldern stehen, wird die Methode ziehenEndfelder() aufgerufen und die Figur zieht auf das Zielfeld, dass sich aus ziehenEndfeld() ergibt.
+	 *  3.2 Sollte die Figur vor den Endfeldern stehen und in die Endfelder ziehen können, wird über ermittleEndfeldSchritte() die Anzahl der Schritte im Endfeld ermittelt und
+	 *  	diese an die Methode ziehenEndfelder() übergeben, diese zieht mit der Figur in den Endfeldern.
+	 *  3.3 Wenn sich eine gegenerische Figur auf dem Zielfeld befindet, wird schlagen() aufgerufen und die übergebene Figur rückt auf das Zielfeld!
+	 *  3.4 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie auf das Zielfeld.
+	 * @param figur - Figur mit der gezogen wird
+	 * @param augenZahl - aktuelle gewürfelte Augenzahl des Spielers
+	 */
 		private void ziehen(Spielfigur figur, int augenZahl){
 			//System.out.println("Bin in ziehen");
 			for(Spielfigur sf:alleZugFiguren()){
