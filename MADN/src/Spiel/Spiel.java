@@ -609,6 +609,9 @@ public class Spiel implements iBediener{
 		 */
 		public void ziehen(Spielfigur figur, int augenZahl){
 			//System.out.println("Bin in ziehen");
+			for(Spielfigur sf:alleZugFiguren()){
+				sf.setKannSchlagen(false);
+			}
 			alleZugFiguren().clear();
 			deleteAnzZugFiguren();
 			setChosen(getIstAmZug().getZugFigur());
@@ -658,7 +661,7 @@ public class Spiel implements iBediener{
 					}else if(getSpielbrett().getStandardFelder()[ZielfeldID].getFigur()==null){	
 						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 3terFall");
 						figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
-						//getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
+						getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 						figur.incSchritteGelaufen(getAugenzahl());
 						//System.out.println("Fall: Gespawnt + 6 gewürfelt + 3terFall :: ENDE");
 						}
@@ -704,7 +707,6 @@ public class Spiel implements iBediener{
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
 			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
-			figur.setKannSchlagen(false);
 		}
 		
 		/**@author Felix Rosa
