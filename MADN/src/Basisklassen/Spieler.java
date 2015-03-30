@@ -77,7 +77,7 @@ public class Spieler {
 	 *  des Interfaces hat.
 	 */
 	// Spiel muss noch im Konstruktor übergeben werden!
-	private iBediener iB =new Spiel();
+	private iBediener iB;
 
 	/**
 	 * Elementklasse der Klasse Spieler. Hier soll später der Algorithmus für
@@ -110,8 +110,7 @@ public class Spieler {
 		 *            - Typ Spieler, setzt eine Referenz auf den Spieler
 		 */
 		public KI(Spieler s) {
-			meinSpieler.setBedienung(this);
-
+			
 		}
 		/**
 		 * Abstrakte Methode, die in den spezifischen KIs aggressiv und defensiv implementiert wird. 
@@ -301,8 +300,10 @@ public class Spieler {
 		KI bot = null;
 		if (verhalten.equals("aggressiv")) {
 			bot = new KI_Aggressiv(this);
+			this.setBedienung(bot);
 		} else if (verhalten.equals("defensiv")) {
 			bot = new KI_Defensiv(this);
+			this.setBedienung(bot);
 		} else
 			throw new IllegalArgumentException(
 					"KI darf nur aggressiv oder defensiv sein!");
