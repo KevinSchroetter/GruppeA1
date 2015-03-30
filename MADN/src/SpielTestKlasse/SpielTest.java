@@ -90,8 +90,7 @@ public class SpielTest {
 		i.werfen(6); //Georg sieht, dass eine Figur ins ZIEL kann
 		i.zugDurchführen("6");
 		i.werfen(6);
-		i.zugDurchführen("12");
-		i.zugDurchführen("13");
+		i.werfen(2);
 	}
 
 		public void starteSpiel() {
