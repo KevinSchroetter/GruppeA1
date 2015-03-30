@@ -14,6 +14,10 @@ public class Spielfigur {
 	 */
 	private static int anzahlFiguren = 0;
 	/**
+	 * Name der Figur
+	 */
+	private String name;
+	/**
 	 * FigurenID - 1-16;
 	 */
 	private int ID;
@@ -57,6 +61,20 @@ public class Spielfigur {
 	private boolean binIchAufEndposition=false;
 
 	// Getter/Setter
+	/**
+	 * Getter fuer den Namen der Figur
+	 * @return name - der Name der Figur
+	 */
+	public String getName(){
+		return this.name;
+	}
+	/**
+	 * Setter fuer den Namen der Figur
+	 * @param name - Name der Figur vom Typ String
+	 */
+	public void setName(String name){
+		this.name = name;
+	}
 	/**
 	 * Gibt meinFeld zurück
 	 * 
@@ -286,7 +304,7 @@ public class Spielfigur {
 	 * lediglich als Platzhalter !
 	 */
 
-	public Spielfigur(int farbID) {
+	public Spielfigur(int farbID, String name) {
 
 		if (farbID == 1) {
 			this.farbe = FarbEnum.ROT;
@@ -305,6 +323,7 @@ public class Spielfigur {
 					"Zu viele Figuren! max. 16 (4 pro Spieler!");
 		else {
 			this.setID(++Spielfigur.anzahlFiguren);
+			setName(name);
 		}
 
 	}

@@ -438,18 +438,29 @@ public class Spieler {
 	public void setFiguren(Startfeld[] startFelder) {
 		if (getFarbe() == null)
 			throw new RuntimeException("Es muss eine Farbe vergeben sein!");
+		int figCounter=1;
+		String name=null;
 		int farbID = 0;
-		if (getFarbe() == FarbEnum.ROT)
+		if (getFarbe() == FarbEnum.ROT){
 			farbID = 1;
-		else if (getFarbe() == FarbEnum.BLAU)
+			name = "ROT ";
+		}
+		else if (getFarbe() == FarbEnum.BLAU){
 			farbID = 2;
-		else if (getFarbe() == FarbEnum.GRÜN)
+			name = "BLAU ";
+		}
+		else if (getFarbe() == FarbEnum.GRÜN){
 			farbID = 3;
-		else if (getFarbe() == FarbEnum.GELB)
+			name = "GRÜN ";
+		}
+		else if (getFarbe() == FarbEnum.GELB){
 			farbID = 4;
+			name = "GELB ";
+		}
 
 		for (int i = 0; i < 4; i++) {
-			figuren[i] = new Spielfigur(farbID);
+			figuren[i] = new Spielfigur(farbID,name+figCounter);
+			figCounter++;
 			figuren[i].setMeinFeld(startFelder[i]);
 			figuren[i].setIstGespawnt(figuren[i].binIchGespawnt());
 			figuren[i].setBinIchAufEndposition(false);

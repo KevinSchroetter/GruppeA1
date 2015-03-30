@@ -51,17 +51,17 @@ public class SpielfigurTest {
 		figurenGelb = new Spielfigur[4];
 
 		for (int i = 0; i < figurenRot.length; i++) {
-			figurenRot[i] = new Spielfigur(1);
+			figurenRot[i] = new Spielfigur(1,"Fig1");
 			System.out.println(figurenRot[i]);
 		}
 
 		for (int i = 0; i < figurenBlau.length; i++) {
-			figurenBlau[i] = new Spielfigur(2);
+			figurenBlau[i] = new Spielfigur(2,"Fig2");
 			System.out.println(figurenBlau[i]);
 		}
 
 		for (int i = 0; i < figurenGrün.length; i++) {
-			figurenGrün[i] = new Spielfigur(3);
+			figurenGrün[i] = new Spielfigur(3,"Fig3");
 			System.out.println(figurenGrün[i]);
 		}
 
@@ -93,7 +93,7 @@ public class SpielfigurTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void UngültigeFarbe() {
-		figurenGelb[0] = new Spielfigur(0);
+		figurenGelb[0] = new Spielfigur(0,"Fig0");
 		System.out.println(figurenGelb[0]);
 	}
 
@@ -104,7 +104,7 @@ public class SpielfigurTest {
 	@Test
 	public void gelbErstellen() {
 		for (int i = 0; i < figurenGelb.length; i++) {
-			figurenGelb[i] = new Spielfigur(4);
+			figurenGelb[i] = new Spielfigur(4,"Fig4");
 			System.out.println(figurenGelb[i]);
 		}
 	}
@@ -115,7 +115,7 @@ public class SpielfigurTest {
 
 	@Test(expected = RuntimeException.class)
 	public void zuVieleFiguren() {
-		Spielfigur overflow = new Spielfigur(1);
+		Spielfigur overflow = new Spielfigur(1,"Fig1");
 		overflow = null;
 	}
 	/**

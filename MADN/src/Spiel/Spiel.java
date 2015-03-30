@@ -1018,6 +1018,7 @@ public class Spiel implements iBediener{
 		alleZugFiguren().clear();
 		deleteAnzZugFiguren();
 		deleteAnzWürfe();
+		Spieler tempSpieler=getIstAmZug();
 		
 		for (int i = 0; i< getAnzahlSpieler();i++){
 			if(getIstAmZug().equals(spieler[i])){
@@ -1030,6 +1031,7 @@ public class Spiel implements iBediener{
 			break;
 			}
 		}
+		System.out.println("\n----------Zug von "+tempSpieler.getName()+" "+tempSpieler.getFarbe()+" beendet----------\n--------"+getIstAmZug().getName()+" "+getIstAmZug().getFarbe()+" ist an der Reihe!--------\n\n\n");
 	}
 	/**
 	 * Methode ausgabeFiguren - gibt ArrayList aller Figuren zurück und gibt diese auf der Systemkonsole aus
@@ -1157,7 +1159,7 @@ public class Spiel implements iBediener{
 	public void starteSpiel() {
 		try{
 			startSpiel();
-			System.out.println("Spiel gestartet!");
+			System.out.println("\n++++++++++Spiel gestartet!++++++++++\n\nSpieler "+getIstAmZug().getName()+" bitte wuerfeln!\n\n");
 		}
 		catch(RuntimeException e){
 			System.out.println(e);
@@ -1171,8 +1173,18 @@ public class Spiel implements iBediener{
 	 */
 	@Override
 	public void werfen(int zahl) {
-		try{
+		try{ 
 			würfeln(zahl);
+			System.out.println("Spieler "+getIstAmZug().getName() +" "+getIstAmZug().getFarbe()+" hat eine "+getAugenzahl()+" gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
+			if(alleZugFiguren().size()==0){
+				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
+			}
+			else{
+				System.out.println("");
+				for(Spielfigur sf:alleZugFiguren())
+					System.out.println(sf.getName()+" auf Feld: "+sf.getMeinFeld().getID()+"\n");
+			}
+			System.out.println("---------------------------------------\n");
 		}
 		catch(RuntimeException e){
 			System.out.println(e);
@@ -1191,7 +1203,7 @@ public class Spiel implements iBediener{
 	public void neuerSpieler(String name, int farbID, int verhaltenID) {
 		try{
 			spielerHinzufügen(name,farbID,verhaltenID);
-			System.out.println("Spieler "+getAnzahlSpieler()+": "+spieler[getAnzahlSpieler()-1].getName()+" "+spieler[getAnzahlSpieler()-1].getFarbe()+" wurde Hinzugefuegt!");
+			System.out.println("Spieler "+getAnzahlSpieler()+": "+spieler[getAnzahlSpieler()-1].getName()+" "+spieler[getAnzahlSpieler()-1].getFarbe()+" wurde Hinzugefuegt!\n");
 		}
 		catch(RuntimeException e){
 			System.out.println(e);

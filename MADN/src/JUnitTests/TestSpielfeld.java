@@ -87,7 +87,7 @@ public class TestSpielfeld {
 	public void setzeAufFeld(){
 		Spielfeld testFeld;
 		testFeld = new Standardfeld(34);
-		Spielfigur testFigur = new Spielfigur(2);
+		Spielfigur testFigur = new Spielfigur(2,"Fig2");
 		testFigur.setMeinFeld(testFeld);
 	}
 	
@@ -99,9 +99,9 @@ public class TestSpielfeld {
 	public void feldIstBelegt(){
 		Spielfeld testFeld;
 		testFeld = new Standardfeld(34);
-		Spielfigur testFigur1 = new Spielfigur(2);
+		Spielfigur testFigur1 = new Spielfigur(2,"Fig2");
 		testFigur1.setMeinFeld(testFeld);
-		Spielfigur testFigur2 = new Spielfigur(2);
+		Spielfigur testFigur2 = new Spielfigur(2,"Fig2");
 		testFigur2.setMeinFeld(testFeld);
 	}
 
