@@ -422,8 +422,10 @@ public class Spiel implements iBediener{
 	private int ermittleZielfeldID(Spielfigur figur){
 		Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 		int ZielfeldID = Integer.parseInt(aktFeld.getID())+getAugenzahl();
-		if(ZielfeldID>=getSpielbrett().getAlleStandardFelder().length){
-			return (ZielfeldID)-getSpielbrett().getAlleStandardFelder().length;
+		if(ZielfeldID==getSpielbrett().getAlleStandardFelder().length){
+			return getSpielbrett().getAlleStandardFelder().length-1;
+		}if(ZielfeldID>getSpielbrett().getAlleStandardFelder().length){
+			return (ZielfeldID-1)-getSpielbrett().getAlleStandardFelder().length;
 		}
 		return ZielfeldID-1;
 	}
@@ -709,7 +711,7 @@ public class Spiel implements iBediener{
 				
 			}//IstDasHierNötig?EsIst23.27UhrMeinGehirnIstDezentZerf****UndIchWeißEsNicht -> throw new BrainException("Ich bin zu dumm für RTL! #BöhmiIstDerÖhmi");
 			//Unnötig?
-			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n");
+			System.out.println("Figur " + figur.getFelderGelaufen() + " " +  figur.getMeinFeld()  + " " + figur.getIstGespawnt() +"\n" +"\n" + spielbrett.getAlleStandardFelder()[5].getFigur());
 		}
 		
 		/**@author Felix Rosa

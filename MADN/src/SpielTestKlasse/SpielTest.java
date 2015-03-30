@@ -86,7 +86,7 @@ public static void main(String[]args){
 		i.werfen(6);
 		i.zugDurchführen("34");//Georg läuft mit BLAU 2 auf Feld 1;
 		i.werfen(6);
-		i.zugDurchführen("1");//Georg läuft mit BLAU 2 auf Feld 7;
+		i.zugDurchführen("40");//Georg läuft mit BLAU 2 auf Feld 7;
 		
 		
 		
