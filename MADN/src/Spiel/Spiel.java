@@ -792,7 +792,6 @@ public class Spiel implements iBediener{
 				}
 			}else if(zuSchlagen.getFarbe().equals(FarbEnum.BLAU)){
 				for(int i = 0; i< getSpielbrett().getAlleStartFelderBlau().length; i++){
-					zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderBlau()[i]);
 					if(getSpielbrett().getAlleStartFelderBlau()[i].getFigur()==null){
 						zuSchlagen.setIstGespawnt(false);
 						zuSchlagen.resetFelderGelaufen();
