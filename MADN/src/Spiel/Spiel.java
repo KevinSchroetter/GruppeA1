@@ -680,7 +680,7 @@ public class Spiel implements iBediener{
 								aktFeld =(Standardfeld) figur.getMeinFeld();
 								int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
 								//System.out.println("Fall: Gespawnt + !6 gewürfelt + 4terFall");
-								figur.setMeinFeld(getSpielbrett().getStandardFelder()[aktFeldID+getAugenzahl()]);
+								figur.setMeinFeld(getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)]);
 								getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 								figur.incSchritteGelaufen(getAugenzahl());
 								nächsterSpieler();
