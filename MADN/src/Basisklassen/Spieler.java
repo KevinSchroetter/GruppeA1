@@ -59,20 +59,13 @@ public class Spieler {
 	 * eines Objektes inkrementiert, durch diee in Spieler identifiziert werden
 	 * kann.
 	 * 
-	 * @param name
-	 *            - Der Name vom Typ String, den sich ein Spieler geben darf.
-	 * @param farbe
-	 *            - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn
-	 *            des Spiels aussuchen darf.
-	 * @param startfelder
-	 *            - Die Zugehöreigen Startfelder eines Spielers, auf die die
-	 *            Figuren gesetzt werden.
-	 * @param endfelder
-	 *            - Die Zugehörigen Endfelder eines Spielers, auf die die
-	 *            Figuren ins Ziel kommen.
+	 * @param name - Der Name vom Typ String, den sich ein Spieler geben darf.
+	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf.
+	 * @param startfelder - Die Zugehöreigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
+	 * @param endfelder - Die Zugehörigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
+	 * @param s - Spiel, das der Spieler kennen muss als KI
 	 */
-	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,
-			Endfeld[] endfelder, Spiel s) {
+	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, Spiel s) {
 		setSpielernummer();
 		setMeineNummer();
 		setName(name);
@@ -89,23 +82,14 @@ public class Spieler {
 	 * Erweiterung kommt jedoch die Variable "bedienung" hinzu, über die dem
 	 * KI-SPieler eine Verhaltensweise zugewiesen werden kann.
 	 * 
-	 * @param name
-	 *            - Name des Spielers vom Typ String
-	 * @param farbe
-	 *            - Farbe des Spielers vom Typ FarbEnum
-	 * @param startfelder
-	 *            - Die Zugehöreigen Startfelder eines Spielers, auf die die
-	 *            Figuren gesetzt werden.
-	 * @param endfelder
-	 *            - Die Zugehörigen Endfelder eines Spielers, auf die die
-	 *            Figuren ins Ziel kommen.
-	 * @param verhalten
-	 *            - Bedienung des Spielers vom Typ String, über den eine
-	 *            Künstliche Intelligenz zugeweisen wird (aggressiv oder
-	 *            defensiv).
+	 * @param name - Name des Spielers vom Typ String
+	 * @param farbe - Farbe des Spielers vom Typ FarbEnum
+	 * @param startfelder - Die Zugehöreigen Startfelder eines Spielers, auf die dieFiguren gesetzt werden.
+	 * @param endfelder - Die Zugehörigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
+	 * @param verhalten - Bedienung des Spielers vom Typ String, über den eine Künstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
+	 * @param s - Spiel, das der Spieler kennen muss als KI
 	 */
-	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,
-			Endfeld[] endfelder, String verhalten, Spiel s) {
+	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, String verhalten, Spiel s) {
 		
 		this(name, farbe, startfelder, endfelder, s);		
 		KI bot = null;
@@ -301,9 +285,7 @@ public class Spieler {
 	 * um auf die ArrayIndizes 0-3 zuzugreifen und so ein Spielfigur
 	 * zurückzugeben.
 	 * 
-	 * @param figurID
-	 *            - Eine int, bei dem die Werte 1-4 erlaubt sind, um auf eine
-	 *            Figur zuzugreifen.
+	 * @param figur - Ein int, bei dem die Werte 1-4 erlaubt sind, um auf eine Figur zuzugreifen.
 	 */
 	public void setZugFigur(Spielfigur figur) {
 		if (!figur.getFarbe().equals(getFarbe()))

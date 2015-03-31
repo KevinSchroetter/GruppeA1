@@ -19,7 +19,7 @@ public class KI_Aggressiv extends KI {
 	
 	/**
 	 * Methode, die nach den Prioritäten entscheidet, welche Figur laufen soll.
-	 * Mögliche Fälle:  1. Eine Figur kann schlagen und dabei spawnen, 2. Figur kann nur schlagen -> 
+	 * Mögliche Fälle:  1. Eine Figur kann schlagen und dabei spawnen, 2. Figur kann nur schlagen -
 	 * am weitesten gelaufene Figur läuft , 3. Keine Figur kann schlagen, aber eine Figur kann spawnen, 
 	 * 4. Keine Figur kann schlagen oder spawnen, dann läuft die Figur, die am Weitesten vorne ist.
 	 */

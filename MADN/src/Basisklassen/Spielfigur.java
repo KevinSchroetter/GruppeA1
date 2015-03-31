@@ -167,7 +167,7 @@ public class Spielfigur {
 	/**
 	 * Privater Setter für kannSchlagen
 	 * 
-	 * @param boolean kannSchlagen
+	 * @param kannSchlagen - boolean
 	 */
 
 	public void setKannSchlagen(boolean kannSchlagen) {
@@ -177,7 +177,7 @@ public class Spielfigur {
 	/**
 	 * Privater Setter für istGespawnt
 	 * 
-	 * @param boolean istGespawnt
+	 * @param istGespawnt - boolean
 	 */
 
 	public void setIstGespawnt(boolean istGespawnt) {
@@ -187,7 +187,7 @@ public class Spielfigur {
 	/**
 	 * Privater Setter für istimZiel
 	 * 
-	 * @param boolean istImZiel
+	 * @param istImZiel - boolean
 	 */
 
 	public void setIstImZiel(boolean istImZiel) {
@@ -197,7 +197,7 @@ public class Spielfigur {
 	/**
 	 * Privater Setter für kannInsZiel
 	 * 
-	 * @param boolean kannInsZiel
+	 * @param kannInsZiel - boolean
 	 */
 
 	public void setKannInsZiel(boolean kannInsZiel) {
@@ -207,7 +207,7 @@ public class Spielfigur {
 	/**
 	 * Privater Setter für kannZiehen
 	 * 
-	 * @param boolean kannZiehen
+	 * @param kannZiehen - boolean
 	 */
 
 	public void setKannZiehen(boolean kannZiehen) {
@@ -215,7 +215,7 @@ public class Spielfigur {
 	}
 
 	/**
-	 * Öffentlicher, Statischer Getter für Anzahl der Figuren
+	 * Oeffentlicher, Statischer Getter für Anzahl der Figuren
 	 * 
 	 * @return int Spielfigur.anzahlFiguren
 	 */
@@ -265,6 +265,7 @@ public class Spielfigur {
 	 * Konstruktor für Klasse Spielfigur
 	 * 
 	 * @param farbID - int
+	 * @param name - String Name der Spielfigur mit zugehoeriger Farbe des Spielers, der die Figuren erstellt
 	 * @exception RuntimeException - wenn Anzahl Figuren größer gleich 16
 	 * @exception IllegalArgumentException - wenn FarbID kleiner gleich Null oder größer 4 ist
 	 * 

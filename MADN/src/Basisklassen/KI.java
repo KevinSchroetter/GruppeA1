@@ -25,7 +25,7 @@ public abstract class KI {
 	
 	/**
 	 * Methode, die über das Interface die übergebene Zahl "würfelt".
-	 * @param zahl
+	 * @param zahl - gewuenschtes Wuerfelergebnis
 	 */
 	public void würfeln(int zahl){
 		iB.werfen(zahl);

@@ -311,8 +311,8 @@ public class Spiel implements iBediener{
 	 * gestartet ist. Sind Spieler im Spiel, so wird Spiel automatisch begonnen.
 	 * 
 	 * @param name - gewünschter Name des Spielers
-	 * @param farbe - gewünschte Farbe des Spielers
-	 * @param verhalten - Falls null: Menschlicher Spieler, sonst: KI mit dem übergebenen Verhalten;
+	 * @param farbID - gewünschte Farbe des Spielers
+	 * @param verhaltenID - Falls null: Menschlicher Spieler, sonst: KI mit dem übergebenen Verhalten;
 	 */
 	public void spielerHinzufügen(String name, int farbID, int verhaltenID) {
 		if (getHatBegonnen() == true)
@@ -925,7 +925,6 @@ public class Spiel implements iBediener{
 	 * (Spieler/ KI) übergebene Spielfeld-ID
 	 * 
 	 * @param id - ID des Spielfeldes, auf dem sich die Figur vor Ausführen des Zuges befindet
-	 * @return figur - gibt die Figur, die ziehen soll zurück, falls diese ziehen kann
 	 * @author Kevin Schroetter(Update v2.2), Anna Rosa
 	 * @since version 2.2
 	 */
@@ -966,7 +965,8 @@ public class Spiel implements iBediener{
 	 * @author Kevin Schroetter
 	 * @since version 2.2
 	 * @param hack - int, der aktuell noch dazu verwendet wird, um konkrete Wuerfelergebnisse fuer Tests zu erarbeiten. Dies wird im spaeteren Verlauf herausgenommen.
-	 * @throws RuntimeException, SpielBeendetException
+	 * @throws RuntimeException - Wenn ein Spiel noch nicht begonnen hat
+	 * @throws SpielBeendetException - Wenn ein Siel bereits beendet ist
 	 */
 	public void würfeln(int hack) {
 		if(getIstBeendet()==true)throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MÖGLICH");
@@ -1033,7 +1033,8 @@ public class Spiel implements iBediener{
 	 * Sollte sich keine Figur in der ArrayList befinden, und es befinden sich NICHT ALLE Figuren auf den Startfeldern, so ist der naechster Spieler mit seinem Zug dran.
 	 * @author Kevin Schroetter
 	 * @since version 2.2
-	 * @throws RuntimeException, SpielBeendetException
+	 * @throws RuntimeException - Wenn ein Spiel noch nicht begonnen hat
+	 * @throws SpielBeendetException - Wenn ein Spiel bereits beendet ist
 	 */
 	public void würfelnOriginal() {
 		if(getIstBeendet()==true)throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MÖGLICH");
@@ -1112,15 +1113,9 @@ public class Spiel implements iBediener{
 	}
 	/**
 	 * Methode ausgabeFiguren - gibt ArrayList aller Figuren zurück und gibt diese auf der Systemkonsole aus
-	 * @return figurenListe - ArrayList<Spielfigur>
-	 * 
-	 * 
+	 * @return figurenListe - ArrayList vom Typ Spielfigur
 	 */
-
-	// Interface - ausgabeFiguren: Gibt alle Figuren aller Spieler aus
 	public ArrayList<Spielfigur> ausgabeFiguren() {
-
-		
 		Spieler s = this.getIstAmZug();
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(Arrays.asList(s.alleFiguren()));
 		for (Spielfigur f : s.alleFiguren()) {
@@ -1130,12 +1125,9 @@ public class Spiel implements iBediener{
 	}
 	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die ziehen können und gibt diese auf der Systemkonsole aus
-	 * @return figurenListe - ArrayList<Spielfigur>
-	 * 
-	 * 
+	 * @return figurenListe - ArrayList vom Typ Spielfigur
 	 */
 	public ArrayList<Spielfigur> ausgabeZugFiguren() {
-
 		Spieler s = this.getIstAmZug();
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
@@ -1148,12 +1140,9 @@ public class Spiel implements iBediener{
 	}
 	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die im Ziel sind und gibt diese auf der Systemkonsole aus
-	 * @return figurenListe - ArrayList<Spielfigur>
-	 * 
-	 * 
+	 * @return figurenListe - ArrayList vom Typ Spielfigur 
 	 */
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel() {
-
 		Spieler s = this.getIstAmZug();
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
@@ -1180,11 +1169,13 @@ public class Spiel implements iBediener{
 	}
 	/**
 	 * Methode zugDurchführen
-	 * @return zugErfolgreich - boolean
-	 * @param ID String
-	 * @throws SpielBeendetException, FigurKannNichtZiehenException, NullPointerException
 	 * Versucht einen Zug mit der gewählten Figur durchzuführen. Fängt im Falle dessen, dass 
 	 * die gewählte Figur nicht ziehen kann, die Exception ab und gibt false zurück.
+	 * @return zugErfolgreich - boolean
+	 * @param ID String
+	 * @throws SpielBeendetException - Wenn ein Spiel bereits beendet ist
+	 * @throws FigurKannNichtZiehenException - Wenn eine Figur nicht ziehen kann
+	 * @throws NullPointerException - Wenn auf ein Feld zugegriffen werden soll, auf dem keine Figur steht
 	 * War der Zug erfolgreich, gibt true zurück.
 	 * 
 	 * 
@@ -1233,9 +1224,7 @@ public class Spiel implements iBediener{
 	}
 	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurück die auf einem Startfeld sind und gibt diese auf der Systemkonsole aus
-	 * @return figurenListe - ArrayList<Spielfigur>
-	 * 
-	 * 
+	 * @return figurenListe - ArrayList vom Typ Spielfigur
 	 */
 	public ArrayList<Spielfigur> ausgabeFigurenAufStartfeld() {
 		Spieler s = this.getIstAmZug();
@@ -1338,7 +1327,7 @@ public class Spiel implements iBediener{
 	 * @since version 2.2
 	 * @param name - String name
 	 * @param farbID - int zum Auswaehlen der Farbe
-	 * @verhalten - int zum Auswaehlen des Verhaltens
+	 * @param verhaltenID - int zum Auswaehlen des Verhaltens
 	 */
 	@Override
 	public void neuerSpieler(String name, int farbID, int verhaltenID) {
