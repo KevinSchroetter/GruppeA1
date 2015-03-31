@@ -379,8 +379,8 @@ public class Spiel implements iBediener,Serializable{
 		}else setIstBeendet(true);
 	}
 
-	/**@author Felix Rosa
-	 * Methode ermittelt die ZielfeldID des Feldes auf das die ziehenden Figur ziehen soll.
+	/** Methode ermittelt die ZielfeldID des Feldes auf das die ziehenden Figur ziehen soll.
+	 * @author Felix Rosa
 	 * Da in Arrays gearbeitet wird, wird von Zielfeld der Wert 1 abgezogen.
 	 * @param figur - Figur von der die ID des Zielfeldes ermittelte werden soll
 	 * @return ZielfeldID - 1 - ID des Zielfeldes -1
@@ -396,8 +396,8 @@ public class Spiel implements iBediener,Serializable{
 		return ZielfeldID-1;
 	}
 	
-	/**@author Felix Rosa
-	 * Methode ermittelt die Schritte die eine Figur in ihren Endfeldern laufen kann. 
+	/** Methode ermittelt die Schritte die eine Figur in ihren Endfeldern laufen kann. 
+	 * @author Felix Rosa
 	 * @param figur - Figur von der ermittelt werden soll, wie weit Sie in ihren Endfeldern laufen kann.
 	 * @return bisherige gelaufene Feld + gewürfelte Augenzahl abzüglich der Spielfeldlänge
 	 */
@@ -405,11 +405,11 @@ public class Spiel implements iBediener,Serializable{
 		return figur.getFelderGelaufen()+getAugenzahl() - getSpielbrett().getAlleStandardFelder().length;
 
 	}
-	/** @author Felix Rosa
-	 *  v. 1.1(kannIchZiehen um Spawn-Abfrage erweitert!)
-	 *  Methode prüft ob übergebene Figur in Kombination mit übergebener Würfelzahl ziehen kann.
-	 *  Dabei wird überprüft ob Zug aus Spielfeld ins Endfeld oder Züge im Endfeld möglich sind!
-	 *  Desweiteren wird geprüft ob eine Figur eine Figur auf einem belegten Feld schlagen kann und setzt das Attribut figur.kannSchlagen.
+	/** Methode prüft ob übergebene Figur in Kombination mit übergebener Würfelzahl ziehen kann.
+	 * Dabei wird überprüft ob Zug aus Spielfeld ins Endfeld oder Züge im Endfeld möglich sind!
+	 * Desweiteren wird geprüft ob eine Figur eine Figur auf einem belegten Feld schlagen kann und setzt das Attribut figur.kannSchlagen.
+	 * @author Felix Rosa
+	 * v. 1.1(kannIchZiehen um Spawn-Abfrage erweitert!)
 	 * @param figur - figur von der überprüft werden soll ob ziehen möglich ist
 	 * @return boolean - true wenn ziehen möglich, false wenn nicht
 	 */
@@ -572,8 +572,7 @@ public class Spiel implements iBediener,Serializable{
 		return true;
 		
 	}*/
-	/** @author Felix Rosa
-	 * Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) 
+	/** Lässt ausgewählte Figur um die entsprechende Würfelzahl ziehen. Die Methode ruft nach jedem erfolgreichen Ziehen die Methode incSchritteGelaufen(augenzahl) 
 	 * aus der Klasse Spielfigur auf um den Schrittzähler zu erhöhen und nächsterSpieler() um auf den nächsten ziehenden zu verweisen.
 	 *  1. Die Figur ist noch nicht gespawnt und es wurde eine 6 gewürfelt
 	 *  1.1 Sollte das Spawnfeld durch keine andere Figur belegt sein spawnt die Figur auf das Spawnfeld!
@@ -589,10 +588,11 @@ public class Spiel implements iBediener,Serializable{
 	 *  	diese an die Methode ziehenEndfelder() übergeben, diese zieht mit der Figur in den Endfeldern.
 	 *  3.3 Wenn sich eine gegenerische Figur auf dem Zielfeld befindet, wird schlagen() aufgerufen und die übergebene Figur rückt auf das Zielfeld!
 	 *  3.4 Sollte die Figur ziehen können und keine gegnerische Figur auf dem Zielfeld stehen, so zieht sie auf das Zielfeld.
+	 * @author Felix Rosa
 	 * @param figur - Figur mit der gezogen wird
 	 * @param augenZahl - aktuelle gewürfelte Augenzahl des Spielers
 	 */
-		private void ziehen(Spielfigur figur, int augenZahl){
+	private void ziehen(Spielfigur figur, int augenZahl){
 			//System.out.println("Bin in ziehen");
 			for(Spielfigur sf:alleZugFiguren()){
 				sf.setKannSchlagen(false);
@@ -700,13 +700,13 @@ public class Spiel implements iBediener,Serializable{
 			
 		}
 		
-		/**@author Felix Rosa
-		 *  Methode die mit einer übergebenen Figur eine Figur die auf dem Feld mit der ZielfeldID steht schlägt.
-		 *  Die geschlagene Figur wird auf ihr Startfeld zurückgesetzt, die schlagende Figur zieht auf das Zielfeld
+	/** Methode die mit einer übergebenen Figur eine Figur die auf dem Feld mit der ZielfeldID steht schlägt.
+		 * Die geschlagene Figur wird auf ihr Startfeld zurückgesetzt, die schlagende Figur zieht auf das Zielfeld
+		 * @author Felix Rosa
 		 * @param figur - Figur die schlagen soll
 		 * @param ZielfeldID - durch gegenerische Figur belegtes Feld, auf die die übergebene Figur laufen soll
 		 */
-		private void schlagen(Spielfigur figur, int ZielfeldID){
+	private void schlagen(Spielfigur figur, int ZielfeldID){
 			Spielfigur zuSchlagen = null;
 			Standardfeld aktFeld =(Standardfeld) figur.getMeinFeld();
 			int aktFeldID = Integer.parseInt(aktFeld.getID())-1;
@@ -754,13 +754,13 @@ public class Spiel implements iBediener,Serializable{
 			}
 		}
 		
-		/**@author Felix Rosa
-		 * Methode mit der eine spawnende Figur eine gegenerische Figur die auf dem Spawnfeld steht schlägt.
+	/** Methode mit der eine spawnende Figur eine gegenerische Figur die auf dem Spawnfeld steht schlägt.
 		 * Die geschlagene Figur wird auf ihr Startfeld zurückgesetzt
+		 * @author Felix Rosa
 		 * @param figur - Figur die schlagen soll
 		 * @param aktFeldIDS - ID des Feldes auf dem spawnende Figur steht
 		 */
-		private void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
+	private void schlagenSpawn(Spielfigur figur, String aktFeldIDS){
 			Spieler istAmZug = this.getIstAmZug();
 			Spielfigur zuSchlagen = null;
 			zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur();
@@ -814,8 +814,11 @@ public class Spiel implements iBediener,Serializable{
 			}
 			
 		}
-		
-		
+	
+	/**Methode die aufgerufen wird wenn Figur schon in Endfeldern steht. Mit dieser Methode zieht die Figur!
+	 * @author Felix Rosa
+	 * @param figur - Figur mit der gezogen werden soll
+	 */
 	private void ziehenInEndfelder(Spielfigur figur){
 		Endfeld aktFeld = (Endfeld) figur.getMeinFeld();
 		int position = 0;
@@ -834,9 +837,9 @@ public class Spiel implements iBediener,Serializable{
 			}
 		
 	}
-	/**@author Anna Rosa, Felix Rosa
-	 * Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
+	/** Methode, die eine Figur um eine bestimmte Anzahl an Zügen in seinem
 	 * Endfeld ziehen lässt.
+	 * @author Anna Rosa, Felix Rosa
 	 * @param figur - Die Figur, die ziehen soll
 	 * @param augenZahl - Anzahl der Züge, die Figur ziehen soll
 	 */
@@ -866,9 +869,9 @@ public class Spiel implements iBediener,Serializable{
 		//aufEndposition(figur);
 		//System.out.println("Hollaho.--------------------Ich bin in der ziehenEndfelder");
 	}
-	/**@author Anna Rosa, Felix Rosa
-	 * Methode, die überprüft, ob eine Figur in ihrer endgültigen Endposition ist und wenn dies der Fall 
+	/** Methode, die überprüft, ob eine Figur in ihrer endgültigen Endposition ist und wenn dies der Fall 
 	 * das Attribut binIchAufEndposition auf true setzt.
+	 * @author Anna Rosa, Felix Rosa
 	 * @param figur - zu Überprüfende Figur
 	 */
 	private void aufEndposition(Spielfigur figur){
