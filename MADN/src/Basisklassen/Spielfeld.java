@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /**
  * Abstrakte Klasse Spielfeld - vererbt ihre Attribute an Startfeld,
  * Standardfeld, Endfeld. Spielfeld kann von genau einer Spielfigur belegt
@@ -10,7 +12,7 @@ package Basisklassen;
  * @since 2015-03-14
  */
 
-public abstract class Spielfeld {
+public abstract class Spielfeld implements Serializable {
 
 	private Spielfigur figur;
 	private String iD;

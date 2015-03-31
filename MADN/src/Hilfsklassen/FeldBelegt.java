@@ -1,6 +1,8 @@
 package Hilfsklassen;
 
 import java.lang.RuntimeException;
+import java.io.Serializable;
+
 import Basisklassen.Spielfigur;
 import Basisklassen.Spielfeld;
 
@@ -8,7 +10,7 @@ import Basisklassen.Spielfeld;
  *
  */
 
-public class FeldBelegt extends RuntimeException {
+public class FeldBelegt extends RuntimeException implements Serializable {
 
 	private static final long serialVersionUID = 8301001168647437108L;
 

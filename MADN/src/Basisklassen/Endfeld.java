@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /**
  * Klasse Endfeld erbt von Spielfeld. Über diese Klasse werden die Endfelder
  * von MADN erstellt. Auf diesen sammeln sich die Figuren um das Ende des Spiels
@@ -11,7 +13,7 @@ package Basisklassen;
  * @since 2015-03-16
  */
 
-public class Endfeld extends Spielfeld {
+public class Endfeld extends Spielfeld implements Serializable {
 
 	private String iD;
 

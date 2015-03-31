@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /**
  * Klasse Startfeld erbt von Spielfeld. Über diese Klasse werden die Startfelder
  * von MADN erstellt. Auf diesen stehen die Figuren bevor Sie auf das
@@ -11,7 +13,7 @@ package Basisklassen;
  * @since 2015-03-16
  */
 
-public class Startfeld extends Spielfeld {
+public class Startfeld extends Spielfeld implements Serializable {
 
 	private String iD;
 

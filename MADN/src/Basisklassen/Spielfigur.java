@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /**
  * @author Alexander Brückner
  *         (Alexander.Brueckner@Student-Reutlingen-University.de)
@@ -7,7 +9,7 @@ package Basisklassen;
  * @since 2015-03-12
  */
 
-public class Spielfigur {
+public class Spielfigur implements Serializable {
 
 	private static int anzahlFiguren = 0;
 

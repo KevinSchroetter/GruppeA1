@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /**
  * Klasse Standardfeld erbt von Spielfeld - über diese Klasse werden die 40
  * Standardfelder von MADN erstellt. Jedes Standardfeld hat eine ID über die
@@ -9,7 +11,7 @@ package Basisklassen;
  * @version 1.3
  * @since 2015-03-16
  */
-public class Standardfeld extends Spielfeld {
+public class Standardfeld extends Spielfeld implements Serializable {
 
 	private String iD;
 

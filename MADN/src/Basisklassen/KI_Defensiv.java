@@ -1,5 +1,6 @@
 package Basisklassen;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Spiel.iBediener;
@@ -10,7 +11,7 @@ import Spiel.iBediener;
  * @author Anna Rosa
  *
  */
-public class KI_Defensiv extends KI {
+public class KI_Defensiv extends KI implements Serializable {
 	iBediener iB;
 	/**
 	 * Konstruktor der defensiven KI, wird durch den Spieler-Konstruktor aufgerufen.

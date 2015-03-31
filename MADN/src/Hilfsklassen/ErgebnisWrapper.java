@@ -1,6 +1,7 @@
 package Hilfsklassen;
 
 import Basisklassen.FarbEnum;
+import java.io.Serializable;
 
 /**
  * Klasse ErgebnisWrapper. Wrapperklasse für relevante Daten eines Spielzuges. Beinhaltet boolsche Werte für Kills/Züge, die ID der Figur,
@@ -13,7 +14,7 @@ import Basisklassen.FarbEnum;
  * @since       2015-03-22          
  */
 
-public class ErgebnisWrapper {
+public class ErgebnisWrapper implements Serializable {
 
 	private int figurID;
 

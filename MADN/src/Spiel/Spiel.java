@@ -1,5 +1,6 @@
 package Spiel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,7 +18,7 @@ import Hilfsklassen.*;
  *
  */
 
-public class Spiel implements iBediener{
+public class Spiel implements iBediener,Serializable{
 
 	private Spieler[] spieler = new Spieler[4];
 

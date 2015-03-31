@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 import Spiel.iBediener;
 
 /**
@@ -9,7 +11,7 @@ import Spiel.iBediener;
 * @author Kevin Schrötter, Anna Rosa
 * @version 2.0
 */
-public abstract class KI {
+public abstract class KI implements Serializable {
 	protected Spieler meinSpieler = null;
 	iBediener iB;
 

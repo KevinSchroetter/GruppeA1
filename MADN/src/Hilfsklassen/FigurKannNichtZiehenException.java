@@ -1,6 +1,8 @@
 package Hilfsklassen;
 
-public class FigurKannNichtZiehenException extends RuntimeException {
+import java.io.Serializable;
+
+public class FigurKannNichtZiehenException extends RuntimeException implements Serializable{
 
 	public FigurKannNichtZiehenException() {
 		// TODO Auto-generated constructor stub

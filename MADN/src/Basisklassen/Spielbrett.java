@@ -1,5 +1,7 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /**
  * Dies ist die Klasse Spielbrett, in der über den Konstruktor das komplette Spielfeld inklusive Start- und Endfelder erstellt. 
  * Die Klasse Spielbrett besitzt die Attribute startFelderRot, startFelderBlau, startFelderGrün, startFelderGelb, endFelderRot, endFelderBlau, endFelderGrün, endFelderGelb, standardFelder , also 9 Arrays, in denen alle einzelnen Spielfelder gespeichert sind.
@@ -9,7 +11,7 @@ package Basisklassen;
  * @version 1.5
  *
  */
-public class Spielbrett {
+public class Spielbrett implements Serializable {
 	private Startfeld [] startFelderRot= new Startfeld[4];
 	private Startfeld [] startFelderBlau= new Startfeld[4];
 	private Startfeld [] startFelderGrün= new Startfeld[4];

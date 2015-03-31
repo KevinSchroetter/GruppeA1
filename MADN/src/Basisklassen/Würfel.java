@@ -1,12 +1,14 @@
 package Basisklassen;
 
+import java.io.Serializable;
+
 /** Dies ist die Klasse Würfel für das MADN-Spiel.
  * Die Klasse besitzt die Eigenschaft gewürfelteZahl, in der sie die zuletzt mit der werfen-Methode gewürfelte Zahl speichert.
 @author Anna Rosa
 @version 1.1
 */
 
-public class Würfel {
+public class Würfel implements Serializable {
 
 	private int augenzahl;
 	/**

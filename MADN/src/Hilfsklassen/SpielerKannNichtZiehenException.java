@@ -1,6 +1,8 @@
 package Hilfsklassen;
 
-public class SpielerKannNichtZiehenException extends RuntimeException {
+import java.io.Serializable;
+
+public class SpielerKannNichtZiehenException extends RuntimeException implements Serializable{
 	public SpielerKannNichtZiehenException() {
 		// TODO Auto-generated constructor stub
 	}

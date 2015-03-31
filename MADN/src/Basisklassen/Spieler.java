@@ -1,5 +1,6 @@
 package Basisklassen;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Spiel.*;
@@ -12,7 +13,7 @@ import Spiel.*;
  * @version 1.3
  *
  */
-public class Spieler {
+public class Spieler implements Serializable {
 
 	private static int spielernummer = 0;
 
