@@ -19,6 +19,8 @@ import Hilfsklassen.*;
  */
 
 public class Spiel implements iBediener,Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	private Spieler[] spieler = new Spieler[4];
 

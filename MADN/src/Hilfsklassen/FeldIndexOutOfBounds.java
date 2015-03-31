@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class FeldIndexOutOfBounds extends RuntimeException implements Serializable {
 
-	private static final long serialVersionUID = -7588968462757300534L;
+	private static final long serialVersionUID = 1L;
 	
 	public FeldIndexOutOfBounds(){
 		super();

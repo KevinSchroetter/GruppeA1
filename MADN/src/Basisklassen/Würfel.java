@@ -10,6 +10,8 @@ import java.io.Serializable;
 
 public class Würfel implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
 	private int augenzahl;
 	/**
 	 * Eine Methode, die die zuletzt gewürfelte Zahl zurückgibt.

@@ -3,6 +3,7 @@ package Hilfsklassen;
 import java.io.Serializable;
 
 public class SpielerKannNichtZiehenException extends RuntimeException implements Serializable{
+	private static final long serialVersionUID = 1L;
 	public SpielerKannNichtZiehenException() {
 		// TODO Auto-generated constructor stub
 	}

@@ -14,6 +14,8 @@ import java.io.Serializable;
 
 public abstract class Spielfeld implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
 	private Spielfigur figur;
 	private String iD;
 	/**

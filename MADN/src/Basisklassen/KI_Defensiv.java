@@ -12,6 +12,8 @@ import Spiel.iBediener;
  *
  */
 public class KI_Defensiv extends KI implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	iBediener iB;
 	/**
 	 * Konstruktor der defensiven KI, wird durch den Spieler-Konstruktor aufgerufen.

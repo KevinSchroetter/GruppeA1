@@ -15,6 +15,8 @@ import Spiel.*;
  */
 public class Spieler implements Serializable {
 
+	private static final long serialVersionUID = 1L;
+
 	private static int spielernummer = 0;
 
 	private int meineNummer = 0;

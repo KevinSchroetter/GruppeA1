@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 public class FigurKannNichtZiehenException extends RuntimeException implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+
 	public FigurKannNichtZiehenException() {
 		// TODO Auto-generated constructor stub
 	}

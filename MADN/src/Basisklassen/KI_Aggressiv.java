@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import Spiel.iBediener;
 
 public class KI_Aggressiv extends KI {
+
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Konstruktor der aggressiven KI, wird durch den Spieler-Konstruktor aufgerufen.
 	 * @param s-Spieler, der eine KI werden soll

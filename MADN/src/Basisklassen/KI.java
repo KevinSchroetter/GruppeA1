@@ -12,6 +12,8 @@ import Spiel.iBediener;
 * @version 2.0
 */
 public abstract class KI implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	protected Spieler meinSpieler = null;
 	iBediener iB;
 

@@ -11,6 +11,9 @@ import java.io.Serializable;
 
 public class Spielfigur implements Serializable {
 
+
+	private static final long serialVersionUID = 1L;
+
 	private static int anzahlFiguren = 0;
 
 	private String name;

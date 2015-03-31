@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  */
 public class SpielBeendetException extends RuntimeException implements Serializable{
-	private static final long serialVersionUID = 6944183139904579155L;
+	private static final long serialVersionUID = 1L;
 	public SpielBeendetException(){
 		super();
 	}

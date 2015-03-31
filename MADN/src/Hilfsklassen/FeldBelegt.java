@@ -12,7 +12,7 @@ import Basisklassen.Spielfeld;
 
 public class FeldBelegt extends RuntimeException implements Serializable {
 
-	private static final long serialVersionUID = 8301001168647437108L;
+	private static final long serialVersionUID = 1L;
 
 	public FeldBelegt(){
 		super();

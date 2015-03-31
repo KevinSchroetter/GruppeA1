@@ -12,6 +12,8 @@ import java.io.Serializable;
  *
  */
 public class Spielbrett implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private Startfeld [] startFelderRot= new Startfeld[4];
 	private Startfeld [] startFelderBlau= new Startfeld[4];
 	private Startfeld [] startFelderGrün= new Startfeld[4];

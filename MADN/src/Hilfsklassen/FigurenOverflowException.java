@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 public class FigurenOverflowException extends RuntimeException implements Serializable{
 
-	private static final long serialVersionUID = 6944183139904579155L;
+	private static final long serialVersionUID = 1L;
 	public FigurenOverflowException(){
 		super();
 	}
