@@ -48,7 +48,7 @@ public class KI_Defensiv extends KI implements Serializable {
 				amWeitesten[i + 1] = temp;
 			}
 		}
-		String id = "" + amWeitesten[amWeitesten.length - 1].getID();
+		String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
 		iB.zugDurchführen(id);
 					
 	}

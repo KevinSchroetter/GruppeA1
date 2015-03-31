@@ -40,7 +40,7 @@ public class KI_Aggressiv extends KI {
 			for (int i = 0; i < kannSchlagen.size(); i++) {
 				Spielfigur figur = kannSchlagen.get(i);
 				if (figur.getIstGespawnt() == false) {
-					String id = "" + figur.getID();
+					String id = "" + figur.getMeinFeld().getID();
 					iB.zugDurchführen(id);
 					return;
 				}
@@ -55,13 +55,13 @@ public class KI_Aggressiv extends KI {
 					amWeitesten[i + 1] = temp;
 				}
 			}
-			String id = "" + amWeitesten[amWeitesten.length - 1].getID();
+			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
 			iB.zugDurchführen(id);
 			return;
 		} else if (kannSchlagen.isEmpty()) {
 			for (Spielfigur figur : kannZiehen) {
 				if (figur.binIchGespawnt() == false) {
-					String id = "" + figur.getID();
+					String id = "" + figur.getMeinFeld().getID();
 					iB.zugDurchführen(id);
 					return;
 				}
@@ -79,7 +79,7 @@ public class KI_Aggressiv extends KI {
 					amWeitesten[i + 1] = temp;
 				}
 			}
-			String id = "" + amWeitesten[amWeitesten.length - 1].getID();
+			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
 			iB.zugDurchführen(id);
 		}
 
