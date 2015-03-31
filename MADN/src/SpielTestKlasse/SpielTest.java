@@ -199,7 +199,8 @@ public class SpielTest {
 		i.zugDurchführen("1");
 		i.werfen(4);			//Georg darf Figur BLAU 4 in die Endfelder bringen
 		i.zugDurchführen("7");	//Figur BLAU 4 kommt in die ZIELPOSITION E1
-		
+		i.werfen(2);			//Würfeln nicht möglich, da Spiel beendet
+		i.zugDurchführen("1");	//Ziehen nicht möglich, da Spiel beendet
 		//GEORG HAT GEWONNEN ------------------------------ALLE FIGUREN AUF DEN ENDELDERN
 		
 		//#################################

@@ -966,8 +966,10 @@ public class Spiel implements iBediener{
 	 * @author Kevin Schroetter
 	 * @since version 2.2
 	 * @param hack - int, der aktuell noch dazu verwendet wird, um konkrete Wuerfelergebnisse fuer Tests zu erarbeiten. Dies wird im spaeteren Verlauf herausgenommen.
+	 * @throws RuntimeException, SpielBeendetException
 	 */
 	public void würfeln(int hack) {
+		if(getIstBeendet()==true)throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MÖGLICH");
 		if(getAnzWürfe()==3 && getAlleAufSpawn()==true && getAugenzahl()!=6){
 			nächsterSpieler();
 		}
@@ -1031,8 +1033,10 @@ public class Spiel implements iBediener{
 	 * Sollte sich keine Figur in der ArrayList befinden, und es befinden sich NICHT ALLE Figuren auf den Startfeldern, so ist der naechster Spieler mit seinem Zug dran.
 	 * @author Kevin Schroetter
 	 * @since version 2.2
+	 * @throws RuntimeException, SpielBeendetException
 	 */
 	public void würfelnOriginal() {
+		if(getIstBeendet()==true)throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MÖGLICH");
 		if(getAnzWürfe()==3 && getAlleAufSpawn()==true && getAugenzahl()!=6){
 			nächsterSpieler();
 		}
@@ -1178,7 +1182,7 @@ public class Spiel implements iBediener{
 	 * Methode zugDurchführen
 	 * @return zugErfolgreich - boolean
 	 * @param ID String
-	 * 
+	 * @throws SpielBeendetException, FigurKannNichtZiehenException, NullPointerException
 	 * Versucht einen Zug mit der gewählten Figur durchzuführen. Fängt im Falle dessen, dass 
 	 * die gewählte Figur nicht ziehen kann, die Exception ab und gibt false zurück.
 	 * War der Zug erfolgreich, gibt true zurück.
@@ -1189,31 +1193,40 @@ public class Spiel implements iBediener{
 
 		boolean zugErfolgreich;
 		try {
-			
-			
-			
-			FarbEnum farbeIstAmZug = istAmZug.getFarbe();
-			
+			if(getIstBeendet()==true)throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MÖGLICH");
+			int endCounter = 0;
+			FarbEnum farbeIstAmZug = getIstAmZug().getFarbe();
+			String amZug = getIstAmZug().getName();
 			Spielfeld f = getSpielbrett().getFeld(ID, farbeIstAmZug);
 			Spielfigur figur = f.getFigur();
+			for(Spielfigur sf: getIstAmZug().alleFiguren())
+				if(sf.getBinIchAufEndpostion()==true)
+					endCounter++;
 			wähleFigur(ID);
 			Spielfeld zielFeld = figur.getMeinFeld();
 			zugErfolgreich = true;
 			System.out.println("Zug erfolgreich!");
-			
-			Spielfeld f2 = getSpielbrett().getFeld(ID, farbeIstAmZug);
 			System.out.println(figur.getName()+" zieht von Feld "+f.getID()+" auf Feld "+zielFeld.getID()+"\n\n");
+			if(endCounter==3 && figur.getBinIchAufEndpostion()==true){
+				System.out.println("++++++++++++++++++++++++++++++++++"+amZug+" " + farbeIstAmZug+" hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
+				setIstBeendet(true);
+			}
 			return zugErfolgreich;
 		}
 
 		catch (FigurKannNichtZiehenException e) {
 			zugErfolgreich = false;
-			System.out.println("Zug fehlgeschlagen!");
+			System.out.println("Zug fehlgeschlagen, diese Figur kann nicht ziehen!");
 			return zugErfolgreich;
 		}
 		catch (NullPointerException e){
 			zugErfolgreich = false;
-			System.out.println("Zug fehlgeschlafen!");
+			System.out.println("Zug fehlgeschlagen, auf diesem Feld steht keine Figur!");
+			return zugErfolgreich;
+		}
+		catch (SpielBeendetException e){
+			zugErfolgreich = false;
+			System.out.println(e);
 			return zugErfolgreich;
 		}
 
