@@ -5,11 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.After;
-import org.junit.AfterClass;
 import Basisklassen.*;
-
+/**
+ * Test fuer das Spielbrett
+ * @author Anna Rosa
+ * @version 3.0
+ *
+ */
 public class SpielbrettTest {
 	static Spielbrett s;
 	@BeforeClass
@@ -32,7 +35,7 @@ public class SpielbrettTest {
 	@Test
 	public void testStartFelder() {
 		Startfeld s1=s.getStartFelderRot(2);
-		Startfeld s2= s.getStartFelderGrün(0);
+		Startfeld s2= s.getStartFelderGruen(0);
 		assertTrue( String.valueOf(s1.getID()).equals("S3")& String.valueOf(s2.getID()).equals("S1"));
 	}
 	

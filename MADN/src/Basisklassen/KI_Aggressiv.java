@@ -7,11 +7,13 @@ import Spiel.iBediener;
 public class KI_Aggressiv extends KI {
 
 	private static final long serialVersionUID = 1L;
+
+	iBediener iB;
 	/**
 	 * Konstruktor der aggressiven KI, wird durch den Spieler-Konstruktor aufgerufen.
-	 * @param s-Spieler, der eine KI werden soll
+	 * @version 3.0
+	 * @param s - der zukuenftige KI Spieler
 	 */
-	iBediener iB;
 	public KI_Aggressiv(Spieler s) {
 		
 		super(s);
@@ -20,12 +22,12 @@ public class KI_Aggressiv extends KI {
 		
 	
 	/**
-	 * Methode, die nach den Prioritäten entscheidet, welche Figur laufen soll.
-	 * Mögliche Fälle:  1. Eine Figur kann schlagen und dabei spawnen, 2. Figur kann nur schlagen -
-	 * am weitesten gelaufene Figur läuft , 3. Keine Figur kann schlagen, aber eine Figur kann spawnen, 
-	 * 4. Keine Figur kann schlagen oder spawnen, dann läuft die Figur, die am Weitesten vorne ist.
+	 * Methode, die nach den Prioritaeten entscheidet, welche Figur laufen soll.
+	 * Moegliche Faelle:  1. Eine Figur kann schlagen und dabei spawnen, 2. Figur kann nur schlagen -
+	 * am weitesten gelaufene Figur laeuft , 3. Keine Figur kann schlagen, aber eine Figur kann spawnen, 
+	 * 4. Keine Figur kann schlagen oder spawnen, dann laeuft die Figur, die am Weitesten vorne ist.
 	 */
-	public void zugWählen() {
+	public void zugWaehlen() {
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
 		ArrayList<Spielfigur> kannSchlagen = new<Spielfigur> ArrayList();
 
@@ -41,7 +43,7 @@ public class KI_Aggressiv extends KI {
 				Spielfigur figur = kannSchlagen.get(i);
 				if (figur.getIstGespawnt() == false) {
 					String id = "" + figur.getMeinFeld().getID();
-					iB.zugDurchführen(id);
+					iB.zugDurchfuehren(id);
 					return;
 				}
 				amWeitesten[i] = figur;
@@ -56,13 +58,13 @@ public class KI_Aggressiv extends KI {
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
-			iB.zugDurchführen(id);
+			iB.zugDurchfuehren(id);
 			return;
 		} else if (kannSchlagen.isEmpty()) {
 			for (Spielfigur figur : kannZiehen) {
 				if (figur.binIchGespawnt() == false) {
 					String id = "" + figur.getMeinFeld().getID();
-					iB.zugDurchführen(id);
+					iB.zugDurchfuehren(id);
 					return;
 				}
 			}
@@ -80,7 +82,7 @@ public class KI_Aggressiv extends KI {
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
-			iB.zugDurchführen(id);
+			iB.zugDurchfuehren(id);
 		}
 
 	}

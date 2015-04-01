@@ -1,21 +1,17 @@
 package JUnitTests;
 
-import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.junit.BeforeClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.After;
-import org.junit.AfterClass;
 import Basisklassen.*;
 
 /**
  * Testklasse zum Testen der Java-Klasse "Spielfeld" im MADN-Projekt
- * Es werden verschiedene Tests erstellt um zu gewährleisten, dass sich die Objekte korrekt erstellen lassen.
+ * Es werden verschiedene Tests erstellt um zu gewaehrleisten, dass sich die Objekte korrekt erstellen lassen.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 1.1
+ * @version 3.0
  * @since 2015-03-14
  */
 
@@ -40,44 +36,48 @@ public class TestSpielfeld {
 	
 	/**
 	 * Kontrolle, das Startfeld nicht unter falscher ID erstellt werden kann.
-	 * Wird unter "Startfeld" mit einer Einschränkung der Eingabemöglichkeiten geregelt.
+	 * Wird unter "Startfeld" mit einer Einschraenkung der Eingabemoeglichkeiten geregelt.
 	 * Exception erwartet
 	 */
 	
 	@Test (expected=Exception.class)
 	public void falscherNameStartfeld(){
 		Startfeld s = new Startfeld("E3", FarbEnum.BLAU);
+		System.out.println(s);
 	}
 	
 	
 	/**
 	 * Kontrolle, das Endfeld nicht unter falscher ID erstellt werden kann.
-	 * Wird unter "Endfeld" mit einer Einschränkung der Eingabemöglichkeiten geregelt.
+	 * Wird unter "Endfeld" mit einer Einschraenkung der Eingabemoeglichkeiten geregelt.
 	 * Exception erwartet
 	 */
 	@Test (expected=Exception.class)
 	public void falscherNameEndfeld(){
 		Endfeld s2 = new Endfeld("S1", FarbEnum.BLAU);
+		System.out.println(s2);
 	}
 	
 	/**
 	 * Kontrolle, das Standardfeld nicht mit einer zu hohen ID erstellt werden kann.
-	 * Wird unter "Endfeld" mit einer Einschränkung des Wertebereichs auf 1-40 geregelt.
+	 * Wird unter "Endfeld" mit einer Einschraenkung des Wertebereichs auf 1-40 geregelt.
 	 * Exception erwartet
 	 */
 	@Test (expected=Exception.class)
 	public void zuHoheID(){
 		Standardfeld f = new Standardfeld(50);
+		System.out.println(f);
 	}
 	
 	/**
 	 * Kontrolle, das Standardfeld nicht mit einer zu niedrigen ID erstellt werden kann.
-	 * Wird unter "Endfeld" mit einer Einschränkung des Wertebereichs auf 1-40 geregelt.
+	 * Wird unter "Endfeld" mit einer Einschraenkung des Wertebereichs auf 1-40 geregelt.
 	 * Exception erwartet
 	 */
 	@Test (expected=Exception.class)
 	public void zuNiedrigeID(){
 		Standardfeld f = new Standardfeld(-1);
+		System.out.println(f);
 	}
 	
 	/**

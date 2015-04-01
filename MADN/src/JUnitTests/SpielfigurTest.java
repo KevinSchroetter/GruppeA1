@@ -5,16 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.After;
-import org.junit.AfterClass;
 
 import Basisklassen.*;
 
 /**
- * @author Alexander Brückner
+ * @author Alexander Brueckner
  *         (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version 1
+ * @version 3.0
  * @since 2015-03-15
  */
 
@@ -30,9 +28,9 @@ public class SpielfigurTest {
 	 */
 	static Spielfigur[] figurenBlau;
 	/**
-	 * 4 Grüne Figuren
+	 * 4 Gruene Figuren
 	 */
-	static Spielfigur[] figurenGrün;
+	static Spielfigur[] figurenGruen;
 	/**
 	 * 4 Gelbe Figuren
 	 */
@@ -47,7 +45,7 @@ public class SpielfigurTest {
 
 		figurenRot = new Spielfigur[4];
 		figurenBlau = new Spielfigur[4];
-		figurenGrün = new Spielfigur[4];
+		figurenGruen = new Spielfigur[4];
 		figurenGelb = new Spielfigur[4];
 
 		for (int i = 0; i < figurenRot.length; i++) {
@@ -60,9 +58,9 @@ public class SpielfigurTest {
 			System.out.println(figurenBlau[i]);
 		}
 
-		for (int i = 0; i < figurenGrün.length; i++) {
-			figurenGrün[i] = new Spielfigur(3,"Fig3");
-			System.out.println(figurenGrün[i]);
+		for (int i = 0; i < figurenGruen.length; i++) {
+			figurenGruen[i] = new Spielfigur(3,"Fig3");
+			System.out.println(figurenGruen[i]);
 		}
 
 	}
@@ -88,11 +86,11 @@ public class SpielfigurTest {
 	}
 
 	/**
-	 * Prüft ob Instanziierung abbricht falls ungültige Farbe gegeben
+	 * Prueft ob Instanziierung abbricht falls ungueltige Farbe gegeben
 	 */
 
 	@Test(expected = IllegalArgumentException.class)
-	public void UngültigeFarbe() {
+	public void UngueltigeFarbe() {
 		figurenGelb[0] = new Spielfigur(0,"Fig0");
 		System.out.println(figurenGelb[0]);
 	}
@@ -110,27 +108,28 @@ public class SpielfigurTest {
 	}
 
 	/**
-	 * Verifizieren, dass nur 16 Figuren existieren dürfen
+	 * Verifizieren, dass nur 16 Figuren existieren duerfen
 	 * */
 
 	@Test(expected = RuntimeException.class)
 	public void zuVieleFiguren() {
 		Spielfigur overflow = new Spielfigur(1,"Fig1");
 		overflow = null;
+		System.out.println(overflow);
 	}
 	/**
-	 * Prüfen ob die kannSchlagen Methode funktioniert
+	 * Pruefen ob die kannSchlagen Methode funktioniert
 	 */
 
 	@Test
-	public void kannIchEtwasTöten() {
+	public void kannIchEtwasToeten() {
 		Spielfeld feld1;
 		Spielfeld feld2;
 		feld1 = new Standardfeld(5);
 		feld2 = new Standardfeld(7);
 
 		figurenGelb[2].setMeinFeld(feld1);
-		figurenGrün[1].setMeinFeld(feld2);
+		figurenGruen[1].setMeinFeld(feld2);
 
 		if (!figurenGelb[2].kannSchlagen((Standardfeld) feld2)) {
 			fail();
@@ -138,7 +137,7 @@ public class SpielfigurTest {
 	}
 
 	/**
-	 * Sicherstellen dass keine Teamkills möglich sind
+	 * Sicherstellen dass keine Teamkills moeglich sind
 	 */
 
 	@Test
@@ -146,9 +145,9 @@ public class SpielfigurTest {
 
 		Spielfeld feld1 = new Standardfeld(5);
 		Spielfeld feld2 = new Standardfeld(6);
-		figurenGrün[2].setMeinFeld(feld1);
-		figurenGrün[3].setMeinFeld(feld2);
-		if (figurenGrün[2].kannSchlagen((Standardfeld) feld2)) {
+		figurenGruen[2].setMeinFeld(feld1);
+		figurenGruen[3].setMeinFeld(feld2);
+		if (figurenGruen[2].kannSchlagen((Standardfeld) feld2)) {
 			fail();
 		}
 	}

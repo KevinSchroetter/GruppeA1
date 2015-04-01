@@ -8,7 +8,7 @@ import java.io.Serializable;
  * werden und kennt diese dann.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 1.3
+ * @version 3.0
  * @since 2015-03-14
  */
 
@@ -19,14 +19,14 @@ public abstract class Spielfeld implements Serializable {
 	private Spielfigur figur;
 	private String iD;
 	/**
-	 * Konstruktor für ein Spielfeld. Spielfeld kennt die Belegung durch eine
+	 * Konstruktor fuer ein Spielfeld. Spielfeld kennt die Belegung durch eine
 	 * Figur.
 	 */
 	public Spielfeld() {
 	}
 
 	/**
-	 * Öffentlicher Getter der Figur des Feldes zurückgibt
+	 * Oeffentlicher Getter der Figur des Feldes zurueckgibt
 	 * 
 	 * @return Spielfigur figur - Figur die auf Feld sitzt
 	 */
@@ -35,7 +35,7 @@ public abstract class Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Geschützter Setter über den eine Spielfigur auf das Feld gesetzt werden
+	 * Geschuetzter Setter ueber den eine Spielfigur auf das Feld gesetzt werden
 	 * kann. Wirft Runtime wenn Feld bereits durch eine Figur belegt ist.
 	 * 
 	 * @param figur - Figur die auf Feld gesetzt wird

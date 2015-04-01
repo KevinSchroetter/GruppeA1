@@ -13,9 +13,9 @@ import Basisklassen.*;
 import Hilfsklassen.FigurKannNichtZiehenException;
 
 /**
- * JUnit Tests für die Klasse Spiel
- * @author Kevin Schrötter, Felix Rosa, Anna Rosa, Alexander Brückner
- * @version 2.0
+ * JUnit Tests fuer die Klasse Spiel
+ * @author Kevin Schroetter, Felix Rosa, Anna Rosa, Alexander Brueckner
+ * @version 3.0
  *
  */
 public class SpielTest {
@@ -28,7 +28,7 @@ public class SpielTest {
 
 	@BeforeClass
 	/**
-	 * Vor den Testfällen wird ein neues Spiel s erstellt.
+	 * Vor den Testfaellen wird ein neues Spiel s erstellt.
 	 */
 	public static void spielErstellen() {
 		ki_game = new Spiel();
@@ -54,11 +54,11 @@ public class SpielTest {
 	 */
 	@Test(expected=RuntimeException.class)
 	public void gleicheFarbe() {
-		s.spielerHinzufügen("Anna", 1, 0);
-		s.spielerHinzufügen("Felix", 1, 0);
+		s.spielerHinzufuegen("Anna", 1, 0);
+		s.spielerHinzufuegen("Felix", 1, 0);
 	}
 	/**
-	 * Testet, ob ein Spiel nicht startet, wenn kein Spieler hinzugefügt wurde.
+	 * Testet, ob ein Spiel nicht startet, wenn kein Spieler hinzugefuegt wurde.
 	 */
 	
 	@Test(expected=RuntimeException.class)
@@ -73,22 +73,22 @@ public class SpielTest {
 		assertTrue(s.getSpielbrett() instanceof Spielbrett);
 	}
 	/**
-	 * Testet, ob ein Spiel erfolgreich gestartet ist, nachdem ein Spieler hinzugefügt wurde.	
+	 * Testet, ob ein Spiel erfolgreich gestartet ist, nachdem ein Spieler hinzugefuegt wurde.	
 	 */
 	@Test
 	public void testeObSpielGestartet(){
-		s.spielerHinzufügen("Kev", 1, 0);
+		s.spielerHinzufuegen("Kev", 1, 0);
 		s.startSpiel();
 		assertTrue(s.getHatBegonnen()==true && s.getAnzahlSpieler()==1);
 	}
 	/**
-	 * Sollte Grün durchlaufen, gibt aber einen Fehler! Problem bei der Erstellung einer KI
+	 * Sollte Gruen durchlaufen, gibt aber einen Fehler! Problem bei der Erstellung einer KI
 	 * Test auf IGNORE gesetzt.
 	 */
 	@Ignore
 	@Test
 	public void KIhinzufuegen() {
-		ki_game.spielerHinzufügen("Tim", 2, 1);
+		ki_game.spielerHinzufuegen("Tim", 2, 1);
 		assertTrue(ki_game.getAnzahlSpieler()==1);
 	}
 	/**
@@ -96,17 +96,17 @@ public class SpielTest {
 	 */
 	@Test(expected=RuntimeException.class)
 	public void FarbeNull(){
-		s.spielerHinzufügen("Paeddi",0, 0);
+		s.spielerHinzufuegen("Paeddi",0, 0);
 	}
 	/**
-	 * Hinzufügen von zu vielen Spielern scheitert.
+	 * Hinzufuegen von zu vielen Spielern scheitert.
 	 * Man merke, ein Spieler mit der Farbe ROT ist bereits erstellt!
 	 */
 	@Test(expected=RuntimeException.class)
 	public void spielerZuViel(){
-		s.spielerHinzufügen("Kevin", 2, 0);
-		s.spielerHinzufügen("Anna", 3, 0);
-		s.spielerHinzufügen("TooMuch", 4, 0);
+		s.spielerHinzufuegen("Kevin", 2, 0);
+		s.spielerHinzufuegen("Anna", 3, 0);
+		s.spielerHinzufuegen("TooMuch", 4, 0);
 	}
 	/**
 	 * Kontrolle, ob die Anzahl der fuer einen Zug moeglichen Figuren nachdem eine eigene Figur auf
@@ -116,16 +116,16 @@ public class SpielTest {
 	@Test
 	public void alleaufspawnzugnachsechs(){
 		s.neuesSpiel();
-		s.spielerHinzufügen("KEVKEV", 1, 0);
-		s.spielerHinzufügen("FLIXFLIX",2,0);
+		s.spielerHinzufuegen("KEVKEV", 1, 0);
+		s.spielerHinzufuegen("FLIXFLIX",2,0);
 		s.startSpiel();
-		s.würfeln(6);
-		s.wähleFigur("S1");//KEVKEV holt eine Figur aus den Startfeldern
-		s.würfeln(1);
-		s.wähleFigur("1");//KEVKEV geht weg vom Startfeld, FLIXFLIX ist darn
-		s.würfeln(6);
-		s.wähleFigur("S1");//FLIXFLIX holt eine Figur aus den Startfeldern
-		s.würfeln(6);//Spawnfeld ist belegt, eine 6 wurde gewuerfelt. Nun koennen die anderen Figuren nicht spawnen, es darf also nur EINE Figur laufen
+		s.wuerfeln(6);
+		s.waehleFigur("S1");//KEVKEV holt eine Figur aus den Startfeldern
+		s.wuerfeln(1);
+		s.waehleFigur("1");//KEVKEV geht weg vom Startfeld, FLIXFLIX ist darn
+		s.wuerfeln(6);
+		s.waehleFigur("S1");//FLIXFLIX holt eine Figur aus den Startfeldern
+		s.wuerfeln(6);//Spawnfeld ist belegt, eine 6 wurde gewuerfelt. Nun koennen die anderen Figuren nicht spawnen, es darf also nur EINE Figur laufen
 		assertTrue(s.alleZugFiguren().size()==1);
 	}
 
@@ -134,7 +134,7 @@ public class SpielTest {
 	 */
 	@Test
 	public void alleAufSpawn6(){
-		s.würfeln(6);
+		s.wuerfeln(6);
 		assertTrue(s.getAlleAufSpawn()==true);
 	}
 	/**
@@ -142,62 +142,62 @@ public class SpielTest {
 	 */
 	@Test
 	public void alleAufSpawn(){
-		s2.spielerHinzufügen("Kev", 1, 0);
+		s2.spielerHinzufuegen("Kev", 1, 0);
 		s2.starteSpiel();
-		s2.würfeln(2);
+		s2.wuerfeln(2);
 		assertTrue(s2.getAlleAufSpawn()==true);
 	}
 	/**
-	 * Vor dem Spawnen darf nach einer 6 nicht nochmals gewürfelt werden.
+	 * Vor dem Spawnen darf nach einer 6 nicht nochmals gewuerfelt werden.
 	 * Dies muss in diesem Test separat behandelt werden, da es in der Methode
-	 * würfeln zwei gesonderte Fälle sind.
+	 * wuerfeln zwei gesonderte Faelle sind.
 	 */
 	@Test(expected=RuntimeException.class)
 	public void wuerfelCheckausSpawnMitSechs(){
-		s2.würfeln(6);
-		s2.würfeln(2);
+		s2.wuerfeln(6);
+		s2.wuerfeln(2);
 	}
 	/**
 	 * Ein Sppieler darf nicht 2 mal hintereinander Wuerfeln, nachdem er die Chance hat zu ziehen!
-	 * wähleFigur wird hier aufgerufen, da in einem Vorherigen Test mit Spiel s bereits gewürfelt wurde.
+	 * waehleFigur wird hier aufgerufen, da in einem Vorherigen Test mit Spiel s bereits gewuerfelt wurde.
 	 */
 	@Test(expected=RuntimeException.class)
 	public void doppelWurfNachSpawnen(){
-		s2.wähleFigur("S1");
-		s2.würfeln(6);
-		s2.würfeln(2);
+		s2.waehleFigur("S1");
+		s2.wuerfeln(6);
+		s2.wuerfeln(2);
 	}
 	/**
 	 * Ein Spieler darf nicht 2 mal hintereinander Ziehen ohne dazwischen zu wuerfeln
 	 */
 	@Test(expected = FigurKannNichtZiehenException.class)
 	public void zugTestDoppel(){
-		s3.spielerHinzufügen("Versager", 1, 0);
+		s3.spielerHinzufuegen("Versager", 1, 0);
 		s3.startSpiel();
-		s3.würfeln(6);
-		s3.wähleFigur("S1");
-		s3.wähleFigur("1");
+		s3.wuerfeln(6);
+		s3.waehleFigur("S1");
+		s3.waehleFigur("1");
 	}
 	/**
 	 * Ein Spieler, der NICHT mehr alle Figuren auf den Startfeldern hat, darf ebenfalls nicht
-	 * doppelt würfeln. Dies muss hier nochmals getestet werden, da es zwei unterschiedliche Fälle sind.
+	 * doppelt wuerfeln. Dies muss hier nochmals getestet werden, da es zwei unterschiedliche Faelle sind.
 	 * Dazu wird Spiel s3 verwendet.
 	 */
 	@Test(expected=RuntimeException.class)
 	public void nochmalWuerfelnNachSechs(){
-		s4.spielerHinzufügen("Kev",1,0);
-		s4.spielerHinzufügen("Felix", 2, 0);
+		s4.spielerHinzufuegen("Kev",1,0);
+		s4.spielerHinzufuegen("Felix", 2, 0);
 		s4.startSpiel();
-		s4.würfeln(6);
-		s4.wähleFigur("S1");
-		s4.würfeln(2);
-		s4.wähleFigur("1");
+		s4.wuerfeln(6);
+		s4.waehleFigur("S1");
+		s4.wuerfeln(2);
+		s4.waehleFigur("1");
 		// Jetzt kommt Spieler Felix und versagt 3 mal im wuerfeln, damit danach wieder Kev dran ist
-		s4.würfeln(2);
-		s4.würfeln(2);
-		s4.würfeln(2);
-		// Nun kommt Kev, würfelt eine 6 und versucht danach nochmals zu würfeln. Dies klappt jedoch nicht
-		s4.würfeln(6);
-		s4.würfeln(2);
+		s4.wuerfeln(2);
+		s4.wuerfeln(2);
+		s4.wuerfeln(2);
+		// Nun kommt Kev, wuerfelt eine 6 und versucht danach nochmals zu wuerfeln. Dies klappt jedoch nicht
+		s4.wuerfeln(6);
+		s4.wuerfeln(2);
 	}
 }

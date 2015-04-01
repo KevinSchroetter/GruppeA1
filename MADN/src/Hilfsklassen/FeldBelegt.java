@@ -7,7 +7,8 @@ import Basisklassen.Spielfigur;
 import Basisklassen.Spielfeld;
 
 /** Klasse FeldBelegt - Eigene Exception, wird geworfen wenn ein Feld belegt ist.
- *
+ * @author Alexander Brueckner
+ * @since version 3.0
  */
 
 public class FeldBelegt extends RuntimeException implements Serializable {
@@ -21,8 +22,5 @@ public class FeldBelegt extends RuntimeException implements Serializable {
 	public FeldBelegt(String message, Spielfigur figur, Spielfeld feld){
 		
 		super(message);
-		Spielfigur figurGeworfen = figur;
-		Spielfeld feldGeworfen = feld;
-		
 	}
 }

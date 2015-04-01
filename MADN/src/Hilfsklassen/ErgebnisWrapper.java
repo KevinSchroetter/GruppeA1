@@ -4,14 +4,14 @@ import Basisklassen.FarbEnum;
 import java.io.Serializable;
 
 /**
- * Klasse ErgebnisWrapper. Wrapperklasse für relevante Daten eines Spielzuges. Beinhaltet boolsche Werte für Kills/Züge, die ID der Figur,
- * die zieht, die ID des Feldes, auf das gezogen wird, die ID der Figur die (falls möglich) geschlagen wird, sowie deren Farben.
- * ! UNVOLLSTÄNDIG !
+ * Klasse ErgebnisWrapper. Wrapperklasse fuer relevante Daten eines Spielzuges. Beinhaltet boolsche Werte fuer Kills/Zuege, die ID der Figur,
+ * die zieht, die ID des Feldes, auf das gezogen wird, die ID der Figur die (falls moeglich) geschlagen wird, sowie deren Farben.
+ * ! UNVOLLSTAENDIG !
  *  
  * 
- * @author      Alexander Brückner (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version     1                 
- * @since       2015-03-22          
+ * @author      Alexander Brueckner (Alexander.Brueckner@Student-Reutlingen-University.de)
+ * @version     3.0           
+ * @since       version 1.0          
  */
 
 public class ErgebnisWrapper implements Serializable {
@@ -23,47 +23,47 @@ public class ErgebnisWrapper implements Serializable {
 
 	private FarbEnum figurFarbe;
 
-	private boolean zugMöglich;
+	private boolean zugMoeglich;
 
 	private int feldID;
 
-	private boolean killMöglich;
+	private boolean killMoeglich;
 
 	private int opferID;
 
 	private FarbEnum opferFarbe;
 
-	private int würfelzahl;
+	//private int wuerfelzahl;
 	
 	
 	/**
-	 * Konstruktor für Klasse ErgebnisWrapper                 
+	 * Konstruktor fuer Klasse ErgebnisWrapper                 
 	 * @param figurID - int
 	 * @param figurFarbe - FarbEnum
 	 * @param feldID - int
 	 * @param opferFarbe - FarbEnum
-	 * @param würfelzahl - int
+	 * @param wuerfelzahl - int
 	 * @param opferID - int
-	 * @throws IllegalArgumentException Bei ungültiger FigurID, FigurFarbe oder FeldID.
+	 * @throws IllegalArgumentException Bei ungueltiger FigurID, FigurFarbe oder FeldID.
 	 * 
-	 * Prüft Parameter und ruft darauf hin setKillmöglich und setZugMöglich auf, um zu Ermitteln ob die Figur
+	 * Prueft Parameter und ruft darauf hin setKillmoeglich und setZugMoeglich auf, um zu Ermitteln ob die Figur
 	 * ziehen und ggf. jemanden schlagen kann.
 	 */
 	
 
 	public ErgebnisWrapper(int figurID, FarbEnum figurFarbe,
 			int feldID, int opferID,
-			FarbEnum opferFarbe, int würfelzahl) {
+			FarbEnum opferFarbe, int wuerfelzahl) {
 
 		if ((figurID <= 0 || figurID > 16))
-			throw new IllegalArgumentException("Ungültige FigurID!");
+			throw new IllegalArgumentException("Ungueltige FigurID!");
 		else {
 			this.setFigurID(figurID);
 			this.setOpferID(opferID);
 		}
 
 		if (figurFarbe == null)
-			throw new IllegalArgumentException("Figurfarbe ungültig");
+			throw new IllegalArgumentException("Figurfarbe ungueltig");
 
 		else {
 			this.setFigurFarbe(figurFarbe);
@@ -71,20 +71,20 @@ public class ErgebnisWrapper implements Serializable {
 		}
 
 		if (feldID < 1 || feldID > 40)
-			throw new IllegalArgumentException("Ungültiges Feld");
+			throw new IllegalArgumentException("Ungueltiges Feld");
 		else {
 			this.setFeldID(feldID);
 		}
 
-		this.setKillMöglich();
-		this.setZugMöglich();
+		this.setKillMoeglich();
+		this.setZugMoeglich();
 		
-		if(würfelzahl > 1 || würfelzahl < 6) throw new IllegalArgumentException("Ungültige Würfelzahl");
+		if(wuerfelzahl > 1 || wuerfelzahl < 6) throw new IllegalArgumentException("Ungueltige Wuerfelzahl");
 
 	}
 	
 	/**
-	 * Gibt figurID zurück                      
+	 * Gibt figurID zurueck                      
 	 * @return figurID - int
 	 */
 
@@ -93,7 +93,7 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Gibt die Farbe der Killer-Figur zurück                   
+	 * Gibt die Farbe der Killer-Figur zurueck                   
 	 * @return figurFarbe - FarbEnum
 	 */
 
@@ -102,16 +102,16 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Prüft, ob die Figur ziehen kann                      
-	 * @return zugMöglich - boolean
+	 * Prueft, ob die Figur ziehen kann                      
+	 * @return zugMoeglich - boolean
 	 */
 
-	public boolean isZugMöglich() {
-		return zugMöglich;
+	public boolean isZugMoeglich() {
+		return zugMoeglich;
 	}
 	
 	/**
-	 * Gibt feldID zurück                      
+	 * Gibt feldID zurueck                      
 	 * @return feldID - int
 	 */
 
@@ -121,16 +121,16 @@ public class ErgebnisWrapper implements Serializable {
 	
 	/**
 	 * Sagt aus, ob die Figur schlagen kann                      
-	 * @return killMöglich - boolean
+	 * @return killMoeglich - boolean
 	 */
 
 
-	public boolean isKillMöglich() {
-		return killMöglich;
+	public boolean isKillMoeglich() {
+		return killMoeglich;
 	}
 	
 	/**
-	 * Gibt opferID zurück                      
+	 * Gibt opferID zurueck                      
 	 * @return opferID - int
 	 */
 
@@ -139,7 +139,7 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Gibt die Farbe der Opfer-Figur zurück                   
+	 * Gibt die Farbe der Opfer-Figur zurueck                   
 	 * @return OpferFarbe - FarbEnum
 	 */
 
@@ -149,7 +149,7 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Privater Setter für figurID                  
+	 * Privater Setter fuer figurID                  
 	 * @param int figurID
 	 */
 
@@ -159,7 +159,7 @@ public class ErgebnisWrapper implements Serializable {
 	
 	
 	/**
-	 * Privater Setter für figurFarbe                 
+	 * Privater Setter fuer figurFarbe                 
 	 * @param FarbEnum figurFarbe
 	 */
 
@@ -168,16 +168,16 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Privater Setter für zugMöglich                  
-	 * @param boolean zugMöglich
+	 * Privater Setter fuer zugMoeglich                  
+	 * @param boolean zugMoeglich
 	 */
 
-	private void setZugMöglich(boolean zugMöglich) {
-		this.zugMöglich = zugMöglich;
+	private void setZugMoeglich(boolean zugMoeglich) {
+		this.zugMoeglich = zugMoeglich;
 	}
 	
 	/**
-	 * Privater Setter für feldID                
+	 * Privater Setter fuer feldID                
 	 * @param int feldID
 	 */
 
@@ -186,16 +186,16 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Privater Setter für killMöglich                  
-	 * @param boolean killMöglich
+	 * Privater Setter fuer killMoeglich                  
+	 * @param boolean killMoeglich
 	 */
 
-	private void setKillMöglich(boolean killMöglich) {
-		this.killMöglich = killMöglich;
+	private void setKillMoeglich(boolean killMoeglich) {
+		this.killMoeglich = killMoeglich;
 	}
 	
 	/**
-	 * Privater Setter für opferID                
+	 * Privater Setter fuer opferID                
 	 * @param int opferID
 	 */
 	
@@ -205,7 +205,7 @@ public class ErgebnisWrapper implements Serializable {
 	}
 	
 	/**
-	 * Privater Setter für opferFarbe                 
+	 * Privater Setter fuer opferFarbe                 
 	 * @param FarbEnum opferFarbe
 	 */
 
@@ -213,33 +213,33 @@ public class ErgebnisWrapper implements Serializable {
 		this.opferFarbe = opferFarbe;
 	}
 
-	// Überladung von boolschen Settern
+	// Ueberladung von boolschen Settern
 	
 	/**
-	 * Privater Setter für zugMöglich - Ermittelt anhand der Farben der Figuren, ob ein Zug möglich ist  
-	 * ! UNVOLLLSTÄNDIG !               
+	 * Privater Setter fuer zugMoeglich - Ermittelt anhand der Farben der Figuren, ob ein Zug moeglich ist  
+	 * ! UNVOLLLSTAENDIG !               
 	 */
 
-	private void setZugMöglich() {
+	private void setZugMoeglich() {
 
 		if (this.getFigurFarbe() == this.getOpferFarbe()) {
-			this.setZugMöglich(false);
+			this.setZugMoeglich(false);
 		}
 
 	}
 	
 	/**
-	 * Privater Setter für killMöglich - Ermittelt anhand der Farben der Figuren, ob ein Kill möglich ist  
-	 * ! UNVOLLLSTÄNDIG !               
+	 * Privater Setter fuer killMoeglich - Ermittelt anhand der Farben der Figuren, ob ein Kill moeglich ist  
+	 * ! UNVOLLLSTAENDIG !               
 	 */
 
-	private void setKillMöglich() {
+	private void setKillMoeglich() {
 		if (this.getOpferFarbe() == null) {
-			this.setKillMöglich(false);
+			this.setKillMoeglich(false);
 		}
 
 		else if (this.getFigurFarbe() != this.getOpferFarbe()) {
-			this.setKillMöglich(true);
+			this.setKillMoeglich(true);
 		}
 	}
 

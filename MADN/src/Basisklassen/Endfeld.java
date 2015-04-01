@@ -3,13 +3,13 @@ package Basisklassen;
 import java.io.Serializable;
 
 /**
- * Klasse Endfeld erbt von Spielfeld. Über diese Klasse werden die Endfelder
+ * Klasse Endfeld erbt von Spielfeld. Ueber diese Klasse werden die Endfelder
  * von MADN erstellt. Auf diesen sammeln sich die Figuren um das Ende des Spiels
- * einzuleiten. Die Klasse hat die Attribute iD über die jedes Feld
+ * einzuleiten. Die Klasse hat die Attribute iD ueber die jedes Feld
  * identifizierbar ist sowie eine Farbe.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 1.3
+ * @version 3.0
  * @since 2015-03-16
  */
 
@@ -25,10 +25,10 @@ public class Endfeld extends Spielfeld implements Serializable {
 	private FarbEnum farbe;
 
 	/**
-	 * Konstruktor für ein Endfeld. Über das Attribut iD wird dem Feld eine
-	 * genaue ID zugewiesen über die das Feld in Kombination mit seiner Farbe
+	 * Konstruktor fuer ein Endfeld. Ueber das Attribut iD wird dem Feld eine
+	 * genaue ID zugewiesen ueber die das Feld in Kombination mit seiner Farbe
 	 * identifizierbar ist. Mit dem Attribut Farbe wird dem Feld eine Farbe
-	 * zugewiesen über die das Feld im Spiel einem Spieler zugewiesen wird!
+	 * zugewiesen ueber die das Feld im Spiel einem Spieler zugewiesen wird!
 	 * Liegt die Eingabe der ID nicht im Wertebereich E1-E4 wird eine
 	 * RuntimeException geworfen!
 	 * 
@@ -49,7 +49,7 @@ public class Endfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Getter der die FeldID zurückgibt.
+	 * Oeffentlicher Getter der die FeldID zurueckgibt.
 	 * 
 	 * @return int iD - die ID des Feldes
 	 */
@@ -58,7 +58,7 @@ public class Endfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Getter der die Farbe des Feldes zurückgibt
+	 * Oeffentlicher Getter der die Farbe des Feldes zurueckgibt
 	 * 
 	 * @return FarbEnum farbe - Farbe des Feldes
 	 */
@@ -67,11 +67,11 @@ public class Endfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Überschreiben der Equals. Zwei Objekte der Klasse Endfeld sind nur
+	 * Ueberschreiben der Equals. Zwei Objekte der Klasse Endfeld sind nur
 	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
-	 * @param obj - Übergebenes Endfeld-Objekt - wird mit this verglichen
-	 * @return boolean - gibt zurück ob zwei verglichene Endfelder gleich sind
+	 * @param obj - Uebergebenes Endfeld-Objekt - wird mit this verglichen
+	 * @return boolean - gibt zurueck ob zwei verglichene Endfelder gleich sind
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -83,10 +83,10 @@ public class Endfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Überschriebene toString angepasst für die Klasse Endfeld. Wandelt die
+	 * Ueberschriebene toString angepasst fuer die Klasse Endfeld. Wandelt die
 	 * Farbe und die ID in einen String und gibt diesen aus.
 	 * 
-	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurück
+	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurueck
 	 */
 	@Override
 	public String toString() {

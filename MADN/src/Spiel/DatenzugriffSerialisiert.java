@@ -4,7 +4,7 @@ import java.io.*;
 
 public class DatenzugriffSerialisiert implements iDatenzugriff {
 	/**
-	 * @author Alexander Brückner
+	 * @author Alexander Brueckner
 	 * @version 1.0
 	 * 
 	 *          Klasse {@link DatenzugriffSerialisiert} implementiert Interface
@@ -21,20 +21,19 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	/**
 	 *
-	 * Methode spielSpeichern überrschreibt Methode aus Interface. Serialisiert
+	 * Methode spielSpeichern ueberrschreibt Methode aus Interface. Serialisiert
 	 * ein Spiel und speichert es in "savegame.ser"
 	 * 
-	 * @param s
-	 *            - Spiel
-	 * @throws {@link IOException}
-	 * @throws {@link FileNotFoundException}
+	 * @param s - Spiel
+	 * @throws IOException - wirft eine IOException
+	 * @throws FileNotFoundException - wenn die Datei nicht gefunden wurde
 	 * 
 	 */
 
 	@Override
 	public void spielSpeichern(Spiel s) throws IOException {
 		if (s == null)
-			throw new IllegalArgumentException("Ungülltiges Spiel");
+			throw new IllegalArgumentException("Unguelltiges Spiel");
 		ObjectOutputStream speicherStream = null;
 
 		try {
@@ -61,7 +60,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 			}
 
 			catch (IOException e) {
-				System.out.println("Fehler beim schließen derr Datei!");
+				System.out.println("Fehler beim schliessen derr Datei!");
 				e.printStackTrace();
 			}
 
@@ -71,14 +70,11 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	/**
 	 *
-	 * Methode spielLaden überrschreibt Methode aus Interface. Deserialisiert
+	 * Methode spielLaden ueberrschreibt Methode aus Interface. Deserialisiert
 	 * ein Spiel aus "savegame.ser"
 	 * 
-	 * @param s
-	 *            - Spiel
-	 * @throws {@link IOException}
-	 * @throws {@link FileNotFoundException}
-	 * @throws {@link ClassNotFoundException}
+	 * @throws IOException - wirft eine IOException
+	 * @throws FileNotFoundException - wenn die Datei nicht gefunden wurde
 	 * 
 	 */
 
@@ -117,7 +113,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 			}
 
 			catch (IOException e) {
-				System.out.println("Fehler beim schließen der Datei!");
+				System.out.println("Fehler beim schliessen der Datei!");
 			}
 		}
 

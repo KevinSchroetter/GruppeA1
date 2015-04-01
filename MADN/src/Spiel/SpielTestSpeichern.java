@@ -4,12 +4,12 @@ import java.io.*;
 
 /**
  * 
- * Klasse SpieltestSpeichern - Testet Funktionalität der
+ * Klasse SpieltestSpeichern - Testet Funktionalitaet der
  * Datenzugriffsfunktionen. Serialisiert, CSV (CSV Implementierung ausstehend)
  * 
- * @author Alexander Brückner
- * 
- *
+ * @author Alexander Brueckner
+ * @version 3.0
+ * @since v2.3
  *
  */
 public class SpielTestSpeichern {
@@ -26,7 +26,7 @@ public class SpielTestSpeichern {
 
 		game.starteSpiel();
 		game.rollTheDice();
-		game.zugDurchführen("S1");
+		game.zugDurchfuehren("S1");
 
 		try {
 			DS.spielSpeichern(game);

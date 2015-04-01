@@ -3,12 +3,12 @@ package Basisklassen;
 import java.io.Serializable;
 
 /**
- * Klasse Standardfeld erbt von Spielfeld - über diese Klasse werden die 40
- * Standardfelder von MADN erstellt. Jedes Standardfeld hat eine ID über die
+ * Klasse Standardfeld erbt von Spielfeld - ueber diese Klasse werden die 40
+ * Standardfelder von MADN erstellt. Jedes Standardfeld hat eine ID ueber die
  * identifizierbar ist - diese liegt im Wertebereich 1-40
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 1.3
+ * @version 3.0
  * @since 2015-03-16
  */
 public class Standardfeld extends Spielfeld implements Serializable {
@@ -17,13 +17,13 @@ public class Standardfeld extends Spielfeld implements Serializable {
 	private String iD;
 
 	/**
-	 * Konstruktor für ein Standardfeld. Über das Attribut iD wird dem Feld
-	 * eine genaue ID zugewiesen über die das Feld identifizierbar ist Liegt die
+	 * Konstruktor fuer ein Standardfeld. ueber das Attribut iD wird dem Feld
+	 * eine genaue ID zugewiesen ueber die das Feld identifizierbar ist Liegt die
 	 * Eingabe nicht innerhalb des Wertebereiches 1-40 wird eine
 	 * RuntimeException geworfen.
 	 * 
 	 * @param iD - Die iD des Feldes vom Typ int
-	 * @exception RuntimeException Wenn iD kleiner 1 oder größer 40
+	 * @exception RuntimeException Wenn iD kleiner 1 oder groesser 40
 	 * 
 	 */
 	public Standardfeld(int iD) {
@@ -37,7 +37,7 @@ public class Standardfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Getter der FeldID zurückgibt.
+	 * Oeffentlicher Getter der FeldID zurueckgibt.
 	 * 
 	 * @return int iD - die ID des Feldes
 	 */
@@ -46,10 +46,10 @@ public class Standardfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Überschreiben der Equals. Zwei Objekte der Klasse Standardfeld sind nur dann gleich, wenn ihre Ihre ID die gleiche ist.
+	 * Ueberschreiben der Equals. Zwei Objekte der Klasse Standardfeld sind nur dann gleich, wenn ihre Ihre ID die gleiche ist.
 	 * 
-	 * @param obj - Übergebenes Standardfeld-Objekt vom Typ Object - wird mit this verglichen
-	 * @return boolean - gibt zurück ob zwei verglichene Standardfelder gleich sind
+	 * @param obj - Ubergebenes Standardfeld-Objekt vom Typ Object - wird mit this verglichen
+	 * @return boolean - gibt zurueck ob zwei verglichene Standardfelder gleich sind
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -60,10 +60,10 @@ public class Standardfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Überschriebene toString angepasst für die Klasse Standardfeld. Wandelt
+	 * Ueberschriebene toString angepasst fuer die Klasse Standardfeld. Wandelt
 	 * die ID in einen String und gibt diesen aus.
 	 * 
-	 * @return String - gibt String mit Inhalt ID des Feldes zurück
+	 * @return String - gibt String mit Inhalt ID des Feldes zurueck
 	 */
 	@Override
 	public String toString() {

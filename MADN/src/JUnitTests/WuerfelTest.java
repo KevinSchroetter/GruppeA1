@@ -5,18 +5,21 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.After;
-import org.junit.AfterClass;
 import Basisklassen.*;
-
-public class WürfelTest {
+/**
+ * Test fuer den Wuerfel
+ * @author Anna Rosa
+ * @version 3.0
+ *
+ */
+public class WuerfelTest {
 	
-	public static Würfel würfel;
+	public static Wuerfel wuerfel;
 	
 	@BeforeClass
-	public static void erstelleWürfel(){
-		würfel=new Würfel();
+	public static void erstelleWuerfel(){
+		wuerfel=new Wuerfel();
 	}
 	
 	@Before
@@ -32,7 +35,7 @@ public class WürfelTest {
 	
 	@Test
 	public void test() {
-			int erg=würfel.werfen();
+			int erg=wuerfel.werfen();
 			assertTrue(erg==1|erg==2|erg==3|erg==4|erg==5|erg==6);
 			assertFalse(erg<1 | erg>6);
 		

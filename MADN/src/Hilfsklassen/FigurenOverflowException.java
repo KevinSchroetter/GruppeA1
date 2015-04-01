@@ -5,6 +5,8 @@ import java.io.Serializable;
 /** 
  * Klasse FigurenoverflowException
  * Wird geworfen, wenn mehr als 16 Figuren erstellt wurden
+ * @author Alexander Brueckner
+ * @since version 3.0
  */
 
 public class FigurenOverflowException extends RuntimeException implements Serializable{

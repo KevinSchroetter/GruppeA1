@@ -3,9 +3,9 @@ package Basisklassen;
 import java.io.Serializable;
 
 /**
- * @author Alexander Brückner
+ * @author Alexander Brueckner
  *         (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version 1
+ * @version 3.0
  * @since 2015-03-12
  */
 
@@ -54,7 +54,7 @@ public class Spielfigur implements Serializable {
 		this.name = name;
 	}
 	/**
-	 * Gibt meinFeld zurück
+	 * Gibt meinFeld zurueck
 	 * 
 	 * @return Spielfeld meinFeld
 	 */
@@ -63,7 +63,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Gibt Farbe zurück
+	 * Gibt Farbe zurueck
 	 * 
 	 * @return FarbEnum farbe
 	 */
@@ -73,7 +73,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Gibt Anzahl gelaufener Felder zurück
+	 * Gibt Anzahl gelaufener Felder zurueck
 	 * 
 	 * @return int felderGelaufen
 	 */
@@ -83,7 +83,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Gibt Aufschluss ob Kill möglich ist
+	 * Gibt Aufschluss ob Kill moeglich ist
 	 * 
 	 * @return boolean kannSchlagen
 	 */
@@ -133,7 +133,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Setter für Feld der Figur, stellt Kenntnisbeziehung zwischen
+	 * Oeffentlicher Setter fuer Feld der Figur, stellt Kenntnisbeziehung zwischen
 	 * Figur und Feld her
 	 * 
 	 * @param meinFeld
@@ -146,7 +146,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für Farbe der Figur
+	 * Privater Setter fuer Farbe der Figur
 	 * 
 	 * @param FarbEnum
 	 *            farbe
@@ -157,9 +157,9 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Setter für Schrittzähler - inkrementiert um Anzahl der
+	 * Oeffentlicher Setter fuer Schrittzaehler - inkrementiert um Anzahl der
 	 * Felder die die Figur gelaufen ist wird bei Kill der Figur resetted
-	 * (Deshalb Public, erfolgt später in Klasse Spiel)
+	 * (Deshalb Public, erfolgt spaeter in Klasse Spiel)
 	 * 
 	 * @param felderGelaufen
 	 *            - int
@@ -170,7 +170,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für kannSchlagen
+	 * Privater Setter fuer kannSchlagen
 	 * 
 	 * @param kannSchlagen - boolean
 	 */
@@ -180,7 +180,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für istGespawnt
+	 * Privater Setter fuer istGespawnt
 	 * 
 	 * @param istGespawnt - boolean
 	 */
@@ -190,7 +190,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für istimZiel
+	 * Privater Setter fuer istimZiel
 	 * 
 	 * @param istImZiel - boolean
 	 */
@@ -200,7 +200,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für kannInsZiel
+	 * Privater Setter fuer kannInsZiel
 	 * 
 	 * @param kannInsZiel - boolean
 	 */
@@ -210,7 +210,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für kannZiehen
+	 * Privater Setter fuer kannZiehen
 	 * 
 	 * @param kannZiehen - boolean
 	 */
@@ -220,7 +220,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Oeffentlicher, Statischer Getter für Anzahl der Figuren
+	 * Oeffentlicher, Statischer Getter fuer Anzahl der Figuren
 	 * 
 	 * @return int Spielfigur.anzahlFiguren
 	 */
@@ -231,7 +231,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Privater Setter für ID - Prüft auf Gültigkeit
+	 * Privater Setter fuer ID - Prueft auf Gueltigkeit
 	 * 
 	 * @param int ID
 	 */
@@ -244,7 +244,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Getter für ID der Figur
+	 * Oeffentlicher Getter fuer ID der Figur
 	 * 
 	 * @return int ID
 	 */
@@ -253,29 +253,29 @@ public class Spielfigur implements Serializable {
 		return this.ID;
 	}
 	/**
-	 * Setter für das Attribut binIchAufEndposition
+	 * Setter fuer das Attribut binIchAufEndposition
 	 * @param bIAE - boolean
 	 */
 	public void setBinIchAufEndposition(boolean bIAE){
 		this.binIchAufEndposition=bIAE;
 	}
 	/**
-	 * Getter für binIchAufEndposition
+	 * Getter fuer binIchAufEndposition
 	 * @return binIchAufEndposition - boolean 
 	 */
 	public boolean getBinIchAufEndpostion() {
 		return this.binIchAufEndposition;
 	}
 	/**
-	 * Konstruktor für Klasse Spielfigur
+	 * Konstruktor fuer Klasse Spielfigur
 	 * 
 	 * @param farbID - int
 	 * @param name - String Name der Spielfigur mit zugehoeriger Farbe des Spielers, der die Figuren erstellt
-	 * @exception RuntimeException - wenn Anzahl Figuren größer gleich 16
-	 * @exception IllegalArgumentException - wenn FarbID kleiner gleich Null oder größer 4 ist
+	 * @exception RuntimeException - wenn Anzahl Figuren groesser gleich 16
+	 * @exception IllegalArgumentException - wenn FarbID kleiner gleich Null oder groesser 4 ist
 	 * 
-	 * Generiert aus anzahlFiguren eine ID, prüft ob eine gültige
-	 * Farbe übergeben wurde, falls nicht, wirft eine
+	 * Generiert aus anzahlFiguren eine ID, prueft ob eine gueltige
+	 * Farbe uebergeben wurde, falls nicht, wirft eine
 	 * IllegalArgumentException. Gibt es bereits 16 Figuren,
 	 * wirft er eine RuntimeException. ! Im Verlauf der
 	 * Implementierung von Klasse Spiel werden eigene Exceptions
@@ -286,16 +286,16 @@ public class Spielfigur implements Serializable {
 	public Spielfigur(int farbID, String name) {
 
 		if (farbID == 1) {
-			this.farbe = FarbEnum.ROT;
+			setFarbe(FarbEnum.ROT);
 		} else if (farbID == 2) {
-			this.farbe = FarbEnum.BLAU;
+			setFarbe(FarbEnum.BLAU);
 		} else if (farbID == 3) {
-			this.farbe = FarbEnum.GRÜN;
+			setFarbe(FarbEnum.GRUEN);
 		} else if (farbID == 4) {
-			this.farbe = FarbEnum.GELB;
+			setFarbe(FarbEnum.GELB);
 		} else
 			throw new IllegalArgumentException(
-					"Ungültige Farbe! 1 = Rot, 2 = Blau, 3 = Grün, 4 = Gelb!");
+					"Ungueltige Farbe! 1 = Rot, 2 = Blau, 3 = Gruen, 4 = Gelb!");
 
 		if (anzahlFiguren >= 16)
 			throw new RuntimeException(
@@ -308,21 +308,21 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Ermittelt, ob das Targetfeld gültig ist, und ob eine Figur darauf steht.
-	 * Gehört die Figur zur gleichen Farbe, kann sie nicht geschlagen werden.
+	 * Ermittelt, ob das Targetfeld gueltig ist, und ob eine Figur darauf steht.
+	 * Gehoert die Figur zur gleichen Farbe, kann sie nicht geschlagen werden.
 	 * Ist die Figur feindlich gesinnt, kann sie erledigt werden.
 	 * 
 	 * @param zielFeld
 	 *            - Spielfeld
 	 * @return boolean
 	 * @exception RuntimeException
-	 *                Wenn Zielfeld ungültig
+	 *                Wenn Zielfeld ungueltig
 	 */
 
 	public boolean kannSchlagen(Standardfeld zielFeld) {
 
 		if (zielFeld == null) {
-			throw new RuntimeException("Zielfeld ungültig!");
+			throw new RuntimeException("Zielfeld ungueltig!");
 		} else if (zielFeld.getFigur() == null) {
 			return false;
 		} else if (zielFeld.getFigur() != null) {
@@ -336,9 +336,9 @@ public class Spielfigur implements Serializable {
 		return false;
 	}
 	/**
-	 * Prüft, ob die Figur im Spiel ist.. Gibt True zurück, wenn sie NICHT auf
+	 * Prueft, ob die Figur im Spiel ist.. Gibt True zurueck, wenn sie NICHT auf
 	 * einem Startfeld steht, nicht im Ziel ist (kann aber auf einem Endfeld
-	 * stehen) und das Feld gültig ist. Gibt sonst false zurück.
+	 * stehen) und das Feld gueltig ist. Gibt sonst false zurueck.
 	 * 
 	 * @return boolean
 	 */
@@ -356,17 +356,17 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Prüft, mittels der übergebenen Augenzahl, ob die Figur im Stande ist,
-	 * einen Zug auf ein Standardfeld durchzuführen. True wenn meinFeld instanz
+	 * Prueft, mittels der uebergebenen Augenzahl, ob die Figur im Stande ist,
+	 * einen Zug auf ein Standardfeld durchzufuehren. True wenn meinFeld instanz
 	 * von Standardfeld ist und die Nummer des aktuellen Feldes plus der
-	 * Augenzahl kleiner gleich 40 ist. Wirft bei ungültiger Feldzahl (kleiner
-	 * gleich Null, größer 40) eine RuntimeException.
+	 * Augenzahl kleiner gleich 40 ist. Wirft bei ungueltiger Feldzahl (kleiner
+	 * gleich Null, groesser 40) eine RuntimeException.
 	 * 
 	 * @return boolean
 	 * @param augenZahl
-	 *            - Integer, gewürfelte Zahl
+	 *            - Integer, gewuerfelte Zahl
 	 * @exception RuntimeException
-	 *                Wenn FeldID kleiner gleich Null oder größer 40 ist.
+	 *                Wenn FeldID kleiner gleich Null oder groesser 40 ist.
 	 */
 /*
 	public boolean kannIchZiehen(int augenZahl) {
@@ -395,7 +395,7 @@ public class Spielfigur implements Serializable {
 
 
 	/**
-	 * Prüft, ob aktuelles Feld ein Standardfeld ist.
+	 * Prueft, ob aktuelles Feld ein Standardfeld ist.
 	 * 
 	 * @return boolean
 	 */
@@ -408,7 +408,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Prüft, ob aktuelles Feld ein Endfeld ist.
+	 * Prueft, ob aktuelles Feld ein Endfeld ist.
 	 * 
 	 * @return boolean
 	 */
@@ -421,7 +421,7 @@ public class Spielfigur implements Serializable {
 	}
 	
 	/**
-	 * Setzt Schrittzähler zurück
+	 * Setzt Schrittzaehler zurueck
 	 * 
 	 *
 	 */
@@ -433,18 +433,18 @@ public class Spielfigur implements Serializable {
 	}
 	
 	/**
-	 * Inkrementiert Schrittzähler um angegebene zahl
+	 * Inkrementiert Schrittzaehler um angegebene zahl
 	 * @param i - int
 	 *
 	 */
 	
 	public void incSchritteGelaufen(int i){
-		if(i <= 0) throw new RuntimeException("Ungültige Schrittzahl!");
+		if(i <= 0) throw new RuntimeException("Ungueltige Schrittzahl!");
 		else this.felderGelaufen+=i;
 	}
 
 	/**
-	 * Klassische toString Methode. Gibt ID, meinFeld und Farbe zurück
+	 * Klassische toString Methode. Gibt ID, meinFeld und Farbe zurueck
 	 * 
 	 * @return String
 	 */
@@ -458,6 +458,6 @@ public class Spielfigur implements Serializable {
 	 * HilfsMethode zum Loeschen der static anzaglFiguren (Wird in Spiel benoetigt, daher public)
 	 */
 	public void deleteAnzahlFiguren(){
-		this.anzahlFiguren=0;
+		Spielfigur.anzahlFiguren=0;
 	}
 }

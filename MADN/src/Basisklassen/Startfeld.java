@@ -3,13 +3,13 @@ package Basisklassen;
 import java.io.Serializable;
 
 /**
- * Klasse Startfeld erbt von Spielfeld. Über diese Klasse werden die Startfelder
+ * Klasse Startfeld erbt von Spielfeld. Ueber diese Klasse werden die Startfelder
  * von MADN erstellt. Auf diesen stehen die Figuren bevor Sie auf das
- * eigentliche Spielbrett treten. Die Klasse hat die Attribute iD über die jedes
+ * eigentliche Spielbrett treten. Die Klasse hat die Attribute iD ueber die jedes
  * Feld identifizierbar ist sowie eine Farbe.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 1.3
+ * @version 3.0
  * @since 2015-03-16
  */
 
@@ -23,10 +23,10 @@ public class Startfeld extends Spielfeld implements Serializable {
 	private FarbEnum farbe;
 
 	/**
-	 * Konstruktor für ein Startfeld. Über das Attribut iD wird dem Feld eine
-	 * genaue ID zugewiesen über die das Feld in Kombination mit seiner Farbe
+	 * Konstruktor fuer ein Startfeld. Ueber das Attribut iD wird dem Feld eine
+	 * genaue ID zugewiesen ueber die das Feld in Kombination mit seiner Farbe
 	 * identifizierbar ist. Mit dem Attribut Farbe wird dem Feld eine Farbe
-	 * zugewiesen über die das Feld im Spiel einem Spieler zugewiesen wird!
+	 * zugewiesen ueber die das Feld im Spiel einem Spieler zugewiesen wird!
 	 * Liegt die Eingabe der ID nicht im Wertebereich S1-S4 wird eine
 	 * RuntimeException geworfen!
 	 * 
@@ -48,7 +48,7 @@ public class Startfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Getter der ID des Feldes zurückgibt
+	 * Oeffentlicher Getter der ID des Feldes zurueckgibt
 	 * 
 	 * @return iD - die ID des Feldes
 	 */
@@ -57,7 +57,7 @@ public class Startfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Öffentlicher Getter der Farbe des Feldes zurückgibt.
+	 * Oeffentlicher Getter der Farbe des Feldes zurueckgibt.
 	 * 
 	 * @return FarbEnum farbe - Farbe des Feldes
 	 */
@@ -66,11 +66,11 @@ public class Startfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Überschreiben der Equals. Zwei Objekte der Klasse Startfeld sind nur
+	 * Ueberschreiben der Equals. Zwei Objekte der Klasse Startfeld sind nur
 	 * dann gleich, wenn ihre Ihre ID und ihre Farbe die gleichen sind.
 	 * 
-	 * @param obj - Übergebenes Startfeld-Objekt vom Typ Object - wird mit this verglichen
-	 * @return boolean - gibt zurück ob zwei verglichene Startfelder gleich sind
+	 * @param obj - Uebergebenes Startfeld-Objekt vom Typ Object - wird mit this verglichen
+	 * @return boolean - gibt zurueck ob zwei verglichene Startfelder gleich sind
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -82,10 +82,10 @@ public class Startfeld extends Spielfeld implements Serializable {
 	}
 
 	/**
-	 * Überschriebene toString angepasst für die Klasse Standardfeld. Wandelt
+	 * Ueberschriebene toString angepasst fuer die Klasse Standardfeld. Wandelt
 	 * die Farbe und die ID in einen String und gibt diesen aus.
 	 * 
-	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurück
+	 * @return String - gibt String mit Inhalt Farbe und ID des Feldes zurueck
 	 */
 	@Override
 	public String toString() {

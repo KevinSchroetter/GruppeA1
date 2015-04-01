@@ -5,11 +5,11 @@ import java.io.Serializable;
 import Spiel.iBediener;
 
 /**
-* Abstrakte Klasse KI, in der eine künstliche Intelligenz erstellt werden kann und die die abstrakte Methode zugWählen besitzt, 
+* Abstrakte Klasse KI, in der eine kuenstliche Intelligenz erstellt werden kann und die die abstrakte Methode zugWaehlen besitzt, 
 * die in KI_Aggressiv und KI_Defensiv definiert werden.
 * 
-* @author Kevin Schrötter, Anna Rosa
-* @version 2.0
+* @author Kevin Schroetter, Anna Rosa
+* @version 3.0
 */
 public abstract class KI implements Serializable {
 
@@ -18,7 +18,7 @@ public abstract class KI implements Serializable {
 	iBediener iB;
 
 	/**
-	 * Konstruktor für eine Künstliche Intelligenz.
+	 * Konstruktor fuer eine Kuenstliche Intelligenz.
 	 * 
 	 * @param s - Typ Spieler, setzt eine Referenz auf den Spieler, der die KI besitzt.
 	 */
@@ -28,15 +28,15 @@ public abstract class KI implements Serializable {
 	}
 	
 	/**
-	 * Methode, die über das Interface die übergebene Zahl "würfelt".
+	 * Methode, die ueber das Interface die uebergebene Zahl "wuerfelt".
 	 * @param zahl - gewuenschtes Wuerfelergebnis
 	 */
-	public void würfeln(int zahl){
+	public void wuerfeln(int zahl){
 		iB.werfen(zahl);
 	}
 	
 	/**
-	 * Methode, die über das Interface eine Zufallszahl würfelt
+	 * Methode, die ueber das Interface eine Zufallszahl wuerfelt
 	 */
 	public void werfen(){
 		iB.rollTheDice();
@@ -47,6 +47,6 @@ public abstract class KI implements Serializable {
 	 * Abstrakte Methode, die in den spezifischen KIs aggressiv und defensiv
 	 * implementiert wird. Sie soll die Entscheidungen der KI steuern.
 	 */
-	public abstract void zugWählen();
+	public abstract void zugWaehlen();
 
 }

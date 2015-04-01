@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 /**
  * Diese Exception wird geworfen, wenn ein Spiel beendet ist.
- * @author kevin
- *
+ * @author Kevin Schroetter
+ * @since version 3.0
  */
 public class SpielBeendetException extends RuntimeException implements Serializable{
 	private static final long serialVersionUID = 1L;

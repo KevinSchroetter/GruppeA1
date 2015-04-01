@@ -1,14 +1,12 @@
 package Hilfsklassen;
 
 import java.io.Serializable;
-
-
-
 /**
  * Klasse FeldIndexOutOfBounds - erbt von {@link RuntimeException}, wird geworfen, wenn ein Feld mit kleiner 1 oder 
- * größer 40 addressiert wird.
+ * groesser 40 addressiert wird.
+ * @author Alexander Brueckner
+ * @since version 3.0
  */
-
 public class FeldIndexOutOfBounds extends RuntimeException implements Serializable {
 
 	private static final long serialVersionUID = 1L;

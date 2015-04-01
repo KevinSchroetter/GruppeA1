@@ -5,37 +5,35 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.After;
-import org.junit.AfterClass;
 
 import Basisklassen.*;
 import Spiel.*;
 /**
  * 
- * @author Kevin Schrötter
- * @version 1.3
+ * @author Kevin Schroetter
+ * @version 3.0
  * JUnit Testklasse zum Testen der Java Klasse "Spieler" im MADN Projekt
- * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalität von "Spieler" zu gewärleisten.
+ * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalitaet von "Spieler" zu gewaerleisten.
  * 
  * Attribute
  * spieler[] - Array zum Speichern von bis zu 4 Spieler-Objekten
- * Farbenums rot, blau, grün, gelb - angelegt zum einfacheren zuweisen einer Farbe an einen Spieler 
+ * Farbenums rot, blau, gruen, gelb - angelegt zum einfacheren zuweisen einer Farbe an einen Spieler 
  * 
  */
 
 public class TestSpieler {
 	static Spieler spieler[] = new Spieler[3];
-	static Würfel meinWürfel = new Würfel();
+	static Wuerfel meinWuerfel = new Wuerfel();
 	static Spielbrett b = new Spielbrett();
 	static Spielfigur figuren[] = new Spielfigur[4];
 	static Startfeld rotStart[] = {b.getStartFelderRot(0),b.getStartFelderRot(1),b.getStartFelderRot(2),b.getStartFelderRot(3)};
 	static Startfeld blauStart[] = {b.getStartFelderBlau(0),b.getStartFelderBlau(1),b.getStartFelderBlau(2),b.getStartFelderBlau(3)};
-	static Startfeld grünStart[] = {b.getStartFelderGrün(0),b.getStartFelderGrün(1),b.getStartFelderGrün(2),b.getStartFelderGrün(3)};
+	static Startfeld gruenStart[] = {b.getStartFelderGruen(0),b.getStartFelderGruen(1),b.getStartFelderGruen(2),b.getStartFelderGruen(3)};
 	static Startfeld gelbStart[] = {b.getStartFelderGelb(0),b.getStartFelderGelb(1),b.getStartFelderGelb(2),b.getStartFelderGelb(3)};
 	static Endfeld rotEnd[] = {b.getEndFelderRot(0),b.getEndFelderRot(1),b.getEndFelderRot(2),b.getEndFelderRot(3)};
 	static Endfeld blauEnd[] = {b.getEndFelderBlau(0),b.getEndFelderBlau(1),b.getEndFelderBlau(2),b.getEndFelderBlau(3)};
-	static Endfeld grünEnd[] = {b.getEndFelderGrün(0),b.getEndFelderGrün(1),b.getEndFelderGrün(2),b.getEndFelderGrün(3)};
+	static Endfeld gruenEnd[] = {b.getEndFelderGruen(0),b.getEndFelderGruen(1),b.getEndFelderGruen(2),b.getEndFelderGruen(3)};
 	static Endfeld gelbEnd[] = {b.getEndFelderGelb(0),b.getEndFelderGelb(1),b.getEndFelderGelb(2),b.getEndFelderGelb(3)};
 	/**
 	 * Bevor die Tests starten, werden 3 Spieler angelegt.	
@@ -47,7 +45,7 @@ public class TestSpieler {
 		
 		spieler[0] = new Spieler("Anna",FarbEnum.ROT,rotStart,rotEnd, s);
 		spieler[1] = new Spieler("Felix",FarbEnum.BLAU,blauStart,blauEnd,s);
-		spieler[2] = new Spieler("Alex",FarbEnum.GRÜN,grünStart,grünEnd,s);
+		spieler[2] = new Spieler("Alex",FarbEnum.GRUEN,gruenStart,gruenEnd,s);
 	}
 	
 	/**
@@ -58,7 +56,7 @@ public class TestSpieler {
 		System.out.println("Teststart");
 	}
 	/**
-	 * Für jedes Ende eines Tests wird ebenfalls eine Ausgabe dargestellt.
+	 * Fuer jedes Ende eines Tests wird ebenfalls eine Ausgabe dargestellt.
 	 */
 	@After
 	public void endAnzeige(){
@@ -66,7 +64,7 @@ public class TestSpieler {
 		System.out.println("");
 	}
 	/**
-	 * Erster Test. Hierbei wird überprüft, ob ein Spieler tatsächlich im Besitz von 4 Spielfiguren ist
+	 * Erster Test. Hierbei wird ueberprueft, ob ein Spieler tatsaechlich im Besitz von 4 Spielfiguren ist
 	 */
 
 	@Test
@@ -79,9 +77,9 @@ public class TestSpieler {
 		assertTrue(anzFiguren==4);
 	}
 	/**
-	 * Kontrolle, das nicht mehr als 4 Spieler erstellt werden können.
-	 * Dies soll wird in "Spieler" über ein statisches Attribut zur Spieleranzahl geregelt.
-	 * Im Test wird bewusst ein zusätzlicher Spieler angelegt, der die maximale Anzahl übersteigt. 
+	 * Kontrolle, das nicht mehr als 4 Spieler erstellt werden koennen.
+	 * Dies soll wird in "Spieler" ueber ein statisches Attribut zur Spieleranzahl geregelt.
+	 * Im Test wird bewusst ein zusaetzlicher Spieler angelegt, der die maximale Anzahl uebersteigt. 
 	 * Erwartet wird eine Exception.
 	 */
 
@@ -89,15 +87,18 @@ public class TestSpieler {
 	public void SpielerOverload() {
 		Spiel s= new Spiel();
 		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd,s);
+		System.out.println(s4);
 		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart,rotEnd,s);
+		System.out.println(overload);
 	}
 	/**
-	 * Ähnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe überprüft.
+	 * Aehnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe ueberprueft.
 	 */
 	@Test(expected=Exception.class)
 	public void FarbOverload(){
 		Spiel s= new Spiel();
 		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart,rotEnd,s);
+		System.out.println(s4);
 	}
 
 	/**
@@ -120,11 +121,11 @@ public class TestSpieler {
 		assertTrue(ki.getBedienung() instanceof KI);
 	}
 	/**
-	 * Trivial-Test nach Änderung am Attribut "meinWürfel". Wurde ein Würfel korrekt angelegt?
+	 * Trivial-Test nach aenderung am Attribut "meinWuerfel". Wurde ein Wuerfel korrekt angelegt?
 	 */
 	@Test
-	public void würfelTrivial(){
-		int erg=spieler[0].getMeinWürfel().werfen();
+	public void wuerfelTrivial(){
+		int erg=spieler[0].getMeinWuerfel().werfen();
 		assertTrue(erg==1|erg==2|erg==3|erg==4|erg==5|erg==6);
 		assertFalse(erg<1 | erg>6);
 	}
