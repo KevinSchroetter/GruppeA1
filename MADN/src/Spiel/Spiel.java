@@ -1114,7 +1114,8 @@ public class Spiel implements iBediener,Serializable{
 	 */
 	public ArrayList<Spielfigur> ausgabeZugFiguren() {
 		Spieler s = this.getIstAmZug();
-		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
+		ArrayList<Spielfigur> figurenListe = alleZugFiguren();
+		
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getKannZiehen()) {
 				figurenListe.add(f);
