@@ -1113,16 +1113,15 @@ public class Spiel implements iBediener,Serializable{
 	 * @return figurenListe - ArrayList vom Typ Spielfigur
 	 */
 	public ArrayList<Spielfigur> ausgabeZugFiguren() {
-		Spieler s = this.getIstAmZug();
 		ArrayList<Spielfigur> figurenListe = alleZugFiguren();
 		
-		for (Spielfigur f : s.alleFiguren()) {
-			if (f.getKannZiehen()) {
-				figurenListe.add(f);
+		for (Spielfigur f : figurenListe) {
 				System.out.println(f.getName()+" auf Feld "+f.getMeinFeld().getID());
-			}
 		}
-		return figurenListe;
+		if(!figurenListe.isEmpty())
+			return figurenListe;
+		else
+			return null;
 	}
 	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurueck die im Ziel sind und gibt diese auf der Systemkonsole aus
