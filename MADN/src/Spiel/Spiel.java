@@ -1161,6 +1161,7 @@ public class Spiel implements iBediener,Serializable{
 	 * @throws SpielBeendetException - Wenn ein Spiel bereits beendet ist
 	 * @throws FigurKannNichtZiehenException - Wenn eine Figur nicht ziehen kann
 	 * @throws NullPointerException - Wenn auf ein Feld zugegriffen werden soll, auf dem keine Figur steht
+	 * @throws RuntimeException - Wenn auf ein nicht vorhandenes Feld zugegriffen wird
 	 * War der Zug erfolgreich, gibt true zurueck.
 	 * 
 	 * 
@@ -1201,6 +1202,11 @@ public class Spiel implements iBediener,Serializable{
 			return zugErfolgreich;
 		}
 		catch (SpielBeendetException e){
+			zugErfolgreich = false;
+			System.out.println(e);
+			return zugErfolgreich;
+		}
+		catch (RuntimeException e){
 			zugErfolgreich = false;
 			System.out.println(e);
 			return zugErfolgreich;
