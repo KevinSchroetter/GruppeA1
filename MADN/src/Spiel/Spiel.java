@@ -466,10 +466,10 @@ public class Spiel implements iBediener,Serializable{
 			}
 			int ZielfeldID = ermittleZielfeldID(figur);
 			Standardfeld Zielfeld = getSpielbrett().getAlleStandardFelder()[ZielfeldID];
-			if (Zielfeld.getFigur() == null){
+			if (Zielfeld.getFigur() == null & figur.getFelderGelaufen()!=spielbrett.getAlleStandardFelder().length){
 				//System.out.println("Fall3.1");
 				return true;}
-			else if (figur.kannSchlagen(Zielfeld) == true){
+			else if (figur.kannSchlagen(Zielfeld) == true & figur.getFelderGelaufen()!=spielbrett.getAlleStandardFelder().length){
 				//System.out.println("Fall3.2");
 				figur.setKannSchlagen(true);
 				return true;}
