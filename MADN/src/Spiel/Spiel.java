@@ -1,8 +1,17 @@
 package Spiel;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import Basisklassen.*;
 import Hilfsklassen.*;
@@ -350,13 +359,37 @@ public class Spiel implements iBediener,Serializable{
 	 * Methode, die das Spiel startet, so dass keine Spieler mehr hinzugefuegt
 	 * werden koennen. Sie setzt den ersten Spieler im Spieler Array als den
 	 * Spieler, der am Zug ist.
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
+	 * @throws LineUnavailableException 
+	 * @throws InterruptedException 
 	 */
-	public void startSpiel() {
+	public void startSpiel() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException {
 		if(getHatBegonnen()==true)throw new RuntimeException("Spiel hat bereits begonnen!");
 		if(spieler[0]==null)throw new RuntimeException("Ein Spiel braucht mindestens einen Spieler!");
 		
 		setHatBegonnen(true);
 		
+		 Object lock = new Object();
+		 
+	    String soundFile = "Dokumente/connected.wav";
+	    try (AudioInputStream ais = AudioSystem.getAudioInputStream(new File(soundFile))) {
+	    	Clip clip = AudioSystem.getClip();
+	        clip.open(ais);
+	        clip.addLineListener((e) -> {
+	        	if (e.getType() == LineEvent.Type.STOP) {
+	        		synchronized (lock) {
+	                lock.notify();
+	        		}
+	        	}
+	        });
+	 
+	        clip.start();
+	    }
+	    synchronized (lock) {
+	    	lock.wait();
+	    }
+	    	
 		if(spieler[0]!=null){
 			spieler[0].setAmZug(true);
 			setIstAmZug(spieler[0]);
@@ -1394,6 +1427,18 @@ public class Spiel implements iBediener,Serializable{
 		}
 		catch(RuntimeException e){
 			System.out.println(e);
+		} catch (IOException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} catch (UnsupportedAudioFileException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			System.out.println(e);
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 	

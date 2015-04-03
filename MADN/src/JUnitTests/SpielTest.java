@@ -2,6 +2,11 @@ package JUnitTests;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -59,10 +64,14 @@ public class SpielTest {
 	}
 	/**
 	 * Testet, ob ein Spiel nicht startet, wenn kein Spieler hinzugefuegt wurde.
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
 	
 	@Test(expected=RuntimeException.class)
-	public void spielDarfNichtStarten(){
+	public void spielDarfNichtStarten() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException{
 		s2.startSpiel();
 	}
 	/**
@@ -74,9 +83,13 @@ public class SpielTest {
 	}
 	/**
 	 * Testet, ob ein Spiel erfolgreich gestartet ist, nachdem ein Spieler hinzugefuegt wurde.	
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
 	@Test
-	public void testeObSpielGestartet(){
+	public void testeObSpielGestartet() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException{
 		s.spielerHinzufuegen("Kev", 1, 0);
 		s.startSpiel();
 		assertTrue(s.getHatBegonnen()==true && s.getAnzahlSpieler()==1);
@@ -112,9 +125,13 @@ public class SpielTest {
 	 * Kontrolle, ob die Anzahl der fuer einen Zug moeglichen Figuren nachdem eine eigene Figur auf
 	 * dem eigenen Spawnfeld steht tatsaechlich nur 1 betraegt. Gleichzeitig wird getestet, ob der Spawnpunkt
 	 * von Spieler BLAU auch auf Feld mit ID 11 liegt.
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
 	@Test
-	public void alleaufspawnzugnachsechs(){
+	public void alleaufspawnzugnachsechs() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException{
 		s.neuesSpiel();
 		s.spielerHinzufuegen("KEVKEV", 1, 0);
 		s.spielerHinzufuegen("FLIXFLIX",2,0);
@@ -169,9 +186,13 @@ public class SpielTest {
 	}
 	/**
 	 * Ein Spieler darf nicht 2 mal hintereinander Ziehen ohne dazwischen zu wuerfeln
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
 	@Test(expected = FigurKannNichtZiehenException.class)
-	public void zugTestDoppel(){
+	public void zugTestDoppel() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException{
 		s3.spielerHinzufuegen("Versager", 1, 0);
 		s3.startSpiel();
 		s3.wuerfeln(6);
@@ -182,9 +203,13 @@ public class SpielTest {
 	 * Ein Spieler, der NICHT mehr alle Figuren auf den Startfeldern hat, darf ebenfalls nicht
 	 * doppelt wuerfeln. Dies muss hier nochmals getestet werden, da es zwei unterschiedliche Faelle sind.
 	 * Dazu wird Spiel s3 verwendet.
+	 * @throws InterruptedException 
+	 * @throws LineUnavailableException 
+	 * @throws UnsupportedAudioFileException 
+	 * @throws IOException 
 	 */
 	@Test(expected=RuntimeException.class)
-	public void nochmalWuerfelnNachSechs(){
+	public void nochmalWuerfelnNachSechs() throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException{
 		s4.spielerHinzufuegen("Kev",1,0);
 		s4.spielerHinzufuegen("Felix", 2, 0);
 		s4.startSpiel();
