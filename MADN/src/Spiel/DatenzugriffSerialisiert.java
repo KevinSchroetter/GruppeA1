@@ -3,120 +3,146 @@ package Spiel;
 import java.io.*;
 
 public class DatenzugriffSerialisiert implements iDatenzugriff {
-	/**
-	 * @author Alexander Brueckner
-	 * @version 1.0
-	 * 
-	 *          Klasse {@link DatenzugriffSerialisiert} implementiert Interface
-	 *          {@link iDatenzugriff} mittels Serialisierung.
-	 * 
-	 */
-
-	/**
-	 * Standardkonstruktor
-	 */
-	public DatenzugriffSerialisiert() {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 *
-	 * Methode spielSpeichern ueberrschreibt Methode aus Interface. Serialisiert
-	 * ein Spiel und speichert es in "savegame.ser"
-	 * 
-	 * @param s - Spiel
-	 * @throws IOException - wirft eine IOException
-	 * @throws FileNotFoundException - wenn die Datei nicht gefunden wurde
-	 * 
-	 */
 
 	@Override
-	public void spielSpeichern(Spiel s) throws IOException {
-		if (s == null)
-			throw new IllegalArgumentException("Unguelltiges Spiel");
-		ObjectOutputStream speicherStream = null;
+	public Object openFile(String path, int mode) {
 
-		try {
-			speicherStream = new ObjectOutputStream(new FileOutputStream(
-					"savegame.ser"));
-			speicherStream.writeObject(s);
-			System.out.println("Erfolgreich gespeicherrt!");
+		// 1 = Input, 2 = Output
+		switch (mode) {
+		case 1:
 
-		}
-
-		catch (FileNotFoundException e) {
-			System.out.println("Fehler beim erstelllen der Datei!");
-			e.printStackTrace();
-		}
-
-		catch (IOException e) {
-			System.out.println("Fehler beim Speichern der Datei!");
-			e.printStackTrace();
-		}
-
-		finally {
 			try {
-				speicherStream.close();
+
+				FileInputStream fileIn = new FileInputStream(path);
+				return fileIn;
 			}
 
-			catch (IOException e) {
-				System.out.println("Fehler beim schliessen derr Datei!");
+			catch (FileNotFoundException e) {
+				System.out.println("Fehler beim öffnen der Datei");
 				e.printStackTrace();
 			}
 
+		case 2:
+
+			try {
+				FileOutputStream fileOut = new FileOutputStream(path);
+				return fileOut;
+			}
+
+			catch (FileNotFoundException e) {
+				System.out.println("Fehler beim Erstellen der Datei!");
+				return null;
+			}
+
+		default:
+			throw new IllegalArgumentException("1 für input oder 2 für output!");
 		}
 
 	}
 
-	/**
-	 *
-	 * Methode spielLaden ueberrschreibt Methode aus Interface. Deserialisiert
-	 * ein Spiel aus "savegame.ser"
-	 * 
-	 * @throws IOException - wirft eine IOException
-	 * @throws FileNotFoundException - wenn die Datei nicht gefunden wurde
-	 * 
-	 */
-
 	@Override
-	public Spiel spielLaden() throws IOException {
-		Spiel s = null;
-		ObjectInputStream ladenStream = null;
+	public void spielSpeichern(Object saveme, Object stream) {
 
-		try {
-
-			ladenStream = new ObjectInputStream(new FileInputStream(
-					"savegame.ser"));
-			s = (Spiel) ladenStream.readObject();
-			return s;
+		if (!(stream instanceof FileOutputStream) || !(saveme instanceof Spiel)) {
+			throw new IllegalArgumentException(
+					"Ungültiger Dateistrom/Spielobjekt ungültig");
 		}
 
-		catch (FileNotFoundException e) {
-			System.out.println("Fehler beim Laden: Datei nicht vorhanden!");
-			e.printStackTrace();
-			return null;
-		}
+		else {
 
-		catch (IOException e) {
-			System.out.println("Fehler beim Laden der Datei!");
-			e.printStackTrace();
-			return null;
-		} catch (ClassNotFoundException e) {
-			System.out.println("Fataler Fehler: Klasse nicht gefunden");
-			e.printStackTrace();
-			return null;
-		}
-
-		finally {
 			try {
-				ladenStream.close();
+
+				ObjectOutputStream oos = new ObjectOutputStream(
+						(FileOutputStream) stream);
+				oos.writeObject(saveme);
+
+			}
+
+			catch (FileNotFoundException e) {
+				System.out.println("Fehler beim Lesen/erstellen der Datei");
 			}
 
 			catch (IOException e) {
-				System.out.println("Fehler beim schliessen der Datei!");
+				System.out.println("Fehler beim Lesen/Erstellen der Datei");
 			}
+
 		}
 
 	}
+
+	@Override
+	public Object spielLaden(Object stream) {
+
+		if (!(stream instanceof FileInputStream)) {
+			throw new IllegalArgumentException("Dateistrom ungültig!");
+		}
+
+		else {
+
+			try {
+				ObjectInputStream ois = new ObjectInputStream(
+						(FileInputStream) stream);
+				Object buf = ois.readObject();
+				if ((buf == null) || (!(buf instanceof Spiel))) {
+					throw new IOException("Spielobjekt ungültig!");
+				} else
+					return buf;
+
+			}
+
+			catch (FileNotFoundException e) {
+				System.out.println("Fehler: Datei nicht gefunden!");
+				e.printStackTrace();
+				return null;
+			} catch (IOException e) {
+				System.out.println("Fataler Fehler beim Öffnen der Datei!");
+				e.printStackTrace();
+				return null;
+			} catch (ClassNotFoundException e) {
+				System.out.println("Fataler Fehler: Klasse nicht gefunden!");
+				e.printStackTrace();
+				return null;
+			}
+
+		}
+
+	}
+
+	@Override
+	public void closeFile(Object o) {
+		// TODO Auto-generated method stub
+
+		if ((!(o instanceof FileInputStream))
+				&& (!(o instanceof FileOutputStream))) {
+			throw new IllegalArgumentException(
+					"Dateistrom ungültig - FileInputStream oder FileOutputStream!");
+		}
+
+		else if (o instanceof FileInputStream) {
+
+			try {
+				((FileInputStream) o).close();
+			}
+
+			catch (IOException e) {
+				System.out.println("Fehler beim schließen der Datei");
+			}
+
+		}
+
+		else if (o instanceof FileOutputStream) {
+
+			try {
+				((FileOutputStream) o).close();
+			}
+
+			catch (IOException e) {
+				System.out.println("Fehler beim schließen der Datei");
+			}
+
+		}
+
+	}
+
 
 }

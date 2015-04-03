@@ -9,7 +9,9 @@ import java.io.IOException;
  */
 public interface iDatenzugriff{
 	
-public void spielSpeichern(Spiel s) throws IOException;
-public Spiel spielLaden() throws IOException;
+public Object openFile(String path, int mode);
+public void spielSpeichern(Object saveme, Object stream);
+public Object spielLaden(Object stream);
+public void closeFile(Object o);
 
 }
