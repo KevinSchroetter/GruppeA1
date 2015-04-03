@@ -372,7 +372,7 @@ public class Spiel implements iBediener,Serializable{
 		
 		 Object lock = new Object();
 		 
-	    String soundFile = "Dokumente/connected.wav";
+	    String soundFile = "sounds/connected.wav";
 	    try (AudioInputStream ais = AudioSystem.getAudioInputStream(new File(soundFile))) {
 	    	Clip clip = AudioSystem.getClip();
 	        clip.open(ais);
