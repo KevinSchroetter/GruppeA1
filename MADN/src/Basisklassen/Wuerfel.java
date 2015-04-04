@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 /** Dies ist die Klasse Wuerfel fuer das MADN-Spiel.
  * Die Klasse besitzt die Eigenschaft gewuerfelteZahl, in der sie die zuletzt mit der werfen-Methode gewuerfelte Zahl speichert.
-@author Anna Rosa
-@version 3.0
-*/
+ *@author Anna Rosa
+ *@version 4.0
+ *@since v1.0
+ */ 
 
 public class Wuerfel implements Serializable {
 

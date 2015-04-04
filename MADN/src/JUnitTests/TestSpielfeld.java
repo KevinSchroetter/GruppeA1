@@ -4,7 +4,9 @@ package JUnitTests;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+
 import Basisklassen.*;
+import Einstellungen.FarbEnum;
 
 /**
  * Testklasse zum Testen der Java-Klasse "Spielfeld" im MADN-Projekt

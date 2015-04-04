@@ -12,8 +12,8 @@ import Basisklassen.*;
 /**
  * @author Alexander Brueckner
  *         (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version 3.0
- * @since 2015-03-15
+ * @version 4.0
+ * @since v1.0
  */
 
 public class SpielfigurTest {

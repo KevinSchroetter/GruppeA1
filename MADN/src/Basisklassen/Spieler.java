@@ -2,7 +2,10 @@ package Basisklassen;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
+import Einstellungen.FarbEnum;
+import Einstellungen.Settings;
 import Spiel.*;
 
 /**
@@ -10,13 +13,16 @@ import Spiel.*;
  * Methoden, auf die ein Spieler spaeter im Spiel Zugriff erhaelt.
  * 
  * @author Kevin Schroetter
- * @version 3.0
+ * @version 4.0
+ * @since v1.0
  *
  */
 public class Spieler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	public static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
+	
 	private static int spielernummer = 0;
 
 	private int meineNummer = 0;
@@ -29,7 +35,7 @@ public class Spieler implements Serializable {
 
 	private Endfeld[] endFelder = null;
 
-	private Spielfigur figuren[] = new Spielfigur[4];
+	private Spielfigur figuren[] = new Spielfigur[Settings.maxFiguren];
 
 	private Spielfigur zugFigur = null;
 
@@ -51,9 +57,6 @@ public class Spieler implements Serializable {
 	 */
 	
 	private iBediener iB;
-
-	/**
-	
 
 	/**
 	 * Konstruktor zum erstellen eines Objektes, das von einem Menschen
@@ -112,8 +115,6 @@ public class Spieler implements Serializable {
 	 * groesser als 4 werden.
 	 */
 	public void setSpielernummer() {
-		if (getSpielernummer() >= 4)
-			throw new RuntimeException("Maximale Spieleranzahl erreicht");
 		spielernummer++;
 	}
 
@@ -177,11 +178,7 @@ public class Spieler implements Serializable {
 	 *            - Array vom Typ Startfeld.
 	 */
 	public void setStartFelder(Startfeld[] startFelder) {
-		for (Startfeld sf : startFelder) {
-			if (getFarbe() != sf.getFarbe())
-				throw new RuntimeException(
-						"Ein Spieler kennt nur die Startfelder seiner Farbe!");
-		}
+		if(!startFelder[0].getFarbe().equals(getFarbe())) throw new RuntimeException("Ein Spieler kennt nur die Startfelder seiner Farbe!");
 		this.startFelder = startFelder;
 	}
 
@@ -208,11 +205,7 @@ public class Spieler implements Serializable {
 	 *            - Array vom Typ Endfeld.
 	 */
 	public void setEndFelder(Endfeld[] endFelder) {
-		for (Endfeld ef : endFelder) {
-			if (getFarbe() != ef.getFarbe())
-				throw new RuntimeException(
-						"Ein Spieler kennt nur die Endfelder seiner Farbe!");
-		}
+		if(!endFelder[0].getFarbe().equals(getFarbe())) throw new RuntimeException("Ein Spieler kennt nur die Endfelder seiner Farbe!");
 		this.endFelder = endFelder;
 	}
 
@@ -238,27 +231,10 @@ public class Spieler implements Serializable {
 		if (getFarbe() == null)
 			throw new RuntimeException("Es muss eine Farbe vergeben sein!");
 		int figCounter=1;
-		String name=null;
-		int farbID = 0;
-		if (getFarbe() == FarbEnum.ROT){
-			farbID = 1;
-			name = "ROT ";
-		}
-		else if (getFarbe() == FarbEnum.BLAU){
-			farbID = 2;
-			name = "BLAU ";
-		}
-		else if (getFarbe() == FarbEnum.GRUEN){
-			farbID = 3;
-			name = "GRUEN ";
-		}
-		else if (getFarbe() == FarbEnum.GELB){
-			farbID = 4;
-			name = "GELB ";
-		}
-
-		for (int i = 0; i < 4; i++) {
-			figuren[i] = new Spielfigur(farbID,name+figCounter);
+		String name=getFarbe().name();
+		int farbID = farben.indexOf(getFarbe());		
+		for (int i = 0; i < Settings.maxFiguren; i++) {
+			figuren[i] = new Spielfigur(farbID,name+" "+figCounter);
 			figCounter++;
 			figuren[i].setMeinFeld(startFelder[i]);
 			figuren[i].setIstGespawnt(figuren[i].binIchGespawnt());
@@ -437,7 +413,7 @@ public class Spieler implements Serializable {
 	public boolean alleAufSpawn() {
 		boolean erg = false;
 		for (int i = 1; i < 4; i++)
-			if (getFiguren(i).getIstGespawnt() == true)
+			if (getFiguren(i).getIstGespawnt() == false)
 				erg = true;
 			else {
 				erg = false;
@@ -482,6 +458,6 @@ public class Spieler implements Serializable {
 	 * HilfsMethode zum Loeschen der static Spielernummer (Wird in Spiel benoetigt, daher public)
 	 */
 	public void deleteSpielernummer(){
-		this.spielernummer=0;
+		Spieler.spielernummer=0;
 	}
 }

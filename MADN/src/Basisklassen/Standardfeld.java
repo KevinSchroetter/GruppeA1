@@ -8,13 +8,13 @@ import java.io.Serializable;
  * identifizierbar ist - diese liegt im Wertebereich 1-40
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 3.0
- * @since 2015-03-16
+ * @version 4.0
+ * @since v1.0
  */
+
 public class Standardfeld extends Spielfeld implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String iD;
 
 	/**
 	 * Konstruktor fuer ein Standardfeld. ueber das Attribut iD wird dem Feld
@@ -28,21 +28,8 @@ public class Standardfeld extends Spielfeld implements Serializable {
 	 */
 	public Standardfeld(int iD) {
 		super();
-		if (iD >= 1 && iD <= 40) {
-			String idString=iD+"";
-			this.iD = idString;
-		} else {
-			throw new RuntimeException("iD muss im Bereich 1-40 liegen!");
-		}
-	}
-
-	/**
-	 * Oeffentlicher Getter der FeldID zurueckgibt.
-	 * 
-	 * @return int iD - die ID des Feldes
-	 */
-	public String getID() {
-		return this.iD;
+		String idString=iD+"";
+		setID(idString);
 	}
 
 	/**
@@ -58,16 +45,4 @@ public class Standardfeld extends Spielfeld implements Serializable {
 			f = (Standardfeld) obj;
 		return f.getID() == this.getID();
 	}
-
-	/**
-	 * Ueberschriebene toString angepasst fuer die Klasse Standardfeld. Wandelt
-	 * die ID in einen String und gibt diesen aus.
-	 * 
-	 * @return String - gibt String mit Inhalt ID des Feldes zurueck
-	 */
-	@Override
-	public String toString() {
-		return String.valueOf(this.getID());
-	}
-
 }

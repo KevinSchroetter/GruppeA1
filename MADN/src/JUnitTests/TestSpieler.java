@@ -8,11 +8,12 @@ import org.junit.Before;
 import org.junit.After;
 
 import Basisklassen.*;
+import Einstellungen.FarbEnum;
 import Spiel.*;
 /**
  * 
  * @author Kevin Schroetter
- * @version 3.0
+ * @version 4.0
  * JUnit Testklasse zum Testen der Java Klasse "Spieler" im MADN Projekt
  * Hierbei werden verschiedene Tests abgedeckt, um die Funktionalitaet von "Spieler" zu gewaerleisten.
  * 
@@ -27,14 +28,14 @@ public class TestSpieler {
 	static Wuerfel meinWuerfel = new Wuerfel();
 	static Spielbrett b = new Spielbrett();
 	static Spielfigur figuren[] = new Spielfigur[4];
-	static Startfeld rotStart[] = {b.getStartFelderRot(0),b.getStartFelderRot(1),b.getStartFelderRot(2),b.getStartFelderRot(3)};
-	static Startfeld blauStart[] = {b.getStartFelderBlau(0),b.getStartFelderBlau(1),b.getStartFelderBlau(2),b.getStartFelderBlau(3)};
-	static Startfeld gruenStart[] = {b.getStartFelderGruen(0),b.getStartFelderGruen(1),b.getStartFelderGruen(2),b.getStartFelderGruen(3)};
-	static Startfeld gelbStart[] = {b.getStartFelderGelb(0),b.getStartFelderGelb(1),b.getStartFelderGelb(2),b.getStartFelderGelb(3)};
-	static Endfeld rotEnd[] = {b.getEndFelderRot(0),b.getEndFelderRot(1),b.getEndFelderRot(2),b.getEndFelderRot(3)};
-	static Endfeld blauEnd[] = {b.getEndFelderBlau(0),b.getEndFelderBlau(1),b.getEndFelderBlau(2),b.getEndFelderBlau(3)};
-	static Endfeld gruenEnd[] = {b.getEndFelderGruen(0),b.getEndFelderGruen(1),b.getEndFelderGruen(2),b.getEndFelderGruen(3)};
-	static Endfeld gelbEnd[] = {b.getEndFelderGelb(0),b.getEndFelderGelb(1),b.getEndFelderGelb(2),b.getEndFelderGelb(3)};
+	static Startfeld rotStart[] = b.getAlleStartFelderEinerFarbe(FarbEnum.ROT);
+	static Startfeld blauStart[] = b.getAlleStartFelderEinerFarbe(FarbEnum.BLAU);
+	static Startfeld gruenStart[] = b.getAlleStartFelderEinerFarbe(FarbEnum.GRUEN);
+	static Startfeld gelbStart[] = b.getAlleStartFelderEinerFarbe(FarbEnum.GELB);
+	static Endfeld rotEnd[] = b.getAlleEndFelderEinerFarbe(FarbEnum.ROT);
+	static Endfeld blauEnd[] = b.getAlleEndFelderEinerFarbe(FarbEnum.BLAU);
+	static Endfeld gruenEnd[] = b.getAlleEndFelderEinerFarbe(FarbEnum.GRUEN);
+	static Endfeld gelbEnd[] = b.getAlleEndFelderEinerFarbe(FarbEnum.GELB);
 	/**
 	 * Bevor die Tests starten, werden 3 Spieler angelegt.	
 	 */
@@ -76,29 +77,20 @@ public class TestSpieler {
 		
 		assertTrue(anzFiguren==4);
 	}
-	/**
-	 * Kontrolle, das nicht mehr als 4 Spieler erstellt werden koennen.
-	 * Dies soll wird in "Spieler" ueber ein statisches Attribut zur Spieleranzahl geregelt.
-	 * Im Test wird bewusst ein zusaetzlicher Spieler angelegt, der die maximale Anzahl uebersteigt. 
-	 * Erwartet wird eine Exception.
-	 */
 
-	@Test(expected=Exception.class)
-	public void SpielerOverload() {
-		Spiel s= new Spiel();
-		Spieler s4 = new Spieler("Kevin",FarbEnum.GELB,gelbStart,gelbEnd,s);
-		System.out.println(s4);
-		Spieler overload = new Spieler("Bonus",FarbEnum.ROT,rotStart,rotEnd,s);
-		System.out.println(overload);
-	}
 	/**
 	 * Aehnlich wie der Test zum Spielernamen. Hierbei wird jedoch die Farbe ueberprueft.
 	 */
-	@Test(expected=Exception.class)
+	@Test
 	public void FarbOverload(){
 		Spiel s= new Spiel();
-		Spieler s4 = new Spieler("Kevin",FarbEnum.ROT,rotStart,rotEnd,s);
-		System.out.println(s4);
+		s.neuerSpieler("Kevin", 1, 0);
+		s.neuerSpieler("Holgersson", 1, 0);
+		s.starteSpiel();
+		s.rollTheDice();
+		s.rollTheDice();
+		s.rollTheDice();
+		assertFalse(s.ausgabeSpielerAmZug().getName().equals("Holgersson"));
 	}
 
 	/**

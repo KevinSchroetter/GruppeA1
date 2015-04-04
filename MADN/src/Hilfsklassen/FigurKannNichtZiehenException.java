@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * Wird geworfen, wenn eine Figur nicht ziehen kann.
  * @author Alexander Brueckner
- * @since version 3.0
+ * @version 4.0
+ * @since v3.0
  */
 
 public class FigurKannNichtZiehenException extends RuntimeException implements Serializable{

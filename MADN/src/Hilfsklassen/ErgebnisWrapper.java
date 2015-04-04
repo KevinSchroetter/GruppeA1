@@ -1,6 +1,7 @@
 package Hilfsklassen;
 
-import Basisklassen.FarbEnum;
+import Einstellungen.FarbEnum;
+
 import java.io.Serializable;
 
 /**
@@ -10,8 +11,8 @@ import java.io.Serializable;
  *  
  * 
  * @author      Alexander Brueckner (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version     3.0           
- * @since       version 1.0          
+ * @version     4.0           
+ * @since       v1.0          
  */
 
 public class ErgebnisWrapper implements Serializable {

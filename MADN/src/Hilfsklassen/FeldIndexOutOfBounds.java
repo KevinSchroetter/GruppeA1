@@ -5,7 +5,8 @@ import java.io.Serializable;
  * Klasse FeldIndexOutOfBounds - erbt von {@link RuntimeException}, wird geworfen, wenn ein Feld mit kleiner 1 oder 
  * groesser 40 addressiert wird.
  * @author Alexander Brueckner
- * @since version 3.0
+ * @version 4.0
+ * @since v3.0
  */
 public class FeldIndexOutOfBounds extends RuntimeException implements Serializable {
 

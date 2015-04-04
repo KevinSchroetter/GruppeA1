@@ -2,6 +2,8 @@ package Basisklassen;
 
 import java.util.ArrayList;
 
+import Einstellungen.FarbEnum;
+
 /**
  * Klasse der aggressiven KI, in der das Verhalten der KI implementiert wird.
  * @author Anna
@@ -15,7 +17,7 @@ public class KI_Aggressiv extends KI {
 
 	/**
 	 * Konstruktor der aggressiven KI, wird durch den Spieler-Konstruktor aufgerufen.
-	 * @version 3.0
+	 * @version 4.0
 	 * @param s - der zukuenftige KI Spieler
 	 */
 	public KI_Aggressiv(Spieler s) {
@@ -33,7 +35,8 @@ public class KI_Aggressiv extends KI {
 	 */
 	public void zugWaehlen() {
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
-		ArrayList<Spielfigur> kannSchlagen = new <Spielfigur> ArrayList();
+		@SuppressWarnings("unused")
+		ArrayList<Spielfigur> kannSchlagen = new <Spielfigur> ArrayList<Spielfigur>();
 
 		for (Spielfigur figur : kannZiehen) {
 			if (figur.getKannSchlagen() == true) {

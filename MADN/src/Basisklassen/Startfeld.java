@@ -2,6 +2,9 @@ package Basisklassen;
 
 import java.io.Serializable;
 
+import Einstellungen.FarbEnum;
+import Einstellungen.Settings;
+
 /**
  * Klasse Startfeld erbt von Spielfeld. Ueber diese Klasse werden die Startfelder
  * von MADN erstellt. Auf diesen stehen die Figuren bevor Sie auf das
@@ -9,19 +12,15 @@ import java.io.Serializable;
  * Feld identifizierbar ist sowie eine Farbe.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 3.0
- * @since 2015-03-16
+ * @version 4.0
+ * @since v1.0
  */
-
 public class Startfeld extends Spielfeld implements Serializable {
-
 	
 	private static final long serialVersionUID = 1L;
 
-	private String iD;
-
 	private FarbEnum farbe;
-
+	
 	/**
 	 * Konstruktor fuer ein Startfeld. Ueber das Attribut iD wird dem Feld eine
 	 * genaue ID zugewiesen ueber die das Feld in Kombination mit seiner Farbe
@@ -37,25 +36,15 @@ public class Startfeld extends Spielfeld implements Serializable {
 	 */
 	public Startfeld(String iD, FarbEnum farbe) {
 		super();
-		if (iD.contains("S1") || iD.contains("S2") || iD.contains("S3")
-				|| iD.contains("S4")) {
-			this.iD = iD;
-		} else {
-			throw new RuntimeException("Muss S1-S4 sein!");
-		}
-
+		int check = 0;
+		for(int i = 0; i < Settings.maxFiguren; i++)
+			if(iD.contains("S"+(i+1)))
+				check++;
+		if(check > 0) setID(iD);
+		else throw new RuntimeException("Muss S1-S"+Settings.maxFiguren +" sein!");
 		this.farbe = farbe;
 	}
-
-	/**
-	 * Oeffentlicher Getter der ID des Feldes zurueckgibt
-	 * 
-	 * @return iD - die ID des Feldes
-	 */
-	public String getID() {
-		return this.iD;
-	}
-
+	
 	/**
 	 * Oeffentlicher Getter der Farbe des Feldes zurueckgibt.
 	 * 
@@ -80,7 +69,7 @@ public class Startfeld extends Spielfeld implements Serializable {
 		return f.getID() == this.getID()
 				&& f.getFarbe().equals(this.getFarbe());
 	}
-
+	
 	/**
 	 * Ueberschriebene toString angepasst fuer die Klasse Standardfeld. Wandelt
 	 * die Farbe und die ID in einen String und gibt diesen aus.
@@ -91,5 +80,4 @@ public class Startfeld extends Spielfeld implements Serializable {
 	public String toString() {
 		return String.valueOf(this.getFarbe()) + " " + this.getID();
 	}
-
 }

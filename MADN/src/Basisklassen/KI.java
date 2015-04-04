@@ -9,7 +9,8 @@ import Spiel.iBediener;
 * die in KI_Aggressiv und KI_Defensiv definiert werden.
 * 
 * @author Kevin Schroetter, Anna Rosa
-* @version 3.0
+* @version 4.0
+* @since v3.0
 */
 public abstract class KI implements Serializable {
 
@@ -41,12 +42,10 @@ public abstract class KI implements Serializable {
 	public void werfen(){
 		iB.rollTheDice();
 	}
-	
 
 	/**
 	 * Abstrakte Methode, die in den spezifischen KIs aggressiv und defensiv
 	 * implementiert wird. Sie soll die Entscheidungen der KI steuern.
 	 */
 	public abstract void zugWaehlen();
-
 }

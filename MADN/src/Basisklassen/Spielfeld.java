@@ -8,16 +8,15 @@ import java.io.Serializable;
  * werden und kennt diese dann.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 3.0
- * @since 2015-03-14
+ * @version 4.0
+ * @since v1.0
  */
-
 public abstract class Spielfeld implements Serializable {
-
 
 	private static final long serialVersionUID = 1L;
 	private Spielfigur figur;
 	private String iD;
+	
 	/**
 	 * Konstruktor fuer ein Spielfeld. Spielfeld kennt die Belegung durch eine
 	 * Figur.
@@ -51,8 +50,17 @@ public abstract class Spielfeld implements Serializable {
 	}
 
 	public String getID() {
-		// TODO Auto-generated method stub
 		return this.iD;
 	}
-
+	
+	/**
+	 * Ueberschriebene toString angepasst fuer die Klasse Standardfeld. Wandelt
+	 * die ID in einen String und gibt diesen aus.
+	 * 
+	 * @return String - gibt String mit Inhalt ID des Feldes zurueck
+	 */
+	@Override
+	public String toString() {
+		return String.valueOf(this.getID());
+	}
 }

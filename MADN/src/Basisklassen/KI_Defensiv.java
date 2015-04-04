@@ -3,13 +3,11 @@ package Basisklassen;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import Spiel.iBediener;
-
 
 /**
  * Die Klasse der defensiven KI, erbt von KI. Ueber den Konstruktor wird die Komposition zum Spieler gesetzt,
  *  ueber die zugWaehlen-Methode definiert.
- * @version 3.0
+ * @version 4.0
  * @author Anna Rosa
  *
  */

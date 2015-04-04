@@ -6,11 +6,14 @@ import org.junit.Test;
 import org.junit.BeforeClass;
 import org.junit.Before;
 import org.junit.After;
+
 import Basisklassen.*;
+import Einstellungen.FarbEnum;
 /**
  * Test fuer das Spielbrett
  * @author Anna Rosa
- * @version 3.0
+ * @version 4.0
+ * @since v1.0
  *
  */
 public class SpielbrettTest {
@@ -34,9 +37,9 @@ public class SpielbrettTest {
 	
 	@Test
 	public void testStartFelder() {
-		Startfeld s1=s.getStartFelderRot(2);
-		Startfeld s2= s.getStartFelderGruen(0);
-		assertTrue( String.valueOf(s1.getID()).equals("S3")& String.valueOf(s2.getID()).equals("S1"));
+		Startfeld s1=s.getAlleStartFelderEinerFarbe(FarbEnum.ROT)[1];
+		Startfeld s2= s.getAlleStartFelderEinerFarbe(FarbEnum.ROT)[0];
+		assertTrue(s1.getFarbe().equals(s2.getFarbe()));
 	}
 	
 	@Test
@@ -49,15 +52,15 @@ public class SpielbrettTest {
 	
 	@Test
 	public void testEndfelder(){
-		Endfeld s1=s.getEndFelderRot(0);
-		Endfeld s2=s.getEndFelderBlau(3);
+		Endfeld s1=s.getAlleEndFelderEinerFarbe(FarbEnum.ROT)[0];
+		Endfeld s2=s.getAlleEndFelderEinerFarbe(FarbEnum.BLAU)[3];
 		assertTrue(String.valueOf(s1.getID()).equals("E1") & String.valueOf(s2.getID()).equals("E4"));
 	}
 	
 	@Test
 	public void testFarben(){
-		FarbEnum f1= s.getStartFelderRot(2).getFarbe();
-		FarbEnum f2= s.getEndFelderBlau(0).getFarbe();
+		FarbEnum f1= s.getAlleStartFelderEinerFarbe(FarbEnum.ROT)[2].getFarbe();
+		FarbEnum f2= s.getAlleEndFelderEinerFarbe(FarbEnum.BLAU)[0].getFarbe();
 		assertTrue(f1.equals(FarbEnum.ROT)& f2.equals(FarbEnum.BLAU));
 	}
 

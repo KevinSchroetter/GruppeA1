@@ -2,6 +2,9 @@ package Basisklassen;
 
 import java.io.Serializable;
 
+import Einstellungen.FarbEnum;
+import Einstellungen.Settings;
+
 /**
  * Klasse Endfeld erbt von Spielfeld. Ueber diese Klasse werden die Endfelder
  * von MADN erstellt. Auf diesen sammeln sich die Figuren um das Ende des Spiels
@@ -9,21 +12,15 @@ import java.io.Serializable;
  * identifizierbar ist sowie eine Farbe.
  * 
  * @author Felix Rosa (Felix_Frederic.Rosa@Student.Reutlingen-University.de)
- * @version 3.0
- * @since 2015-03-16
+ * @version 4.0
+ * @since v1.0
  */
-
 public class Endfeld extends Spielfeld implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	private String iD;
-
 	private FarbEnum farbe;
-
+	
 	/**
 	 * Konstruktor fuer ein Endfeld. Ueber das Attribut iD wird dem Feld eine
 	 * genaue ID zugewiesen ueber die das Feld in Kombination mit seiner Farbe
@@ -39,24 +36,15 @@ public class Endfeld extends Spielfeld implements Serializable {
 	 */
 	public Endfeld(String iD, FarbEnum farbe) {
 		super();
-		if (iD.contains("E1") || iD.contains("E2") || iD.contains("E3")
-				|| iD.contains("E4")) {
-			this.iD = iD;
-		} else {
-			throw new RuntimeException("Muss E1-E4 sein!");
-		}
+		int check = 0;
+		for(int i = 0; i < Settings.maxFiguren; i++)
+			if(iD.contains("E"+(i+1)))
+				check++;
+		if(check > 0) setID(iD);
+		else throw new RuntimeException("Muss E1-E"+Settings.maxFiguren +" sein!");
 		this.farbe = farbe;
 	}
-
-	/**
-	 * Oeffentlicher Getter der die FeldID zurueckgibt.
-	 * 
-	 * @return int iD - die ID des Feldes
-	 */
-	public String getID() {
-		return this.iD;
-	}
-
+	
 	/**
 	 * Oeffentlicher Getter der die Farbe des Feldes zurueckgibt
 	 * 
@@ -81,7 +69,7 @@ public class Endfeld extends Spielfeld implements Serializable {
 		return f.getID() == this.getID()
 				&& f.getFarbe().equals(this.getFarbe());
 	}
-
+	
 	/**
 	 * Ueberschriebene toString angepasst fuer die Klasse Endfeld. Wandelt die
 	 * Farbe und die ID in einen String und gibt diesen aus.
@@ -92,5 +80,4 @@ public class Endfeld extends Spielfeld implements Serializable {
 	public String toString() {
 		return String.valueOf(this.getFarbe()) + " " + this.getID();
 	}
-
 }

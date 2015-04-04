@@ -1,20 +1,25 @@
 package Basisklassen;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.EnumSet;
+
+import Einstellungen.FarbEnum;
 
 /**
- * @author Alexander Brueckner
- *         (Alexander.Brueckner@Student-Reutlingen-University.de)
- * @version 3.0
- * @since 2015-03-12
+ * @author Alexander Brueckner (Alexander.Brueckner@Student-Reutlingen-University.de)
+ * @version 4.0
+ * @since v1.0
  */
 
 public class Spielfigur implements Serializable {
 
 
 	private static final long serialVersionUID = 1L;
-
+	
 	private static int anzahlFiguren = 0;
+	
+	public static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
 
 	private String name;
 
@@ -38,7 +43,6 @@ public class Spielfigur implements Serializable {
 
 	private boolean binIchAufEndposition=false;
 
-	// Getter/Setter
 	/**
 	 * Getter fuer den Namen der Figur
 	 * @return name - der Name der Figur
@@ -225,7 +229,7 @@ public class Spielfigur implements Serializable {
 	 * @return int Spielfigur.anzahlFiguren
 	 */
 
-	public static int getAnzFiguren() {
+	public int getAnzFiguren() {
 		return Spielfigur.anzahlFiguren;
 
 	}
@@ -284,27 +288,10 @@ public class Spielfigur implements Serializable {
 	 */
 
 	public Spielfigur(int farbID, String name) {
-
-		if (farbID == 1) {
-			setFarbe(FarbEnum.ROT);
-		} else if (farbID == 2) {
-			setFarbe(FarbEnum.BLAU);
-		} else if (farbID == 3) {
-			setFarbe(FarbEnum.GRUEN);
-		} else if (farbID == 4) {
-			setFarbe(FarbEnum.GELB);
-		} else
-			throw new IllegalArgumentException(
-					"Ungueltige Farbe! 1 = Rot, 2 = Blau, 3 = Gruen, 4 = Gelb!");
-
-		if (anzahlFiguren >= 16)
-			throw new RuntimeException(
-					"Zu viele Figuren! max. 16 (4 pro Spieler!");
-		else {
-			this.setID(++Spielfigur.anzahlFiguren);
-			setName(name);
-		}
-
+		FarbEnum farbe = farben.get(farbID);
+		setFarbe(farbe);
+		setID(++Spielfigur.anzahlFiguren);
+		setName(name);
 	}
 
 	/**
