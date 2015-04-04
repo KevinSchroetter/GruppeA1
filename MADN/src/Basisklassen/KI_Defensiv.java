@@ -7,7 +7,8 @@ import Spiel.iBediener;
 
 
 /**
- * Die Klasse der defensiven KI, erbt von KI. Ueber den Konstruktor wird die Komposition zum Spieler gesetzt.
+ * Die Klasse der defensiven KI, erbt von KI. Ueber den Konstruktor wird die Komposition zum Spieler gesetzt,
+ *  ueber die zugWaehlen-Methode definiert.
  * @version 3.0
  * @author Anna Rosa
  *
@@ -15,7 +16,6 @@ import Spiel.iBediener;
 public class KI_Defensiv extends KI implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	iBediener iB;
 	/**
 	 * Konstruktor der defensiven KI, wird durch den Spieler-Konstruktor aufgerufen.
 	 * @param s-Spieler, der eine KI werden soll
@@ -41,12 +41,12 @@ public class KI_Defensiv extends KI implements Serializable {
 		for (int i = 0; i < kannZiehen.size(); i++) {
 			amWeitesten[i] = kannZiehen.get(i);
 		}
-		for (int i = 0; i < amWeitesten.length; i++) {
+		for (int i = 0; i < amWeitesten.length-1; i++) {
 			if (amWeitesten[i].getFelderGelaufen() > amWeitesten[i + 1]
 					.getFelderGelaufen()) {
 				Spielfigur temp = amWeitesten[i + 1];
-				amWeitesten[i] = amWeitesten[i + 1];
-				amWeitesten[i + 1] = temp;
+				amWeitesten[i+1] = amWeitesten[i];
+				amWeitesten[i] = temp;
 			}
 		}
 		String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();

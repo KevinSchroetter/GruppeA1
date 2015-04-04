@@ -2,13 +2,17 @@ package Basisklassen;
 
 import java.util.ArrayList;
 
-import Spiel.iBediener;
-
+/**
+ * Klasse der aggressiven KI, in der das Verhalten der KI implementiert wird.
+ * @author Anna
+ * 
+ *
+ */
 public class KI_Aggressiv extends KI {
 
 	private static final long serialVersionUID = 1L;
 
-	iBediener iB;
+
 	/**
 	 * Konstruktor der aggressiven KI, wird durch den Spieler-Konstruktor aufgerufen.
 	 * @version 3.0
@@ -29,7 +33,7 @@ public class KI_Aggressiv extends KI {
 	 */
 	public void zugWaehlen() {
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
-		ArrayList<Spielfigur> kannSchlagen = new<Spielfigur> ArrayList();
+		ArrayList<Spielfigur> kannSchlagen = new <Spielfigur> ArrayList();
 
 		for (Spielfigur figur : kannZiehen) {
 			if (figur.getKannSchlagen() == true) {
@@ -49,12 +53,12 @@ public class KI_Aggressiv extends KI {
 				amWeitesten[i] = figur;
 
 			}
-			for (int i = 0; i < amWeitesten.length - 1; i++) {
+			for (int i = 0; i < amWeitesten.length-1; i++) {
 				if (amWeitesten[i].getFelderGelaufen() > amWeitesten[i + 1]
 						.getFelderGelaufen()) {
 					Spielfigur temp = amWeitesten[i + 1];
-					amWeitesten[i] = amWeitesten[i + 1];
-					amWeitesten[i + 1] = temp;
+					amWeitesten[i+1] = amWeitesten[i];
+					amWeitesten[i] = temp;
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
@@ -71,14 +75,48 @@ public class KI_Aggressiv extends KI {
 
 			Spielfigur[] amWeitesten = new Spielfigur[kannZiehen.size()];
 			for (int i = 0; i < kannZiehen.size(); i++) {
+				String idSpawnFeldCheck=kannZiehen.get(i).getMeinFeld().getID();
+				switch(idSpawnFeldCheck){
+					case "1":
+						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.ROT)){
+							String id=kannZiehen.get(i).getMeinFeld().getID();
+							iB.zugDurchfuehren(id);
+							return;
+						}
+						
+					case "11":
+						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.BLAU)){
+							String id=kannZiehen.get(i).getMeinFeld().getID();
+							iB.zugDurchfuehren(id);
+							return;
+						}
+						
+						
+					case "21":
+						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.GRUEN)){
+							String id=kannZiehen.get(i).getMeinFeld().getID();
+							iB.zugDurchfuehren(id);
+							return;
+						}
+						
+						
+					case "31":
+						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.GELB)){
+							String id=kannZiehen.get(i).getMeinFeld().getID();
+							iB.zugDurchfuehren(id);
+							return;
+						}
+						
+				}
+					
 				amWeitesten[i] = kannZiehen.get(i);
 			}
-			for (int i = 0; i < amWeitesten.length; i++) {
+			for (int i = 0; i < amWeitesten.length-1; i++) {
 				if (amWeitesten[i].getFelderGelaufen() > amWeitesten[i + 1]
 						.getFelderGelaufen()) {
 					Spielfigur temp = amWeitesten[i + 1];
-					amWeitesten[i] = amWeitesten[i + 1];
-					amWeitesten[i + 1] = temp;
+					amWeitesten[i+1] = amWeitesten[i];
+					amWeitesten[i] = temp;
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
@@ -86,5 +124,4 @@ public class KI_Aggressiv extends KI {
 		}
 
 	}
-
 }

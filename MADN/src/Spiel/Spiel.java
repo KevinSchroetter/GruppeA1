@@ -1446,4 +1446,29 @@ public class Spiel implements iBediener,Serializable{
 	public Spieler ausgabeSpielerAmZug(){
 		return istAmZug;
 	}
+	
+	/**
+	 * Methode fuer die KI, die ueberprueft, ob Spieler istAmZug eine KI hat, falls dies der Fall ist,
+	 * wird die zugWaehlen-Methode der KI aufgerufen, falls nicht, wird eine Exception gethrowt und gecatcht.
+	 * @author Anna Rosa
+	 * @since version 3.0
+	 * @throws MethodeFuerKiException  Falls die Methode von einem menschlichen Spieler aufgerufen wird.
+	 */
+	@Override
+	public void zugDurchfuehrenKI(){
+		try {
+			if(istAmZug.getBedienung()==null)
+				throw new MethodeFuerKiException("Spieler ist keine KI!");
+
+			
+			else
+				istAmZug.getBedienung().zugWaehlen();
+		}
+		catch (MethodeFuerKiException e){
+ 			System.out.println(e.getMessage()+ " Bitte andere Methode waehlen.");
+			
+		}
+		
+	
+	}
 }

@@ -26,6 +26,7 @@ public interface iBediener {
 	public boolean zugDurchfuehren(String ID);
 	public int rollTheDice();
 	public Spieler ausgabeSpielerAmZug();
+	public void zugDurchfuehrenKI();
 	
 
 }
