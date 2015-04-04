@@ -1218,6 +1218,8 @@ public class Spiel implements iBediener, Serializable {
 		try {
 			if (getIstBeendet() == true)
 				throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
+			if(istAmZug.getBedienung()!=null)
+				throw new MethodeFuerKiException("Spieler ist eine KI, bitte andere Methode verwenden!");
 			int endCounter = 0;
 			FarbEnum farbeIstAmZug = getIstAmZug().getFarbe();
 			String amZug = getIstAmZug().getName();
@@ -1242,6 +1244,10 @@ public class Spiel implements iBediener, Serializable {
 		catch (FigurKannNichtZiehenException e) {
 			zugErfolgreich = false;
 			System.out.println("Zug fehlgeschlagen, diese Figur kann nicht ziehen!");
+			return zugErfolgreich;
+		} catch(MethodeFuerKiException e){
+			zugErfolgreich=false;
+			System.out.println(e.getMessage());
 			return zugErfolgreich;
 		} catch (NullPointerException e) {
 			zugErfolgreich = false;
@@ -1491,6 +1497,7 @@ public class Spiel implements iBediener, Serializable {
 		return istAmZug;
 	}
 
+	/**
 	/**
 	 * Methode fuer die KI, die ueberprueft, ob Spieler istAmZug eine KI hat, falls dies der Fall ist,
 	 * wird die zugWaehlen-Methode der KI aufgerufen, falls nicht, wird eine Exception gethrowt und gecatcht.

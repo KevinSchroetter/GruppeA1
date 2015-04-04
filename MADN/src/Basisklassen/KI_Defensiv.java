@@ -30,6 +30,7 @@ public class KI_Defensiv extends KI implements Serializable {
 	 * gespawnt. Die dritte Prioritaet schlagen kann vernachlaessigt werden, da entweder die weiteste
 	 * Figur zieht, egal ob sie schlagen kann oder nicht, oder irgendeinen Figur spawnt und mit Glueck dabei
 	 * schlaegt.
+	 * Die Methode ruft die zugDurchfuehren-Methode auf, welche dann über den iBediener den Zug durchfuehrt.
 	 */
 	
 	
@@ -48,9 +49,7 @@ public class KI_Defensiv extends KI implements Serializable {
 			}
 		}
 		String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
-		iB.zugDurchfuehren(id);
+		zugDurchfuehren(id);
 					
 	}
-
-
 }

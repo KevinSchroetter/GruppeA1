@@ -377,6 +377,12 @@ public class KITest {
         iB.werfen(1);
         iB.werfen(1);
         iB.werfen(3);
+
+        // Test, dass KI nicht mit Methode für menschlichen Spieler ziehen kann, also immer selbst entscheiden muss.
+        // Erwartet: Meldung, dass eine andere Methode verwendet werden soll.
+        iB.zugDurchfuehren("39");
+        // Test erfolgreich.
+        
         iB.zugDurchfuehrenKI();
         iB.werfen(1);
         iB.werfen(1);

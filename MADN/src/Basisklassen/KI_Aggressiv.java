@@ -32,6 +32,7 @@ public class KI_Aggressiv extends KI {
 	 * Moegliche Faelle:  1. Eine Figur kann schlagen und dabei spawnen, 2. Figur kann nur schlagen -
 	 * am weitesten gelaufene Figur laeuft , 3. Keine Figur kann schlagen, aber eine Figur kann spawnen, 
 	 * 4. Keine Figur kann schlagen oder spawnen, dann laeuft die Figur, die am Weitesten vorne ist.
+	 * Die Methode ruft die zugDurchfuehren-Methode auf, welche dann über den iBediener den Zug durchfuehrt.
 	 */
 	public void zugWaehlen() {
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
@@ -50,7 +51,7 @@ public class KI_Aggressiv extends KI {
 				Spielfigur figur = kannSchlagen.get(i);
 				if (figur.getIstGespawnt() == false) {
 					String id = "" + figur.getMeinFeld().getID();
-					iB.zugDurchfuehren(id);
+					zugDurchfuehren(id);
 					return;
 				}
 				amWeitesten[i] = figur;
@@ -65,13 +66,13 @@ public class KI_Aggressiv extends KI {
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
-			iB.zugDurchfuehren(id);
+			zugDurchfuehren(id);
 			return;
 		} else if (kannSchlagen.isEmpty()) {
 			for (Spielfigur figur : kannZiehen) {
 				if (figur.binIchGespawnt() == false) {
 					String id = "" + figur.getMeinFeld().getID();
-					iB.zugDurchfuehren(id);
+					zugDurchfuehren(id);
 					return;
 				}
 			}
@@ -83,14 +84,14 @@ public class KI_Aggressiv extends KI {
 					case "1":
 						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.ROT)){
 							String id=kannZiehen.get(i).getMeinFeld().getID();
-							iB.zugDurchfuehren(id);
+							zugDurchfuehren(id);
 							return;
 						}
 						
 					case "11":
 						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.BLAU)){
 							String id=kannZiehen.get(i).getMeinFeld().getID();
-							iB.zugDurchfuehren(id);
+							zugDurchfuehren(id);
 							return;
 						}
 						
@@ -98,7 +99,7 @@ public class KI_Aggressiv extends KI {
 					case "21":
 						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.GRUEN)){
 							String id=kannZiehen.get(i).getMeinFeld().getID();
-							iB.zugDurchfuehren(id);
+							zugDurchfuehren(id);
 							return;
 						}
 						
@@ -106,7 +107,7 @@ public class KI_Aggressiv extends KI {
 					case "31":
 						if(kannZiehen.get(i).getFarbe().equals(FarbEnum.GELB)){
 							String id=kannZiehen.get(i).getMeinFeld().getID();
-							iB.zugDurchfuehren(id);
+							zugDurchfuehren(id);
 							return;
 						}
 						
@@ -123,7 +124,7 @@ public class KI_Aggressiv extends KI {
 				}
 			}
 			String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
-			iB.zugDurchfuehren(id);
+			zugDurchfuehren(id);
 		}
 
 	}

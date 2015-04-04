@@ -17,6 +17,7 @@ public abstract class KI implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected Spieler meinSpieler = null;
 	iBediener iB;
+	KI dieseKI;
 
 	/**
 	 * Konstruktor fuer eine Kuenstliche Intelligenz.
@@ -48,4 +49,17 @@ public abstract class KI implements Serializable {
 	 * implementiert wird. Sie soll die Entscheidungen der KI steuern.
 	 */
 	public abstract void zugWaehlen();
+	/**
+	 * Methode, die die KI-Bedienung des am Zug seienden Spielers voruebergehend auf null setzt, so dass dieser auf 
+	 * die zugDurchfuehren-Methode des Interfaces zugreifen kann. Ihr uebergibt er die ID des Spielfeldes der Zug-Figur,
+	 * die von der zugWaehlen-Methode uebergeben wird, so dass der Zug ausgefuehrt wird. Dann setzt die Methode die 
+	 * KI des Spielers wieder auf sich selbst.
+	 * @param ID - ID des Spielfeldes, dessen Figur laufen soll
+	 */
+	protected void zugDurchfuehren(String ID){
+		dieseKI=this;
+		meinSpieler.setBedienung(null);
+		iB.zugDurchfuehren(ID);
+		meinSpieler.setBedienung(dieseKI);
+	}
 }
