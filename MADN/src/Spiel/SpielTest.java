@@ -9,7 +9,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import Basisklassen.*;
-import Hilfsklassen.FigurKannNichtZiehenException;
 
 /**
  * JUnit Tests fuer die Klasse Spiel

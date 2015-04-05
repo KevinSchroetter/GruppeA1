@@ -19,7 +19,7 @@ public class Spielfigur implements Serializable {
 	
 	private static int anzahlFiguren = 0;
 	
-	public static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
+	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
 
 	private String name;
 
@@ -54,7 +54,7 @@ public class Spielfigur implements Serializable {
 	 * Setter fuer den Namen der Figur
 	 * @param name - Name der Figur vom Typ String
 	 */
-	public void setName(String name){
+	private void setName(String name){
 		this.name = name;
 	}
 	/**
@@ -229,7 +229,7 @@ public class Spielfigur implements Serializable {
 	 * @return int Spielfigur.anzahlFiguren
 	 */
 
-	public int getAnzFiguren() {
+	private int getAnzFiguren() {
 		return Spielfigur.anzahlFiguren;
 
 	}
@@ -387,7 +387,7 @@ public class Spielfigur implements Serializable {
 	 * @return boolean
 	 */
 
-	public boolean istAufStandardfeld() {
+	private boolean istAufStandardfeld() {
 		if (this.getMeinFeld() instanceof Standardfeld)
 			return true;
 		else

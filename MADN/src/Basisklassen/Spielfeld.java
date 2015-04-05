@@ -45,7 +45,7 @@ public abstract class Spielfeld implements Serializable {
 			this.figur = figur;
 	}
 	 
-	public void setID(String iD){
+	protected void setID(String iD){
 		this.iD = iD;
 	}
 

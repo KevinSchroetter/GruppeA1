@@ -1,6 +1,4 @@
 package Spiel;
-
-import java.io.IOException;
 /**
  * Interface, ueber das allgemein gespeichert und geladen werden kann
  * @author Alexander Brueckner

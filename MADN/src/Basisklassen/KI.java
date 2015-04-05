@@ -33,14 +33,14 @@ public abstract class KI implements Serializable {
 	 * Methode, die ueber das Interface die uebergebene Zahl "wuerfelt".
 	 * @param zahl - gewuenschtes Wuerfelergebnis
 	 */
-	public void wuerfeln(int zahl){
+	private void wuerfeln(int zahl){
 		iB.werfen(zahl);
 	}
 	
 	/**
 	 * Methode, die ueber das Interface eine Zufallszahl wuerfelt
 	 */
-	public void werfen(){
+	private void werfen(){
 		iB.rollTheDice();
 	}
 

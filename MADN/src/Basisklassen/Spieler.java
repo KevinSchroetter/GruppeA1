@@ -21,7 +21,7 @@ public class Spieler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
+	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
 	
 	private static int spielernummer = 0;
 
@@ -114,7 +114,7 @@ public class Spieler implements Serializable {
 	 * Setter fuer die Spielernummer. Diese wird inkrementiert und darf nicht
 	 * groesser als 4 werden.
 	 */
-	public void setSpielernummer() {
+	private void setSpielernummer() {
 		spielernummer++;
 	}
 
@@ -123,7 +123,7 @@ public class Spieler implements Serializable {
 	 * 
 	 * @return spielernummer - Gibt die spielernummer vom Typ int zurueck.
 	 */
-	public int getSpielernummer() {
+	private int getSpielernummer() {
 		return spielernummer;
 	}
 
@@ -135,7 +135,7 @@ public class Spieler implements Serializable {
 	 * @param name
 	 *            - Der Name des Spielers vom Typ String
 	 */
-	public void setName(String name) {
+	private void setName(String name) {
 		if (name.length() < 2 && name.length() < 10)
 			throw new RuntimeException("Ungueltiger Spielername");
 		this.name = name;
@@ -157,7 +157,7 @@ public class Spieler implements Serializable {
 	 * @param farbe
 	 *            - Farbe des Spielers vom Typ FarbEnum.
 	 */
-	public void setFarbe(FarbEnum farbe) {
+	private void setFarbe(FarbEnum farbe) {
 		this.farbe = farbe;
 	}
 
@@ -177,7 +177,7 @@ public class Spieler implements Serializable {
 	 * @param startFelder
 	 *            - Array vom Typ Startfeld.
 	 */
-	public void setStartFelder(Startfeld[] startFelder) {
+	private void setStartFelder(Startfeld[] startFelder) {
 		if(!startFelder[0].getFarbe().equals(getFarbe())) throw new RuntimeException("Ein Spieler kennt nur die Startfelder seiner Farbe!");
 		this.startFelder = startFelder;
 	}
@@ -190,7 +190,7 @@ public class Spieler implements Serializable {
 	 *            - Typ int als Index zur Rueckgabe eines bestimmten Startfeldes.
 	 * @return Startfeld - das gewaehlte Startfeld
 	 */
-	public Startfeld getStartFelder(int startFeld) {
+	private Startfeld getStartFelder(int startFeld) {
 		if (startFeld < 1 | startFeld > 4)
 			throw new RuntimeException(
 					"Es koennen nur startfelder 1-4 angesprochen werden!");
@@ -204,7 +204,7 @@ public class Spieler implements Serializable {
 	 * @param endFelder
 	 *            - Array vom Typ Endfeld.
 	 */
-	public void setEndFelder(Endfeld[] endFelder) {
+	private void setEndFelder(Endfeld[] endFelder) {
 		if(!endFelder[0].getFarbe().equals(getFarbe())) throw new RuntimeException("Ein Spieler kennt nur die Endfelder seiner Farbe!");
 		this.endFelder = endFelder;
 	}
@@ -227,7 +227,7 @@ public class Spieler implements Serializable {
 	 *            - Array mit den Startfeldern der zugehoerigen Farbe fuer die
 	 *            Figuren des Spielers
 	 */
-	public void setFiguren(Startfeld[] startFelder) {
+	private void setFiguren(Startfeld[] startFelder) {
 		if (getFarbe() == null)
 			throw new RuntimeException("Es muss eine Farbe vergeben sein!");
 		int figCounter=1;
@@ -279,7 +279,7 @@ public class Spieler implements Serializable {
 	 * @return zugFigur - Die Figur vom Typ Spielfigur, mit der ein Zug
 	 *         ausgefuehrt werden soll.
 	 */
-	public Spielfigur getZugFigur() {
+	private Spielfigur getZugFigur() {
 		return zugFigur;
 	}
 
@@ -322,7 +322,7 @@ public class Spieler implements Serializable {
 	 *            - Boolean Wert, mit dem festgelegt werden kann, ob ein Spieler
 	 *            generell bei einem Zug uebersprungen wird oder nicht.
 	 */
-	public void setImSpiel(boolean imSpiel) {
+	private void setImSpiel(boolean imSpiel) {
 		this.imSpiel = imSpiel;
 	}
 
@@ -332,7 +332,7 @@ public class Spieler implements Serializable {
 	 * @return imSpiel - Boolean, der anzeigt, ob sich ein Spieler noch im Spiel
 	 *         befindet oder bereits alle Figuren in den Zielfeldern hat.
 	 */
-	public boolean getImSpiel() {
+	private boolean getImSpiel() {
 		return imSpiel;
 	}
 
@@ -343,7 +343,7 @@ public class Spieler implements Serializable {
 	 *            - String, der angibt, ob es sich um einen menschlichen
 	 *            Spieler, eine aggressive KI oder eine defensive KI handelt.
 	 */
-	public void setBedienung(KI ki) {
+	protected void setBedienung(KI ki) {
 		this.bedienung = ki;
 	}
 
@@ -360,7 +360,7 @@ public class Spieler implements Serializable {
 	 * 
 	 * @return meineNummer - int Wert
 	 */
-	public int getMeineNummer() {
+	private int getMeineNummer() {
 		return this.meineNummer;
 	}
 
@@ -377,7 +377,7 @@ public class Spieler implements Serializable {
 	private void setIBediener(Spiel s){
 		this.iB=s;
 	}
-	public iBediener getIBediener(){
+	protected iBediener getIBediener(){
 		return iB;
 	}
 

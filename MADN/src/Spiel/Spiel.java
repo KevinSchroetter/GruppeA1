@@ -30,11 +30,11 @@ public class Spiel implements iBediener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
+	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
 
-	public boolean firstBlood = false;
+	private boolean firstBlood = false;
 
-	public int endSoundCounter = 0;
+	private int endSoundCounter = 0;
 
 	private Spieler[] spieler = new Spieler[farben.size()];
 
