@@ -3,6 +3,7 @@ package Basisklassen;
 import java.util.ArrayList;
 
 import Einstellungen.FarbEnum;
+import Hilfsklassen.FigurKannNichtZiehenException;
 
 /**
  * Klasse der aggressiven KI, in der das Verhalten der KI implementiert wird.
@@ -36,8 +37,9 @@ public class KI_Aggressiv extends KI {
 	 */
 	public void zugWaehlen() {
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
-		@SuppressWarnings("unused")
-		ArrayList<Spielfigur> kannSchlagen = new <Spielfigur> ArrayList<Spielfigur>();
+		if(kannZiehen==null)
+			throw new FigurKannNichtZiehenException("Es wurde noch nicht gewürfelt. Bitte würfeln!");
+		ArrayList<Spielfigur> kannSchlagen = new ArrayList<Spielfigur>();
 
 		for (Spielfigur figur : kannZiehen) {
 			if (figur.getKannSchlagen() == true) {

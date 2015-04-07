@@ -3,6 +3,8 @@ package Basisklassen;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import Hilfsklassen.FigurKannNichtZiehenException;
+
 
 /**
  * Die Klasse der defensiven KI, erbt von KI. Ueber den Konstruktor wird die Komposition zum Spieler gesetzt,
@@ -36,6 +38,8 @@ public class KI_Defensiv extends KI implements Serializable {
 	
 	public void zugWaehlen(){
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
+		if(kannZiehen==null)
+			throw new FigurKannNichtZiehenException("Es wurde noch nicht gewürfelt. Bitte würfeln!");
 		Spielfigur[] amWeitesten = new Spielfigur[kannZiehen.size()];
 		for (int i = 0; i < kannZiehen.size(); i++) {
 			amWeitesten[i] = kannZiehen.get(i);

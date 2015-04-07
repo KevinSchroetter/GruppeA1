@@ -1508,13 +1508,21 @@ public class Spiel implements iBediener, Serializable {
 	@Override
 	public void zugDurchfuehrenKI(){
 		try {
+			if(getIstBeendet()==true)
+				throw new SpielBeendetException("Spiel ist schon beendet.");
 			if(istAmZug.getBedienung()==null)
 				throw new MethodeFuerKiException("Spieler ist keine KI!");			
 			else
 				istAmZug.getBedienung().zugWaehlen();
 		}
+		catch(SpielBeendetException e){
+			System.out.println(e.getMessage());
+		}
 		catch (MethodeFuerKiException e){
 			System.out.println(e.getMessage()+ " Bitte andere Methode waehlen.");	
 		}		
+		catch(FigurKannNichtZiehenException e){
+			System.out.println(e.getMessage());
+		}
 	}
 }
