@@ -23,7 +23,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 					"Dateipfad ungültig! Oder Modus ungültig");
 		else {
 
-			if (mode == 1) {
+			if (mode == 2) {
 
 				try {
 					BufferedWriter bw = new BufferedWriter(new FileWriter(path));
@@ -34,7 +34,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				}
 			}
 
-			else if (mode == 2) {
+			else if (mode == 1) {
 				try {
 					BufferedReader br = new BufferedReader(new FileReader(path));
 					return br;
@@ -360,11 +360,17 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				here.setFigur(figurenDieEndlichFertigSind[i][j]);
 				here = null;
 				}
+			}
+			
+			
+			for(int i = 0; i<4; i++){
+				if(spielerSchnitt[i][3] == null) continue;
+					fastFertig[i].setAmZug(spielerSchnitt[i][3].equals("true"));	
+					gibMichZurueck.setIstAmZug(fastFertig[i]);
 					
-				
 			}
 
-
+			gibMichZurueck.starteSpiel();
 		return gibMichZurueck;
 
 		}

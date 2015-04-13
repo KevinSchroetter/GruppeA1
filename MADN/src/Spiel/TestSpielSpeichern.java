@@ -23,12 +23,19 @@ public class TestSpielSpeichern {
 		speicherMich.zugDurchfuehrenKI();
 		speicherMich.werfen(3);
 		speicherMich.zugDurchfuehrenKI();
-
+		
+		DatenzugriffCSV dCSV = new DatenzugriffCSV();
+		BufferedWriter bw = (BufferedWriter) dCSV.openFile("tutCSVDenn.csv", 2);
+		dCSV.spielSpeichern(speicherMich, bw);
+		dCSV.closeFile(bw);
+		
 		DatenzugriffSerialisiert ds = new DatenzugriffSerialisiert();
 		FileOutputStream closeMe = (FileOutputStream) ds.openFile("savegame.ser", 2);
 		ds.spielSpeichern(speicherMich,closeMe);
 		ds.closeFile(closeMe);
 		
+		
+
 
 		
 		
