@@ -238,4 +238,17 @@ public class Spielbrett implements Serializable {
 		felder+="----------------------------------------\n\n########################################\n\n";
 		return(felder);
 	}
+
+	public ArrayList<Startfeld[]> getStartFelder() {
+		return startFelder;
+	}
+
+	public ArrayList<Endfeld[]> getEndFelder() {
+		return endFelder;
+	}
+
+	public void setStandardFelder(Standardfeld[] standardFelder) {
+		this.standardFelder = standardFelder;
+	}
+	
 }

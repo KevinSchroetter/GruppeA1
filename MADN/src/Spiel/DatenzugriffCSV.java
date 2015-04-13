@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EnumSet;
 
 public class DatenzugriffCSV implements iDatenzugriff {
 
@@ -105,10 +106,10 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				}
 
 				speicherMichIchBinFertig[i] = String.format(
-						"%s,%s;%s,%s,%s,%s;%s,%s\n", spielerNamen[i],
-						gamer[i].getFarbe(), figurFeldIDs[i][0],
-						figurFeldIDs[i][1], figurFeldIDs[i][2],
-						figurFeldIDs[i][3], verhalten, binIchDran[i]);
+						"%s,%s,%s,%s,%s,%s,%s,%s\n", spielerNamen[i],
+						gamer[i].getFarbe(), verhalten, binIchDran[i],
+						figurFeldIDs[i][0], figurFeldIDs[i][1],
+						figurFeldIDs[i][2], figurFeldIDs[i][3]);
 			}
 
 			for (int i = 0; i < speicherMichIchBinFertig.length; i++) {
@@ -132,17 +133,19 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		else {
 
 			BufferedReader bw = (BufferedReader) stream;
-			ArrayList<String> ladenStrings = new ArrayList<String>(0);
 
 			String readBuf = "";
+			String[] saved = new String[4];
+			int meep = 0;
 			while (readBuf != null) {
 
 				try {
-
 					readBuf = bw.readLine();
-					ladenStrings.add(readBuf);
+					saved[meep] = readBuf;
+					meep++;
+
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+
 					e.printStackTrace();
 				}
 			}
@@ -155,33 +158,69 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 			// Verarbeiten
 
-			String[] workWithMe = new String[ladenStrings.size()];
-			workWithMe = (String[]) ladenStrings.toArray();
-			ladenStrings = null;
+			String[][] datenGeladen = new String[4][8];
+			String[] figurBuf = new String[4];
+			SpielerLadenWrapper slw[] = new SpielerLadenWrapper[4];
 
-			SpielerLadenWrapper slw[] = new SpielerLadenWrapper[workWithMe.length];
-			Spieler gamer[] = new Spieler[workWithMe.length];
-
-			String[] figurenEinzeln = new String[4];
-			String[] verhaltenUndAmZug = new String[2];
-			String[][][] cutMe = new String [workWithMe.length][3][5];
-			String figurenAmStück = null;
-			String[] nameUndFarbe = new String[2];
-
-			//figurenEinzeln = figurenAmStück.split(",");
-
-			for (int i = 0; i < workWithMe.length; i++) {
-				
-				cutMe[i][i] = workWithMe[i].split(";");
-				
-				nameUndFarbe = cutMe[i][1];
-				
-				
+			for (int i = 0; i < slw.length; i++) {
 				slw[i] = new SpielerLadenWrapper();
-				slw[i].setName(nameUndFarbe[0]);
-				slw[i].setFarbe(nameUndFarbe[1]);
+			}
+
+			for (int i = 0; i < datenGeladen.length; i++) {
+				if (saved[i] == null)
+					continue;
+				datenGeladen[i] = saved[i].split(",");
+				slw[i].setName(datenGeladen[i][0]);
+				slw[i].setFarbe(datenGeladen[i][1]);
+				slw[i].setVerhalten(datenGeladen[i][2]);
+				slw[i].setBinIchDran(datenGeladen[i][3]);
+
+				for (int j = 0; j < 4; j++) {
+					figurBuf[j] = datenGeladen[i][4 + j];
+
+				}
+				slw[i].setFeldIDs(figurBuf);
+			}
+
+			Spielbrett sb = new Spielbrett();
+
+			Spielfigur[][] figuren = new Spielfigur[4][4];
+
+			int farbID = 0;
+			String nochEinZwischenStringFuerDenNamen;
+			Spielfeld zwischenFeld = null;
+			Startfeld[][] startFelder = new Startfeld[4][4];
+			
+
+		
+			Spielfigur.deleteAnzahlFiguren();
+			for (int i = 0; i < 4; i++) {
+
+				if (slw[i] == null || slw[i].getFarbe()==null)
+					continue;
 				
-				
+				switch(slw[i].getFarbe()){
+				case ROT:
+					farbID = 0;
+					break;
+				case BLAU:
+					farbID = 1;
+					break;
+				case GRUEN:
+					farbID = 2;
+					break;
+				case GELB:
+					farbID = 3;
+					break;
+
+				}
+
+				for (int j = 0; j < 4; j++) {
+					
+					nochEinZwischenStringFuerDenNamen = slw[i].getFarbe().toString()+(j+1);
+					figuren[i][j] = new Spielfigur(farbID, nochEinZwischenStringFuerDenNamen);
+					
+				}
 			}
 
 			return null;

@@ -444,7 +444,7 @@ public class Spielfigur implements Serializable {
 	/**
 	 * HilfsMethode zum Loeschen der static anzaglFiguren (Wird in Spiel benoetigt, daher public)
 	 */
-	public void deleteAnzahlFiguren(){
+	public static void deleteAnzahlFiguren(){
 		Spielfigur.anzahlFiguren=0;
 	}
 }

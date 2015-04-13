@@ -1,6 +1,8 @@
 package Spiel;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.IOException;
 
 public class TestCSV {
 
@@ -26,6 +28,15 @@ public class TestCSV {
 		BufferedWriter bw = (BufferedWriter) seeEssVee.openFile("csv.csv", 1);
 		seeEssVee.spielSpeichern(spast, bw);
 		seeEssVee.closeFile(bw);
+		
+		BufferedReader br = (BufferedReader) seeEssVee.openFile("csv.csv",2);
+		Object fuckme = seeEssVee.spielLaden(br);
+		try {
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 
 	}
