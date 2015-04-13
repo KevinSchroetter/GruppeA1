@@ -76,7 +76,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param sIAZ
 	 *            - Uebergebener Spieler, der gespeichert werden soll.
 	 */
-	private void setIstAmZug(Spieler sIAZ) {
+	protected void setIstAmZug(Spieler sIAZ) {
 		if (!(sIAZ instanceof Spieler))
 			throw new RuntimeException(
 					"Es kann nur ein Spielerobjekt am Zug sein!");
@@ -357,6 +357,23 @@ public class Spiel implements iBediener, Serializable {
 			setHatBegonnen(true);
 		}
 
+	}
+	
+	/**
+	 * Lädt einen bereits bestehenden Spieler ins Spiel
+	 * @param loadMe - Spieler
+	 * @throws IllegalArgumentException
+	 * */
+	protected void spielerLaden(Spieler loadMe){
+		if(loadMe == null | (!(loadMe instanceof Spieler))){
+			throw new IllegalArgumentException("Spielerobjekt ungültig");
+		}
+		if(this.getAnzahlSpieler()>=4) throw new RuntimeException("Spielerlimit erreicht!");
+		else{
+			this.spieler[this.getAnzahlSpieler()] = loadMe;
+			this.incAnzahlSpieler();
+		}
+		
 	}
 
 	/**

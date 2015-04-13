@@ -241,6 +241,18 @@ public class Spieler implements Serializable {
 			figuren[i].setBinIchAufEndposition(false);
 		}
 	}
+	
+	/**
+	 * Erhält ein Array aus Figuren und lädt diese in sich, sofern gültige Figuren
+	 * @param loadUs - Spielfigur[]
+	 * 
+	 * */
+	public void figurenLaden(Spielfigur[] loadUs){
+		if(loadUs == null || loadUs.length != 4) throw new IllegalArgumentException("Parameter ungültig");
+		else{
+			this.figuren = loadUs;
+		}
+	}
 
 	/**
 	 * Getter fuer die Spielfiguren.
