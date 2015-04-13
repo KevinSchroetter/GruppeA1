@@ -203,4 +203,16 @@ public class SpielTest {
 		s4.wuerfeln(6);
 		s4.wuerfeln(2);
 	}
+	
+	@Test
+	public void herMitDenSpielern(){
+		System.out.println("Spieler Strings Test Anfang");
+		String[] noob = new String[4];
+		noob = s4.ausgabeSpielerNamenStrings();
+		
+		for(int i = 0; i < noob.length; i++){
+			System.out.println(noob[i]);
+		}
+		System.out.println("Spieler Strings Test Ende");
+	}
 }

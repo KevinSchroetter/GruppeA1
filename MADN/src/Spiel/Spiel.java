@@ -1199,6 +1199,18 @@ public class Spiel implements iBediener, Serializable {
 			}
 		}
 	}
+	
+	public String[] ausgabeSpielerNamenStrings(){
+		
+		String[] spielerStrings = new String[this.spieler.length];
+		
+		for(int i = 0; i<spielerStrings.length; i++){
+			if(this.spieler[i] == null) continue;
+			spielerStrings[i] = this.spieler[i].getName();
+		}
+		return spielerStrings;
+		
+	}
 
 	/**
 	 * Methode zugDurchfuehren Versucht einen Zug mit der gewaehlten Figur
@@ -1460,6 +1472,13 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	private void deleteAnzahlSpieler() {
 		this.anzahlSpieler = 0;
+	}
+	
+	/**
+	 * Gibt Spielerarray zurück
+	 * */
+	public Spieler[] getSpieler(){
+		return this.spieler;
 	}
 
 	/**

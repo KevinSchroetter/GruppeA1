@@ -63,4 +63,8 @@ public abstract class Spielfeld implements Serializable {
 	public String toString() {
 		return String.valueOf(this.getID());
 	}
+
+	public String toStringOhneFarbe() {
+		return String.format("%s",this.getID());
+	}
 }

@@ -33,6 +33,18 @@ public class Spielbrett implements Serializable {
 		erstelleStandardFelder();
 	}
 	
+	/**
+	 * Zweiter Konstuktor lädt das Brett mit schon bestehenden Feldern so richtig durch
+	 */
+	
+	public Spielbrett(ArrayList<Startfeld[]> startFelder, ArrayList<Endfeld[]> endFelder, Standardfeld[] standardFelder ){
+		
+		ladeStartfelder(startFelder);
+		ladeEndfelder(endFelder);
+		ladeStandardfelder(standardFelder);
+		
+	}
+	
 	/** 
 	 * Ein Getter, der alle Startfelder der gewuenschten, uebergebenen Farbe zurueckgibt.
 	 * @param farbe - Uebergebene Farb vom Typ FarbEnum.
@@ -159,6 +171,41 @@ public class Spielbrett implements Serializable {
 			standardFelder[i]=new Standardfeld(iD);
 		}
 	}
+	
+	/**
+	 * Zum Laden einer bestehenden Startfeldliste
+	 * @param startFelderListe - ArrayList<Startfeld[]>
+	 * */
+	public void ladeStartfelder(ArrayList<Startfeld[]> startFelderListe){
+		
+		if(startFelderListe == null){
+			throw new IllegalArgumentException("Keine Startfeldliste!");
+		} else this.startFelder = startFelderListe;
+	}
+	
+	/**
+	 * Zum Laden einer bestehenden Endfeldliste
+	 * @param endFelderListe - ArrayList<Endfeld[]>
+	 * */
+	
+	public void ladeEndfelder(ArrayList<Endfeld[]> endFelderListe){
+		
+		if(endFelderListe == null){
+			throw new IllegalArgumentException("Keine Endfeldliste!");
+		} else this.endFelder = endFelderListe;
+		
+		
+	}
+	
+	/**
+	 * Zum Laden einer bestehenden Standardfeldliste
+	 * @param standardFelder - Standardfeld[]
+	 * */
+	public void ladeStandardfelder(Standardfeld[] standardFelder){
+		if(standardFelder == null || standardFelder.length == 0) throw new IllegalArgumentException("Standardfelder ungültig!");
+		else this.standardFelder = standardFelder;
+	}
+	
 	
 	/**
 	 * Override der toString-Methode, die alle Spielfelder zurueckgibt.

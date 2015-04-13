@@ -80,4 +80,8 @@ public class Endfeld extends Spielfeld implements Serializable {
 	public String toString() {
 		return String.valueOf(this.getFarbe()) + " " + this.getID();
 	}
+	@Override
+	public String toStringOhneFarbe() {
+		return String.format("%s",this.getID());
+	}
 }
