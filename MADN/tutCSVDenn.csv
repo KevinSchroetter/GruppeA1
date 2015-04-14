@@ -1,4 +1,4 @@
 /Inhalte die mit einem Slash beginnen werden ignoriert
 /Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet
-Hans-Joachim,ROT,aggressiv,true;4.4,S2.0,S3.0,S4.0;true,false 
-Detlef,BLAU,defensiv,false;S1.0,S2.0,S3.0,20.10;true,false 
+Hans-Joachim,ROT,aggressiv,true;7.7,S2.0,S3.0,S4.0;true,false 
+Detlef,BLAU,defensiv,false;S1.0,S2.0,S3.0,23.13;true,false 

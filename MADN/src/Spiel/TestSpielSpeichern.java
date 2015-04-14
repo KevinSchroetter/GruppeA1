@@ -33,14 +33,20 @@ public class TestSpielSpeichern {
 		speicherMich.werfen(3);
 		speicherMich.zugDurchfuehrenKI();
 		speicherMich.ausgabeFiguren();
+		speicherMich.werfen(3);
+		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
+		speicherMich.werfen(3);
+		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
 		
 		//CSV
-		DatenzugriffCSV dCSV = new DatenzugriffCSV();
+		iDatenzugriff dCSV = new DatenzugriffCSV();
 		BufferedWriter bw = (BufferedWriter) dCSV.openFile("tutCSVDenn.csv", 2);
 		dCSV.spielSpeichern(speicherMich, bw);
 		dCSV.closeFile(bw);
 		//Serialsiert
-		DatenzugriffSerialisiert ds = new DatenzugriffSerialisiert();
+		iDatenzugriff ds = new DatenzugriffSerialisiert();
 		FileOutputStream closeMe = (FileOutputStream) ds.openFile("savegame.ser", 2);
 		ds.spielSpeichern(speicherMich,closeMe);
 		ds.closeFile(closeMe);

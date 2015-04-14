@@ -16,8 +16,8 @@ public class TestSpielLaden {
 		
 		
 		//Datenzugriffe anlegen und Spiel laden, anschließend prüfen, ob Ausgabe äquivalent zu Ausgabe in Speichern
-		DatenzugriffSerialisiert ds = new DatenzugriffSerialisiert();
-		DatenzugriffCSV dCSV = new DatenzugriffCSV();
+		iDatenzugriff ds = new DatenzugriffSerialisiert();
+		iDatenzugriff dCSV = new DatenzugriffCSV();
 		
 		//Serialsiert Laden
 		FileInputStream ichLadeEtwas = (FileInputStream) ds.openFile("savegame.ser", 1);
@@ -50,6 +50,12 @@ public class TestSpielLaden {
 		ladeMich.werfen(6);
 		ladeMich.zugDurchfuehrenKI();
 		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.ausgabeFiguren();
+		ladeMich.werfen(3);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.ausgabeFiguren();
+		ladeMich.werfen(3);
 		ladeMich.zugDurchfuehrenKI();
 		ladeMich.ausgabeFiguren();
 		ladeMich = null;
