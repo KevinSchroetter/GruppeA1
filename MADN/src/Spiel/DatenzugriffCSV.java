@@ -13,8 +13,28 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.regex.Pattern;
 
+/**
+ * Klasse DatenzugriffCSV - Implementiert iDatenzugriff und bietet Operationen zum Gebrauch von CSV
+ * Dateien an.
+ * @author Alexander Brückner
+ * @version 3.0
+ * @since 3.0
+ * 
+ * 
+ ***/
+
 public class DatenzugriffCSV implements iDatenzugriff {
 
+	/**
+	 * openFile - öffnet Datei an angegebenen Pfad mit übergebenem Modus (1 = Input, 2 = Output)
+	 * Gibt abhängig von "mode" einen BufferedReader oder BufferedWriter zurück
+	 * @param path - String
+	 * @param mode - int
+	 * @return Object
+	 * @Exception IOException
+	 * @Exception IllegalArgumentException
+	 * 
+	 * **/
 	@Override
 	public Object openFile(String path, int mode) {
 
@@ -50,16 +70,28 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		return null;
 	}
 
+	/**
+	 * spielSpeichern - speichert "saveme" in den Strom "stream".
+	 * Output als .CSV datei
+	 *
+	 * @param saveme - Object
+	 * @param stream - Object
+	 * @Exception IOException
+	 * @Exception IllegalArgumentException
+	 * **/
 	@Override
 	public void spielSpeichern(Object saveme, Object stream) {
 		// TODO Auto-generated method stub
 
+		//Parameterchecks
 		if (saveme == null || stream == null)
 			throw new IllegalArgumentException("Strom oder Spiel ungültig!");
 		if ((!(saveme instanceof Spiel))
 				|| (!(stream instanceof BufferedWriter)))
 			throw new IllegalArgumentException("Strom oder Spiel ungültig!");
 		else {
+			
+			//Anlegen von Variablen, Strom
 
 			BufferedWriter saver = (BufferedWriter) stream;
 			Spiel buf = (Spiel) saveme;
@@ -122,6 +154,8 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				} else if (gamer[i].getBedienung() == null) {
 					verhalten = "mensch";
 				}
+				
+				//Variablen fertig, wrapping in Outputstring via String.format
 
 				speicherMichIchBinFertig[i] = String.format(
 						"%s,%s,%s,%s;%s.%d,%s.%d,%s.%d,%s.%d;%s,%s \n",
@@ -133,6 +167,8 @@ public class DatenzugriffCSV implements iDatenzugriff {
 						figurenSchritte[i][3], spielStatus[0], spielStatus[1]);
 			}
 
+			
+			//Dateikopf mit Strukturbeschreibung
 			try {
 				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
 				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet\n");
@@ -141,6 +177,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				e.printStackTrace();
 			}
 
+			//Schreiben
 			for (int i = 0; i < speicherMichIchBinFertig.length; i++) {
 				try {
 					saver.write(speicherMichIchBinFertig[i]);
@@ -154,15 +191,29 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 	}
 
+	
+	/**
+	 * spielLaden - nimmt einen BufferedReader entgegen und versucht damit, ein Spiel zu laden
+	 * @param stream - Object
+	 * @return Object
+	 * @Exception IOException
+	 * @Exception IllegalArgumentException 
+	 * 
+	 * 
+	 **/
+	
+	//TODO Code aufräumen, ggf. überarbeiten
 	@Override
 	public Object spielLaden(Object stream) {
-		// TODO Auto-generated method stub
+		// Parametercheck	
+		
 		if (!(stream instanceof BufferedReader))
 			throw new IllegalArgumentException("Strom fehlerhaft/Ungültig");
 		else {
 
 			BufferedReader bw = (BufferedReader) stream;
 
+			//Daten aus Datei laden
 			String readBuf = "";
 			String[] saved = new String[4];
 			int meep = 0;
@@ -297,7 +348,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			Spielfigur[][] figurenDieEndlichFertigSind = new Spielfigur[4][4];
 			Spielfigur.deleteAnzahlFiguren();
 
-			int figCounter = 0;
+			int figCounter = 1;
 			for (int i = 0; i < 4; i++) {
 				if (saved[i] == null)
 					continue; // Damit auch nur so viele Figurenarrays errzeugt
@@ -376,6 +427,17 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		}
 
 	}
+	
+	/***
+	 * 
+	 * closeFile
+	 * 
+	 * Schließt den übergebenen Datenstrom
+	 * @param o - Object
+	 * @Exception IOException
+	 * 
+	 * 
+	 ***/
 
 	@Override
 	public void closeFile(Object o) {

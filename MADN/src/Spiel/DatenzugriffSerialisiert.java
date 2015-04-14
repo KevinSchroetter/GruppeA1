@@ -2,8 +2,29 @@ package Spiel;
 
 import java.io.*;
 
+/**
+ * Klasse DatenzugriffSerialisiert
+ * Implementiert iDatenzugriff - bietet Dateioperationen für serialisiertes Speichern/Laden an
+ * @author Alexander Brückner
+ * @version 3.0
+ * @since 3.0
+ *
+ */
+
+
 public class DatenzugriffSerialisiert implements iDatenzugriff {
 
+	
+	/**
+	 *openFile - öffnet Datei mit Modus (1 = Input, 2 = Output) an Pfad "path"
+	 *Gibt einen FileInputStream bzw FileOutputStream zurück
+	 *@param path - String
+	 *@param mode- int
+	 *@return Object
+	 *@Exception IOException
+	 *@Exception IllegalArgumentException
+	 * 
+	 ***/
 	@Override
 	public Object openFile(String path, int mode) {
 
@@ -40,8 +61,19 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	}
 
+	/**
+	 *
+	 * spielSpeichern - speichert serialisiert ein Spiel
+	 * @param saveme - Object
+	 * @param stream - Object
+	 * @Exception IOException
+	 * @Exception IllegalArgumentException
+	 * 
+	 **/
 	@Override
 	public void spielSpeichern(Object saveme, Object stream) {
+		
+		//Parameterchecks
 
 		if (!(stream instanceof FileOutputStream) || !(saveme instanceof Spiel)) {
 			throw new IllegalArgumentException(
@@ -51,13 +83,15 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 		else {
 
 			try {
-
+				
+				//Spielobjekt saveme speichern
 				ObjectOutputStream oos = new ObjectOutputStream(
 						(FileOutputStream) stream);
 				oos.writeObject(saveme);
 
 			}
 
+			//Exceptionhandling
 			catch (FileNotFoundException e) {
 				System.out.println("Fehler beim Lesen/erstellen der Datei");
 			}
@@ -70,15 +104,26 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	}
 
+	/**
+	 * SpielLaden - Lädt ein Spiel serialisiert as einer Datei
+	 * @return Object
+	 * @param stream - Object
+	 * @Exception IllegalArgumentException
+	 * @Exception IOException
+	 * @Exception FileNotFoundException
+	 * @Exception ClassNotFoundException
+	 * **/
 	@Override
 	public Object spielLaden(Object stream) {
 
+		//Parameterchecks
 		if (!(stream instanceof FileInputStream)) {
 			throw new IllegalArgumentException("Dateistrom ungültig!");
 		}
 
 		else {
 
+			//Laden und Überprüfen
 			try {
 				ObjectInputStream ois = new ObjectInputStream(
 						(FileInputStream) stream);
@@ -90,6 +135,8 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 			}
 
+			
+			//Exceptionhandling
 			catch (FileNotFoundException e) {
 				System.out.println("Fehler: Datei nicht gefunden!");
 				e.printStackTrace();
@@ -108,16 +155,25 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	}
 
+	/**
+	 * closeFile
+	 * schließt übergebenen Datenstrom
+	 * @param o - Object
+	 * 
+	 */
+	
 	@Override
 	public void closeFile(Object o) {
 		// TODO Auto-generated method stub
 
+		//Parametercheck
 		if ((!(o instanceof FileInputStream))
 				&& (!(o instanceof FileOutputStream))) {
 			throw new IllegalArgumentException(
 					"Dateistrom ungültig - FileInputStream oder FileOutputStream!");
 		}
 
+		//Instanzprüfung und schließen von Inputstream
 		else if (o instanceof FileInputStream) {
 
 			try {
@@ -129,7 +185,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 			}
 
 		}
-
+		//Instanzprüfung und schließen von Outputstream
 		else if (o instanceof FileOutputStream) {
 
 			try {
