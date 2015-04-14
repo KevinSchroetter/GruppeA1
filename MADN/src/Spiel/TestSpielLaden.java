@@ -24,9 +24,16 @@ public class TestSpielLaden {
 		Spiel ladeMich = (Spiel) ds.spielLaden(ichLadeEtwas);
 		ds.closeFile(ichLadeEtwas);	
 		ladeMich.ausgabeSpielerListe();
+		ladeMich.ausgabeFiguren();	
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
 		ladeMich.ausgabeFiguren();
-		ladeMich.ausgabeFigurenAufStartfeld();
-		
 		ladeMich = null;
 		
 		//CSV Laden
@@ -35,8 +42,17 @@ public class TestSpielLaden {
 		ladeMich = (Spiel) dCSV.spielLaden(br);
 		dCSV.closeFile(br);		
 		ladeMich.ausgabeSpielerListe();
+		ladeMich.ausgabeFiguren();	
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
+		ladeMich.werfen(6);
+		ladeMich.zugDurchfuehrenKI();
 		ladeMich.ausgabeFiguren();
-		ladeMich.ausgabeFigurenAufStartfeld();
+		ladeMich = null;
 		
 	}
 

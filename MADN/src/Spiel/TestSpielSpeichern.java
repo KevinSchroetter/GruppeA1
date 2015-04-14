@@ -17,16 +17,22 @@ public class TestSpielSpeichern {
 		speicherMich.neuerSpieler("Detlef", 2, 2);
 		
 		speicherMich.starteSpiel();
+		speicherMich.ausgabeFiguren();
 		speicherMich.werfen(6);
 		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
 		speicherMich.werfen(3);
 		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
 		speicherMich.werfen(6);
 		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
 		speicherMich.werfen(6);
 		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
 		speicherMich.werfen(3);
 		speicherMich.zugDurchfuehrenKI();
+		speicherMich.ausgabeFiguren();
 		
 		//CSV
 		DatenzugriffCSV dCSV = new DatenzugriffCSV();
