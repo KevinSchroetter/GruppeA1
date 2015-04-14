@@ -47,17 +47,8 @@ public class TestSpielLaden {
 		ladeMich.zugDurchfuehrenKI();
 		ladeMich.werfen(6);
 		ladeMich.zugDurchfuehrenKI();
-		ladeMich.werfen(6);
-		ladeMich.zugDurchfuehrenKI();
-		ladeMich.werfen(6);
-		ladeMich.zugDurchfuehrenKI();
 		ladeMich.ausgabeFiguren();
-		ladeMich.werfen(3);
-		ladeMich.zugDurchfuehrenKI();
-		ladeMich.ausgabeFiguren();
-		ladeMich.werfen(3);
-		ladeMich.zugDurchfuehrenKI();
-		ladeMich.ausgabeFiguren();
+
 		ladeMich = null;
 		
 	}
