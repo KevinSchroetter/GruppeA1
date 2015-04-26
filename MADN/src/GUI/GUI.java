@@ -53,12 +53,17 @@ public class GUI implements ActionListener{
 	
 	public GUI(String titel, int spalten, int zeilen, int index){
 		this.setNaviButtonNamesByLanguage(index);
+		
+		
+		
 		map.put("diceGame", diceGame);
 		map.put("startGame",startGame);
 		map.put("endGame",endGame);
 		map.put("newGame",newGame);
 		map.put("loadGame",startGame);
 		map.put("sendGame",startGame);
+		
+		diceGame.addActionListener(new Eventhandler(map));
 		
 		
 		frame = new JFrame(titel);
@@ -168,6 +173,11 @@ public class GUI implements ActionListener{
 			saveGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("save").ordinal()));
 			loadGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("load").ordinal()));
 			sendGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("send").ordinal()));
+			
+			
+			
+			
+			
 		}
 		
 	}

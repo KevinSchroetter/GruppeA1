@@ -9,7 +9,7 @@ import javax.swing.JButton;
 
 public class Eventhandler implements ActionListener {
 	
-	private HashMap eventMap = null;
+	private HashMap<String,JButton> eventMap = null;
 	
 	
 	public Eventhandler(HashMap eventMap){
@@ -19,6 +19,12 @@ public class Eventhandler implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {	
+		
+		JButton buf;
+		if(e.getSource() == eventMap.get("diceGame")){
+			buf = (JButton) e.getSource();
+			buf.setText("Meep!");
+		}
 		
 		
 	}
