@@ -5,11 +5,14 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
@@ -34,6 +37,7 @@ public class GUI implements ActionListener{
 	JLabel header = new JLabel("MADN - Gore Edition");
 	JLabel dice = new JLabel("DICE");
 	JLabel consoleHeader = new JLabel("Console");
+	JLabel game = new JLabel();
 	JTextArea console = new JTextArea(10,100);
 	
 	
@@ -65,13 +69,21 @@ public class GUI implements ActionListener{
 		sueden.add(console);
 		frame.getContentPane().add(sueden, BorderLayout.SOUTH);
 		
+		ImageIcon icon = new ImageIcon("images/dice_04.jpg");
+		dice.setIcon(icon);
 		westen.add(dice);
 		frame.getContentPane().add(westen, BorderLayout.WEST);
 		
+		ImageIcon ico = new ImageIcon("images/game.jpg");
+		ico.setImage(ico.getImage().getScaledInstance(500,500,Image.SCALE_DEFAULT)); 
+		game.setIcon(ico);
+		game.setIconTextGap(10);
+		mitte.add(game);
+		frame.getContentPane().add(mitte,BorderLayout.CENTER);
 		
 
 
-	    frame.setSize(1000, 700);
+	    frame.setSize(1000, 800);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
