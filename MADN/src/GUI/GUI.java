@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -21,7 +22,7 @@ import Spiel.ButtonsNavi;
 
 
 public class GUI implements ActionListener{
-	
+	HashMap<String, JButton> map = new HashMap<String, JButton>();
 	JFrame frame = null;
 	int zeilen = 0;
 	int spalten = 0;
@@ -52,6 +53,13 @@ public class GUI implements ActionListener{
 	
 	public GUI(String titel, int spalten, int zeilen, int index){
 		this.setNaviButtonNamesByLanguage(index);
+		map.put("diceGame", diceGame);
+		map.put("startGame",startGame);
+		map.put("endGame",endGame);
+		map.put("newGame",newGame);
+		map.put("loadGame",startGame);
+		map.put("sendGame",startGame);
+		
 		
 		frame = new JFrame(titel);
 		BorderLayout bl = new BorderLayout();
@@ -96,6 +104,7 @@ public class GUI implements ActionListener{
 	    bb.setHorizontalTextPosition(SwingConstants.CENTER);
 	    bb.setBounds(100,0,30,30);
 	    bb.addActionListener(this);
+	    bb.setVisible(true);
 	    
 		mitte.add(game);
 	
@@ -169,6 +178,9 @@ public class GUI implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getSource().getClass().getName()+"GEKLICKT");
+		bb.setVisible(true);
+		bb.setBounds(100,100,30,30);
+
 		
 		
 	}
