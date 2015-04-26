@@ -1,4 +1,4 @@
-package Spiel;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -14,6 +14,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import Spiel.ButtonsNavi;
 
 
 public class GUI implements ActionListener{

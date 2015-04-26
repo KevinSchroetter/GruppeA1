@@ -1,4 +1,4 @@
-package Spiel;
+package GUI;
 
 public class TestGUI {
 
