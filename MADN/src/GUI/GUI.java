@@ -1,11 +1,13 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +43,8 @@ public class GUI implements ActionListener{
 	JLabel consoleHeader = new JLabel("Console");
 	JLabel game = new JLabel();
 	JTextArea console = new JTextArea(10,100);
+	JButton bb = new JButton("blaTest");
+
 	
 	
 
@@ -48,7 +52,7 @@ public class GUI implements ActionListener{
 	
 	public GUI(String titel, int spalten, int zeilen, int index){
 		this.setNaviButtonNamesByLanguage(index);
-
+		
 		frame = new JFrame(titel);
 		BorderLayout bl = new BorderLayout();
 		GridLayout gl = new GridLayout(ButtonsNavi.values().length,1);
@@ -76,11 +80,39 @@ public class GUI implements ActionListener{
 		westen.add(dice);
 		frame.getContentPane().add(westen, BorderLayout.WEST);
 		
+		
+		
+		
+		mitte.setLayout(null);
+		
+		
+		
+		mitte.setBackground(Color.RED);
+		mitte.add(bb);
+		ImageIcon ico2 = new ImageIcon("images/dice_01.jpg");
+		ico2.setImage(ico2.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		bb.setIcon(ico2);
+		bb.setVerticalTextPosition(SwingConstants.CENTER);
+	    bb.setHorizontalTextPosition(SwingConstants.CENTER);
+	    bb.setBounds(100,0,30,30);
+	    bb.addActionListener(this);
+	    
+		mitte.add(game);
+	
+	    
+	    
+      
+
 		ImageIcon ico = new ImageIcon("images/game.jpg");
 		ico.setImage(ico.getImage().getScaledInstance(500,500,Image.SCALE_DEFAULT)); 
 		game.setIcon(ico);
 		game.setIconTextGap(10);
-		mitte.add(game);
+		game.setBounds(90,30,500,500);
+		
+	
+
+		
+		
 		frame.getContentPane().add(mitte,BorderLayout.CENTER);
 		
 
@@ -88,6 +120,7 @@ public class GUI implements ActionListener{
 	    frame.setSize(1000, 800);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
 	    
@@ -135,7 +168,7 @@ public class GUI implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getClass());
+		System.out.println(e.getSource().getClass().getName()+"GEKLICKT");
 		
 		
 	}
