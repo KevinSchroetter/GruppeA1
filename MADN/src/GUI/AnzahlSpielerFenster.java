@@ -1,10 +1,20 @@
 package GUI;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.*;
 
 public class AnzahlSpielerFenster extends JFrame{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private HashMap<String,JButton> map = null;
+	
 	public AnzahlSpielerFenster(){
 		
 		this.setResizable(false);
@@ -28,12 +38,20 @@ public class AnzahlSpielerFenster extends JFrame{
 		auswahl.add(auswahlAnzahl);
 		JPanel okbutton= new JPanel();
 		JButton ok= new JButton("OK");
+		System.out.println(ok);
+		
 		okbutton.add(ok);
 		this.add(okbutton);
-		pack();
+		map.put("OK",ok);
+		ok.addActionListener(new Eventhandler(map,auswahlAnzahl.getSelectedIndex(),this));
+		
+		this.pack();
 		
 		
+		
+
 		
 	}
+
 
 }

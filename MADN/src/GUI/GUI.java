@@ -23,6 +23,7 @@ import Spiel.ButtonsNavi;
 
 public class GUI implements ActionListener{
 	HashMap<String, JButton> map = new HashMap<String, JButton>();
+	ArrayList<ImageIcon> images = new ArrayList<ImageIcon>();
 	JFrame frame = null;
 	int zeilen = 0;
 	int spalten = 0;
@@ -53,16 +54,7 @@ public class GUI implements ActionListener{
 	
 	public GUI(String titel, int spalten, int zeilen, int index){
 		this.setNaviButtonNamesByLanguage(index);
-		
-		
-		
-		map.put("diceGame", diceGame);
-		map.put("startGame",startGame);
-		map.put("endGame",endGame);
-		map.put("newGame",newGame);
-		map.put("loadGame",startGame);
-		map.put("sendGame",startGame);
-		
+				
 		diceGame.addActionListener(new Eventhandler(map));
 		
 		
@@ -88,8 +80,6 @@ public class GUI implements ActionListener{
 		sueden.add(console);
 		frame.getContentPane().add(sueden, BorderLayout.SOUTH);
 		
-		ImageIcon icon = new ImageIcon("images/dice_04.jpg");
-		dice.setIcon(icon);
 		westen.add(dice);
 		frame.getContentPane().add(westen, BorderLayout.WEST);
 		
@@ -100,47 +90,58 @@ public class GUI implements ActionListener{
 		
 		
 		
-		mitte.setBackground(Color.RED);
-		mitte.add(bb);
-		ImageIcon ico2 = new ImageIcon("images/dice_01.jpg");
-		ico2.setImage(ico2.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
-		bb.setIcon(ico2);
+		
+
+		bb.setIcon(images.get(1));
 		bb.setVerticalTextPosition(SwingConstants.CENTER);
 	    bb.setHorizontalTextPosition(SwingConstants.CENTER);
 	    bb.setBounds(100,0,30,30);
 	    bb.addActionListener(this);
 	    bb.setVisible(true);
 	    
-		mitte.add(game);
+		
 	
 	    
 	    
-      
-
+	    mitte.setBackground(Color.RED);
+		mitte.add(bb);
+	    mitte.add(game);
 		ImageIcon ico = new ImageIcon("images/game.jpg");
 		ico.setImage(ico.getImage().getScaledInstance(500,500,Image.SCALE_DEFAULT)); 
 		game.setIcon(ico);
 		game.setIconTextGap(10);
 		game.setBounds(90,30,500,500);
-		
-	
 
-		
-		
 		frame.getContentPane().add(mitte,BorderLayout.CENTER);
-		
-
-
 	    frame.setSize(1000, 800);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
-
-	    
+   
 	}
 	
 	private void setNaviButtonNamesByLanguage(int index){
+		ImageIcon icon = new ImageIcon("images/dice_01.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		images.add(icon);
+		icon = new ImageIcon("images/dice_02.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		images.add(icon);
+		icon = new ImageIcon("images/dice_03.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		images.add(icon);
+		icon = new ImageIcon("images/dice_04.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		images.add(icon);
+		icon = new ImageIcon("images/dice_05.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		images.add(icon);
+		icon = new ImageIcon("images/dice_06.jpg");
+		icon.setImage(icon.getImage().getScaledInstance(40,40,Image.SCALE_DEFAULT));
+		images.add(icon);
+		dice.setIcon(images.get(5));
+		dice.setVerticalTextPosition(SwingConstants.BOTTOM);
+	    dice.setHorizontalTextPosition(SwingConstants.CENTER);		
+		
 		ArrayList<String> DE = new ArrayList<String>();
 		DE.add("Wuerfeln");
 		DE.add("Spiel Starten");
@@ -173,6 +174,18 @@ public class GUI implements ActionListener{
 			saveGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("save").ordinal()));
 			loadGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("load").ordinal()));
 			sendGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("send").ordinal()));
+			map.put("diceGame", diceGame);
+			diceGame.addActionListener(new Eventhandler(map));
+			map.put("startGame",startGame);
+			startGame.addActionListener(new Eventhandler(map));
+			map.put("endGame",endGame);
+			endGame.addActionListener(new Eventhandler(map));
+			map.put("newGame",newGame);
+			newGame.addActionListener(new Eventhandler(map));
+			map.put("loadGame",startGame);
+			loadGame.addActionListener(new Eventhandler(map));
+			map.put("sendGame",startGame);
+			sendGame.addActionListener(new Eventhandler(map));
 			
 			
 			
