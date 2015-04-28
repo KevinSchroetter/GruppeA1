@@ -32,6 +32,9 @@ public class Eventhandler implements ActionListener {
 	private FarbEnum tempFarbe = null;
 	
 	
+
+	
+	
 	public Eventhandler(HashMap<String,JButton> naviMap, HashMap<String,JLabel> labelMap, HashMap<String,ImageIcon> imagesMap, HashMap<String,JButton> stdFieldsMap, HashMap<String,JButton> startFieldsMap, HashMap<String,JButton> endFieldsMap ){
 		if(naviMap == null || labelMap == null || imagesMap == null || stdFieldsMap == null || startFieldsMap == null || endFieldsMap == null) throw new IllegalArgumentException("Hashmap fehlerhaft");
 		this.naviMap = naviMap;
@@ -83,6 +86,7 @@ public class Eventhandler implements ActionListener {
 		if(e.getSource() == naviMap.get("diceGame")){
 			buf = (JButton) e.getSource();
 			buf.setText("Meep!");
+			System.out.println("Meep?");
 		}
 		if(e.getSource() == naviMap.get("startGame")){
 			buf = (JButton) e.getSource();

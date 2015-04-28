@@ -3,6 +3,7 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -12,6 +13,7 @@ import Spiel.ButtonsNavi;
 
 
 public class GUI {
+	
 	private HashMap<String, JButton> naviMap = new HashMap<String, JButton>();
 	private HashMap<String, ImageIcon> imagesMap = new HashMap<String, ImageIcon>();
 	private HashMap<String, JLabel> labelMap = new HashMap<String, JLabel>();
@@ -29,6 +31,8 @@ public class GUI {
 	private JPanel westen = new JPanel();
 	private JPanel mitte = new JPanel();
 	private JTextArea console = new JTextArea(10,100);
+
+	
 
 	public GUI(String titel, int spalten, int zeilen, int index){
 		frame = new JFrame(titel);
@@ -50,6 +54,8 @@ public class GUI {
 	    frame.setSize(780, 768);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    
+	    
    
 	}
 
