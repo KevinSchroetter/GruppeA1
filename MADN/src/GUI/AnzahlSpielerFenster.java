@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.*;
@@ -13,10 +11,13 @@ public class AnzahlSpielerFenster extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private HashMap<String,JButton> map = null;
+	private HashMap<String,JButton> map = new HashMap<String,JButton>();
+	private Eventhandler myHandler = null;
+	String [] spielerAuswahl={"1 Spieler", "2 Spieler","3 Spieler","4 Spieler"};
+	JComboBox <String> auswahlAnzahl= new JComboBox <String> (spielerAuswahl);
 	
-	public AnzahlSpielerFenster(){
-		
+	public AnzahlSpielerFenster(Eventhandler myHandler){
+		this.myHandler = myHandler;
 		this.setResizable(false);
 		this.setLocation(550, 200);
 		this.setTitle("Anz. Spieler");
@@ -31,8 +32,7 @@ public class AnzahlSpielerFenster extends JFrame{
 		frage.add(anzahlSpieler);
 		this.add(frage);
 		this.add(auswahl);
-		String [] spielerAuswahl={"1 Spieler", "2 Spieler","3 Spieler","4 Spieler"};
-		JComboBox <String> auswahlAnzahl= new JComboBox <String> (spielerAuswahl);
+		
 		
 		auswahlAnzahl.setEnabled(true);
 		auswahl.add(auswahlAnzahl);
@@ -43,8 +43,8 @@ public class AnzahlSpielerFenster extends JFrame{
 		okbutton.add(ok);
 		this.add(okbutton);
 		map.put("OK",ok);
-		ok.addActionListener(new Eventhandler(map,auswahlAnzahl.getSelectedIndex(),this));
-		
+		ok.addActionListener(myHandler);
+		myHandler.addStuff(map,this);
 		this.pack();
 		
 		

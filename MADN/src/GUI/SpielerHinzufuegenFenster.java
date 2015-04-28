@@ -1,12 +1,25 @@
 package GUI;
 
 import java.awt.GridLayout;
+import java.util.HashMap;
 
 import javax.swing.*;
 
 public class SpielerHinzufuegenFenster extends JFrame{
 	
-	public SpielerHinzufuegenFenster(){
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private HashMap<String,JButton> map = new HashMap<String,JButton>();
+	private Eventhandler myHandler = null;
+	public JTextField eingabeName= new JTextField(10);
+	private String[] auswahlFarben= {"ROT", "BLAU", "GRUEN", "GELB"};
+	public JComboBox <String> FarbAuswahl= new JComboBox <String>(auswahlFarben);
+	public ButtonGroup art= new ButtonGroup();
+
+	public SpielerHinzufuegenFenster(Eventhandler myHandler){;
+		eingabeName.setSize(200, 10);
 		this.setResizable(false);
 		this.setLocation(400, 150);
 		this.setTitle("Neuer Spieler");
@@ -18,7 +31,7 @@ public class SpielerHinzufuegenFenster extends JFrame{
 		this.add(new JLabel("Neuer Spieler:"));
 		this.add(new JLabel(""));
 		this.add(new JLabel("Name:"));
-		JTextField eingabeName= new JTextField(" Name des Spielers ");
+		
 		JPanel ename= new JPanel();
 		
 		ename.add(eingabeName);
@@ -40,8 +53,8 @@ public class SpielerHinzufuegenFenster extends JFrame{
 		
 		
 		this.add(new JLabel("Farbe:"));
-		String[] auswahlFarben= {"ROT", "BLAU", "GRUEN", "GELB"};
-		JComboBox <String> FarbAuswahl= new JComboBox <String>(auswahlFarben);
+		
+		
 		JPanel farben= new JPanel();
 		farben.add(FarbAuswahl);
 		this.add(farben);
@@ -53,8 +66,10 @@ public class SpielerHinzufuegenFenster extends JFrame{
 		JPanel okbutt= new JPanel();
 		JButton ok= new JButton("OK");
 		okbutt.add(ok);
+		map.put("addSpieler", ok);
+		ok.addActionListener(myHandler);
+		myHandler.addStuff(map,this);
 		this.add(okbutt);
-		
 		pack();
 		
 	}

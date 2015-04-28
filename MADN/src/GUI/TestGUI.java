@@ -3,7 +3,7 @@ package GUI;
 public class TestGUI {
 
 	public static void main(String[] args) {
-		GUI bla = new GUI("MADNGUI",6,6,0);
+		GUI testGUI = new GUI("MADN - GORE EDITION",6,6,0);
 
 	}
 
