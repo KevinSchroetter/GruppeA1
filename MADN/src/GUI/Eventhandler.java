@@ -166,6 +166,7 @@ public class Eventhandler implements ActionListener {
 			buf = (JButton) e.getSource();
 			buf.setEnabled(false);
 			naviMap.get("startGame").setEnabled(true);
+			naviMap.get("newGame").setEnabled(false);
 			myGame.neuesSpielErstellen();
 			System.out.println("Neues Spiel wurde erstellt!");
 			if(!vorhandeneFarben.contains(FarbEnum.GELB))
