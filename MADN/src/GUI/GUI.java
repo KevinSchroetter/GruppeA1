@@ -32,6 +32,7 @@ public class GUI {
 	private JPanel westen = new JPanel();
 	private JPanel mitte = new JPanel();
 	private JTextArea console = new JTextArea(10,100);
+	private JFileChooser dateiGrabber = new JFileChooser();
 
 	
 
@@ -83,7 +84,7 @@ public class GUI {
 	}
 
 	private void setEventhandler() {
-		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap);	
+		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber);	
 		myHandler.addGUI(frame);
 		for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();
