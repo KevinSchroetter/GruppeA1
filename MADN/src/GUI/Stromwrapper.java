@@ -12,18 +12,18 @@ public class Stromwrapper extends OutputStream {
 	
 	//Referenzen auf Ursprungsströme:
 	
-	private PrintStream standardOut = System.out;
-	private PrintStream standardErr = System.err;
+	private static PrintStream standardOut = System.out;
+	private static PrintStream standardErr = System.err;
 	
 	public Stromwrapper(JTextArea hierReinSchreiben){
 		if(hierReinSchreiben == null) throw new IllegalArgumentException("JTextArea null");
 		this.destOutput = hierReinSchreiben;
 	}
 	
-	public PrintStream getStandardOut(){
+	public static PrintStream getStandardOut(){
 		return standardOut;
 	}
-	public PrintStream getStandardErr(){
+	public static PrintStream getStandardErr(){
 		return standardErr;
 	}
 	

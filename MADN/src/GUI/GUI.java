@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.PrintStream;
@@ -387,6 +388,13 @@ public class GUI {
 		sueden.add(labelMap.get("consoleHeader"));
 		sueden.add(console);
 		frame.getContentPane().add(sueden, BorderLayout.SOUTH);
+		System.out.println("Test standard");
+		//Stromumleiten
+		System.setOut(new PrintStream(new Stromwrapper(this.console)));
+		this.console.setVisible(true);
+		System.out.println("Test GUI");
+		
+
 	}
 	private void createPanelWEST() {
 		setDiceImage("Dice6");
