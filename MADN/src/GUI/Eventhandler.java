@@ -158,6 +158,8 @@ public class Eventhandler implements ActionListener {
 			buf = (JButton) e.getSource();
 			buf.setEnabled(false);
 			naviMap.get("newGame").setEnabled(true);
+			naviMap.get("diceGame").setEnabled(true);
+			naviMap.get("saveGame").setEnabled(true);
 			tempASF = new AnzahlSpielerFenster(this);
 		}
 		if(e.getSource() == naviMap.get("newGame")){
