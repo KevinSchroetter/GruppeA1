@@ -84,6 +84,7 @@ public class GUI {
 
 	private void setEventhandler() {
 		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap);	
+		myHandler.addGUI(frame);
 		for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();
 		    mitte.add(value);
@@ -390,7 +391,7 @@ public class GUI {
 		frame.getContentPane().add(sueden, BorderLayout.SOUTH);
 		System.out.println("Test standard");
 		//Stromumleiten
-		System.setOut(new PrintStream(new Stromwrapper(this.console)));
+	//	System.setOut(new PrintStream(new Stromwrapper(this.console)));
 		this.console.setVisible(true);
 		System.out.println("Test GUI");
 		

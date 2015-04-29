@@ -1564,4 +1564,9 @@ public class Spiel implements iBediener, Serializable {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	@Override
+	public void neuesSpielErstellen() {
+		neuesSpiel();
+	}
 }

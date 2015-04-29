@@ -32,6 +32,7 @@ public class Eventhandler implements ActionListener {
 	private String tempString = null;
 	private JLabel tempLabel = null;
 	private JFrame frame = null;
+	private JFrame guiFrame = null;
 	private int counter = 0;
 	private FarbEnum tempFarbe = null;
 	private ArrayList <FarbEnum> vorhandeneFarben=null;
@@ -60,6 +61,7 @@ public class Eventhandler implements ActionListener {
 
 	public void addStuff(HashMap<String,JButton> eventMap, JFrame frame,HashMap<String, JRadioButton> tempMap,
 			ButtonGroup bg, JComboBox<String> jcb, JTextField name){
+		if(eventMap!=null)
 		for(java.util.Map.Entry<String, JButton> entry : eventMap.entrySet()) {
 		    String key = entry.getKey();
 		    JButton value = entry.getValue();
@@ -69,8 +71,10 @@ public class Eventhandler implements ActionListener {
 		this.buttonGroup=bg;
 		farbe= jcb;
 		this.name= name;
-
 		this.frame = frame;
+	}
+	public void addGUI(JFrame frame){
+		this.guiFrame = frame;
 	}
 
 	@Override
@@ -78,6 +82,10 @@ public class Eventhandler implements ActionListener {
 		if (!(e instanceof ActionEvent)) return;
 		//System.out.println(e.getSource());
 		JButton buf;
+		if(e.getSource() == naviMap.get("endGame")){
+			guiFrame.dispose();
+			
+		}
 		if(e.getSource() == naviMap.get("OK")){
 			frame.dispose();
 			counter = tempASF.auswahlAnzahl.getSelectedIndex();
@@ -88,9 +96,6 @@ public class Eventhandler implements ActionListener {
 		}
 		if(e.getSource() == naviMap.get("addSpieler")){
 			frame.dispose();
-//			tempString=tempSHF.eingabeName.getText();
-//			tempFarbe = FarbEnum.valueOf(tempSHF.FarbAuswahl.getSelectedItem().toString());
-			
 			int kIAuswahl=1;
 			JRadioButton jrb=null;
 			for(java.util.Map.Entry<String, JRadioButton> entry : auswahlMenschKi.entrySet()) {
@@ -103,8 +108,7 @@ public class Eventhandler implements ActionListener {
 				kIAuswahl=1;
 			else if(jrb.equals(auswahlMenschKi.get("dki")))
 				kIAuswahl=2;
-			System.out.println("KI oder Mensch?" + kIAuswahl);
-			
+			System.out.println("KI oder Mensch?" + " " +kIAuswahl);
 			String farbtemp=(String) farbe.getSelectedItem();
 			int farbId=0;
 			switch(farbtemp){
@@ -124,11 +128,8 @@ public class Eventhandler implements ActionListener {
 				tempFarbe=FarbEnum.GELB;
 				farbId=4;
 			}
-			
 			System.out.println("Farbe: " + tempFarbe);
-			
 			String tempName=name.getText();
-			
 			System.out.println("Eingabe im Namensfeld:"+ name);
 			System.out.println("Farbe: "+tempFarbe);
 			
@@ -138,9 +139,7 @@ public class Eventhandler implements ActionListener {
 				counter --;
 			}
 			if(erfolgreich==false)
-				System.out.println("Erstellen des Spielers war nicht erfolgreich. Bitte erneut versuchen!");
-			
-			
+				System.out.println("Erstellen des Spielers war nicht erfolgreich. Bitte erneut versuchen!");			
 			frame=null;
 			tempString=null;
 			tempFarbe=null;
@@ -149,9 +148,7 @@ public class Eventhandler implements ActionListener {
 			else{
 				myGame.starteSpiel();
 			}
-		}
-		
-		
+		}		
 		if(e.getSource() == naviMap.get("diceGame")){
 			buf = (JButton) e.getSource();
 			buf.setText("Meep!");
@@ -160,13 +157,24 @@ public class Eventhandler implements ActionListener {
 		if(e.getSource() == naviMap.get("startGame")){
 			buf = (JButton) e.getSource();
 			buf.setEnabled(false);
+			naviMap.get("newGame").setEnabled(true);
 			tempASF = new AnzahlSpielerFenster(this);
-		
-		
 		}
-
-		
+		if(e.getSource() == naviMap.get("newGame")){
+			buf = (JButton) e.getSource();
+			buf.setEnabled(false);
+			naviMap.get("startGame").setEnabled(true);
+			myGame.neuesSpielErstellen();
+			System.out.println("Neues Spiel wurde erstellt!");
+			if(!vorhandeneFarben.contains(FarbEnum.GELB))
+			vorhandeneFarben.add(FarbEnum.GELB);
+			if(!vorhandeneFarben.contains(FarbEnum.GRUEN))
+				vorhandeneFarben.add(FarbEnum.GRUEN);
+			if(!vorhandeneFarben.contains(FarbEnum.BLAU))
+				vorhandeneFarben.add(FarbEnum.BLAU);
+			if(!vorhandeneFarben.contains(FarbEnum.ROT))
+				vorhandeneFarben.add(FarbEnum.ROT);
+			
+		}
 	}
-	
-
 }

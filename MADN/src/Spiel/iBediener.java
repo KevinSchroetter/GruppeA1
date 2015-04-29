@@ -17,7 +17,7 @@ public interface iBediener {
 	public void starteSpiel();
 	public void werfen(int zahl);
 	public boolean neuerSpieler(String name, int farbID, int verhaltenID);
-	
+	public void neuesSpielErstellen();
 	public ArrayList<Spielfigur> ausgabeFiguren();
 	public ArrayList<Spielfigur> ausgabeZugFiguren();
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel();

@@ -38,7 +38,6 @@ public class AnzahlSpielerFenster extends JFrame{
 		auswahl.add(auswahlAnzahl);
 		JPanel okbutton= new JPanel();
 		JButton ok= new JButton("OK");
-		System.out.println(ok);
 		
 		okbutton.add(ok);
 		this.add(okbutton);
