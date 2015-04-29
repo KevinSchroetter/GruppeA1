@@ -124,7 +124,7 @@ public class Eventhandler implements ActionListener {
 				tempFarbe=FarbEnum.GELB;
 				farbId=4;
 			}
-			vorhandeneFarben.remove(tempFarbe);
+			
 			System.out.println("Farbe: " + tempFarbe);
 			
 			String tempName=name.getText();
@@ -132,19 +132,23 @@ public class Eventhandler implements ActionListener {
 			System.out.println("Eingabe im Namensfeld:"+ name);
 			System.out.println("Farbe: "+tempFarbe);
 			
-			/* Wenn neuerSPieler dann nen boolean zurückgibt, tut das hier)
-			boolean erfolgreich= myGame.neuerSpieler(tempName, farbId, kIAuswahl);
+			boolean erfolgreich=myGame.neuerSpieler(tempName, farbId, kIAuswahl);
 			if(erfolgreich==true){
-			counter --;
+				vorhandeneFarben.remove(tempFarbe);
+				counter --;
 			}
-			*/
-			myGame.neuerSpieler(tempName, farbId, kIAuswahl);
+			if(erfolgreich==false)
+				System.out.println("Erstellen des Spielers war nicht erfolgreich. Bitte erneut versuchen!");
+			
 			
 			frame=null;
 			tempString=null;
 			tempFarbe=null;
-			counter--;
-			if(counter>=0) tempSHF = new SpielerHinzufuegenFenster(this, vorhandeneFarben);
+			if(counter>=0) 
+				tempSHF = new SpielerHinzufuegenFenster(this, vorhandeneFarben);
+			else{
+				myGame.starteSpiel();
+			}
 		}
 		
 		

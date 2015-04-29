@@ -317,7 +317,7 @@ public class Spiel implements iBediener, Serializable {
 	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
 	 *            uebergebenen Verhalten;
 	 */
-	protected void spielerHinzufuegen(String name, int farbID, int verhaltenID) {
+	protected boolean spielerHinzufuegen(String name, int farbID, int verhaltenID) {
 		if (getHatBegonnen() == true)
 			throw new RuntimeException("Spiel hat schon begonnen");
 		if (getAnzahlSpieler() > farben.size())
@@ -356,6 +356,7 @@ public class Spiel implements iBediener, Serializable {
 		if (getAnzahlSpieler() == 4) {
 			setHatBegonnen(true);
 		}
+		return true;
 
 	}
 	
@@ -1429,11 +1430,11 @@ public class Spiel implements iBediener, Serializable {
 	 *            - int zum Auswaehlen des Verhaltens
 	 */
 	@Override
-	public void neuerSpieler(String name, int farbID, int verhaltenID) {
-
+	public boolean neuerSpieler(String name, int farbID, int verhaltenID) {
+		boolean erfolgreich=false;
 		try {
 
-			spielerHinzufuegen(name, farbID, verhaltenID);
+			erfolgreich=spielerHinzufuegen(name, farbID, verhaltenID);
 			System.out.println("Spieler " + getAnzahlSpieler() + ": "+ spieler[getAnzahlSpieler() - 1].getName() + " "+ spieler[getAnzahlSpieler() - 1].getFarbe()+ " wurde Hinzugefuegt!\n");
 			if (getAnzahlSpieler() == 4) {
 				setHatBegonnen(false);
@@ -1441,6 +1442,8 @@ public class Spiel implements iBediener, Serializable {
 			}
 		} catch (RuntimeException e) {
 			System.out.println(e);
+		}finally{
+			return erfolgreich;
 		}
 	}
 
