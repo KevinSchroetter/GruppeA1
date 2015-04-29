@@ -256,6 +256,56 @@ public class Eventhandler implements ActionListener {
 			}
 
 		}
+		
+		if(e.getSource() == naviMap.get("loadGame")){
+			
+			Object[] optionen = { "CSV", "Serialisiert" };
+			Object typ = JOptionPane.showOptionDialog(frame,
+					"Serialisiert oder CSV?", "Wie magstn Laden dude?",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, optionen, optionen[1]);
+
+			if (typ.equals(0)) {
+				File datei = null;
+
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+						"CSV-Dateien", "csv");
+				fileGrabber = new JFileChooser();
+				fileGrabber.setFileFilter(filter);
+
+				int returnVal = fileGrabber.showOpenDialog(this.frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					datei = fileGrabber.getSelectedFile();
+
+					String lol = datei.getPath();
+					myGame = (iBediener) saveCsv.spielLaden(saveCsv.openFile(lol, 1));
+				} else {
+					System.out.println("Speichern abgebrochen");
+				}
+
+			} else if (typ.equals(1)) {
+				File datei = null;
+
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+						"Serialisierte Objektdateien", "ser");
+				fileGrabber = new JFileChooser();
+				fileGrabber.setFileFilter(filter);
+
+				int returnVal = fileGrabber.showOpenDialog(this.frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					datei = fileGrabber.getSelectedFile();
+					String lol = datei.getPath();
+					myGame = (iBediener) saveSer.spielLaden(saveSer.openFile(lol, 1));
+
+				} else {
+					System.out.println("Speichern abgebrochen");
+				}
+
+			}
+			
+			
+			
+		}
 
 	}
 }
