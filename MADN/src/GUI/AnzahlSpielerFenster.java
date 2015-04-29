@@ -44,7 +44,7 @@ public class AnzahlSpielerFenster extends JFrame{
 		this.add(okbutton);
 		map.put("OK",ok);
 		ok.addActionListener(myHandler);
-		myHandler.addStuff(map,this);
+		myHandler.addStuff(map,this, null, null, null, null);
 		this.pack();
 		
 		

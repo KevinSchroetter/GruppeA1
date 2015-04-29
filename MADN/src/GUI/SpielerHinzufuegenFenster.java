@@ -1,9 +1,12 @@
 package GUI;
 
 import java.awt.GridLayout;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
+
+import Einstellungen.FarbEnum;
 
 public class SpielerHinzufuegenFenster extends JFrame{
 	
@@ -12,13 +15,14 @@ public class SpielerHinzufuegenFenster extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	private HashMap<String,JButton> map = new HashMap<String,JButton>();
+	private HashMap<String,JRadioButton> radioButtons = new HashMap<String,JRadioButton>();
 	private Eventhandler myHandler = null;
 	public JTextField eingabeName= new JTextField(10);
-	private String[] auswahlFarben= {"ROT", "BLAU", "GRUEN", "GELB"};
-	public JComboBox <String> FarbAuswahl= new JComboBox <String>(auswahlFarben);
-	public ButtonGroup art= new ButtonGroup();
+	private String[] auswahlFarben;
+	private JComboBox <String> farbAuswahl;
+	private ButtonGroup art;
 
-	public SpielerHinzufuegenFenster(Eventhandler myHandler){;
+	public SpielerHinzufuegenFenster(Eventhandler myHandler, ArrayList<FarbEnum> vorhandeneFarben){;
 		eingabeName.setSize(200, 10);
 		this.setResizable(false);
 		this.setLocation(400, 150);
@@ -39,9 +43,13 @@ public class SpielerHinzufuegenFenster extends JFrame{
 		
 		this.add(new JLabel("Mensch / KI aggressiv / KI defensiv:"));
 		JRadioButton mensch= new JRadioButton("Mensch");
-		JRadioButton aki= new JRadioButton("KI aggressiv");
+		JRadioButton aki= new JRadioButton("KI aggressiv",true);
 		JRadioButton dki= new JRadioButton("KI defensiv");
 		ButtonGroup art= new ButtonGroup();
+		radioButtons.put("Mensch",mensch);
+		radioButtons.put("aki", aki);
+		radioButtons.put("dki",dki);
+		art= new ButtonGroup();
 		art.add(mensch);
 		art.add(aki);
 		art.add(dki);
@@ -53,10 +61,15 @@ public class SpielerHinzufuegenFenster extends JFrame{
 		
 		
 		this.add(new JLabel("Farbe:"));
-		
+		auswahlFarben= new String[vorhandeneFarben.size()];
+		for( int i=0; i<vorhandeneFarben.size(); i++){
+			String temp= vorhandeneFarben.get(i).name();
+			auswahlFarben[i]=temp;
+		}
+		farbAuswahl=new JComboBox <String>(auswahlFarben);
 		
 		JPanel farben= new JPanel();
-		farben.add(FarbAuswahl);
+		farben.add(farbAuswahl);
 		this.add(farben);
 		
 		this.add(new JLabel(""));
@@ -68,7 +81,7 @@ public class SpielerHinzufuegenFenster extends JFrame{
 		okbutt.add(ok);
 		map.put("addSpieler", ok);
 		ok.addActionListener(myHandler);
-		myHandler.addStuff(map,this);
+		myHandler.addStuff(map,this, radioButtons, art, farbAuswahl, eingabeName);
 		this.add(okbutt);
 		pack();
 		

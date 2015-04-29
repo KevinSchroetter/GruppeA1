@@ -6,10 +6,14 @@ import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 import Einstellungen.FarbEnum;
 import Spiel.Spiel;
@@ -30,7 +34,11 @@ public class Eventhandler implements ActionListener {
 	private JFrame frame = null;
 	private int counter = 0;
 	private FarbEnum tempFarbe = null;
-	
+	private ArrayList <FarbEnum> vorhandeneFarben=null;
+	private ButtonGroup buttonGroup= null;
+	private HashMap<String, JRadioButton> auswahlMenschKi=null;
+	private JComboBox <String> farbe=null;
+	private JTextField name= null;
 	
 
 	
@@ -43,14 +51,25 @@ public class Eventhandler implements ActionListener {
 		this.stdFieldsMap = stdFieldsMap;
 		this.startFieldsMap = startFieldsMap;
 		this.endFieldsMap = endFieldsMap;
+		vorhandeneFarben= new ArrayList <FarbEnum>();
+		vorhandeneFarben.add(FarbEnum.ROT);
+		vorhandeneFarben.add(FarbEnum.BLAU);
+		vorhandeneFarben.add(FarbEnum.GRUEN);
+		vorhandeneFarben.add(FarbEnum.GELB);
 	}
 
-	public void addStuff(HashMap<String,JButton> eventMap, JFrame frame){
+	public void addStuff(HashMap<String,JButton> eventMap, JFrame frame,HashMap<String, JRadioButton> tempMap,
+			ButtonGroup bg, JComboBox<String> jcb, JTextField name){
 		for(java.util.Map.Entry<String, JButton> entry : eventMap.entrySet()) {
 		    String key = entry.getKey();
 		    JButton value = entry.getValue();
 		    naviMap.put(key, value);
 		}
+		auswahlMenschKi=tempMap;
+		this.buttonGroup=bg;
+		farbe= jcb;
+		this.name= name;
+
 		this.frame = frame;
 	}
 
@@ -65,21 +84,67 @@ public class Eventhandler implements ActionListener {
 			tempASF = null;
 			frame = null;
 			System.out.println("Gewaehlte Spieleranzahl: "+(counter+1));
-			tempSHF = new SpielerHinzufuegenFenster(this);
+			tempSHF = new SpielerHinzufuegenFenster(this, vorhandeneFarben);
 		}
 		if(e.getSource() == naviMap.get("addSpieler")){
 			frame.dispose();
-			tempString=tempSHF.eingabeName.getText();
-			tempFarbe = FarbEnum.valueOf(tempSHF.FarbAuswahl.getSelectedItem().toString());
-			System.out.println("Eingabe im Namensfeld:"+ tempString);
+//			tempString=tempSHF.eingabeName.getText();
+//			tempFarbe = FarbEnum.valueOf(tempSHF.FarbAuswahl.getSelectedItem().toString());
+			
+			int kIAuswahl=1;
+			JRadioButton jrb=null;
+			for(java.util.Map.Entry<String, JRadioButton> entry : auswahlMenschKi.entrySet()) {
+				if(entry.getValue().isSelected())
+					jrb=entry.getValue();
+			}
+			if(jrb.equals(auswahlMenschKi.get("Mensch")))
+				kIAuswahl=0;
+			else if(jrb.equals(auswahlMenschKi.get("aki")))
+				kIAuswahl=1;
+			else if(jrb.equals(auswahlMenschKi.get("dki")))
+				kIAuswahl=2;
+			System.out.println("KI oder Mensch?" + kIAuswahl);
+			
+			String farbtemp=(String) farbe.getSelectedItem();
+			int farbId=0;
+			switch(farbtemp){
+			case "ROT":
+				tempFarbe=FarbEnum.ROT;
+				farbId=1;
+				break;
+			case "BLAU":
+				tempFarbe=FarbEnum.BLAU;
+				farbId=2;
+				break;
+			case "GRUEN":
+				tempFarbe=FarbEnum.GRUEN;
+				farbId=3;
+				break;
+			case "GELB":
+				tempFarbe=FarbEnum.GELB;
+				farbId=4;
+			}
+			vorhandeneFarben.remove(tempFarbe);
+			System.out.println("Farbe: " + tempFarbe);
+			
+			String tempName=name.getText();
+			
+			System.out.println("Eingabe im Namensfeld:"+ name);
 			System.out.println("Farbe: "+tempFarbe);
-			System.out.println("KEIN PLAN WIE ICH AN DEN RADIOBUTTON RANKOMME: ANNA DO UR THING");
-			//Create Spieler hier ueber iBediern Methode myGame.spielerHinzufuegen
+			
+			/* Wenn neuerSPieler dann nen boolean zurückgibt, tut das hier)
+			boolean erfolgreich= myGame.neuerSpieler(tempName, farbId, kIAuswahl);
+			if(erfolgreich==true){
+			counter --;
+			}
+			*/
+			myGame.neuerSpieler(tempName, farbId, kIAuswahl);
+			
 			frame=null;
 			tempString=null;
 			tempFarbe=null;
 			counter--;
-			if(counter>=0) tempSHF = new SpielerHinzufuegenFenster(this);
+			if(counter>=0) tempSHF = new SpielerHinzufuegenFenster(this, vorhandeneFarben);
 		}
 		
 		
