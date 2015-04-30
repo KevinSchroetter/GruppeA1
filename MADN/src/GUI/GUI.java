@@ -53,12 +53,12 @@ public class GUI {
 		createPanelWEST();
 		createPanelCENTER();
 		
-	    frame.setSize(780, 768);
+	 //   disableAllFields();
+		
+	    frame.setSize(880, 868);
+	    frame.setBounds(500, 100, 880, 868);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    
-	    
-   
 	}
 
 	private void setEndFieldImage(String imageName) {
@@ -73,6 +73,15 @@ public class GUI {
 		    JButton value = entry.getValue();
 		    value.setIcon(imagesMap.get(imageName));
 		}
+		startMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+		startMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+		startMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+		startMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+		startMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+		startMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+		startMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+		startMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
+		
 	}
 
 	private void setStandardFieldImage(String imageName) {
@@ -86,7 +95,7 @@ public class GUI {
 	private void setEventhandler() {
 		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber);	
 		myHandler.addGUI(frame);
-		for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
+		/*for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();
 		    mitte.add(value);
 		    value.addActionListener(myHandler);
@@ -100,7 +109,7 @@ public class GUI {
 		    JButton value = entry.getValue();
 		    mitte.add(value);
 		    value.addActionListener(myHandler);
-		}
+		}*/
 		for(java.util.Map.Entry<String, JButton> entry : naviMap.entrySet()) {
 		    JButton value = entry.getValue();
 		    mitte.add(value);
@@ -125,12 +134,20 @@ public class GUI {
 	}
 	private void initImagesMap(){
 		addIconToImagesMap("field","images/game.jpg",534,534);
-		addIconToImagesMap("Dice1","images/dice_01.jpg",40,40);
-		addIconToImagesMap("Dice2","images/dice_02.jpg",40,40);
-		addIconToImagesMap("Dice3","images/dice_03.jpg",40,40);
-		addIconToImagesMap("Dice4","images/dice_04.jpg",40,40);
-		addIconToImagesMap("Dice5","images/dice_05.jpg",40,40);
-		addIconToImagesMap("Dice6","images/dice_06.jpg",40,40);
+		addIconToImagesMap("Dice1","images/dice_01.jpg",100,100);
+		addIconToImagesMap("Dice2","images/dice_02.jpg",100,100);
+		addIconToImagesMap("Dice3","images/dice_03.jpg",100,100);
+		addIconToImagesMap("Dice4","images/dice_04.jpg",100,100);
+		addIconToImagesMap("Dice5","images/dice_05.jpg",100,100);
+		addIconToImagesMap("Dice6","images/dice_06.jpg",100,100);
+		addIconToImagesMap("figRed1","images/figRed1.jpg",60,60);
+		addIconToImagesMap("figRed2","images/figRed2.jpg",60,60);
+		addIconToImagesMap("figRed3","images/figRed3.jpg",60,60);
+		addIconToImagesMap("figRed4","images/figRed4.jpg",60,60);
+		addIconToImagesMap("figYellow1","images/figYellow1.jpg",60,60);
+		addIconToImagesMap("figYellow2","images/figYellow2.jpg",60,60);
+		addIconToImagesMap("figYellow3","images/figYellow3.jpg",60,60);
+		addIconToImagesMap("figYellow4","images/figYellow4.jpg",60,60);
 	}
 	private void setFieldBackgroundImage(String image){ 
 		if(labelMap.isEmpty()) throw new RuntimeException("labelMap leer");
@@ -191,82 +208,82 @@ public class GUI {
 		
 	}
 	private void initStartFieldButtons(){
-		JButton s1Rot = new JButton("Startfeld 1 Rot");startMap.put("s1Rot", s1Rot);
-		JButton s2Rot = new JButton("Startfeld 2 Rot");startMap.put("s2Rot", s2Rot);
-		JButton s3Rot = new JButton("Startfeld 3 Rot");startMap.put("s3Rot", s3Rot);
-		JButton s4Rot = new JButton("Startfeld 4 Rot");startMap.put("s4Rot", s4Rot);
-		JButton s1Blau = new JButton("Startfeld 1 Blau");startMap.put("s1Blau", s1Blau);
-		JButton s2Blau = new JButton("Startfeld 2 Blau");startMap.put("s2Blau", s2Blau);
-		JButton s3Blau = new JButton("Startfeld 3 Blau");startMap.put("s3Blau", s3Blau);
-		JButton s4Blau = new JButton("Startfeld 4 Blau");startMap.put("s4Blau", s4Blau);
-		JButton s1Gruen = new JButton("Startfeld 1 Gruen");startMap.put("s1Gruen", s1Gruen);
-		JButton s2Gruen = new JButton("Startfeld 2 Gruen");startMap.put("s2Gruen", s2Gruen);
-		JButton s3Gruen = new JButton("Startfeld 3 Gruen");startMap.put("s3Gruen", s3Gruen);
-		JButton s4Gruen = new JButton("Startfeld 4 Gruen");startMap.put("s4Gruen", s4Gruen);
-		JButton s1Gelb = new JButton("Startfeld 1 Gelb");startMap.put("s1Gelb", s1Gelb);
-		JButton s2Gelb = new JButton("Startfeld 2 Gelb");startMap.put("s2Gelb", s2Gelb);
-		JButton s3Gelb = new JButton("Startfeld 3 Gelb");startMap.put("s3Gelb", s3Gelb);
-		JButton s4Gelb = new JButton("Startfeld 4 Gelb");startMap.put("s4Gelb", s4Gelb);
+		JButton s1Rot = new JButton("S1ROT");startMap.put("S1ROT", s1Rot);
+		JButton s2Rot = new JButton("S2ROT");startMap.put("S2ROT", s2Rot);
+		JButton s3Rot = new JButton("S3ROT");startMap.put("S3ROT", s3Rot);
+		JButton s4Rot = new JButton("S4ROT");startMap.put("S4ROT", s4Rot);
+		JButton s1Blau = new JButton("S1BLAU");startMap.put("S1BLAU", s1Blau);
+		JButton s2Blau = new JButton("S2BLAU");startMap.put("S2BLAU", s2Blau);
+		JButton s3Blau = new JButton("S3BLAU");startMap.put("S3BLAU", s3Blau);
+		JButton s4Blau = new JButton("S4BLAU");startMap.put("S4BLAU", s4Blau);
+		JButton s1Gruen = new JButton("S1GRUEN");startMap.put("S1GRUEN", s1Gruen);
+		JButton s2Gruen = new JButton("S2GRUEN");startMap.put("S2GRUEN", s2Gruen);
+		JButton s3Gruen = new JButton("S3GRUEN");startMap.put("S3GRUEN", s3Gruen);
+		JButton s4Gruen = new JButton("S4GRUEN");startMap.put("S4GRUEN", s4Gruen);
+		JButton s1Gelb = new JButton("S1GELB");startMap.put("S1GELB", s1Gelb);
+		JButton s2Gelb = new JButton("S2GELB");startMap.put("S2GELB", s2Gelb);
+		JButton s3Gelb = new JButton("S3GELB");startMap.put("S3GELB", s3Gelb);
+		JButton s4Gelb = new JButton("S4GELB");startMap.put("S4GELB", s4Gelb);
 	}
 	private void initEndFieldButtons() {
-		JButton e1Rot = new JButton("Endfeld 1 Rot");endMap.put("e1Rot", e1Rot);
-		JButton e2Rot = new JButton("Endfeld 2 Rot");endMap.put("e2Rot", e2Rot);
-		JButton e3Rot = new JButton("Endfeld 3 Rot");endMap.put("e3Rot", e3Rot);
-		JButton e4Rot = new JButton("Endfeld 4 Rot");endMap.put("e4Rot", e4Rot);
-		JButton e1Blau = new JButton("Endfeld 1 Blau");endMap.put("e1Blau", e1Blau);
-		JButton e2Blau = new JButton("Endfeld 2 Blau");endMap.put("e2Blau", e2Blau);
-		JButton e3Blau = new JButton("Endfeld 3 Blau");endMap.put("e3Blau", e3Blau);
-		JButton e4Blau = new JButton("Endfeld 4 Blau");endMap.put("e4Blau", e4Blau);
-		JButton e1Gruen = new JButton("Startfeld 1 Gruen");endMap.put("e1Gruen", e1Gruen);
-		JButton e2Gruen = new JButton("Startfeld 2 Gruen");endMap.put("e2Gruen", e2Gruen);
-		JButton e3Gruen = new JButton("Startfeld 3 Gruen");endMap.put("e3Gruen", e3Gruen);
-		JButton e4Gruen = new JButton("Startfeld 4 Gruen");endMap.put("e4Gruen", e4Gruen);
-		JButton e1Gelb = new JButton("Startfeld 1 Gelb");endMap.put("e1Gelb", e1Gelb);
-		JButton e2Gelb = new JButton("Startfeld 2 Gelb");endMap.put("e2Gelb", e2Gelb);
-		JButton e3Gelb = new JButton("Startfeld 3 Gelb");endMap.put("e3Gelb", e3Gelb);
-		JButton e4Gelb = new JButton("Startfeld 4 Gelb");endMap.put("e4Gelb", e4Gelb);
+		JButton e1Rot = new JButton("E1ROT");endMap.put("E1ROT", e1Rot);
+		JButton e2Rot = new JButton("E2ROT");endMap.put("E2ROT", e2Rot);
+		JButton e3Rot = new JButton("E3ROT");endMap.put("E3ROT", e3Rot);
+		JButton e4Rot = new JButton("E4ROT");endMap.put("E4ROT", e4Rot);
+		JButton e1Blau = new JButton("E1BLAU");endMap.put("E1BLAU", e1Blau);
+		JButton e2Blau = new JButton("E2BLAU");endMap.put("E2BLAU", e2Blau);
+		JButton e3Blau = new JButton("E3BLAU");endMap.put("E3BLAU", e3Blau);
+		JButton e4Blau = new JButton("E4BLAU");endMap.put("E4BLAU", e4Blau);
+		JButton e1Gruen = new JButton("E1GRUEN");endMap.put("E1GRUEN", e1Gruen);
+		JButton e2Gruen = new JButton("E2GRUEN");endMap.put("E2GRUEN", e2Gruen);
+		JButton e3Gruen = new JButton("E3GRUEN");endMap.put("E3GRUEN", e3Gruen);
+		JButton e4Gruen = new JButton("E4GRUEN");endMap.put("E4GRUEN", e4Gruen);
+		JButton e1Gelb = new JButton("E1GELB");endMap.put("E1GELB", e1Gelb);
+		JButton e2Gelb = new JButton("E2GELB");endMap.put("E2GELB", e2Gelb);
+		JButton e3Gelb = new JButton("E3GELB");endMap.put("E3GELB", e3Gelb);
+		JButton e4Gelb = new JButton("E4GELB");endMap.put("E4GELB", e4Gelb);
 	}
 	private void initStandardFieldButtons() {
-		JButton s1 = new JButton("Standardfeld 1");sMap.put("S1", s1);
-		JButton s2 = new JButton("Standardfeld 2");sMap.put("S2", s2);
-		JButton s3 = new JButton("Standardfeld 3");sMap.put("S3", s3);
-		JButton s4 = new JButton("Standardfeld 4");sMap.put("S4", s4);
-		JButton s5 = new JButton("Standardfeld 5");sMap.put("S5", s5);
-		JButton s6 = new JButton("Standardfeld 6");sMap.put("S6", s6);
-		JButton s7 = new JButton("Standardfeld 7");sMap.put("S7", s7);
-		JButton s8 = new JButton("Standardfeld 8");sMap.put("S8", s8);
-		JButton s9 = new JButton("Standardfeld 9");sMap.put("S9", s9);
-		JButton s10 = new JButton("Standardfeld 10");sMap.put("S10", s10);
-		JButton s11 = new JButton("Standardfeld 11");sMap.put("S11", s11);
-		JButton s12 = new JButton("Standardfeld 12");sMap.put("S12", s12);
-		JButton s13 = new JButton("Standardfeld 13");sMap.put("S13", s13);
-		JButton s14 = new JButton("Standardfeld 14");sMap.put("S14", s14);
-		JButton s15 = new JButton("Standardfeld 15");sMap.put("S15", s15);
-		JButton s16 = new JButton("Standardfeld 16");sMap.put("S16", s16);
-		JButton s17 = new JButton("Standardfeld 17");sMap.put("S17", s17);
-		JButton s18 = new JButton("Standardfeld 18");sMap.put("S18", s18);
-		JButton s19 = new JButton("Standardfeld 19");sMap.put("S19", s19);
-		JButton s20 = new JButton("Standardfeld 20");sMap.put("S20", s20);
-		JButton s21 = new JButton("Standardfeld 21");sMap.put("S21", s21);
-		JButton s22 = new JButton("Standardfeld 22");sMap.put("S22", s22);
-		JButton s23 = new JButton("Standardfeld 23");sMap.put("S23", s23);
-		JButton s24 = new JButton("Standardfeld 24");sMap.put("S24", s24);
-		JButton s25 = new JButton("Standardfeld 25");sMap.put("S25", s25);
-		JButton s26 = new JButton("Standardfeld 26");sMap.put("S26", s26);
-		JButton s27 = new JButton("Standardfeld 27");sMap.put("S27", s27);
-		JButton s28 = new JButton("Standardfeld 28");sMap.put("S28", s28);
-		JButton s29 = new JButton("Standardfeld 29");sMap.put("S29", s29);
-		JButton s30 = new JButton("Standardfeld 30");sMap.put("S30", s30);
-		JButton s31 = new JButton("Standardfeld 31");sMap.put("S31", s31);
-		JButton s32 = new JButton("Standardfeld 32");sMap.put("S32", s32);
-		JButton s33 = new JButton("Standardfeld 33");sMap.put("S33", s33);
-		JButton s34 = new JButton("Standardfeld 34");sMap.put("S34", s34);
-		JButton s35 = new JButton("Standardfeld 35");sMap.put("S35", s35);
-		JButton s36 = new JButton("Standardfeld 36");sMap.put("S36", s36);
-		JButton s37 = new JButton("Standardfeld 37");sMap.put("S37", s37);
-		JButton s38 = new JButton("Standardfeld 38");sMap.put("S38", s38);
-		JButton s39 = new JButton("Standardfeld 39");sMap.put("S39", s39);
-		JButton s40 = new JButton("Standardfeld 40");sMap.put("S40", s40);
+		JButton s1 = new JButton("1");sMap.put("1", s1);
+		JButton s2 = new JButton("2");sMap.put("2", s2);
+		JButton s3 = new JButton("3");sMap.put("3", s3);
+		JButton s4 = new JButton("4");sMap.put("4", s4);
+		JButton s5 = new JButton("5");sMap.put("5", s5);
+		JButton s6 = new JButton("6");sMap.put("6", s6);
+		JButton s7 = new JButton("7");sMap.put("7", s7);
+		JButton s8 = new JButton("8");sMap.put("8", s8);
+		JButton s9 = new JButton("9");sMap.put("9", s9);
+		JButton s10 = new JButton("10");sMap.put("10", s10);
+		JButton s11 = new JButton("11");sMap.put("11", s11);
+		JButton s12 = new JButton("12");sMap.put("12", s12);
+		JButton s13 = new JButton("13");sMap.put("13", s13);
+		JButton s14 = new JButton("14");sMap.put("14", s14);
+		JButton s15 = new JButton("15");sMap.put("15", s15);
+		JButton s16 = new JButton("16");sMap.put("16", s16);
+		JButton s17 = new JButton("17");sMap.put("17", s17);
+		JButton s18 = new JButton("18");sMap.put("18", s18);
+		JButton s19 = new JButton("19");sMap.put("19", s19);
+		JButton s20 = new JButton("20");sMap.put("20", s20);
+		JButton s21 = new JButton("21");sMap.put("21", s21);
+		JButton s22 = new JButton("22");sMap.put("22", s22);
+		JButton s23 = new JButton("23");sMap.put("23", s23);
+		JButton s24 = new JButton("24");sMap.put("24", s24);
+		JButton s25 = new JButton("25");sMap.put("25", s25);
+		JButton s26 = new JButton("26");sMap.put("26", s26);
+		JButton s27 = new JButton("27");sMap.put("27", s27);
+		JButton s28 = new JButton("28");sMap.put("28", s28);
+		JButton s29 = new JButton("29");sMap.put("29", s29);
+		JButton s30 = new JButton("30");sMap.put("30", s30);
+		JButton s31 = new JButton("31");sMap.put("31", s31);
+		JButton s32 = new JButton("32");sMap.put("32", s32);
+		JButton s33 = new JButton("33");sMap.put("33", s33);
+		JButton s34 = new JButton("34");sMap.put("34", s34);
+		JButton s35 = new JButton("35");sMap.put("35", s35);
+		JButton s36 = new JButton("36");sMap.put("36", s36);
+		JButton s37 = new JButton("37");sMap.put("37", s37);
+		JButton s38 = new JButton("38");sMap.put("38", s38);
+		JButton s39 = new JButton("39");sMap.put("39", s39);
+		JButton s40 = new JButton("40");sMap.put("40", s40);
 	}
 	private void initAllFieldButtons(){
 		initStartFieldButtons();
@@ -280,97 +297,97 @@ public class GUI {
 		field.setBounds(x,y,width,height);
 		field.setVisible(visible);
 	}
-	private void setStartFieldPositions() {
+	private void setStartFieldPositions(int width, int height) {
 		//StartfelderButtonsRot
-		setFieldPosition(startMap.get("s1Rot"),66,22,30,30,true);
-		setFieldPosition(startMap.get("s2Rot"),19,22,30,30,true);
-		setFieldPosition(startMap.get("s3Rot"),19,66,30,30,true);
-		setFieldPosition(startMap.get("s4Rot"),66,66,30,30,true);
+		setFieldPosition(startMap.get("S1ROT"),66,22,width,height,true);
+		setFieldPosition(startMap.get("S2ROT"),19,22,width,height,true);
+		setFieldPosition(startMap.get("S3ROT"),19,66,width,height,true);
+		setFieldPosition(startMap.get("S4ROT"),66,66,width,height,true);
 		//StartfelderButtonsBlau
-		setFieldPosition(startMap.get("s1Blau"),473,20,30,30,true);
-		setFieldPosition(startMap.get("s2Blau"),425,20,30,30,true);
-		setFieldPosition(startMap.get("s3Blau"),425,63,30,30,true);
-		setFieldPosition(startMap.get("s4Blau"),473,63,30,30,true);;
+		setFieldPosition(startMap.get("S1BLAU"),473,20,width,height,true);
+		setFieldPosition(startMap.get("S2BLAU"),425,20,width,height,true);
+		setFieldPosition(startMap.get("S3BLAU"),425,63,width,height,true);
+		setFieldPosition(startMap.get("S4BLAU"),473,63,width,height,true);;
 		//StartfelderButtonsGruen
-		setFieldPosition(startMap.get("s1Gruen"),473,430,30,30,true);
-		setFieldPosition(startMap.get("s2Gruen"),427,431,30,30,true);
-		setFieldPosition(startMap.get("s3Gruen"),423,477,30,30,true);
-		setFieldPosition(startMap.get("s4Gruen"),473,479,30,30,true);
+		setFieldPosition(startMap.get("S1GRUEN"),473,430,width,height,true);
+		setFieldPosition(startMap.get("S2GRUEN"),427,431,width,height,true);
+		setFieldPosition(startMap.get("S3GRUEN"),423,477,width,height,true);
+		setFieldPosition(startMap.get("S4GRUEN"),473,479,width,height,true);
 		//StartfelderButtonsGelb
-		setFieldPosition(startMap.get("s1Gelb"),66,428,30,30,true);
-		setFieldPosition(startMap.get("s2Gelb"),20,428,30,30,true);
-		setFieldPosition(startMap.get("s3Gelb"),21,478,30,30,true);
-		setFieldPosition(startMap.get("s4Gelb"),65,478,30,30,true);		
+		setFieldPosition(startMap.get("S1GELB"),66,428,width,height,true);
+		setFieldPosition(startMap.get("S2GELB"),20,428,width,height,true);
+		setFieldPosition(startMap.get("S3GELB"),21,478,width,height,true);
+		setFieldPosition(startMap.get("S4GELB"),65,478,width,height,true);		
 	}
 	
-	private void setEndFieldPositions() {
+	private void setEndFieldPositions(int width, int height) {
 		//EndfelderButtonsRot
-		setFieldPosition(endMap.get("e1Rot"),65,250,30,30,false);
-		setFieldPosition(endMap.get("e2Rot"),110,250,30,30,false);
-		setFieldPosition(endMap.get("e3Rot"),157,250,30,30,false);
-		setFieldPosition(endMap.get("e4Rot"),200,250,30,30,false);
+		setFieldPosition(endMap.get("E1ROT"),65,250,width,height,false);
+		setFieldPosition(endMap.get("E2ROT"),110,250,width,height,false);
+		setFieldPosition(endMap.get("E3ROT"),157,250,width,height,false);
+		setFieldPosition(endMap.get("E4ROT"),200,250,width,height,false);
 		//EndfelderButtonsBlau
-		setFieldPosition(endMap.get("e1Blau"),248,65,30,30,false);
-		setFieldPosition(endMap.get("e2Blau"),248,111,30,30,false);
-		setFieldPosition(endMap.get("e3Blau"),248,157,30,30,false);
-		setFieldPosition(endMap.get("e4Blau"),248,200,30,30,false);
+		setFieldPosition(endMap.get("E1BLAU"),248,65,width,height,false);
+		setFieldPosition(endMap.get("E2BLAU"),248,111,width,height,false);
+		setFieldPosition(endMap.get("E3BLAU"),248,157,width,height,false);
+		setFieldPosition(endMap.get("E4BLAU"),248,200,width,height,false);
 		//EndfelderButtonsGruen
-		setFieldPosition(endMap.get("e1Gruen"),430,248,30,30,false);
-		setFieldPosition(endMap.get("e2Gruen"),387,248,30,30,false);
-		setFieldPosition(endMap.get("e3Gruen"),340,248,30,30,false);
-		setFieldPosition(endMap.get("e4Gruen"),295,248,30,30,false);
+		setFieldPosition(endMap.get("E1GRUEN"),430,248,width,height,false);
+		setFieldPosition(endMap.get("E2GRUEN"),387,248,width,height,false);
+		setFieldPosition(endMap.get("E3GRUEN"),340,248,width,height,false);
+		setFieldPosition(endMap.get("E4GRUEN"),295,248,width,height,false);
 		//EndfelderButtonsGelb
-		setFieldPosition(endMap.get("e1Gelb"),248,432,30,30,false);
-		setFieldPosition(endMap.get("e2Gelb"),248,386,30,30,false);
-		setFieldPosition(endMap.get("e3Gelb"),248,340,30,30,false);
-		setFieldPosition(endMap.get("e4Gelb"),248,297,30,30,false);		
+		setFieldPosition(endMap.get("E1GELB"),248,432,width,height,false);
+		setFieldPosition(endMap.get("E2GELB"),248,386,width,height,false);
+		setFieldPosition(endMap.get("E3GELB"),248,340,width,height,false);
+		setFieldPosition(endMap.get("E4GELB"),248,297,width,height,false);		
 	}
 	
-	private void setStandardFieldPositions() {
+	private void setStandardFieldPositions(int width, int height) {
 		//StandardFelder fuer Spieler ROT
-		setFieldPosition(sMap.get("S1"),21,204,30,30,false);
-		setFieldPosition(sMap.get("S2"),61,204,30,30,false);
-		setFieldPosition(sMap.get("S3"),104,204,30,30,false);
-		setFieldPosition(sMap.get("S4"),148,204,30,30,false);
-		setFieldPosition(sMap.get("S5"),202,201,30,30,false);
-		setFieldPosition(sMap.get("S6"),202,155,30,30,false);
-		setFieldPosition(sMap.get("S7"),202,110,30,30,false);
-		setFieldPosition(sMap.get("S8"),202,63,30,30,false);
-		setFieldPosition(sMap.get("S9"),202,22,30,30,false);
-		setFieldPosition(sMap.get("S10"),250,22,30,30,false);
+		setFieldPosition(sMap.get("1"),21,204,width,height,false);
+		setFieldPosition(sMap.get("2"),61,204,width,height,false);
+		setFieldPosition(sMap.get("3"),104,204,width,height,false);
+		setFieldPosition(sMap.get("4"),148,204,width,height,false);
+		setFieldPosition(sMap.get("5"),202,201,width,height,false);
+		setFieldPosition(sMap.get("6"),202,155,width,height,false);
+		setFieldPosition(sMap.get("7"),202,110,width,height,false);
+		setFieldPosition(sMap.get("8"),202,63,width,height,false);
+		setFieldPosition(sMap.get("9"),202,22,width,height,false);
+		setFieldPosition(sMap.get("10"),250,22,width,height,false);
 		//StandardFelder fuer Spieler BLAU
-		setFieldPosition(sMap.get("S11"),295,22,30,30,false);
-		setFieldPosition(sMap.get("S12"),295,63,30,30,false);
-		setFieldPosition(sMap.get("S13"),295,105,30,30,false);
-		setFieldPosition(sMap.get("S14"),295,150,30,30,false);
-		setFieldPosition(sMap.get("S15"),295,200,30,30,false);
-		setFieldPosition(sMap.get("S16"),337,200,30,30,false);
-		setFieldPosition(sMap.get("S17"),383,200,30,30,false);
-		setFieldPosition(sMap.get("S18"),430,200,30,30,false);
-		setFieldPosition(sMap.get("S19"),473,200,30,30,false);
-		setFieldPosition(sMap.get("S20"),473,250,30,30,false);
+		setFieldPosition(sMap.get("11"),295,22,width,height,false);
+		setFieldPosition(sMap.get("12"),295,63,width,height,false);
+		setFieldPosition(sMap.get("13"),295,105,width,height,false);
+		setFieldPosition(sMap.get("14"),295,150,width,height,false);
+		setFieldPosition(sMap.get("15"),295,200,width,height,false);
+		setFieldPosition(sMap.get("16"),337,200,width,height,false);
+		setFieldPosition(sMap.get("17"),383,200,width,height,false);
+		setFieldPosition(sMap.get("18"),430,200,width,height,false);
+		setFieldPosition(sMap.get("19"),473,200,width,height,false);
+		setFieldPosition(sMap.get("20"),473,250,width,height,false);
 		//StandardFelder fuer Spieler GRUEN
-		setFieldPosition(sMap.get("S21"),473,295,30,30,false);
-		setFieldPosition(sMap.get("S22"),430,295,30,30,false);
-		setFieldPosition(sMap.get("S23"),383,295,30,30,false);
-		setFieldPosition(sMap.get("S24"),337,295,30,30,false);
-		setFieldPosition(sMap.get("S25"),296,295,30,30,false);
-		setFieldPosition(sMap.get("S26"),296,340,30,30,false);
-		setFieldPosition(sMap.get("S27"),296,383,30,30,false);
-		setFieldPosition(sMap.get("S28"),296,426,30,30,false);
-		setFieldPosition(sMap.get("S29"),296,476,30,30,false);
-		setFieldPosition(sMap.get("S30"),250,476,30,30,false);
+		setFieldPosition(sMap.get("21"),473,295,width,height,false);
+		setFieldPosition(sMap.get("22"),430,295,width,height,false);
+		setFieldPosition(sMap.get("23"),383,295,width,height,false);
+		setFieldPosition(sMap.get("24"),337,295,width,height,false);
+		setFieldPosition(sMap.get("25"),296,295,width,height,false);
+		setFieldPosition(sMap.get("26"),296,340,width,height,false);
+		setFieldPosition(sMap.get("27"),296,383,width,height,false);
+		setFieldPosition(sMap.get("28"),296,426,width,height,false);
+		setFieldPosition(sMap.get("29"),296,476,width,height,false);
+		setFieldPosition(sMap.get("30"),250,476,width,height,false);
 		//StandardFelder fuer Spieler GELB
-		setFieldPosition(sMap.get("S31"),202,475,30,30,false);
-		setFieldPosition(sMap.get("S32"),202,430,30,30,false);
-		setFieldPosition(sMap.get("S33"),202,385,30,30,false);
-		setFieldPosition(sMap.get("S34"),202,339,30,30,false);
-		setFieldPosition(sMap.get("S35"),202,295,30,30,false);
-		setFieldPosition(sMap.get("S36"),148,295,30,30,false);
-		setFieldPosition(sMap.get("S37"),104,295,30,30,false);
-		setFieldPosition(sMap.get("S38"),61,295,30,30,false);
-		setFieldPosition(sMap.get("S39"),21,295,30,30,false);
-		setFieldPosition(sMap.get("S40"),21,250,30,30,false);
+		setFieldPosition(sMap.get("31"),202,475,width,height,false);
+		setFieldPosition(sMap.get("32"),202,430,width,height,false);
+		setFieldPosition(sMap.get("33"),202,385,width,height,false);
+		setFieldPosition(sMap.get("34"),202,339,width,height,false);
+		setFieldPosition(sMap.get("35"),202,295,width,height,false);
+		setFieldPosition(sMap.get("36"),148,295,width,height,false);
+		setFieldPosition(sMap.get("37"),104,295,width,height,false);
+		setFieldPosition(sMap.get("38"),61,295,width,height,false);
+		setFieldPosition(sMap.get("39"),21,295,width,height,false);
+		setFieldPosition(sMap.get("40"),21,250,width,height,false);
 	}
 	
 	private void createPanelNORTH() {
@@ -408,9 +425,9 @@ public class GUI {
 	}
 	private void createPanelCENTER() {
 		mitte.setLayout(null);
-		setStandardFieldPositions();
-		setStartFieldPositions();
-		setEndFieldPositions();
+		setStandardFieldPositions(30,30);
+		setStartFieldPositions(30,30);
+		setEndFieldPositions(30,30);
 		setFieldBackgroundImage("field");
 		setStandardFieldImage("Dice1");
 		setStartFieldImage("Dice2");
@@ -431,4 +448,28 @@ public class GUI {
 		labelMap.get("game").setBounds(0,0,534,534);
 		frame.getContentPane().add(mitte,BorderLayout.CENTER);
 	}
+	private void disableStartFields(){
+		for(java.util.Map.Entry<String, JButton> entry : startMap.entrySet()) {
+		    JButton value = entry.getValue();
+		    value.setEnabled(false);
+		}
+	}
+	private void disableEndFields(){
+		for(java.util.Map.Entry<String, JButton> entry : endMap.entrySet()) {
+		    JButton value = entry.getValue();
+		    value.setEnabled(false);
+		}
+	}
+	private void disableStandardFields(){
+		for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
+		    JButton value = entry.getValue();
+		    value.setEnabled(false);
+		}
+	}
+	private void disableAllFields(){
+		disableStartFields();
+		disableEndFields();
+		disableStandardFields();
+	}
 }
+

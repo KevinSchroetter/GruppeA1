@@ -43,6 +43,7 @@ public class Endfeld extends Spielfeld implements Serializable {
 		if(check > 0) setID(iD);
 		else throw new RuntimeException("Muss E1-E"+Settings.maxFiguren +" sein!");
 		this.farbe = farbe;
+		setGuiID(iD+farbe.toString());
 	}
 	
 	/**

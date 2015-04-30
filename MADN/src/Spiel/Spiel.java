@@ -1569,4 +1569,16 @@ public class Spiel implements iBediener, Serializable {
 	public void neuesSpielErstellen() {
 		neuesSpiel();
 	}
+
+	@Override
+	public ArrayList<String> getZugInfo() {
+		if(!this.zugFiguren.isEmpty()){
+			ArrayList<String> infos = new ArrayList<String>();			
+			for(Spielfigur fig: zugFiguren)
+				infos.add(fig.getMeinFeld().getGuiID());
+			return infos;
+		}
+		else
+			return null;
+	}
 }

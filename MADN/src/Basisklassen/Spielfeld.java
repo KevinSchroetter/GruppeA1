@@ -16,12 +16,19 @@ public abstract class Spielfeld implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Spielfigur figur;
 	private String iD;
+	private String guiID;
 	
 	/**
 	 * Konstruktor fuer ein Spielfeld. Spielfeld kennt die Belegung durch eine
 	 * Figur.
 	 */
 	public Spielfeld() {
+	}
+	protected void setGuiID(String iD) {
+		this.guiID = iD;
+	}
+	public String getGuiID(){
+		return guiID;
 	}
 
 	/**

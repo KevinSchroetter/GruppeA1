@@ -41,6 +41,7 @@ public class Eventhandler implements ActionListener {
 	private HashMap<String, JButton> endFieldsMap = null;
 	private HashMap<String, JLabel> labelMap = null;
 	private HashMap<String, ImageIcon> imagesMap = null;
+	private HashMap<String, JButton> actionMap = new HashMap<String,JButton>();
 	private AnzahlSpielerFenster tempASF = null;
 	private SpielerHinzufuegenFenster tempSHF = null;
 	private String tempString = null;
@@ -109,7 +110,6 @@ public class Eventhandler implements ActionListener {
 		JButton buf;
 		if (e.getSource() == naviMap.get("endGame")) {
 			guiFrame.dispose();
-
 		}
 		if (e.getSource() == naviMap.get("OK")) {
 			frame.dispose();
@@ -178,10 +178,58 @@ public class Eventhandler implements ActionListener {
 			}
 		}
 		if (e.getSource() == naviMap.get("diceGame")) {
+			HashMap<String, JButton> tempMap = null;
 			buf = (JButton) e.getSource();
-			buf.setText("Meep!");
-			System.out.println("Meep?");
+			int number = myGame.rollTheDice();
+			labelMap.get("dice").setIcon(imagesMap.get("Dice"+number));
+			if(myGame.getZugInfo()!=null){			
+				for(String button: myGame.getZugInfo()){
+					if(button.matches("S.*")==true){
+						buf = startFieldsMap.get(button);
+						buf.setEnabled(true);
+						buf.addActionListener(this);
+						buf.setVisible(true);
+						button=button.substring(0, 2);
+						System.out.println(button);
+						actionMap.put(button, buf);
+					}
+					else if(button.matches("E.*")==true){
+						buf = endFieldsMap.get(button);
+						buf.setEnabled(true);
+						buf.addActionListener(this);
+						buf.setVisible(true);
+						button=button.substring(0,2);
+						System.out.println(button);
+						actionMap.put(button, buf);
+					}
+					else{
+						buf = stdFieldsMap.get(button);
+						buf.setEnabled(true);
+						buf.addActionListener(this);
+						buf.setVisible(true);
+						button = "S"+button;
+						System.out.println(button);
+						actionMap.put(button, buf);
+					}
+				}
+			}
 		}
+		if (actionMap != null && actionMap.size() != 0 && actionMap.containsValue(e.getSource())){
+			buf = (JButton) e.getSource();
+			String zugButton = null;
+			for(java.util.Map.Entry<String, JButton> entry : actionMap.entrySet()) {
+				JButton value = entry.getValue();
+				String key = entry.getKey();
+				if(value == buf)
+					zugButton = key;
+			}
+			myGame.zugDurchfuehren(zugButton);
+			buf.setVisible(false);
+			actionMap.clear();
+		}
+			
+		
+		
 		if (e.getSource() == naviMap.get("startGame")) {
 			buf = (JButton) e.getSource();
 			buf.setEnabled(false);

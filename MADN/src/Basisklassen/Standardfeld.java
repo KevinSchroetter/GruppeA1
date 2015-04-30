@@ -30,6 +30,7 @@ public class Standardfeld extends Spielfeld implements Serializable {
 		super();
 		String idString=iD+"";
 		setID(idString);
+		setGuiID(idString);
 	}
 
 	/**

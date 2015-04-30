@@ -43,8 +43,9 @@ public class Startfeld extends Spielfeld implements Serializable {
 		if(check > 0) setID(iD);
 		else throw new RuntimeException("Muss S1-S"+Settings.maxFiguren +" sein!");
 		this.farbe = farbe;
+		setGuiID(iD+farbe.toString());
 	}
-	
+
 	/**
 	 * Oeffentlicher Getter der Farbe des Feldes zurueckgibt.
 	 * 
