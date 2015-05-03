@@ -32,7 +32,7 @@ public class GUI {
 	private JPanel osten = new JPanel();
 	private JPanel westen = new JPanel();
 	private JPanel mitte = new JPanel();
-	private JTextArea console = new JTextArea(10,100);
+	private JTextArea console = new JTextArea(5,100);
 	private JFileChooser dateiGrabber = new JFileChooser();
 
 	
@@ -454,6 +454,8 @@ public class GUI {
 		sueden.add(labelMap.get("consoleHeader"));
 		sueden.add(console);
 		frame.getContentPane().add(sueden, BorderLayout.SOUTH);
+		console.add(new JScrollBar());
+		sueden.add(new JScrollPane(console));
 		System.out.println("Test standard");
 		//Stromumleiten
 	//	System.setOut(new PrintStream(new Stromwrapper(this.console)));
