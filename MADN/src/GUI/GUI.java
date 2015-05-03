@@ -56,8 +56,7 @@ public class GUI {
 		
 	 //   disableAllFields();
 		
-	    frame.setSize(880, 868);
-	    frame.setBounds(500, 100, 880, 868);
+	    frame.setBounds(400, 100, 1280, 868);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -458,7 +457,7 @@ public class GUI {
 		sueden.add(new JScrollPane(console));
 		System.out.println("Test standard");
 		//Stromumleiten
-	//	System.setOut(new PrintStream(new Stromwrapper(this.console)));
+		System.setOut(new PrintStream(new Stromwrapper(this.console)));
 		this.console.setVisible(true);
 		System.out.println("Test GUI");
 		
