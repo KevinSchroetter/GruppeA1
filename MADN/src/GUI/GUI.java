@@ -32,7 +32,7 @@ public class GUI {
 	private JPanel osten = new JPanel();
 	private JPanel westen = new JPanel();
 	private JPanel mitte = new JPanel();
-	private JTextArea console = new JTextArea(5,100);
+	private JTextArea console = new JTextArea(8,100);
 	private JFileChooser dateiGrabber = new JFileChooser();
 
 	

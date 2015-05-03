@@ -134,7 +134,7 @@ public class Eventhandler implements ActionListener {
 				kIAuswahl = 1;
 			else if (jrb.equals(auswahlMenschKi.get("dki")))
 				kIAuswahl = 2;
-			System.out.println("KI oder Mensch?" + " " + kIAuswahl);
+			
 			String farbtemp = (String) farbe.getSelectedItem();
 			int farbId = 0;
 			switch (farbtemp) {
@@ -154,11 +154,8 @@ public class Eventhandler implements ActionListener {
 				tempFarbe = FarbEnum.GELB;
 				farbId = 4;
 			}
-			System.out.println("Farbe: " + tempFarbe);
-			String tempName = name.getText();
-			System.out.println("Eingabe im Namensfeld:" + name);
-			System.out.println("Farbe: " + tempFarbe);
 
+			String tempName = name.getText();
 			boolean erfolgreich = myGame.neuerSpieler(tempName, farbId,
 					kIAuswahl);
 			if (erfolgreich == true) {
