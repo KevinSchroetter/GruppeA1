@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.PrintStream;
@@ -22,7 +23,7 @@ public class GUI {
 	private HashMap<String, JButton> endMap = new HashMap<String,JButton>();
 	private HashMap<String, JButton> sMap = new HashMap<String, JButton>();
 	private JFrame frame = null;
-	private ArrayList<ArrayList<String>> language = new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<ImageIcon>> language = new ArrayList<ArrayList<ImageIcon>>();
 	private Eventhandler myHandler = null;
 	private int zeilen = 0;
 	private int spalten = 0;
@@ -161,27 +162,40 @@ public class GUI {
 	    labelMap.get("dice").setHorizontalTextPosition(SwingConstants.CENTER);		
 	}
 	private void initNaviButtonsByLanguage(int index){
-				
-		ArrayList<String> DE = new ArrayList<String>();
-		DE.add("Wuerfeln");
-		DE.add("Spiel Starten");
-		DE.add("Spiel Beenden");
-		DE.add("Neues Spiel");
-		DE.add("Spiel Speichern");
-		DE.add("Spiel Laden");
-		DE.add("Speicherstand versenden");
+		ArrayList<ImageIcon> DE= new ArrayList<ImageIcon>();
+		DE.add(new ImageIcon("images/werfen.png"));
+		DE.add(new ImageIcon("images/spielstarten.png"));
+		DE.add(new ImageIcon("images/spielbeenden.png"));
+		DE.add(new ImageIcon("images/neuesspiel.png"));
+		DE.add(new ImageIcon("images/spielspeichern.png"));
+		DE.add(new ImageIcon("images/spielladen.png"));
+		DE.add(new ImageIcon("images/standversenden.png"));
+		for( ImageIcon x:DE){
+			x.setImage(x.getImage().getScaledInstance(170,70,  1));
+		}
+
+//		ArrayList<String> DE = new ArrayList<String>();
+//		DE.add("Wuerfeln");
+//		DE.add("Spiel Starten");
+//		DE.add("Spiel Beenden");
+//		DE.add("Neues Spiel");
+//		DE.add("Spiel Speichern");
+//		DE.add("Spiel Laden");
+//		DE.add("Speicherstand versenden");
 		
 		language.add(DE);
 		
-		ArrayList<String> EN = new ArrayList<String>();
-		EN.add("Roll the Dice");
-		EN.add("Start Game");
-		EN.add("End Game");
-		EN.add("New Game");
-		EN.add("Save Game");
-		EN.add("Load Game");
-		EN.add("Send Savegame");
-		
+		ArrayList<ImageIcon> EN = new ArrayList<ImageIcon>();
+		EN.add(new ImageIcon("images/dice.png"));
+		EN.add(new ImageIcon("images/startgame.png"));
+		EN.add(new ImageIcon("images/endgame.png"));
+		EN.add(new ImageIcon("images/newgame.png"));
+		EN.add(new ImageIcon("images/savegame.png"));
+		EN.add(new ImageIcon("images/loadgame.png"));
+		EN.add(new ImageIcon("images/sendgame.png"));
+		for( ImageIcon x:EN){
+			x.setImage(x.getImage().getScaledInstance(170,70,  1));
+		}
 		language.add(EN);
 		
 		if(index <0 || index>ButtonsNavi.values().length)
@@ -189,21 +203,36 @@ public class GUI {
 		else{
 			JButton diceGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("roll").ordinal()));
 			naviMap.put("diceGame", diceGame);
+			Dimension d= new Dimension(language.get(0).get(ButtonsNavi.valueOf("roll").ordinal()).getIconWidth(), language.get(0).get(1).getIconHeight());
+			diceGame.setPreferredSize(d);
 			diceGame.setEnabled(false);;
 			JButton startGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("start").ordinal()));
+			startGame.setPreferredSize(d);
 			naviMap.put("startGame", startGame);
 			JButton endGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("end").ordinal()));
+			endGame.setPreferredSize(d);
+			endGame.setSize(130, 80);
 			naviMap.put("endGame", endGame);
 			JButton newGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("newGame").ordinal()));
+			newGame.setPreferredSize(d);
 			naviMap.put("newGame", newGame);
 			newGame.setEnabled(false);
+			
 			JButton saveGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("save").ordinal()));
+			saveGame.setPreferredSize(d);
 			naviMap.put("saveGame", saveGame);
 			saveGame.setEnabled(false);
+
 			JButton loadGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("load").ordinal()));
+			loadGame.setPreferredSize(d);
 			naviMap.put("loadGame", loadGame);
-			JButton sendGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("send").ordinal()));			
+
+			JButton sendGame = new JButton(language.get(index).get(ButtonsNavi.valueOf("send").ordinal()));	
+			sendGame.setPreferredSize(d);
 			naviMap.put("sendGame", sendGame);
+		
+			
+			
 		}
 		
 	}
@@ -397,13 +426,28 @@ public class GUI {
 	private void createPanelEAST() {
 		GridLayout gl = new GridLayout(ButtonsNavi.values().length,1);
 		osten.setLayout(gl);
-		osten.add(naviMap.get("diceGame"));
-		osten.add(naviMap.get("startGame"));
-		osten.add(naviMap.get("endGame"));
-		osten.add(naviMap.get("newGame"));
-		osten.add(naviMap.get("saveGame"));
-		osten.add(naviMap.get("loadGame"));
-		osten.add(naviMap.get("sendGame"));	
+		JPanel dicePanel= new JPanel();
+		dicePanel.add(naviMap.get("diceGame"));
+		osten.add(dicePanel);
+		JPanel startPanel= new JPanel();
+		startPanel.add(naviMap.get("startGame"));
+		osten.add(startPanel);
+		JPanel endPanel=new JPanel();
+		endPanel.add(naviMap.get("endGame"));
+		osten.add(endPanel);
+		JPanel newPanel= new JPanel();
+		newPanel.add(naviMap.get("newGame"));
+		osten.add(newPanel);
+		JPanel savePanel=new JPanel();
+		savePanel.add(naviMap.get("saveGame"));
+		osten.add(savePanel);
+		JPanel loadPanel= new JPanel();
+		loadPanel.add(naviMap.get("loadGame"));
+		osten.add(loadPanel);
+		JPanel sendPanel= new JPanel();
+		sendPanel.add(naviMap.get("sendGame"));
+		osten.add(sendPanel);
+
 		frame.getContentPane().add(osten,BorderLayout.EAST);
 	}
 	private void createPanelSOUTH() {
