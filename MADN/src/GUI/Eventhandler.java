@@ -41,7 +41,7 @@ public class Eventhandler implements ActionListener {
 	private HashMap<String, JButton> endFieldsMap = null;
 	private HashMap<String, JLabel> labelMap = null;
 	private HashMap<String, ImageIcon> imagesMap = null;
-	private HashMap<String, JButton> actionMap = new HashMap<String,JButton>();
+	private HashMap<String, JButton> actionMap = new HashMap<String, JButton>();
 	private AnzahlSpielerFenster tempASF = null;
 	private SpielerHinzufuegenFenster tempSHF = null;
 	private String tempString = null;
@@ -134,7 +134,7 @@ public class Eventhandler implements ActionListener {
 				kIAuswahl = 1;
 			else if (jrb.equals(auswahlMenschKi.get("dki")))
 				kIAuswahl = 2;
-			
+
 			String farbtemp = (String) farbe.getSelectedItem();
 			int farbId = 0;
 			switch (farbtemp) {
@@ -178,55 +178,61 @@ public class Eventhandler implements ActionListener {
 			HashMap<String, JButton> tempMap = null;
 			buf = (JButton) e.getSource();
 			int number = myGame.rollTheDice();
-			labelMap.get("dice").setIcon(imagesMap.get("Dice"+number));
-			if(myGame.getZugInfo()!=null){			
-				for(String button: myGame.getZugInfo()){
-					if(button.matches("S.*")==true){
-						buf = startFieldsMap.get(button);
-						buf.setEnabled(true);
-						buf.addActionListener(this);
-						buf.setVisible(true);
-						button=button.substring(0, 2);
-						System.out.println(button);
-						actionMap.put(button, buf);
-					}
-					else if(button.matches("E.*")==true){
-						buf = endFieldsMap.get(button);
-						buf.setEnabled(true);
-						buf.addActionListener(this);
-						buf.setVisible(true);
-						button=button.substring(0,2);
-						System.out.println(button);
-						actionMap.put(button, buf);
-					}
-					else{
-						buf = stdFieldsMap.get(button);
-						buf.setEnabled(true);
-						buf.addActionListener(this);
-						buf.setVisible(true);
-						button = "S"+button;
-						System.out.println(button);
-						actionMap.put(button, buf);
+			labelMap.get("dice").setIcon(imagesMap.get("Dice" + number));
+			if (myGame.getZugInfo() != null) {
+				for (String button : myGame.getZugInfo()) {
+					if (myGame.ausgabeSpielerAmZug() == true) {
+						String[] zugFelder=null;
+						zugFelder= myGame.zugDurchfuehrenKI();
+						// Hier folgt Umgang mit zugFeldern -> setzen der Figuren-> Have fun, Kevster ;) 
+
+					} else {
+						if (button.matches("S.*") == true) {
+							buf = startFieldsMap.get(button);
+							buf.setEnabled(true);
+							buf.addActionListener(this);
+							buf.setVisible(true);
+							button = button.substring(0, 2);
+							System.out.println(button);
+							actionMap.put(button, buf);
+						} else if (button.matches("E.*") == true) {
+							buf = endFieldsMap.get(button);
+							buf.setEnabled(true);
+							buf.addActionListener(this);
+							buf.setVisible(true);
+							button = button.substring(0, 2);
+							System.out.println(button);
+							actionMap.put(button, buf);
+						} else {
+							buf = stdFieldsMap.get(button);
+							buf.setEnabled(true);
+							buf.addActionListener(this);
+							buf.setVisible(true);
+							button = "S" + button;
+							System.out.println(button);
+							actionMap.put(button, buf);
+						}
 					}
 				}
 			}
 		}
-		if (actionMap != null && actionMap.size() != 0 && actionMap.containsValue(e.getSource())){
+		if (actionMap != null && actionMap.size() != 0
+				&& actionMap.containsValue(e.getSource())) {
 			buf = (JButton) e.getSource();
 			String zugButton = null;
-			for(java.util.Map.Entry<String, JButton> entry : actionMap.entrySet()) {
+			for (java.util.Map.Entry<String, JButton> entry : actionMap
+					.entrySet()) {
 				JButton value = entry.getValue();
 				String key = entry.getKey();
-				if(value == buf)
+				if (value == buf)
 					zugButton = key;
 			}
-			myGame.zugDurchfuehren(zugButton);
+			String [] zugFelder= myGame.zugDurchfuehren(zugButton);
+			// Hier folgt Umgang mit zugFeldern -> setzen der Figuren-> Have fun, Kevster ;) 
 			buf.setVisible(false);
 			actionMap.clear();
 		}
-			
-		
-		
+
 		if (e.getSource() == naviMap.get("startGame")) {
 			buf = (JButton) e.getSource();
 			buf.setEnabled(false);
@@ -301,9 +307,9 @@ public class Eventhandler implements ActionListener {
 			}
 
 		}
-		
-		if(e.getSource() == naviMap.get("loadGame")){
-			
+
+		if (e.getSource() == naviMap.get("loadGame")) {
+
 			Object[] optionen = { "CSV", "Serialisiert" };
 			Object typ = JOptionPane.showOptionDialog(frame,
 					"Serialisiert oder CSV?", "Wie magstn Laden dude?",
@@ -323,7 +329,8 @@ public class Eventhandler implements ActionListener {
 					datei = fileGrabber.getSelectedFile();
 
 					String lol = datei.getPath();
-					myGame = (iBediener) saveCsv.spielLaden(saveCsv.openFile(lol, 1));
+					myGame = (iBediener) saveCsv.spielLaden(saveCsv.openFile(
+							lol, 1));
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
@@ -340,16 +347,15 @@ public class Eventhandler implements ActionListener {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					datei = fileGrabber.getSelectedFile();
 					String lol = datei.getPath();
-					myGame = (iBediener) saveSer.spielLaden(saveSer.openFile(lol, 1));
+					myGame = (iBediener) saveSer.spielLaden(saveSer.openFile(
+							lol, 1));
 
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
 
 			}
-			
-			
-			
+
 		}
 
 	}

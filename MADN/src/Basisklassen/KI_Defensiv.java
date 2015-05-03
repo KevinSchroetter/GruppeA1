@@ -36,7 +36,8 @@ public class KI_Defensiv extends KI implements Serializable {
 	 */
 	
 	
-	public void zugWaehlen(){
+	public String[] zugWaehlen(){
+		String[] zugFelder=null;
 		ArrayList<Spielfigur> kannZiehen = iB.ausgabeZugFiguren();
 		if(kannZiehen==null)
 			throw new FigurKannNichtZiehenException("Es wurde noch nicht gewürfelt. Bitte würfeln!");
@@ -53,7 +54,8 @@ public class KI_Defensiv extends KI implements Serializable {
 			}
 		}
 		String id = "" + amWeitesten[amWeitesten.length - 1].getMeinFeld().getID();
-		zugDurchfuehren(id);
+		zugFelder=zugDurchfuehren(id);
+		return zugFelder;
 					
 	}
 }

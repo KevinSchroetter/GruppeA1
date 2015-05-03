@@ -24,10 +24,10 @@ public interface iBediener {
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel();
 	public ArrayList<Spielfigur> ausgabeFigurenAufStartfeld();
 	public void ausgabeSpielerListe();
-	public boolean zugDurchfuehren(String ID);
+	public String[] zugDurchfuehren(String ID);
 	public int rollTheDice();
-	public Spieler ausgabeSpielerAmZug();
-	public void zugDurchfuehrenKI();
+	public boolean ausgabeSpielerAmZug();
+	public String[] zugDurchfuehrenKI();
 	
 
 }

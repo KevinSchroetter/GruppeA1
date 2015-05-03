@@ -1242,9 +1242,10 @@ public class Spiel implements iBediener, Serializable {
 	 * @throws NullPointerException - Wenn auf ein Feld zugegriffen werden soll, auf dem keine Figur steht
 	 * @throws RuntimeException - Wenn auf ein nicht vorhandenes Feld zugegriffen wird. War der Zug erfolgreich, gibt true zurueck.
 	 */
-	public boolean zugDurchfuehren(String ID) {
-
-		boolean zugErfolgreich;
+	public String[] zugDurchfuehren(String ID) {
+		
+		String[] zugFelder= new String[2];
+		
 		try {
 			if (getIstBeendet() == true)
 				throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
@@ -1254,13 +1255,16 @@ public class Spiel implements iBediener, Serializable {
 			FarbEnum farbeIstAmZug = getIstAmZug().getFarbe();
 			String amZug = getIstAmZug().getName();
 			Spielfeld f = getSpielbrett().getFeld(ID, farbeIstAmZug);
+			zugFelder[0]=f.getGuiID();
 			Spielfigur figur = f.getFigur();
 			for (Spielfigur sf : getIstAmZug().alleFiguren())
 				if (sf.getBinIchAufEndpostion() == true)
 					endCounter++;
 			waehleFigur(ID);
 			Spielfeld zielFeld = figur.getMeinFeld();
-			zugErfolgreich = true;
+			zugFelder[1]=zielFeld.getGuiID();
+			//zugErfolgreich = true;
+			zugFelder[1]= zielFeld.getGuiID();
 			System.out.println("Zug erfolgreich!");
 			System.out.println(figur.getName() + " zieht von Feld " + f.getID()	+ " auf Feld " + zielFeld.getID() + "\n\n");
 			if (endCounter == 3 && figur.getBinIchAufEndpostion() == true) {
@@ -1268,45 +1272,63 @@ public class Spiel implements iBediener, Serializable {
 				setIstBeendet(true);
 				PlaySounds.gameOver();
 			}
-			return zugErfolgreich;
+			return zugFelder;
 		}
 
 		catch (FigurKannNichtZiehenException e) {
-			zugErfolgreich = false;
+			//zugErfolgreich = false;
 			System.out.println("Zug fehlgeschlagen, diese Figur kann nicht ziehen!");
-			return zugErfolgreich;
+			//return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch(MethodeFuerKiException e){
-			zugErfolgreich=false;
+			//zugErfolgreich=false;
 			System.out.println(e.getMessage());
-			return zugErfolgreich;
+			//return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (NullPointerException e) {
-			zugErfolgreich = false;
+			//zugErfolgreich = false;
 			System.out.println("Zug fehlgeschlagen, auf diesem Feld steht keine Figur!");
-			return zugErfolgreich;
+			//return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (SpielBeendetException e) {
-			zugErfolgreich = false;
+//			zugErfolgreich = false;
 			System.out.println(e);
-			return zugErfolgreich;
+//			return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (RuntimeException e) {
-			zugErfolgreich = false;
+//			zugErfolgreich = false;
 			System.out.println(e);
-			return zugErfolgreich;
+//			return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (InterruptedException e) {
 			System.out.println(e);
-			zugErfolgreich = false;
-			return zugErfolgreich;
+//			zugErfolgreich = false;
+//			return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (LineUnavailableException e) {
 			System.out.println(e);
-			zugErfolgreich = false;
-			return zugErfolgreich;
+//			zugErfolgreich = false;
+//			return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (IOException e) {
 			System.out.println(e);
-			zugErfolgreich = false;
-			return zugErfolgreich;
+//			zugErfolgreich = false;
+//			return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		} catch (UnsupportedAudioFileException e) {
 			System.out.println(e);
-			zugErfolgreich = false;
-			return zugErfolgreich;
+//			zugErfolgreich = false;
+//			return zugErfolgreich;
+			zugFelder=null;
+			return zugFelder;
 		}
 	}
 
@@ -1530,10 +1552,19 @@ public class Spiel implements iBediener, Serializable {
 			System.out.println(e);
 		}
 	}
-
+	
+	
+	/** 
+	 * Methode, die booleanschen Wert zurückgibt, ob am Zug seiender Spieler KI ist oder nicht.
+	 * Falls Spieler KI: return true
+	 * Falls Spieler Mensch: return false
+	 */
 	@Override
-	public Spieler ausgabeSpielerAmZug() {
-		return istAmZug;
+	public boolean ausgabeSpielerAmZug() {
+		if(istAmZug.getBedienung()!=null)
+			return true;
+		else
+			return false;
 	}
 
 	/**
@@ -1545,23 +1576,28 @@ public class Spiel implements iBediener, Serializable {
 	 * @throws MethodeFuerKiException  Falls die Methode von einem menschlichen Spieler aufgerufen wird.
 	 */
 	@Override
-	public void zugDurchfuehrenKI(){
+	public String[] zugDurchfuehrenKI(){
+		String[] zugFelder= null;
 		try {
 			if(getIstBeendet()==true)
 				throw new SpielBeendetException("Spiel ist schon beendet.");
 			if(istAmZug.getBedienung()==null)
 				throw new MethodeFuerKiException("Spieler ist keine KI!");			
 			else
-				istAmZug.getBedienung().zugWaehlen();
+				zugFelder=istAmZug.getBedienung().zugWaehlen();
+			return zugFelder;
 		}
 		catch(SpielBeendetException e){
 			System.out.println(e.getMessage());
+			return zugFelder;
 		}
 		catch (MethodeFuerKiException e){
-			System.out.println(e.getMessage()+ " Bitte andere Methode waehlen.");	
+			System.out.println(e.getMessage()+ " Bitte andere Methode waehlen.");
+			return zugFelder;
 		}		
 		catch(FigurKannNichtZiehenException e){
 			System.out.println(e.getMessage());
+			return zugFelder;
 		}
 	}
 

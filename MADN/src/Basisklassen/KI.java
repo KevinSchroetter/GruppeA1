@@ -47,19 +47,23 @@ public abstract class KI implements Serializable {
 	/**
 	 * Abstrakte Methode, die in den spezifischen KIs aggressiv und defensiv
 	 * implementiert wird. Sie soll die Entscheidungen der KI steuern.
+	 * @return 
 	 */
-	public abstract void zugWaehlen();
+	public abstract String[] zugWaehlen();
 	/**
 	 * Methode, die die KI-Bedienung des am Zug seienden Spielers voruebergehend auf null setzt, so dass dieser auf 
 	 * die zugDurchfuehren-Methode des Interfaces zugreifen kann. Ihr uebergibt er die ID des Spielfeldes der Zug-Figur,
 	 * die von der zugWaehlen-Methode uebergeben wird, so dass der Zug ausgefuehrt wird. Dann setzt die Methode die 
 	 * KI des Spielers wieder auf sich selbst.
 	 * @param ID - ID des Spielfeldes, dessen Figur laufen soll
+	 * @return 
 	 */
-	protected void zugDurchfuehren(String ID){
+	protected String[] zugDurchfuehren(String ID){
+		String[] zugFelder=null;
 		dieseKI=this;
 		meinSpieler.setBedienung(null);
-		iB.zugDurchfuehren(ID);
+		zugFelder=iB.zugDurchfuehren(ID);
 		meinSpieler.setBedienung(dieseKI);
+		return zugFelder;
 	}
 }
