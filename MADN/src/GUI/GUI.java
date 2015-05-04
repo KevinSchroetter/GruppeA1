@@ -56,7 +56,7 @@ public class GUI {
 		
 	 //   disableAllFields();
 		
-	    frame.setBounds(400, 100, 1280, 868);
+	    frame.setBounds(400, 100, 1280, 1080);
 	    frame.setVisible(true);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -93,13 +93,69 @@ public class GUI {
 		    value.setIcon(imagesMap.get(imageName));
 		}
 		startMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+		startMap.get("S1ROT").setOpaque(false);
+		startMap.get("S1ROT").setContentAreaFilled(false);
+		startMap.get("S1ROT").setBorderPainted(false);
 		startMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+		startMap.get("S2ROT").setOpaque(false);
+		startMap.get("S2ROT").setContentAreaFilled(false);
+		startMap.get("S2ROT").setBorderPainted(false);
 		startMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+		startMap.get("S3ROT").setOpaque(false);
+		startMap.get("S3ROT").setContentAreaFilled(false);
+		startMap.get("S3ROT").setBorderPainted(false);
 		startMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+		startMap.get("S4ROT").setOpaque(false);
+		startMap.get("S4ROT").setContentAreaFilled(false);
+		startMap.get("S4ROT").setBorderPainted(false);
+		startMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
+		startMap.get("S1BLAU").setOpaque(false);
+		startMap.get("S1BLAU").setContentAreaFilled(false);
+		startMap.get("S1BLAU").setBorderPainted(false);
+		startMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
+		startMap.get("S2BLAU").setOpaque(false);
+		startMap.get("S2BLAU").setContentAreaFilled(false);
+		startMap.get("S2BLAU").setBorderPainted(false);
+		startMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
+		startMap.get("S3BLAU").setOpaque(false);
+		startMap.get("S3BLAU").setContentAreaFilled(false);
+		startMap.get("S3BLAU").setBorderPainted(false);
+		startMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
+		startMap.get("S4BLAU").setOpaque(false);
+		startMap.get("S4BLAU").setContentAreaFilled(false);
+		startMap.get("S4BLAU").setBorderPainted(false);
+		startMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
+		startMap.get("S1GRUEN").setOpaque(false);
+		startMap.get("S1GRUEN").setContentAreaFilled(false);
+		startMap.get("S1GRUEN").setBorderPainted(false);
+		startMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
+		startMap.get("S2GRUEN").setOpaque(false);
+		startMap.get("S2GRUEN").setContentAreaFilled(false);
+		startMap.get("S2GRUEN").setBorderPainted(false);
+		startMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
+		startMap.get("S3GRUEN").setOpaque(false);
+		startMap.get("S3GRUEN").setContentAreaFilled(false);
+		startMap.get("S3GRUEN").setBorderPainted(false);
+		startMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
+		startMap.get("S4GRUEN").setOpaque(false);
+		startMap.get("S4GRUEN").setContentAreaFilled(false);
+		startMap.get("S4GRUEN").setBorderPainted(false);
 		startMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+		startMap.get("S1GELB").setOpaque(false);
+		startMap.get("S1GELB").setContentAreaFilled(false);
+		startMap.get("S1GELB").setBorderPainted(false);
 		startMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+		startMap.get("S2GELB").setOpaque(false);
+		startMap.get("S2GELB").setContentAreaFilled(false);
+		startMap.get("S2GELB").setBorderPainted(false);
 		startMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+		startMap.get("S3GELB").setOpaque(false);
+		startMap.get("S3GELB").setContentAreaFilled(false);
+		startMap.get("S3GELB").setBorderPainted(false);
 		startMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
+		startMap.get("S4GELB").setOpaque(false);
+		startMap.get("S4GELB").setContentAreaFilled(false);
+		startMap.get("S4GELB").setBorderPainted(false);
 		
 	}
 
@@ -138,7 +194,7 @@ public class GUI {
 
 	private void addIconToImagesMap(String imageName, String path, int width, int length){
 		ImageIcon icon = new ImageIcon(path);
-		icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_DEFAULT));
+		icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_SMOOTH));
 		imagesMap.put(imageName, icon);
 	}
 	private void initLabelMap(){
@@ -152,21 +208,29 @@ public class GUI {
 		labelMap.put("game",game);
 	}
 	private void initImagesMap(){
-		addIconToImagesMap("field","images/game.jpg",534,534);
+		addIconToImagesMap("field","images/game.png",975, 875);
 		addIconToImagesMap("Dice1","images/dice_01.jpg",100,100);
 		addIconToImagesMap("Dice2","images/dice_02.jpg",100,100);
 		addIconToImagesMap("Dice3","images/dice_03.jpg",100,100);
 		addIconToImagesMap("Dice4","images/dice_04.jpg",100,100);
 		addIconToImagesMap("Dice5","images/dice_05.jpg",100,100);
 		addIconToImagesMap("Dice6","images/dice_06.jpg",100,100);
-		addIconToImagesMap("figRed1","images/figRed1.jpg",60,60);
-		addIconToImagesMap("figRed2","images/figRed2.jpg",60,60);
-		addIconToImagesMap("figRed3","images/figRed3.jpg",60,60);
-		addIconToImagesMap("figRed4","images/figRed4.jpg",60,60);
-		addIconToImagesMap("figYellow1","images/figYellow1.jpg",60,60);
-		addIconToImagesMap("figYellow2","images/figYellow2.jpg",60,60);
-		addIconToImagesMap("figYellow3","images/figYellow3.jpg",60,60);
-		addIconToImagesMap("figYellow4","images/figYellow4.jpg",60,60);
+		addIconToImagesMap("figRed1","images/figRed1.png",110,150);
+		addIconToImagesMap("figRed2","images/figRed2.png",60,60);
+		addIconToImagesMap("figRed3","images/figRed3.png",60,60);
+		addIconToImagesMap("figRed4","images/figRed4.png",60,60);
+		addIconToImagesMap("figBlue1","images/figBlue1.png",60,60);
+		addIconToImagesMap("figBlue2","images/figBlue2.png",60,60);
+		addIconToImagesMap("figBlue3","images/figBlue3.png",60,60);
+		addIconToImagesMap("figBlue4","images/figBlue4.png",60,60);
+		addIconToImagesMap("figGreen1","images/figGreen1.png",60,60);
+		addIconToImagesMap("figGreen2","images/figGreen2.png",60,60);
+		addIconToImagesMap("figGreen3","images/figGreen3.png",60,60);
+		addIconToImagesMap("figGreen4","images/figGreen4.png",60,60);
+		addIconToImagesMap("figYellow1","images/figYellow1.png",60,60);
+		addIconToImagesMap("figYellow2","images/figYellow2.png",60,60);
+		addIconToImagesMap("figYellow3","images/figYellow3.png",60,60);
+		addIconToImagesMap("figYellow4","images/figYellow4.png",60,60);
 	}
 	private void setFieldBackgroundImage(String image){ 
 		if(labelMap.isEmpty()) throw new RuntimeException("labelMap leer");
@@ -509,7 +573,7 @@ public class GUI {
 		    mitte.add(value);
 		}
 	    mitte.add(labelMap.get("game"));
-		labelMap.get("game").setBounds(0,0,534,534);
+		labelMap.get("game").setBounds(0,0,975, 875);
 		frame.getContentPane().add(mitte,BorderLayout.CENTER);
 	}
 	private void disableStartFields(){
