@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -36,7 +35,6 @@ import Spiel.iDatenzugriff;
 public class Eventhandler implements ActionListener {
 	private JPanel spielbrettGUI = null;
 	private iBediener myGame = new Spiel();
-	private GUI myGUI=null;
 	private iDatenzugriff saveSer = new DatenzugriffSerialisiert();
 	private iDatenzugriff saveCsv = new DatenzugriffCSV();
 	private iDatenzugriff savePDF = new DatenzugriffPDF();
@@ -49,7 +47,7 @@ public class Eventhandler implements ActionListener {
 	private HashMap<String, JButton> actionMap = new HashMap<String, JButton>();
 	private AnzahlSpielerFenster tempASF = null;
 	private SpielerHinzufuegenFenster tempSHF = null;
-	private String tempString[] = null;
+	private String tempString = null;
 	private JLabel tempLabel = null;
 	private JFrame frame = null;
 	private JFrame guiFrame = null;
@@ -67,7 +65,7 @@ public class Eventhandler implements ActionListener {
 			HashMap<String, ImageIcon> imagesMap,
 			HashMap<String, JButton> stdFieldsMap,
 			HashMap<String, JButton> startFieldsMap,
-			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber, GUI myGUI, JPanel spielbrettGUI) {
+			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber, JPanel spielbrettGUI) {
 		if (naviMap == null || fileGrabber == null || labelMap == null
 				|| imagesMap == null || stdFieldsMap == null
 				|| startFieldsMap == null || endFieldsMap == null)
@@ -79,7 +77,6 @@ public class Eventhandler implements ActionListener {
 		this.stdFieldsMap = stdFieldsMap;
 		this.startFieldsMap = startFieldsMap;
 		this.endFieldsMap = endFieldsMap;
-		this.myGUI = myGUI;
 		vorhandeneFarben = new ArrayList<FarbEnum>();
 		vorhandeneFarben.add(FarbEnum.ROT);
 		vorhandeneFarben.add(FarbEnum.BLAU);
@@ -189,14 +186,11 @@ public class Eventhandler implements ActionListener {
 			labelMap.get("dice").setIcon(imagesMap.get("Dice" + number));
 			if (myGame.getZugInfo() != null) {
 				for (String button : myGame.getZugInfo()) {
-					System.out.println("bla "+button);
 					if (myGame.ausgabeSpielerAmZug() == true) {
 						String[] zugFelder=null;
 						zugFelder= myGame.zugDurchfuehrenKI();
 						// Hier folgt Umgang mit zugFeldern -> setzen der Figuren-> Have fun, Kevster ;) 
-						for(String a:zugFelder){
-							System.out.println("REINGEKOMMENE FELDNAMEN: "+a);
-						}
+
 					} else {
 						if (button.matches("S.*") == true) {
 							buf = startFieldsMap.get(button);
@@ -204,7 +198,7 @@ public class Eventhandler implements ActionListener {
 							buf.addActionListener(this);
 							buf.setVisible(true);
 							button = button.substring(0, 2);
-							System.out.println(buf.getText()+" wird zu "+button);
+							System.out.println(button);
 							actionMap.put(button, buf);
 						} else if (button.matches("E.*") == true) {
 							buf = endFieldsMap.get(button);
@@ -212,17 +206,17 @@ public class Eventhandler implements ActionListener {
 							buf.addActionListener(this);
 							buf.setVisible(true);
 							button = button.substring(0, 2);
-							System.out.println(buf.getText()+" wird zu "+button);
+							System.out.println(button);
 							actionMap.put(button, buf);
 						} else {
 							buf = stdFieldsMap.get(button);
 							buf.setEnabled(true);
 							buf.addActionListener(this);
 							buf.setVisible(true);
-							System.out.println(buf.getText()+" wird zu "+button);
+							button = "S" + button;
+							System.out.println(button);
 							actionMap.put(button, buf);
 						}
-						button = null;
 					}
 				}
 			}
@@ -230,35 +224,18 @@ public class Eventhandler implements ActionListener {
 		if (actionMap != null && actionMap.size() != 0
 				&& actionMap.containsValue(e.getSource())) {
 			buf = (JButton) e.getSource();
-			String button = buf.getText();
-			if (button.matches("S.*") == true) {
-				button = button.substring(0, 2);
-			} else if (button.matches("E.*") == true) {
-				button = button.substring(0, 2);
-			}			
-			
-			//String button = buf.getText();
-			System.out.println("Button test gerade: "+buf.getText() + " wichtig für Feldhandling bilder");
-			System.out.println("BUTTONS name: "+button+" wichtig fuer zug");
-			String[] zugFelder = myGame.zugDurchfuehren(button);
-			String zID = zugFelder[1];
-			JButton target = null;
-			if (zID.matches("S.*") == true) {
-				target = startFieldsMap.get(zID);
-				
-			} else if (zID.matches("E.*") == true) {
-				target = endFieldsMap.get(zID);
-			} else {
-				target = stdFieldsMap.get(zID);
+			String zugButton = null;
+			for (java.util.Map.Entry<String, JButton> entry : actionMap
+					.entrySet()) {
+				JButton value = entry.getValue();
+				String key = entry.getKey();
+				if (value == buf)
+					zugButton = key;
 			}
+			String [] zugFelder= myGame.zugDurchfuehren(zugButton);
+			// Hier folgt Umgang mit zugFeldern -> setzen der Figuren-> Have fun, Kevster ;) 
 			buf.setVisible(false);
-			Icon icon = buf.getIcon();
-			buf.setIcon(null);
-			target.setVisible(true);
-			target.setIcon(icon);
-			
 			actionMap.clear();
-			button = null;
 		}
 
 		if (e.getSource() == naviMap.get("startGame")) {
@@ -277,12 +254,15 @@ public class Eventhandler implements ActionListener {
 			naviMap.get("saveGame").setEnabled(false);
 			myGame.neuesSpielErstellen();
 			System.out.println("Neues Spiel wurde erstellt!");
-			vorhandeneFarben.clear();
-			vorhandeneFarben.add(FarbEnum.ROT);
-			vorhandeneFarben.add(FarbEnum.BLAU);
-			vorhandeneFarben.add(FarbEnum.GRUEN);
-			vorhandeneFarben.add(FarbEnum.GELB);
-			myGUI.restartGame();
+			if (!vorhandeneFarben.contains(FarbEnum.GELB))
+				vorhandeneFarben.add(FarbEnum.GELB);
+			if (!vorhandeneFarben.contains(FarbEnum.GRUEN))
+				vorhandeneFarben.add(FarbEnum.GRUEN);
+			if (!vorhandeneFarben.contains(FarbEnum.BLAU))
+				vorhandeneFarben.add(FarbEnum.BLAU);
+			if (!vorhandeneFarben.contains(FarbEnum.ROT))
+				vorhandeneFarben.add(FarbEnum.ROT);
+
 		}
 
 		if (e.getSource() == naviMap.get("saveGame")) {
@@ -382,7 +362,6 @@ public class Eventhandler implements ActionListener {
 			}
 
 		}
-
 		
 		if(e.getSource()==naviMap.get("sendGame")){
 			Mailversand mv = null;

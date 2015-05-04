@@ -68,11 +68,6 @@ public class GUI {
 		}
 	}
 
-	public void restartGame(){
-		setStartFieldPositions(30,30);
-		setEndFieldPositions(30,30);
-		setStandardFieldPositions(30,30);
-	}
 	private void setStartFieldImage(String imageName) {
 		for(java.util.Map.Entry<String, JButton> entry : startMap.entrySet()) {
 		    JButton value = entry.getValue();
@@ -98,7 +93,7 @@ public class GUI {
 	}
 
 	private void setEventhandler() {
-		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber,this,mitte);	
+		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber,mitte);	
 		myHandler.addGUI(frame);
 		/*for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();
