@@ -118,6 +118,12 @@ public class Eventhandler implements ActionListener {
 		JButton buf;
 		if (e.getSource() == naviMap.get("endGame")) {
 			guiFrame.dispose();
+			if(tempASF != null)
+				tempASF.dispose();
+			tempASF = null;
+			if(tempSHF != null)
+				tempSHF.dispose();
+			tempSHF = null;
 		}
 		if (e.getSource() == naviMap.get("OK")) {
 			frame.dispose();
@@ -181,6 +187,11 @@ public class Eventhandler implements ActionListener {
 			else {
 				myGame.starteSpiel();
 			}
+			naviMap.get("diceGame").setEnabled(true);
+			naviMap.get("loadGame").setEnabled(true);
+			naviMap.get("newGame").setEnabled(true);
+			naviMap.get("saveGame").setEnabled(true);
+			naviMap.get("sendGame").setEnabled(true);
 		}
 		if (e.getSource() == naviMap.get("diceGame")) {
 			HashMap<String, JButton> tempMap = null;
@@ -300,9 +311,9 @@ public class Eventhandler implements ActionListener {
 		if (e.getSource() == naviMap.get("startGame")) {
 			buf = (JButton) e.getSource();
 			buf.setEnabled(false);
-			naviMap.get("newGame").setEnabled(true);
-			naviMap.get("diceGame").setEnabled(true);
-			naviMap.get("saveGame").setEnabled(true);
+			naviMap.get("loadGame").setEnabled(false);
+			naviMap.get("saveGame").setEnabled(false);
+			naviMap.get("sendGame").setEnabled(false);
 			tempASF = new AnzahlSpielerFenster(this);
 		}
 		if (e.getSource() == naviMap.get("newGame")) {
@@ -424,7 +435,7 @@ public class Eventhandler implements ActionListener {
 		
 		if(e.getSource()==naviMap.get("sendGame")){
 			Mailversand mv = null;
-			
+
 			Object[] optionen = { "PDF", "Serialisiert" };
 			Object typ = JOptionPane.showOptionDialog(frame,
 					"Serialisiert oder PDF?", "Wie magstn Laden dude?",
