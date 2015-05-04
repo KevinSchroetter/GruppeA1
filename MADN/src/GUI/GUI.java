@@ -96,66 +96,82 @@ public class GUI {
 		startMap.get("S1ROT").setOpaque(false);
 		startMap.get("S1ROT").setContentAreaFilled(false);
 		startMap.get("S1ROT").setBorderPainted(false);
+		startMap.get("S1ROT").setText("");
 		startMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
 		startMap.get("S2ROT").setOpaque(false);
 		startMap.get("S2ROT").setContentAreaFilled(false);
 		startMap.get("S2ROT").setBorderPainted(false);
+		startMap.get("S2ROT").setText("");
 		startMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
 		startMap.get("S3ROT").setOpaque(false);
 		startMap.get("S3ROT").setContentAreaFilled(false);
 		startMap.get("S3ROT").setBorderPainted(false);
+		startMap.get("S3ROT").setText("");
 		startMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
 		startMap.get("S4ROT").setOpaque(false);
 		startMap.get("S4ROT").setContentAreaFilled(false);
 		startMap.get("S4ROT").setBorderPainted(false);
+		startMap.get("S4ROT").setText("");
 		startMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
 		startMap.get("S1BLAU").setOpaque(false);
 		startMap.get("S1BLAU").setContentAreaFilled(false);
 		startMap.get("S1BLAU").setBorderPainted(false);
+		startMap.get("S1BLAU").setText("");
 		startMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
 		startMap.get("S2BLAU").setOpaque(false);
 		startMap.get("S2BLAU").setContentAreaFilled(false);
 		startMap.get("S2BLAU").setBorderPainted(false);
+		startMap.get("S2BLAU").setText("");
 		startMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
 		startMap.get("S3BLAU").setOpaque(false);
 		startMap.get("S3BLAU").setContentAreaFilled(false);
 		startMap.get("S3BLAU").setBorderPainted(false);
+		startMap.get("S3BLAU").setText("");
 		startMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
 		startMap.get("S4BLAU").setOpaque(false);
 		startMap.get("S4BLAU").setContentAreaFilled(false);
 		startMap.get("S4BLAU").setBorderPainted(false);
+		startMap.get("S4BLAU").setText("");
 		startMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
 		startMap.get("S1GRUEN").setOpaque(false);
 		startMap.get("S1GRUEN").setContentAreaFilled(false);
 		startMap.get("S1GRUEN").setBorderPainted(false);
+		startMap.get("S1GRUEN").setText("");
 		startMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
 		startMap.get("S2GRUEN").setOpaque(false);
 		startMap.get("S2GRUEN").setContentAreaFilled(false);
 		startMap.get("S2GRUEN").setBorderPainted(false);
+		startMap.get("S2GRUEN").setText("");
 		startMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
 		startMap.get("S3GRUEN").setOpaque(false);
 		startMap.get("S3GRUEN").setContentAreaFilled(false);
 		startMap.get("S3GRUEN").setBorderPainted(false);
+		startMap.get("S3GRUEN").setText("");
 		startMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
 		startMap.get("S4GRUEN").setOpaque(false);
 		startMap.get("S4GRUEN").setContentAreaFilled(false);
 		startMap.get("S4GRUEN").setBorderPainted(false);
+		startMap.get("S4GRUEN").setText("");
 		startMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
 		startMap.get("S1GELB").setOpaque(false);
 		startMap.get("S1GELB").setContentAreaFilled(false);
 		startMap.get("S1GELB").setBorderPainted(false);
+		startMap.get("S1GELB").setText("");
 		startMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
 		startMap.get("S2GELB").setOpaque(false);
 		startMap.get("S2GELB").setContentAreaFilled(false);
 		startMap.get("S2GELB").setBorderPainted(false);
+		startMap.get("S2GELB").setText("");
 		startMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
 		startMap.get("S3GELB").setOpaque(false);
 		startMap.get("S3GELB").setContentAreaFilled(false);
 		startMap.get("S3GELB").setBorderPainted(false);
+		startMap.get("S3GELB").setText("");
 		startMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
 		startMap.get("S4GELB").setOpaque(false);
 		startMap.get("S4GELB").setContentAreaFilled(false);
 		startMap.get("S4GELB").setBorderPainted(false);
+		startMap.get("S4GELB").setText("");
 		
 	}
 
@@ -407,6 +423,7 @@ public class GUI {
 		field.setHorizontalTextPosition(SwingConstants.CENTER);
 		field.setBounds(x,y,width,height);
 		field.setVisible(visible);
+		
 	}
 	private void setStartFieldPositions(int width, int height) {
 		//StartfelderButtonsRot
