@@ -20,6 +20,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,9 +33,11 @@ import Spiel.iBediener;
 import Spiel.iDatenzugriff;
 
 public class Eventhandler implements ActionListener {
+	private JPanel spielbrettGUI = null;
 	private iBediener myGame = new Spiel();
 	private iDatenzugriff saveSer = new DatenzugriffSerialisiert();
 	private iDatenzugriff saveCsv = new DatenzugriffCSV();
+	private iDatenzugriff savePDF = new DatenzugriffPDF();
 	private HashMap<String, JButton> naviMap = null;
 	private HashMap<String, JButton> stdFieldsMap = null;
 	private HashMap<String, JButton> startFieldsMap = null;
@@ -62,7 +65,7 @@ public class Eventhandler implements ActionListener {
 			HashMap<String, ImageIcon> imagesMap,
 			HashMap<String, JButton> stdFieldsMap,
 			HashMap<String, JButton> startFieldsMap,
-			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber) {
+			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber, JPanel spielbrettGUI) {
 		if (naviMap == null || fileGrabber == null || labelMap == null
 				|| imagesMap == null || stdFieldsMap == null
 				|| startFieldsMap == null || endFieldsMap == null)
@@ -79,6 +82,8 @@ public class Eventhandler implements ActionListener {
 		vorhandeneFarben.add(FarbEnum.BLAU);
 		vorhandeneFarben.add(FarbEnum.GRUEN);
 		vorhandeneFarben.add(FarbEnum.GELB);
+		this.spielbrettGUI = spielbrettGUI;
+				
 	}
 
 	public void addStuff(HashMap<String, JButton> eventMap, JFrame frame,
@@ -359,15 +364,62 @@ public class Eventhandler implements ActionListener {
 		}
 		
 		if(e.getSource()==naviMap.get("sendGame")){
+			Mailversand mv = null;
+			
+			Object[] optionen = { "PDF", "Serialisiert" };
+			Object typ = JOptionPane.showOptionDialog(frame,
+					"Serialisiert oder PDF?", "Wie magstn Laden dude?",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, optionen, optionen[1]);
+
+			if (typ.equals(0)) {
+				File datei = null;
+
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+						"PDF-Dateien", "pdf");
+				fileGrabber = new JFileChooser();
+				fileGrabber.setFileFilter(filter);
+
+				int returnVal = fileGrabber.showOpenDialog(this.frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					datei = fileGrabber.getSelectedFile();
+					
+					String lol = datei.getPath();
+					savePDF.spielSpeichern(spielbrettGUI, savePDF.openFile(lol,1337));
+					mv = new Mailversand(lol);
+					
+				} else {
+					System.out.println("Speichern abgebrochen");
+				}
+
+			} else if (typ.equals(1)) {
+				File datei = null;
+
+				FileNameExtensionFilter filter = new FileNameExtensionFilter(
+						"Serialisierte Objektdateien", "ser");
+				fileGrabber = new JFileChooser();
+				fileGrabber.setFileFilter(filter);
+
+				int returnVal = fileGrabber.showOpenDialog(this.frame);
+				if (returnVal == JFileChooser.APPROVE_OPTION) {
+					datei = fileGrabber.getSelectedFile();
+					String lol = datei.getPath();
+					mv = new Mailversand(lol);
+
+				} else {
+					System.out.println("Speichern abgebrochen");
+				}
+
+			}
 			
 			
-			Mailversand mv = new Mailversand();
+			
 			try{
 			mv.run();	
-			
 			}
 			
 			catch(Exception ex){
+				ex.printStackTrace();
 			}
 		}
 
