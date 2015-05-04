@@ -98,7 +98,7 @@ public class GUI {
 	}
 
 	private void setEventhandler() {
-		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber,this);	
+		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber,mitte,this);	
 		myHandler.addGUI(frame);
 		/*for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();

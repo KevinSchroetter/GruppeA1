@@ -30,6 +30,7 @@ public class Mailversand extends Thread{
 	private String username = null;
 	private String password = null;
 	private String sendTo = null;
+	private String pfad;
 	
 	private class MailAuthenticator extends Authenticator{
 		private String user, password;
@@ -44,7 +45,7 @@ public class Mailversand extends Thread{
 
 	
 	
-	public Mailversand(){
+	public Mailversand(String pfad){
 		//Loginanfrage
 		JPanel panel = new JPanel();
 		JLabel label = new JLabel("Passwort:");
@@ -89,6 +90,8 @@ public class Mailversand extends Thread{
 		 "Anna.Rosa@Student.Reutlingen-University.de",
 		 "Felix_Frederic.Rosa@Reutlingen-Unsiversity.de"}; 
 		
+		if(this.username == null) return;
+		
 		if(this.username.equals("brueckna")){
 			putMeIn = adressen[0];			 
 		}
@@ -128,7 +131,7 @@ public class Mailversand extends Thread{
 	public void run(){
 		
 		try{
-			System.out.println("Starte Mailversand an"+props.getProperty("an"));
+			System.out.println("Starte Mailversand an "+props.getProperty("an"));
 			MailAuthenticator auth = new MailAuthenticator();
 			Session session = Session.getDefaultInstance(props,auth);
 			Message msg = new MimeMessage(session);
@@ -141,6 +144,13 @@ public class Mailversand extends Thread{
 			bodyNachricht.setText(props.getProperty("text"));
 			Multipart body = new MimeMultipart();
 			body.addBodyPart(bodyNachricht);
+			if(pfad != null){
+				MimeBodyPart bodyAnhang = new MimeBodyPart();
+				DataSource source = new FileDataSource(pfad);
+				bodyAnhang.setDataHandler(new DataHandler(source));
+				bodyAnhang.setFileName("Savegame_MADN");
+				body.addBodyPart(bodyAnhang);
+			}
 			msg.setContent(body);
 			msg.setSentDate(new Date());
 			Transport.send(msg);
