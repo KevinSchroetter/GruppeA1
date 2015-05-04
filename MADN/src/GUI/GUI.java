@@ -436,9 +436,6 @@ public class GUI {
 		JPanel startPanel= new JPanel();
 		startPanel.add(naviMap.get("startGame"));
 		osten.add(startPanel);
-		JPanel endPanel=new JPanel();
-		endPanel.add(naviMap.get("endGame"));
-		osten.add(endPanel);
 		JPanel newPanel= new JPanel();
 		newPanel.add(naviMap.get("newGame"));
 		osten.add(newPanel);
@@ -451,6 +448,9 @@ public class GUI {
 		JPanel sendPanel= new JPanel();
 		sendPanel.add(naviMap.get("sendGame"));
 		osten.add(sendPanel);
+		JPanel endPanel=new JPanel();
+		endPanel.add(naviMap.get("endGame"));
+		osten.add(endPanel);
 
 		frame.getContentPane().add(osten,BorderLayout.EAST);
 	}

@@ -28,6 +28,7 @@ public interface iBediener {
 	public int rollTheDice();
 	public boolean ausgabeSpielerAmZug();
 	public String[] zugDurchfuehrenKI();
+	public boolean getStatus();
 	
 
 }

@@ -1775,4 +1775,9 @@ public class Spiel implements iBediener, Serializable {
 		} else
 			return null;
 	}
+
+	@Override
+	public boolean getStatus() {
+		return this.getHatBegonnen();
+	}
 }

@@ -417,6 +417,8 @@ public class Eventhandler implements ActionListener {
 				}
 
 			}
+			if(myGame.getStatus()==true)
+				naviMap.get("startGame").setEnabled(false);
 
 		}
 		
