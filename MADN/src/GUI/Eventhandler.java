@@ -357,6 +357,19 @@ public class Eventhandler implements ActionListener {
 			}
 
 		}
+		
+		if(e.getSource()==naviMap.get("sendGame")){
+			
+			
+			Mailversand mv = new Mailversand();
+			try{
+			mv.run();	
+			
+			}
+			
+			catch(Exception ex){
+			}
+		}
 
 	}
 }
