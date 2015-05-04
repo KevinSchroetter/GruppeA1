@@ -198,6 +198,7 @@ public class Eventhandler implements ActionListener {
 					}
 					JButton home = null;
 					JButton target = null;
+					JButton targetKilled = null;
 					if(zugFelder[0].matches("S.*")==true)
 						home = startFieldsMap.get(zugFelder[0]);
 					else if(zugFelder[0].matches("E.*")==true)
@@ -210,6 +211,12 @@ public class Eventhandler implements ActionListener {
 						target = endFieldsMap.get(zugFelder[1]);
 					else
 						target = stdFieldsMap.get(zugFelder[1]);
+					if(zugFelder[2]!=null){
+						targetKilled=startFieldsMap.get(zugFelder[2]);
+						Icon killed = target.getIcon();
+						targetKilled.setIcon(killed);
+						targetKilled.setVisible(true);
+					}
 					
 					Icon icon = home.getIcon();
 					target.setIcon(icon);
@@ -263,6 +270,7 @@ public class Eventhandler implements ActionListener {
 			String[] zugFelder = myGame.zugDurchfuehren(button);
 			String zID = zugFelder[1];
 			JButton target = null;
+			JButton targetKilled = null;
 			if (zID.matches("S.*") == true) {
 				target = startFieldsMap.get(zID);
 				
@@ -270,6 +278,12 @@ public class Eventhandler implements ActionListener {
 				target = endFieldsMap.get(zID);
 			} else {
 				target = stdFieldsMap.get(zID);
+			}
+			if(zugFelder[2]!=null){
+				targetKilled=startFieldsMap.get(zugFelder[2]);
+				Icon killed = target.getIcon();
+				targetKilled.setIcon(killed);
+				targetKilled.setVisible(true);
 			}
 			buf.setVisible(false);
 			Icon icon = buf.getIcon();

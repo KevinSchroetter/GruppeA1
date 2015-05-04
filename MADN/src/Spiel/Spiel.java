@@ -30,7 +30,8 @@ public class Spiel implements iBediener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
+	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(
+			EnumSet.allOf(FarbEnum.class));
 
 	private boolean firstBlood = false;
 
@@ -317,11 +318,13 @@ public class Spiel implements iBediener, Serializable {
 	 *            - Falls null: Menschlicher Spieler, sonst: KI mit dem
 	 *            uebergebenen Verhalten;
 	 */
-	protected boolean spielerHinzufuegen(String name, int farbID, int verhaltenID) {
+	protected boolean spielerHinzufuegen(String name, int farbID,
+			int verhaltenID) {
 		if (getHatBegonnen() == true)
 			throw new RuntimeException("Spiel hat schon begonnen");
 		if (getAnzahlSpieler() > farben.size())
-			throw new RuntimeException("Maximale Spieleranzahl kann nicht ueberschritten werden!");
+			throw new RuntimeException(
+					"Maximale Spieleranzahl kann nicht ueberschritten werden!");
 		farbID = farbID - 1;
 		if (farbID < 0 || farbID > farben.size() - 1)
 			throw new RuntimeException("Ungueltige Farbe!");
@@ -342,15 +345,21 @@ public class Spiel implements iBediener, Serializable {
 		for (int i = 0; i <= 3; i++) {
 			if (spieler[i] != null) {
 				if (farbe.equals(spieler[i].getFarbe()))
-					throw new RuntimeException("Farbe "+ spieler[i].getFarbe()+ " schon vorhanden! Bitte waehlen Sie eine andere Farbe!");
+					throw new RuntimeException(
+							"Farbe "
+									+ spieler[i].getFarbe()
+									+ " schon vorhanden! Bitte waehlen Sie eine andere Farbe!");
 			}
 		}
-		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(farbe);
+		Startfeld[] startfelder = getSpielbrett().getAlleStartFelderEinerFarbe(
+				farbe);
 		Endfeld[] endfelder = getSpielbrett().getAlleEndFelderEinerFarbe(farbe);
 		if (verhalten == null) {
-			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder, this);
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,
+					endfelder, this);
 		} else if (verhalten != null) {
-			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,endfelder, verhalten, this);
+			spieler[getAnzahlSpieler()] = new Spieler(name, farbe, startfelder,
+					endfelder, verhalten, this);
 		}
 		incAnzahlSpieler();
 		if (getAnzahlSpieler() == 4) {
@@ -359,22 +368,25 @@ public class Spiel implements iBediener, Serializable {
 		return true;
 
 	}
-	
+
 	/**
 	 * Lädt einen bereits bestehenden Spieler ins Spiel
-	 * @param loadMe - Spieler
+	 * 
+	 * @param loadMe
+	 *            - Spieler
 	 * @throws IllegalArgumentException
 	 * */
-	protected void spielerLaden(Spieler loadMe){
-		if(loadMe == null | (!(loadMe instanceof Spieler))){
+	protected void spielerLaden(Spieler loadMe) {
+		if (loadMe == null | (!(loadMe instanceof Spieler))) {
 			throw new IllegalArgumentException("Spielerobjekt ungültig");
 		}
-		if(this.getAnzahlSpieler()>=4) throw new RuntimeException("Spielerlimit erreicht!");
-		else{
+		if (this.getAnzahlSpieler() >= 4)
+			throw new RuntimeException("Spielerlimit erreicht!");
+		else {
 			this.spieler[this.getAnzahlSpieler()] = loadMe;
 			this.incAnzahlSpieler();
 		}
-		
+
 	}
 
 	/**
@@ -388,7 +400,8 @@ public class Spiel implements iBediener, Serializable {
 	 * @throws InterruptedException
 	 */
 	private void startSpiel() throws IOException,
-			UnsupportedAudioFileException, LineUnavailableException,InterruptedException {
+			UnsupportedAudioFileException, LineUnavailableException,
+			InterruptedException {
 		if (getHatBegonnen() == true)
 			throw new RuntimeException("Spiel hat bereits begonnen!");
 		if (spieler[0] == null)
@@ -420,7 +433,8 @@ public class Spiel implements iBediener, Serializable {
 			return getSpielbrett().getStandardFelder().length - 1;
 		}
 		if (ZielfeldID > getSpielbrett().getStandardFelder().length) {
-			return (ZielfeldID - 1)- getSpielbrett().getStandardFelder().length;
+			return (ZielfeldID - 1)
+					- getSpielbrett().getStandardFelder().length;
 		}
 		return ZielfeldID - 1;
 	}
@@ -437,7 +451,8 @@ public class Spiel implements iBediener, Serializable {
 	 *         Spielfeldlaenge
 	 */
 	private int ermittleEndfeldSchritte(Spielfigur figur) {
-		return figur.getFelderGelaufen() + getAugenzahl()- getSpielbrett().getStandardFelder().length;
+		return figur.getFelderGelaufen() + getAugenzahl()
+				- getSpielbrett().getStandardFelder().length;
 
 	}
 
@@ -455,52 +470,60 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	private boolean kannIchZiehen(Spielfigur figur) {
 		Spieler istAmZug = this.getIstAmZug();
-		if(figur.getIstGespawnt()==false&&getAugenzahl()==6){
-			//System.out.println("Fall1");
-			if(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur()==null){
-				//System.out.println("Fall1.1");
+		if (figur.getIstGespawnt() == false && getAugenzahl() == 6) {
+			// System.out.println("Fall1");
+			if (getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur() == null) {
+				// System.out.println("Fall1.1");
 				return true;
-			}else if(!(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))){
-				//System.out.println("Fall1.2");
+			} else if (!(getSpielbrett().getSpawnfeld(istAmZug.getFarbe())
+					.getFigur().getFarbe().equals(istAmZug.getFarbe()))) {
+				// System.out.println("Fall1.2");
 				figur.setKannSchlagen(true);
 				return true;
-			}else if(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe())){
+			} else if (getSpielbrett().getSpawnfeld(istAmZug.getFarbe())
+					.getFigur().getFarbe().equals(istAmZug.getFarbe())) {
 				return false;
 			}
-		}
-		else if (figur.binIchGespawnt() == true
-				& (figur.getBinIchAufEndpostion()==false)& figur !=null) {
-			//System.out.println(ZielfeldID);
-			if (figur.getIstImZiel() == true){
-				if (kannZiehenEndfelder(figur, getAugenzahl()) == true){
+		} else if (figur.binIchGespawnt() == true
+				& (figur.getBinIchAufEndpostion() == false) & figur != null) {
+			// System.out.println(ZielfeldID);
+			if (figur.getIstImZiel() == true) {
+				if (kannZiehenEndfelder(figur, getAugenzahl()) == true) {
 					return true;
-				}else 
-						return false;
+				} else
+					return false;
 			}
-			if ((figur.getFelderGelaufen() + getAugenzahl()) > getSpielbrett().getStandardFelder().length) {
-				if (ermittleEndfeldSchritte(figur) <= 4){
-					if (kannZiehenEndfelder(figur, ermittleEndfeldSchritte(figur)) == true) {
+			if ((figur.getFelderGelaufen() + getAugenzahl()) > getSpielbrett()
+					.getStandardFelder().length) {
+				if (ermittleEndfeldSchritte(figur) <= 4) {
+					if (kannZiehenEndfelder(figur,
+							ermittleEndfeldSchritte(figur)) == true) {
 						figur.setKannInsZiel(true);
-						//System.out.println("Fall2.2");
+						// System.out.println("Fall2.2");
 						return true;
-					}else
+					} else
 						return false;
 				}
 			}
 			int ZielfeldID = ermittleZielfeldID(figur);
 			Standardfeld Zielfeld = getSpielbrett().getStandardFelder()[ZielfeldID];
-			if (Zielfeld.getFigur() == null & (figur.getFelderGelaufen()+getAugenzahl())<=spielbrett.getStandardFelder().length){
-				//System.out.println("Fall3.1");
+			if (Zielfeld.getFigur() == null
+					& (figur.getFelderGelaufen() + getAugenzahl()) <= spielbrett
+							.getStandardFelder().length) {
+				// System.out.println("Fall3.1");
 				return true;
-			}else if (figur.kannSchlagen(Zielfeld) == true & (figur.getFelderGelaufen()+getAugenzahl())<=spielbrett.getStandardFelder().length){
-				//System.out.println("Fall3.2");
+			} else if (figur.kannSchlagen(Zielfeld) == true
+					& (figur.getFelderGelaufen() + getAugenzahl()) <= spielbrett
+							.getStandardFelder().length) {
+				// System.out.println("Fall3.2");
 				figur.setKannSchlagen(true);
-				return true;}
-			else
+				return true;
+			} else
 				return false;
-		} 
+		}
 		return false;
 	}
+
 	/**
 	 * @author Anna Rosa Methode, die prueft, ob eine Figur, die entweder auf
 	 *         einem Standard- oder Endfeld steht, innerhalb der Endfelder
@@ -544,8 +567,7 @@ public class Spiel implements iBediener, Serializable {
 
 			else
 				return false;
-		}
-		else if (figur.getMeinFeld() instanceof Endfeld) {
+		} else if (figur.getMeinFeld() instanceof Endfeld) {
 			if (figur.getMeinFeld().getID()
 					.equals(endfelderIstAmZug[0].getID())) {
 				if (zuZiehen > 3)
@@ -632,15 +654,19 @@ public class Spiel implements iBediener, Serializable {
 	 * Zielfeld.
 	 * 
 	 * @author Felix Rosa
-	 * @param figur - Figur mit der gezogen wird
-	 * @param augenZahl - aktuelle gewuerfelte Augenzahl des Spielers
+	 * @param figur
+	 *            - Figur mit der gezogen wird
+	 * @param augenZahl
+	 *            - aktuelle gewuerfelte Augenzahl des Spielers
 	 * @throws UnsupportedAudioFileException
 	 * @throws IOException
 	 * @throws LineUnavailableException
 	 * @throws InterruptedException
 	 */
-	private void ziehen(Spielfigur figur, int augenZahl)
-			throws InterruptedException, LineUnavailableException, IOException,UnsupportedAudioFileException {
+	private String ziehen(Spielfigur figur, int augenZahl)
+			throws InterruptedException, LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
+		String targetArea = null;
 		// System.out.println("Bin in ziehen");
 		for (Spielfigur sf : alleZugFiguren()) {
 			sf.setKannSchlagen(false);
@@ -655,20 +681,23 @@ public class Spiel implements iBediener, Serializable {
 			String aktFeldIDS = aktFeld.getID();
 			if (getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur() == null) {
 				// System.out.println("Fall: Nicht Gespawnt + 6 gewuerfelt + 1terFall");
-				figur.setMeinFeld(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()));
+				figur.setMeinFeld(getSpielbrett().getSpawnfeld(
+						istAmZug.getFarbe()));
 				figur.setFelderGelaufen(1);
 				figur.setIstGespawnt(true);
 				for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
 						istAmZug.getFarbe()).length; i++) {
-					if (getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)) {
+					if (getSpielbrett().getAlleStartFelderEinerFarbe(
+							istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)) {
 						getSpielbrett().getAlleStartFelderEinerFarbe(
 								istAmZug.getFarbe())[i].setFigur(null);
 					}
 				}
 				// System.out.println("Fall: Nicht Gespawnt + 6 gewuerfelt + 1terFall:: ENDE");
-			} else if (!(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur().getFarbe().equals(istAmZug.getFarbe()))) {
+			} else if (!(getSpielbrett().getSpawnfeld(istAmZug.getFarbe())
+					.getFigur().getFarbe().equals(istAmZug.getFarbe()))) {
 				// System.out.println("Fall: Nicht Gespawnt + 6 gewuerfelt + 2terFall");
-				schlagenSpawn(figur, aktFeldIDS);
+				targetArea=schlagenSpawn(figur, aktFeldIDS);
 				// System.out.println("Fall: Nicht Gespawnt + 6 gewuerfelt + 2terFall :: ENDE");
 			}
 
@@ -685,15 +714,20 @@ public class Spiel implements iBediener, Serializable {
 			if (figur.getKannInsZiel() == true) {
 				// System.out.println("Fall: Gespawnt + 6 gewuerfelt + 1terFall");
 				ziehenAufEndfelder(figur, EndfeldSchritte);
-				figur.setFelderGelaufen(getSpielbrett().getStandardFelder().length- figur.getFelderGelaufen());
+				figur.setFelderGelaufen(getSpielbrett().getStandardFelder().length
+						- figur.getFelderGelaufen());
 				figur.setKannInsZiel(false);
 				figur.setIstImZiel(true);
 				// System.out.println("Fall: Gespawnt + 6 gewuerfelt + 1terFall :: ENDE");
-			} else if (getSpielbrett().getStandardFelder()[ZielfeldID].getFigur() != null && !((getSpielbrett().getStandardFelder()[ZielfeldID].getFigur().getFarbe()).equals(istAmZug.getFarbe()))) {
+			} else if (getSpielbrett().getStandardFelder()[ZielfeldID]
+					.getFigur() != null
+					&& !((getSpielbrett().getStandardFelder()[ZielfeldID]
+							.getFigur().getFarbe()).equals(istAmZug.getFarbe()))) {
 				// System.out.println("Fall: Gespawnt + 6 gewuerfelt + 2terFall");
-				schlagen(figur, ZielfeldID);
+				targetArea=schlagen(figur, ZielfeldID);
 				// System.out.println("Fall: Gespawnt + 6 gewuerfelt + 2terFall :: ENDE");
-			} else if (getSpielbrett().getStandardFelder()[ZielfeldID].getFigur() == null) {
+			} else if (getSpielbrett().getStandardFelder()[ZielfeldID]
+					.getFigur() == null) {
 				// System.out.println("Fall: Gespawnt + 6 gewuerfelt + 3terFall");
 				figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
 				getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
@@ -712,21 +746,26 @@ public class Spiel implements iBediener, Serializable {
 			} else if (figur.getKannInsZiel() == true) {
 				// System.out.println("Fall: Gespawnt + !6 gewuerfelt + 2terFall");
 				ziehenAufEndfelder(figur, EndfeldSchritte);
-				figur.setFelderGelaufen(getSpielbrett().getStandardFelder().length- figur.getFelderGelaufen());
+				figur.setFelderGelaufen(getSpielbrett().getStandardFelder().length
+						- figur.getFelderGelaufen());
 				figur.setKannInsZiel(false);
 				figur.setIstImZiel(true);
 				naechsterSpieler();
 				// System.out.println("Naechster spieler gesetzt");
 				// System.out.println("Fall: Gespawnt + !6 gewuerfelt + 2terFall :: ENDE");
-			} else if (getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)].getFigur() != null && (!(getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)].getFigur().getFarbe().equals(istAmZug.getFarbe())))) {
+			} else if (getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)]
+					.getFigur() != null
+					&& (!(getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)]
+							.getFigur().getFarbe().equals(istAmZug.getFarbe())))) {
 				// System.out.println("Fall: Gespawnt + !6 gewuerfelt + 3terFall");
 				int ZielfeldID = ermittleZielfeldID(figur);
 				aktFeld = (Standardfeld) figur.getMeinFeld();
-				schlagen(figur, ZielfeldID);
+				targetArea=schlagen(figur, ZielfeldID);
 				naechsterSpieler();
 				// System.out.println("Naechster spieler gesetzt");
 				// System.out.println("Fall: Gespawnt + !6 gewuerfelt + 3terFall :: ENDE");
-			} else if (getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)].getFigur() == null) {
+			} else if (getSpielbrett().getStandardFelder()[ermittleZielfeldID(figur)]
+					.getFigur() == null) {
 				aktFeld = (Standardfeld) figur.getMeinFeld();
 				int aktFeldID = Integer.parseInt(aktFeld.getID()) - 1;
 				// System.out.println("Fall: Gespawnt + !6 gewuerfelt + 4terFall");
@@ -747,6 +786,7 @@ public class Spiel implements iBediener, Serializable {
 			// System.out.println(figur.getBinIchAufEndpostion());
 		aufEndposition(figur);
 		// System.out.println(figur.getBinIchAufEndpostion());
+		return targetArea;
 	}
 
 	/**
@@ -765,9 +805,11 @@ public class Spiel implements iBediener, Serializable {
 	 * @throws LineUnavailableException
 	 * @throws InterruptedException
 	 */
-	private void schlagen(Spielfigur figur, int ZielfeldID)
-			throws InterruptedException, LineUnavailableException, IOException,UnsupportedAudioFileException {
+	private String schlagen(Spielfigur figur, int ZielfeldID)
+			throws InterruptedException, LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
 		Spielfigur zuSchlagen = null;
+		String targetArea = null;
 		Standardfeld aktFeld = (Standardfeld) figur.getMeinFeld();
 		FarbEnum myColor = figur.getFarbe();
 		int aktFeldID = Integer.parseInt(aktFeld.getID()) - 1;
@@ -778,11 +820,15 @@ public class Spiel implements iBediener, Serializable {
 		FarbEnum targetColor = zuSchlagen.getFarbe();
 
 		if (!targetColor.equals(myColor))
-			for (int i = 0; i < getSpielbrett().getAlleStartFelderEinerFarbe(targetColor).length; i++) {
-				if (getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i].getFigur() == null) {
+			for (int i = 0; i < getSpielbrett().getAlleStartFelderEinerFarbe(
+					targetColor).length; i++) {
+				if (getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i]
+						.getFigur() == null) {
 					zuSchlagen.setIstGespawnt(false);
 					zuSchlagen.resetFelderGelaufen();
-					zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i]);
+					zuSchlagen.setMeinFeld(getSpielbrett()
+							.getAlleStartFelderEinerFarbe(targetColor)[i]);
+					targetArea = zuSchlagen.getMeinFeld().getGuiID();
 					break;
 				}
 			}
@@ -792,6 +838,8 @@ public class Spiel implements iBediener, Serializable {
 			firstBlood = true;
 		} else
 			PlaySounds.kill();
+		
+		return targetArea;
 	}
 
 	/**
@@ -809,10 +857,14 @@ public class Spiel implements iBediener, Serializable {
 	 * @throws LineUnavailableException
 	 * @throws InterruptedException
 	 */
-	private void schlagenSpawn(Spielfigur figur, String aktFeldIDS)	throws InterruptedException, LineUnavailableException, IOException, UnsupportedAudioFileException {
+	private String schlagenSpawn(Spielfigur figur, String aktFeldIDS)
+			throws InterruptedException, LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
+		String targetArea = null;
 		Spieler istAmZug = this.getIstAmZug();
 		Spielfigur zuSchlagen = null;
-		zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).getFigur();
+		zuSchlagen = getSpielbrett().getSpawnfeld(istAmZug.getFarbe())
+				.getFigur();
 		getSpielbrett().getSpawnfeld(istAmZug.getFarbe()).setFigur(null);
 		figur.setMeinFeld(getSpielbrett().getSpawnfeld(istAmZug.getFarbe()));
 		// System.out.println(figur.getMeinFeld());
@@ -820,17 +872,24 @@ public class Spiel implements iBediener, Serializable {
 		figur.setIstGespawnt(true);
 		FarbEnum myColor = figur.getFarbe();
 		FarbEnum targetColor = zuSchlagen.getFarbe();
-		for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(istAmZug.getFarbe()).length; i++) {
-			if (getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)) {
-				getSpielbrett().getAlleStartFelderEinerFarbe(istAmZug.getFarbe())[i].setFigur(null);
+		for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
+				istAmZug.getFarbe()).length; i++) {
+			if (getSpielbrett().getAlleStartFelderEinerFarbe(
+					istAmZug.getFarbe())[i].getID().equals(aktFeldIDS)) {
+				getSpielbrett().getAlleStartFelderEinerFarbe(
+						istAmZug.getFarbe())[i].setFigur(null);
 			}
 		}
 		if (!targetColor.equals(myColor))
-			for (int i = 0; i < getSpielbrett().getAlleStartFelderEinerFarbe(targetColor).length; i++) {
-				if (getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i].getFigur() == null) {
+			for (int i = 0; i < getSpielbrett().getAlleStartFelderEinerFarbe(
+					targetColor).length; i++) {
+				if (getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i]
+						.getFigur() == null) {
 					zuSchlagen.setIstGespawnt(false);
 					zuSchlagen.resetFelderGelaufen();
-					zuSchlagen.setMeinFeld(getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i]);
+					zuSchlagen.setMeinFeld(getSpielbrett()
+							.getAlleStartFelderEinerFarbe(targetColor)[i]);
+					targetArea = zuSchlagen.getMeinFeld().getGuiID();
 					break;
 				}
 			}
@@ -840,6 +899,7 @@ public class Spiel implements iBediener, Serializable {
 			firstBlood = true;
 		} else
 			PlaySounds.kill();
+		return targetArea;
 	}
 
 	/**
@@ -853,17 +913,24 @@ public class Spiel implements iBediener, Serializable {
 	private void ziehenInEndfelder(Spielfigur figur) {
 		Endfeld aktFeld = (Endfeld) figur.getMeinFeld();
 		int position = 0;
-		for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe()).length; i++) {
-			if (getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].getID().equals(aktFeld.getID())) {
+		for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
+				getIstAmZug().getFarbe()).length; i++) {
+			if (getSpielbrett().getAlleEndFelderEinerFarbe(
+					getIstAmZug().getFarbe())[i].getID()
+					.equals(aktFeld.getID())) {
 				position = i;
 				break;
 			}
 		}
-		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[position + getAugenzahl()]);
+		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(
+				getIstAmZug().getFarbe())[position + getAugenzahl()]);
 		String aktFeldIDS = aktFeld.getID();
-		for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe()).length; i++) {
-			if (getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].getID().equals(aktFeldIDS)) {
-				getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].setFigur(null);
+		for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
+				getIstAmZug().getFarbe()).length; i++) {
+			if (getSpielbrett().getAlleEndFelderEinerFarbe(
+					getIstAmZug().getFarbe())[i].getID().equals(aktFeldIDS)) {
+				getSpielbrett().getAlleEndFelderEinerFarbe(
+						getIstAmZug().getFarbe())[i].setFigur(null);
 			}
 		}
 	}
@@ -891,11 +958,15 @@ public class Spiel implements iBediener, Serializable {
 		} else if (aktFeld instanceof Standardfeld) {
 			aktFeldID = Integer.parseInt(figur.getMeinFeld().getID());
 		}
-		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[restSchritte - 1]);
+		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(
+				getIstAmZug().getFarbe())[restSchritte - 1]);
 		if (aktFeld instanceof Endfeld) {
-			for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe()).length; i++) {
-				if (getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].getID().equals(aktFeldIDS)) {
-					getSpielbrett().getAlleEndFelderEinerFarbe(getIstAmZug().getFarbe())[i].setFigur(null);
+			for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
+					getIstAmZug().getFarbe()).length; i++) {
+				if (getSpielbrett().getAlleEndFelderEinerFarbe(
+						getIstAmZug().getFarbe())[i].getID().equals(aktFeldIDS)) {
+					getSpielbrett().getAlleEndFelderEinerFarbe(
+							getIstAmZug().getFarbe())[i].setFigur(null);
 				}
 			}
 		} else if (aktFeld instanceof Standardfeld) {
@@ -918,23 +989,34 @@ public class Spiel implements iBediener, Serializable {
 		else {
 			FarbEnum farbe = figur.getFarbe();
 			int index = 0;
-			for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(farbe).length; i++) {
-				if (figur.equals(getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[i].getFigur())) {
+			for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
+					farbe).length; i++) {
+				if (figur.equals(getSpielbrett().getAlleEndFelderEinerFarbe(
+						farbe)[i].getFigur())) {
 					index = i;
 				}
 			}
 			switch (index) {
 			case 0:
-				if (getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[1].getFigur() != null	&& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2].getFigur() != null && getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3].getFigur() != null)
+				if (getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[1]
+						.getFigur() != null
+						&& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2]
+								.getFigur() != null
+						&& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]
+								.getFigur() != null)
 					figur.setBinIchAufEndposition(true);
 				break;
 			case 1:
-				if (getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2].getFigur() != null	&& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3].getFigur() != null) {
+				if (getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[2]
+						.getFigur() != null
+						&& getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]
+								.getFigur() != null) {
 					figur.setBinIchAufEndposition(true);
 				}
 				break;
 			case 2:
-				if (getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3].getFigur() != null)
+				if (getSpielbrett().getAlleEndFelderEinerFarbe(farbe)[3]
+						.getFigur() != null)
 					figur.setBinIchAufEndposition(true);
 				break;
 			case 3:
@@ -957,7 +1039,10 @@ public class Spiel implements iBediener, Serializable {
 	 * @throws InterruptedException
 	 * @since version 2.2
 	 */
-	private void waehleFigur(String id) throws InterruptedException, LineUnavailableException, IOException, UnsupportedAudioFileException {
+	private String waehleFigur(String id) throws InterruptedException,
+			LineUnavailableException, IOException,
+			UnsupportedAudioFileException {
+		String targetArea=null;
 		try {
 			if (getZugMoeglich() == false)
 				throw new FigurKannNichtZiehenException("Zug nicht moeglich!");
@@ -965,14 +1050,17 @@ public class Spiel implements iBediener, Serializable {
 			Spielfeld f = getSpielbrett().getFeld(id, farbeIstAmZug);
 			Spielfigur figur = f.getFigur();
 			if (!(alleZugFiguren().contains(figur)))
-				throw new FigurKannNichtZiehenException(String.format("Figur "+ figur.getID() + " %s kann nicht ziehen!",figur.getFarbe()));
+				throw new FigurKannNichtZiehenException(String.format("Figur "
+						+ figur.getID() + " %s kann nicht ziehen!",
+						figur.getFarbe()));
 			else {
 				getIstAmZug().setZugFigur(figur);
-				ziehen(figur, getAugenzahl());
+				targetArea = ziehen(figur, getAugenzahl());
 			}
 		} catch (RuntimeException e) {
 			System.out.println(e);
 		}
+		return targetArea;
 	}
 
 	/**
@@ -992,14 +1080,20 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	protected void wuerfeln(int hack) {
 		if (getIstBeendet() == true) {
-			throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
+			throw new SpielBeendetException(
+					"SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
 		}
-		if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true && getAugenzahl() != 6) {
+		if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true
+				&& getAugenzahl() != 6) {
 			naechsterSpieler();
 		}
-		if ((alleZugFiguren().size() != 0) || (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
-			throw new RuntimeException(getIstAmZug().getName()+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
-		if (getHatBegonnen() == false)throw new RuntimeException("Spiel hat noch nicht begonnen");
+		if ((alleZugFiguren().size() != 0)
+				|| (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
+			throw new RuntimeException(
+					getIstAmZug().getName()
+							+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
+		if (getHatBegonnen() == false)
+			throw new RuntimeException("Spiel hat noch nicht begonnen");
 
 		int spawncounter = 0;
 		incAnzWuerfe();
@@ -1018,13 +1112,19 @@ public class Spiel implements iBediener, Serializable {
 			setAlleAufSpawn(true);
 		else
 			setAlleAufSpawn(false);
-		if (getAlleAufSpawn() == false && getAugenzahl() == 6 && getAnzWuerfe() < 1)
-			throw new RuntimeException(getIstAmZug().getName()+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
+		if (getAlleAufSpawn() == false && getAugenzahl() == 6
+				&& getAnzWuerfe() < 1)
+			throw new RuntimeException(
+					getIstAmZug().getName()
+							+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
 
-		if (alleZugFiguren().isEmpty() == true && getAlleAufSpawn() == true	&& getAnzWuerfe() > 3 && getAugenzahl() != 6) {
+		if (alleZugFiguren().isEmpty() == true && getAlleAufSpawn() == true
+				&& getAnzWuerfe() > 3 && getAugenzahl() != 6) {
 			setZugMoeglich(false);
 			naechsterSpieler();
-		} else if (alleZugFiguren().isEmpty() == true && getAlleAufSpawn() == true && getAnzWuerfe() <= 3 && getAugenzahl() != 6) {
+		} else if (alleZugFiguren().isEmpty() == true
+				&& getAlleAufSpawn() == true && getAnzWuerfe() <= 3
+				&& getAugenzahl() != 6) {
 			setZugMoeglich(false);
 		} else if (getAugenzahl() == 6) {
 			setZugMoeglich(true);
@@ -1072,12 +1172,17 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	private void wuerfelnOriginal() {
 		if (getIstBeendet() == true)
-			throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
-		if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true && getAugenzahl() != 6) {
+			throw new SpielBeendetException(
+					"SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
+		if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true
+				&& getAugenzahl() != 6) {
 			naechsterSpieler();
 		}
-		if ((alleZugFiguren().size() != 0) || (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
-			throw new RuntimeException(getIstAmZug().getName()+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
+		if ((alleZugFiguren().size() != 0)
+				|| (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
+			throw new RuntimeException(
+					getIstAmZug().getName()
+							+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
 		if (getHatBegonnen() == false)
 			throw new RuntimeException("Spiel hat noch nicht begonnen");
 
@@ -1098,13 +1203,19 @@ public class Spiel implements iBediener, Serializable {
 			setAlleAufSpawn(true);
 		else
 			setAlleAufSpawn(false);
-		if (getAlleAufSpawn() == false && getAugenzahl() == 6 && getAnzWuerfe() < 1)
-			throw new RuntimeException(getIstAmZug().getName()+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
+		if (getAlleAufSpawn() == false && getAugenzahl() == 6
+				&& getAnzWuerfe() < 1)
+			throw new RuntimeException(
+					getIstAmZug().getName()
+							+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
 
-		if (alleZugFiguren().isEmpty() == true && getAlleAufSpawn() == true	&& getAnzWuerfe() > 3 && getAugenzahl() != 6) {
+		if (alleZugFiguren().isEmpty() == true && getAlleAufSpawn() == true
+				&& getAnzWuerfe() > 3 && getAugenzahl() != 6) {
 			setZugMoeglich(false);
 			naechsterSpieler();
-		} else if (alleZugFiguren().isEmpty() == true && getAlleAufSpawn() == true && getAnzWuerfe() <= 3 && getAugenzahl() != 6) {
+		} else if (alleZugFiguren().isEmpty() == true
+				&& getAlleAufSpawn() == true && getAnzWuerfe() <= 3
+				&& getAugenzahl() != 6) {
 			setZugMoeglich(false);
 		} else if (getAugenzahl() == 6) {
 			setZugMoeglich(true);
@@ -1155,9 +1266,11 @@ public class Spiel implements iBediener, Serializable {
 	public ArrayList<Spielfigur> ausgabeFiguren() {
 		try {
 			Spieler s = this.getIstAmZug();
-			ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(Arrays.asList(s.alleFiguren()));
+			ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(
+					Arrays.asList(s.alleFiguren()));
 			for (Spielfigur f : s.alleFiguren()) {
-				System.out.println(f.getName() + " auf Feld "+ f.getMeinFeld().getID());
+				System.out.println(f.getName() + " auf Feld "
+						+ f.getMeinFeld().getID());
 			}
 			return figurenListe;
 		} catch (RuntimeException e) {
@@ -1176,7 +1289,8 @@ public class Spiel implements iBediener, Serializable {
 		ArrayList<Spielfigur> figurenListe = alleZugFiguren();
 
 		for (Spielfigur f : figurenListe) {
-			System.out.println(f.getName() + " auf Feld "+ f.getMeinFeld().getID());
+			System.out.println(f.getName() + " auf Feld "
+					+ f.getMeinFeld().getID());
 		}
 		if (!figurenListe.isEmpty())
 			return figurenListe;
@@ -1192,11 +1306,13 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public ArrayList<Spielfigur> ausgabeFigurenImZiel() {
 		Spieler s = this.getIstAmZug();
-		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(Settings.maxFiguren);
+		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(
+				Settings.maxFiguren);
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getIstImZiel()) {
 				figurenListe.add(f);
-				System.out.println(f.getName() + " auf Feld "+ f.getMeinFeld().getID());
+				System.out.println(f.getName() + " auf Feld "
+						+ f.getMeinFeld().getID());
 			}
 		}
 		return figurenListe;
@@ -1217,17 +1333,18 @@ public class Spiel implements iBediener, Serializable {
 			}
 		}
 	}
-	
-	public String[] ausgabeSpielerNamenStrings(){
-		
+
+	public String[] ausgabeSpielerNamenStrings() {
+
 		String[] spielerStrings = new String[this.spieler.length];
-		
-		for(int i = 0; i<spielerStrings.length; i++){
-			if(this.spieler[i] == null) continue;
+
+		for (int i = 0; i < spielerStrings.length; i++) {
+			if (this.spieler[i] == null)
+				continue;
 			spielerStrings[i] = this.spieler[i].getName();
 		}
 		return spielerStrings;
-		
+
 	}
 
 	/**
@@ -1236,39 +1353,54 @@ public class Spiel implements iBediener, Serializable {
 	 * ziehen kann, die Exception ab und gibt false zurueck.
 	 * 
 	 * @return zugErfolgreich - boolean
-	 * @param ID - String
-	 * @throws SpielBeendetException - Wenn ein Spiel bereits beendet ist
-	 * @throws FigurKannNichtZiehenException - Wenn eine Figur nicht ziehen kann
-	 * @throws NullPointerException - Wenn auf ein Feld zugegriffen werden soll, auf dem keine Figur steht
-	 * @throws RuntimeException - Wenn auf ein nicht vorhandenes Feld zugegriffen wird. War der Zug erfolgreich, gibt true zurueck.
+	 * @param ID
+	 *            - String
+	 * @throws SpielBeendetException
+	 *             - Wenn ein Spiel bereits beendet ist
+	 * @throws FigurKannNichtZiehenException
+	 *             - Wenn eine Figur nicht ziehen kann
+	 * @throws NullPointerException
+	 *             - Wenn auf ein Feld zugegriffen werden soll, auf dem keine
+	 *             Figur steht
+	 * @throws RuntimeException
+	 *             - Wenn auf ein nicht vorhandenes Feld zugegriffen wird. War
+	 *             der Zug erfolgreich, gibt true zurueck.
 	 */
 	public String[] zugDurchfuehren(String ID) {
-		
-		String[] zugFelder= new String[2];
-		
+
+		String[] zugFelder = new String[3];
+
 		try {
 			if (getIstBeendet() == true)
-				throw new SpielBeendetException("SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
-			if(istAmZug.getBedienung()!=null)
-				throw new MethodeFuerKiException("Spieler ist eine KI, bitte andere Methode verwenden!");
+				throw new SpielBeendetException(
+						"SPIEL IST BEREITS BEENDET! KEIN WEITERER ZUG MOEGLICH");
+			if (istAmZug.getBedienung() != null)
+				throw new MethodeFuerKiException(
+						"Spieler ist eine KI, bitte andere Methode verwenden!");
 			int endCounter = 0;
 			FarbEnum farbeIstAmZug = getIstAmZug().getFarbe();
 			String amZug = getIstAmZug().getName();
 			Spielfeld f = getSpielbrett().getFeld(ID, farbeIstAmZug);
-			zugFelder[0]=f.getGuiID();
+			zugFelder[0] = f.getGuiID();
 			Spielfigur figur = f.getFigur();
 			for (Spielfigur sf : getIstAmZug().alleFiguren())
 				if (sf.getBinIchAufEndpostion() == true)
 					endCounter++;
-			waehleFigur(ID);
+			zugFelder[2]=waehleFigur(ID);
 			Spielfeld zielFeld = figur.getMeinFeld();
-			zugFelder[1]=zielFeld.getGuiID();
-			//zugErfolgreich = true;
-			zugFelder[1]= zielFeld.getGuiID();
+			zugFelder[1] = zielFeld.getGuiID();
+			// zugErfolgreich = true;
+			zugFelder[1] = zielFeld.getGuiID();
 			System.out.println("Zug erfolgreich!");
-			System.out.println(figur.getName() + " zieht von Feld " + f.getID()	+ " auf Feld " + zielFeld.getID() + "\n\n");
+			System.out.println(figur.getName() + " zieht von Feld " + f.getID()
+					+ " auf Feld " + zielFeld.getID() + "\n\n");
 			if (endCounter == 3 && figur.getBinIchAufEndpostion() == true) {
-				System.out.println("++++++++++++++++++++++++++++++++++"+ amZug+ " "+ farbeIstAmZug+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
+				System.out
+						.println("++++++++++++++++++++++++++++++++++"
+								+ amZug
+								+ " "
+								+ farbeIstAmZug
+								+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
 				setIstBeendet(true);
 				PlaySounds.gameOver();
 			}
@@ -1276,58 +1408,60 @@ public class Spiel implements iBediener, Serializable {
 		}
 
 		catch (FigurKannNichtZiehenException e) {
-			//zugErfolgreich = false;
-			System.out.println("Zug fehlgeschlagen, diese Figur kann nicht ziehen!");
-			//return zugErfolgreich;
-			zugFelder=null;
+			// zugErfolgreich = false;
+			System.out
+					.println("Zug fehlgeschlagen, diese Figur kann nicht ziehen!");
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
-		} catch(MethodeFuerKiException e){
-			//zugErfolgreich=false;
+		} catch (MethodeFuerKiException e) {
+			// zugErfolgreich=false;
 			System.out.println(e.getMessage());
-			//return zugErfolgreich;
-			zugFelder=null;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (NullPointerException e) {
-			//zugErfolgreich = false;
-			System.out.println("Zug fehlgeschlagen, auf diesem Feld steht keine Figur!");
-			//return zugErfolgreich;
-			zugFelder=null;
+			// zugErfolgreich = false;
+			System.out
+					.println("Zug fehlgeschlagen, auf diesem Feld steht keine Figur!");
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (SpielBeendetException e) {
-//			zugErfolgreich = false;
+			// zugErfolgreich = false;
 			System.out.println(e);
-//			return zugErfolgreich;
-			zugFelder=null;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (RuntimeException e) {
-//			zugErfolgreich = false;
+			// zugErfolgreich = false;
 			System.out.println(e);
-//			return zugErfolgreich;
-			zugFelder=null;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (InterruptedException e) {
 			System.out.println(e);
-//			zugErfolgreich = false;
-//			return zugErfolgreich;
-			zugFelder=null;
+			// zugErfolgreich = false;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (LineUnavailableException e) {
 			System.out.println(e);
-//			zugErfolgreich = false;
-//			return zugErfolgreich;
-			zugFelder=null;
+			// zugErfolgreich = false;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (IOException e) {
 			System.out.println(e);
-//			zugErfolgreich = false;
-//			return zugErfolgreich;
-			zugFelder=null;
+			// zugErfolgreich = false;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		} catch (UnsupportedAudioFileException e) {
 			System.out.println(e);
-//			zugErfolgreich = false;
-//			return zugErfolgreich;
-			zugFelder=null;
+			// zugErfolgreich = false;
+			// return zugErfolgreich;
+			zugFelder = null;
 			return zugFelder;
 		}
 	}
@@ -1343,7 +1477,8 @@ public class Spiel implements iBediener, Serializable {
 		ArrayList<Spielfigur> figurenListe = new ArrayList<Spielfigur>(4);
 		for (Spielfigur f : s.alleFiguren()) {
 			if (f.getMeinFeld() instanceof Startfeld) {
-				System.out.println(f.getName() + " auf Feld "+ f.getMeinFeld().getID());
+				System.out.println(f.getName() + " auf Feld "
+						+ f.getMeinFeld().getID());
 				figurenListe.add(f);
 			}
 		}
@@ -1360,8 +1495,16 @@ public class Spiel implements iBediener, Serializable {
 		try {
 
 			wuerfelnOriginal();
-			System.out.println("Spieler " + getIstAmZug().getName()	+ " ist am Zug!");
-			System.out.println("Spieler "+ getIstAmZug().getName()+ " "	+ getIstAmZug().getFarbe()+ " hat eine "+ getAugenzahl()+ " gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
+			System.out.println("Spieler " + getIstAmZug().getName()
+					+ " ist am Zug!");
+			System.out
+					.println("Spieler "
+							+ getIstAmZug().getName()
+							+ " "
+							+ getIstAmZug().getFarbe()
+							+ " hat eine "
+							+ getAugenzahl()
+							+ " gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
 			if (alleZugFiguren().size() == 0 && getAlleAufSpawn() == false) {
 				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
 				naechsterSpieler();
@@ -1371,7 +1514,8 @@ public class Spiel implements iBediener, Serializable {
 			} else {
 				System.out.println("");
 				for (Spielfigur sf : alleZugFiguren()) {
-					System.out.print(sf.getName() + " auf Feld: "+ sf.getMeinFeld().getID());
+					System.out.print(sf.getName() + " auf Feld: "
+							+ sf.getMeinFeld().getID());
 					if (sf.getIstGespawnt() == false
 							&& sf.getKannSchlagen() == true)
 						System.out.println(" Kann Spawnen & Killen");
@@ -1407,8 +1551,16 @@ public class Spiel implements iBediener, Serializable {
 	public void werfen(int zahl) {
 		try {
 			wuerfeln(zahl);
-			System.out.println("Spieler " + getIstAmZug().getName()+ " ist am Zug!");
-			System.out.println("Spieler "+ getIstAmZug().getName()+ " "+ getIstAmZug().getFarbe()+ " hat eine "	+ getAugenzahl()+ " gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
+			System.out.println("Spieler " + getIstAmZug().getName()
+					+ " ist am Zug!");
+			System.out
+					.println("Spieler "
+							+ getIstAmZug().getName()
+							+ " "
+							+ getIstAmZug().getFarbe()
+							+ " hat eine "
+							+ getAugenzahl()
+							+ " gewuerfelt und darf mit folgenden Figuren ziehen:\n#########################");
 			if (alleZugFiguren().size() == 0 && getAlleAufSpawn() == false) {
 				System.out.println("Keine Figur darf ziehen! Neu wuerfeln!\n");
 				naechsterSpieler();
@@ -1417,7 +1569,8 @@ public class Spiel implements iBediener, Serializable {
 			} else {
 				System.out.println("");
 				for (Spielfigur sf : alleZugFiguren()) {
-					System.out.print(sf.getName() + " auf Feld: "+ sf.getMeinFeld().getID());
+					System.out.print(sf.getName() + " auf Feld: "
+							+ sf.getMeinFeld().getID());
 					if (sf.getIstGespawnt() == false
 							&& sf.getKannSchlagen() == true)
 						System.out.println(" Kann Spawnen & Killen");
@@ -1453,18 +1606,21 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	@Override
 	public boolean neuerSpieler(String name, int farbID, int verhaltenID) {
-		boolean erfolgreich=false;
+		boolean erfolgreich = false;
 		try {
 
-			erfolgreich=spielerHinzufuegen(name, farbID, verhaltenID);
-			System.out.println("Spieler " + getAnzahlSpieler() + ": "+ spieler[getAnzahlSpieler() - 1].getName() + " "+ spieler[getAnzahlSpieler() - 1].getFarbe()+ " wurde Hinzugefuegt!\n");
+			erfolgreich = spielerHinzufuegen(name, farbID, verhaltenID);
+			System.out.println("Spieler " + getAnzahlSpieler() + ": "
+					+ spieler[getAnzahlSpieler() - 1].getName() + " "
+					+ spieler[getAnzahlSpieler() - 1].getFarbe()
+					+ " wurde Hinzugefuegt!\n");
 			if (getAnzahlSpieler() == 4) {
 				setHatBegonnen(false);
 				starteSpiel();
 			}
 		} catch (RuntimeException e) {
 			System.out.println(e);
-		}finally{
+		} finally {
 			return erfolgreich;
 		}
 	}
@@ -1515,11 +1671,11 @@ public class Spiel implements iBediener, Serializable {
 	private void deleteAnzahlSpieler() {
 		this.anzahlSpieler = 0;
 	}
-	
+
 	/**
 	 * Gibt Spielerarray zurück
 	 * */
-	public Spieler[] getSpieler(){
+	public Spieler[] getSpieler() {
 		return this.spieler;
 	}
 
@@ -1538,7 +1694,10 @@ public class Spiel implements iBediener, Serializable {
 		try {
 			if (getHatBegonnen() == false) {
 				startSpiel();
-				System.out.println("\n++++++++++Spiel gestartet!++++++++++\n\nSpieler "	+ getIstAmZug().getName()+ " bitte wuerfeln!\n\n");
+				System.out
+						.println("\n++++++++++Spiel gestartet!++++++++++\n\nSpieler "
+								+ getIstAmZug().getName()
+								+ " bitte wuerfeln!\n\n");
 			}
 		} catch (RuntimeException e) {
 			System.out.println(e);
@@ -1552,50 +1711,50 @@ public class Spiel implements iBediener, Serializable {
 			System.out.println(e);
 		}
 	}
-	
-	
-	/** 
-	 * Methode, die booleanschen Wert zurückgibt, ob am Zug seiender Spieler KI ist oder nicht.
-	 * Falls Spieler KI: return true
-	 * Falls Spieler Mensch: return false
+
+	/**
+	 * Methode, die booleanschen Wert zurückgibt, ob am Zug seiender Spieler KI
+	 * ist oder nicht. Falls Spieler KI: return true Falls Spieler Mensch:
+	 * return false
 	 */
 	@Override
 	public boolean ausgabeSpielerAmZug() {
-		if(istAmZug.getBedienung()!=null)
+		if (istAmZug.getBedienung() != null)
 			return true;
 		else
 			return false;
 	}
 
 	/**
-	/**
-	 * Methode fuer die KI, die ueberprueft, ob Spieler istAmZug eine KI hat, falls dies der Fall ist,
-	 * wird die zugWaehlen-Methode der KI aufgerufen, falls nicht, wird eine Exception gethrowt und gecatcht.
+	 * /** Methode fuer die KI, die ueberprueft, ob Spieler istAmZug eine KI
+	 * hat, falls dies der Fall ist, wird die zugWaehlen-Methode der KI
+	 * aufgerufen, falls nicht, wird eine Exception gethrowt und gecatcht.
+	 * 
 	 * @author Anna Rosa
 	 * @since version 3.0
-	 * @throws MethodeFuerKiException  Falls die Methode von einem menschlichen Spieler aufgerufen wird.
+	 * @throws MethodeFuerKiException
+	 *             Falls die Methode von einem menschlichen Spieler aufgerufen
+	 *             wird.
 	 */
 	@Override
-	public String[] zugDurchfuehrenKI(){
-		String[] zugFelder= null;
+	public String[] zugDurchfuehrenKI() {
+		String[] zugFelder = null;
 		try {
-			if(getIstBeendet()==true)
+			if (getIstBeendet() == true)
 				throw new SpielBeendetException("Spiel ist schon beendet.");
-			if(istAmZug.getBedienung()==null)
-				throw new MethodeFuerKiException("Spieler ist keine KI!");			
+			if (istAmZug.getBedienung() == null)
+				throw new MethodeFuerKiException("Spieler ist keine KI!");
 			else
-				zugFelder=istAmZug.getBedienung().zugWaehlen();
+				zugFelder = istAmZug.getBedienung().zugWaehlen();
 			return zugFelder;
-		}
-		catch(SpielBeendetException e){
+		} catch (SpielBeendetException e) {
 			System.out.println(e.getMessage());
 			return zugFelder;
-		}
-		catch (MethodeFuerKiException e){
-			System.out.println(e.getMessage()+ " Bitte andere Methode waehlen.");
+		} catch (MethodeFuerKiException e) {
+			System.out.println(e.getMessage()
+					+ " Bitte andere Methode waehlen.");
 			return zugFelder;
-		}		
-		catch(FigurKannNichtZiehenException e){
+		} catch (FigurKannNichtZiehenException e) {
 			System.out.println(e.getMessage());
 			return zugFelder;
 		}
@@ -1608,13 +1767,12 @@ public class Spiel implements iBediener, Serializable {
 
 	@Override
 	public ArrayList<String> getZugInfo() {
-		if(!this.zugFiguren.isEmpty()){
-			ArrayList<String> infos = new ArrayList<String>();			
-			for(Spielfigur fig: zugFiguren)
+		if (!this.zugFiguren.isEmpty()) {
+			ArrayList<String> infos = new ArrayList<String>();
+			for (Spielfigur fig : zugFiguren)
 				infos.add(fig.getMeinFeld().getGuiID());
 			return infos;
-		}
-		else
+		} else
 			return null;
 	}
 }
