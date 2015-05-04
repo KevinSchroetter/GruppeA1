@@ -72,7 +72,21 @@ public class GUI {
 		setStartFieldPositions(30,30);
 		setEndFieldPositions(30,30);
 		setStandardFieldPositions(30,30);
+		redoIcons();
 	}
+	private void redoIcons() {
+		for(java.util.Map.Entry<String, JButton> entry : endMap.entrySet()) {
+		    JButton value = entry.getValue();
+		    value.setIcon(null);
+		}
+		for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
+		    JButton value = entry.getValue();
+		    value.setIcon(null);
+		}
+		setStartFieldImage("Dice2");
+		
+	}
+
 	private void setStartFieldImage(String imageName) {
 		for(java.util.Map.Entry<String, JButton> entry : startMap.entrySet()) {
 		    JButton value = entry.getValue();
