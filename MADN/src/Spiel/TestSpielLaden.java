@@ -38,7 +38,7 @@ public class TestSpielLaden {
 		
 		//CSV Laden
 		System.out.println("--------CSV--------");
-		BufferedReader br = (BufferedReader) dCSV.openFile("tutCSVDenn.csv", 1);
+		BufferedReader br = (BufferedReader) dCSV.openFile("meep.csv", 1);
 		ladeMich = (Spiel) dCSV.spielLaden(br);
 		dCSV.closeFile(br);		
 		ladeMich.ausgabeSpielerListe();

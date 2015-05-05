@@ -61,6 +61,7 @@ public class Eventhandler implements ActionListener {
 	private JComboBox<String> farbe = null;
 	private JTextField name = null;
 	private JFileChooser fileGrabber = null;
+	boolean geladenAngefangen = false;
 
 	public Eventhandler(HashMap<String, JButton> naviMap,
 			HashMap<String, JLabel> labelMap,
@@ -404,6 +405,7 @@ public class Eventhandler implements ActionListener {
 					String lol = datei.getPath();
 					myGame = (iBediener) saveCsv.spielLaden(saveCsv.openFile(
 							lol, 1));
+					this.geladenAngefangen=myGame.getStatus();
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
@@ -422,6 +424,7 @@ public class Eventhandler implements ActionListener {
 					String lol = datei.getPath();
 					myGame = (iBediener) saveSer.spielLaden(saveSer.openFile(
 							lol, 1));
+					this.geladenAngefangen=myGame.getStatus();
 
 				} else {
 					System.out.println("Speichern abgebrochen");
