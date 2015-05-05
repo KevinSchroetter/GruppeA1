@@ -1383,9 +1383,9 @@ public class Spiel implements iBediener, Serializable {
 			Spielfeld f = getSpielbrett().getFeld(ID, farbeIstAmZug);
 			zugFelder[0] = f.getGuiID();
 			Spielfigur figur = f.getFigur();
-			for (Spielfigur sf : getIstAmZug().alleFiguren())
+			for (Spielfigur sf : getIstAmZug().alleFiguren()){
 				if (sf.getBinIchAufEndpostion() == true)
-					endCounter++;
+					endCounter++;}
 			zugFelder[2]=waehleFigur(ID);
 			Spielfeld zielFeld = figur.getMeinFeld();
 			zugFelder[1] = zielFeld.getGuiID();
@@ -1779,5 +1779,9 @@ public class Spiel implements iBediener, Serializable {
 	@Override
 	public boolean getStatus() {
 		return this.getHatBegonnen();
+	}
+	
+	public boolean getBeendet(){
+		return this.istBeendet;
 	}
 }
