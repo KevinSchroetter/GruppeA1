@@ -59,6 +59,7 @@ public class GUI {
 		
 	    frame.setBounds(400, 100, 1280, 1080);
 	    frame.setVisible(true);
+	    frame.setResizable(false);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
@@ -363,8 +364,9 @@ public class GUI {
 		field.setContentAreaFilled(false);
 		field.setToolTipText(field.getText());
 		field.setText("");
-		field.setFocusPainted(true);
+		field.setFocusPainted(false);
 		field.setBorderPainted(false);
+		field.setRolloverEnabled(true);
 		field.setVisible(visible);
 		
 	}
