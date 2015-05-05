@@ -271,7 +271,7 @@ public class Eventhandler implements ActionListener {
 		if (actionMap != null && actionMap.size() != 0
 				&& actionMap.containsValue(e.getSource())) {
 			buf = (JButton) e.getSource();
-			String button = buf.getText();
+			String button = buf.getToolTipText();
 			if (button.matches("S.*") == true) {
 				button = button.substring(0, 2);
 			} else if (button.matches("E.*") == true) {
