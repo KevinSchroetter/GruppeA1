@@ -69,9 +69,9 @@ public class GUI {
 	}
 	
 	public void restartGame(){
-		setStartFieldPositions(30,30);
-		setEndFieldPositions(30,30);
-		setStandardFieldPositions(30,30);
+		setStartFieldPositions(80,108);
+		setEndFieldPositions(80,108);
+		setStandardFieldPositions(80,108);
 		redoIcons();
 	}
 	private void redoIcons() {
@@ -167,22 +167,22 @@ public class GUI {
 		addIconToImagesMap("Dice4","images/dice_04.jpg",100,100);
 		addIconToImagesMap("Dice5","images/dice_05.jpg",100,100);
 		addIconToImagesMap("Dice6","images/dice_06.jpg",100,100);
-		addIconToImagesMap("figRed1","images/figRed1.png",120,120);
-		addIconToImagesMap("figRed2","images/figRed2.png",120,120);
-		addIconToImagesMap("figRed3","images/figRed3.png",120,120);
-		addIconToImagesMap("figRed4","images/figRed4.png",120,120);
-		addIconToImagesMap("figBlue1","images/figBlue1.png",120,120);
-		addIconToImagesMap("figBlue2","images/figBlue2.png",120,120);
-		addIconToImagesMap("figBlue3","images/figBlue3.png",120,120);
-		addIconToImagesMap("figBlue4","images/figBlue4.png",120,120);
-		addIconToImagesMap("figGreen1","images/figGreen1.png",120,120);
-		addIconToImagesMap("figGreen2","images/figGreen2.png",120,120);
-		addIconToImagesMap("figGreen3","images/figGreen3.png",120,120);
-		addIconToImagesMap("figGreen4","images/figGreen4.png",120,120);
-		addIconToImagesMap("figYellow1","images/figYellow1.png",120,120);
-		addIconToImagesMap("figYellow2","images/figYellow2.png",120,120);
-		addIconToImagesMap("figYellow3","images/figYellow3.png",120,120);
-		addIconToImagesMap("figYellow4","images/figYellow4.png",120,120);
+		addIconToImagesMap("figRed1","images/figRed1.png",80,108);
+		addIconToImagesMap("figRed2","images/figRed2.png",80,108);
+		addIconToImagesMap("figRed3","images/figRed3.png",80,108);
+		addIconToImagesMap("figRed4","images/figRed4.png",80,108);
+		addIconToImagesMap("figBlue1","images/figBlue1.png",80,108);
+		addIconToImagesMap("figBlue2","images/figBlue2.png",80,108);
+		addIconToImagesMap("figBlue3","images/figBlue3.png",80,108);
+		addIconToImagesMap("figBlue4","images/figBlue4.png",80,108);
+		addIconToImagesMap("figGreen1","images/figGreen1.png",80,108);
+		addIconToImagesMap("figGreen2","images/figGreen2.png",80,108);
+		addIconToImagesMap("figGreen3","images/figGreen3.png",80,108);
+		addIconToImagesMap("figGreen4","images/figGreen4.png",80,108);
+		addIconToImagesMap("figYellow1","images/figYellow1.png",80,108);
+		addIconToImagesMap("figYellow2","images/figYellow2.png",80,108);
+		addIconToImagesMap("figYellow3","images/figYellow3.png",80,108);
+		addIconToImagesMap("figYellow4","images/figYellow4.png",80,108);
 	}
 	private void setFieldBackgroundImage(String image){ 
 		if(labelMap.isEmpty()) throw new RuntimeException("labelMap leer");
@@ -358,14 +358,18 @@ public class GUI {
 		field.setVerticalTextPosition(SwingConstants.CENTER);
 		field.setHorizontalTextPosition(SwingConstants.CENTER);
 		field.setBounds(x,y,width,height);
-		field.setOpaque(false);
-		field.setContentAreaFilled(false);
+		field.setOpaque(true);
+		field.setContentAreaFilled(true);
 		field.setToolTipText(field.getText());
 		field.setText("");
-		field.setBorderPainted(false);
+		field.setBorderPainted(true);
 		field.setVisible(visible);
 		
 	}
+	
+	
+	
+	
 	private void setStartFieldPositions(int width, int height) {
 		//StartfelderButtonsRot
 		setFieldPosition(startMap.get("S1ROT"),66,22,width,height,true);
@@ -511,9 +515,9 @@ public class GUI {
 	}
 	private void createPanelCENTER() {
 		mitte.setLayout(null);
-		setStandardFieldPositions(130,130);
-		setStartFieldPositions(130,130);
-		setEndFieldPositions(130,130);
+		setStandardFieldPositions(80,108);
+		setStartFieldPositions(80,108);
+		setEndFieldPositions(80,108);
 		setFieldBackgroundImage("field");
 		setStandardFieldImage("Dice1");
 		setStartFieldImage("Dice2");
@@ -534,6 +538,24 @@ public class GUI {
 		labelMap.get("game").setBounds(0,0,975, 875);
 		frame.getContentPane().add(mitte,BorderLayout.CENTER);
 	}
+	
+	public void makeVisible(){
+		 for(java.util.Map.Entry<String, JButton> entry : startMap.entrySet()) {
+		  JButton value = entry.getValue();
+		  value.setVisible(true);
+		  
+		 }
+		 for(java.util.Map.Entry<String, JButton> entry : endMap.entrySet()) {
+		  JButton value = entry.getValue();
+		  value.setVisible(true);
+		  
+		 }
+		 for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
+		  JButton value = entry.getValue();
+		  value.setVisible(true);
+		  
+		 }
+		}
 	private void disableStartFields(){
 		for(java.util.Map.Entry<String, JButton> entry : startMap.entrySet()) {
 		    JButton value = entry.getValue();
@@ -552,6 +574,8 @@ public class GUI {
 		    value.setEnabled(false);
 		}
 	}
+	
+	
 	private void disableAllFields(){
 		disableStartFields();
 		disableEndFields();
