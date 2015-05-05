@@ -53,6 +53,7 @@ public class GUI {
 		createPanelSOUTH();
 		createPanelWEST();
 		createPanelCENTER();
+		makeVisible();
 		
 	 //   disableAllFields();
 		
