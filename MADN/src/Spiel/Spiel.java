@@ -408,7 +408,7 @@ public class Spiel implements iBediener, Serializable {
 			throw new RuntimeException(
 					"Ein Spiel braucht mindestens einen Spieler!");
 		setHatBegonnen(true);
-		PlaySounds.playStart();
+		//PlaySounds.playStart();
 		if (spieler[0] != null) {
 			spieler[0].setAmZug(true);
 			setIstAmZug(spieler[0]);
@@ -604,8 +604,8 @@ public class Spiel implements iBediener, Serializable {
 						return false;
 				}
 				if (zuZiehen == 2)
-					if (kannZiehenEndfelder(figur, 1) == true
-							&& endfelderIstAmZug[2].getFigur() == null)
+					if (kannZiehenEndfelder(figur, 1) == true//fehler
+							&& endfelderIstAmZug[3].getFigur() == null)
 						return true;
 			}
 			if (figur.getMeinFeld().getID()
@@ -832,12 +832,12 @@ public class Spiel implements iBediener, Serializable {
 					break;
 				}
 			}
-		if (firstBlood == false) {
-			PlaySounds.kill();
-			PlaySounds.firstblood();
-			firstBlood = true;
-		} else
-			PlaySounds.kill();
+		//if (firstBlood == false) {
+			//PlaySounds.kill();
+		//	PlaySounds.firstblood();
+	//		firstBlood = true;
+		//} else
+			//PlaySounds.kill();
 		
 		return targetArea;
 	}
@@ -893,12 +893,12 @@ public class Spiel implements iBediener, Serializable {
 					break;
 				}
 			}
-		if (firstBlood == false) {
-			PlaySounds.kill();
-			PlaySounds.firstblood();
-			firstBlood = true;
-		} else
-			PlaySounds.kill();
+	//	if (firstBlood == false) {
+			//PlaySounds.kill();
+		//	PlaySounds.firstblood();
+		//	firstBlood = true;
+	//	} else
+			//PlaySounds.kill();
 		return targetArea;
 	}
 
@@ -950,16 +950,22 @@ public class Spiel implements iBediener, Serializable {
 		String aktFeldIDS = "";
 		int aktFeldID = 0;
 		if (kannZiehenEndfelder(figur, restSchritte) != true) {
-			System.out.println("Figur kann nicht ziehen!");
-			throw new FigurKannNichtZiehenException("Figur kann nicht ziehen!");
+//			System.out.println("Figur kann nicht ziehen!");
+//			throw new FigurKannNichtZiehenException("Figur kann nicht ziehen!");
+			this.zugFiguren.remove(figur);
+			this.naechsterSpieler();
 		}
 		if (aktFeld instanceof Endfeld) {
 			aktFeldIDS = figur.getMeinFeld().getID();
 		} else if (aktFeld instanceof Standardfeld) {
 			aktFeldID = Integer.parseInt(figur.getMeinFeld().getID());
 		}
+		if(restSchritte<=0){
+			figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(
+					getIstAmZug().getFarbe())[0]);
+		}else{
 		figur.setMeinFeld(getSpielbrett().getAlleEndFelderEinerFarbe(
-				getIstAmZug().getFarbe())[restSchritte - 1]);
+				getIstAmZug().getFarbe())[restSchritte - 1]);}
 		if (aktFeld instanceof Endfeld) {
 			for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
 					getIstAmZug().getFarbe()).length; i++) {
@@ -1057,8 +1063,9 @@ public class Spiel implements iBediener, Serializable {
 				getIstAmZug().setZugFigur(figur);
 				targetArea = ziehen(figur, getAugenzahl());
 			}
-		} catch (RuntimeException e) {
-			System.out.println(e);
+		} catch (Exception e) {
+			System.out.println(e +" in Methode waehle Figur Zeile 1061");
+			e.printStackTrace();
 		}
 		return targetArea;
 	}
@@ -1388,7 +1395,7 @@ public class Spiel implements iBediener, Serializable {
 					endCounter++;}
 			zugFelder[2]=waehleFigur(ID);
 			Spielfeld zielFeld = figur.getMeinFeld();
-			zugFelder[1] = zielFeld.getGuiID();
+		//	zugFelder[1] = zielFeld.getGuiID();
 			// zugErfolgreich = true;
 			zugFelder[1] = zielFeld.getGuiID();
 			System.out.println("Zug erfolgreich!");
@@ -1402,7 +1409,7 @@ public class Spiel implements iBediener, Serializable {
 								+ farbeIstAmZug
 								+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
 				setIstBeendet(true);
-				PlaySounds.gameOver();
+			//	PlaySounds.gameOver();
 			}
 			return zugFelder;
 		}
@@ -1769,8 +1776,8 @@ public class Spiel implements iBediener, Serializable {
 	public ArrayList<String> getZugInfo() {
 		if (!this.zugFiguren.isEmpty()) {
 			ArrayList<String> infos = new ArrayList<String>();
-			for (Spielfigur fig : zugFiguren)
-				infos.add(fig.getMeinFeld().getGuiID());
+			for (Spielfigur fig : zugFiguren){
+				infos.add(fig.getMeinFeld().getGuiID());}
 			return infos;
 		} else
 			return null;
