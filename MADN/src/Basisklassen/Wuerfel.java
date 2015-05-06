@@ -28,6 +28,7 @@ public class Wuerfel implements Serializable {
 	 */
 	public int werfen(){
 		int augenzahl = (int)  ((Math.random()*6) + 1);
+		augenzahl = (augenzahl % 7);
 		return augenzahl;
 	}
 	

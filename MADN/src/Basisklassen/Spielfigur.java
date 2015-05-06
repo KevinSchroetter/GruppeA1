@@ -438,7 +438,7 @@ public class Spielfigur implements Serializable {
 
 	@Override
 	public String toString() {
-		return String.format("Figur %d auf Feld %s mit Farbe %s --\n ",
+		return String.format("Figur %d auf Feld %s mit Farbe %s -- ",
 				this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
 	/**

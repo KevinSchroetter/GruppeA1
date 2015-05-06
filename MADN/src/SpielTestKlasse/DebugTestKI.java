@@ -1,48 +1,97 @@
 package SpielTestKlasse;
 
 import Spiel.*;
+
+import java.util.Date;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import GUI.Stromwrapper;
 import Basisklassen.Spieler;
 import Basisklassen.Spielfigur;
 
 import java.lang.management.GarbageCollectorMXBean;
 import java.util.ArrayList;
 
-public class DebugTestKI {
+public class DebugTestKI extends Thread {
+
 	public static void main(String[] args) {
 
+		PrintStream logOutput;
+		File datei;
+		FileOutputStream fileOut = null;
+		Date time;
+
+		time = new Date();
+		datei = new File(String.format("ErrorLog-%d%d%d.log", time.getHours(),
+				time.getMinutes(), time.getSeconds()));
+		try {
+			fileOut = new FileOutputStream(datei, false);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		logOutput = new PrintStream(fileOut);
+
+		DebugTestKI dTKI = new DebugTestKI();
+		try {
+			dTKI.start();
+		} catch (Exception e) {
+
+		}
+
+	}
+
+	@Override
+	public void run() {
+
 		Spiel s = new Spiel();
-		s.neuerSpieler("Detlef", 1, 1);
-
+		s.neuerSpieler("Detlef", 1, 2);
 		s.neuerSpieler("Hans-Joachim", 2, 2);
-
+		s.neuerSpieler("JetztKackkktsAb",3,1);
 		s.starteSpiel();
-
-		while (s.getStatus()) {
-
+		while (!(s.getBeendet())) {
+			
 			try {
+
 				s.rollTheDice();
 				s.zugDurchfuehrenKI();
+
+				if (s.getBeendet()){
+					
+					System.out.println("Endpositionen von Figuren:");
+					Spieler[] ausgabeSpieler = s.getSpieler();
+					
+					Spielfigur [][] ausgabeFiguren = new Spielfigur[4][4];
+					
+					for(int i = 0; i<4; i++){
+						if(ausgabeSpieler[i] == null) continue;
+							ausgabeFiguren[i] = ausgabeSpieler[i].alleFiguren();
+					}
+					
+					for(int i = 0; i<4; i++){
+						
+						
+						for(Spielfigur f : ausgabeFiguren[i]){
+							if(f == null) continue;
+							System.out.println(f);
+						}
+					}
+					
+					
+
+					// System.out.println("Debugger break");
+					break;}
+
 			}
 
 			catch (Exception e) {
 				e.printStackTrace();
-				return;
-			}
-			if (s.getBeendet())
-				break;
-		}
-		Spieler[] gamer = s.getSpieler();
-		for (Spieler zocker : gamer) {
-			try {
-				for (Spielfigur f : zocker.alleFiguren()) {
-					System.out.println(f);
-				}
-			} catch (NullPointerException npe) {
-				System.out.println("gibbet nüsch");
 			}
 		}
-		 System.out.println("DebugTestKI.main()");
 	}
-	
-
 }
