@@ -12,6 +12,7 @@ import java.util.HashMap;
 import javax.swing.*;
 
 import java.awt.Color;
+import java.awt.geom.RoundRectangle2D;
 
 import Spiel.ButtonsNavi;
 
@@ -55,14 +56,20 @@ public class GUI {
 		createPanelSOUTH();
 		createPanelWEST();
 		createPanelCENTER();
-		//makeVisible();
+		makeVisible();
 		
 	 //   disableAllFields();
-		
 	    frame.setBounds(400, 100, 1280, 1080);
 	    frame.setVisible(true);
 	    frame.setResizable(false);
+	    frame.getRootPane().setBackground(Color.DARK_GRAY);
+	    frame.getRootPane().setForeground(Color.gray);
 	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    
+	    
+	    
+	    //console.setBackground(Color.DARK_GRAY);
+	    //console.setForeground(Color.gray);
 	}
 
 	private void setEndFieldImage(String imageName) {
@@ -164,13 +171,13 @@ public class GUI {
 		labelMap.put("game",game);
 	}
 	private void initImagesMap(){
-		addIconToImagesMap("field","images/game.png",975, 875);
-		addIconToImagesMap("Dice1","images/dice_01.jpg",100,100);
-		addIconToImagesMap("Dice2","images/dice_02.jpg",100,100);
-		addIconToImagesMap("Dice3","images/dice_03.jpg",100,100);
-		addIconToImagesMap("Dice4","images/dice_04.jpg",100,100);
-		addIconToImagesMap("Dice5","images/dice_05.jpg",100,100);
-		addIconToImagesMap("Dice6","images/dice_06.jpg",100,100);
+		addIconToImagesMap("field","images/game.png",986, 886);
+		addIconToImagesMap("Dice1","images/dice_01.jpg",101,101);
+		addIconToImagesMap("Dice2","images/dice_02.jpg",101,101);
+		addIconToImagesMap("Dice3","images/dice_03.jpg",101,101);
+		addIconToImagesMap("Dice4","images/dice_04.jpg",101,101);
+		addIconToImagesMap("Dice5","images/dice_05.jpg",101,101);
+		addIconToImagesMap("Dice6","images/dice_06.jpg",101,101);
 		addIconToImagesMap("figRed1","images/figRed1.png",90,121);
 		addIconToImagesMap("figRed2","images/figRed2.png",90,121);
 		addIconToImagesMap("figRed3","images/figRed3.png",90,121);
@@ -378,99 +385,101 @@ public class GUI {
 	
 	private void setStartFieldPositions(int width, int height) {
 		//StartfelderButtonsRot
-		setFieldPosition(startMap.get("S1ROT"),121,-13,width,height,true);
-		setFieldPosition(startMap.get("S2ROT"),46,-13,width,height,true);
-		setFieldPosition(startMap.get("S3ROT"),46,62,width,height,true);
-		setFieldPosition(startMap.get("S4ROT"),121,61,width,height,true);
+		setFieldPosition(startMap.get("S1ROT"),141,23,width,height,true);
+		setFieldPosition(startMap.get("S2ROT"),66,21,width,height,true);
+		setFieldPosition(startMap.get("S3ROT"),66,94,width,height,true);
+		setFieldPosition(startMap.get("S4ROT"),141,93,width,height,true);
 		//StartfelderButtonsBlau
-		setFieldPosition(startMap.get("S1BLAU"),840,-13,width,height,true);
-		setFieldPosition(startMap.get("S2BLAU"),770,-13,width,height,true);
-		setFieldPosition(startMap.get("S3BLAU"),760,65,width,height,true);
-		setFieldPosition(startMap.get("S4BLAU"),840,61,width,height,true);;
+		setFieldPosition(startMap.get("S1BLAU"),825,20,width,height,true);
+		setFieldPosition(startMap.get("S2BLAU"),755,21,width,height,true);
+		setFieldPosition(startMap.get("S3BLAU"),753,99,width,height,true);
+		setFieldPosition(startMap.get("S4BLAU"),828,95,width,height,true);;
 		//StartfelderButtonsGruen
-		setFieldPosition(startMap.get("S1GRUEN"),842,623,width,height,true);
-		setFieldPosition(startMap.get("S2GRUEN"),760,623,width,height,true);
-		setFieldPosition(startMap.get("S3GRUEN"),765,700,width,height,true);
-		setFieldPosition(startMap.get("S4GRUEN"),845,700,width,height,true);
+		setFieldPosition(startMap.get("S1GRUEN"),827,646,width,height,true);
+		setFieldPosition(startMap.get("S2GRUEN"),752,646,width,height,true);
+		setFieldPosition(startMap.get("S3GRUEN"),755,723,width,height,true);
+		setFieldPosition(startMap.get("S4GRUEN"),832,723,width,height,true);
 		//StartfelderButtonsGelb
-		setFieldPosition(startMap.get("S1GELB"),131,626,width,height,true);
-		setFieldPosition(startMap.get("S2GELB"),46,625,width,height,true);
-		setFieldPosition(startMap.get("S3GELB"),46,700,width,height,true);
-		setFieldPosition(startMap.get("S4GELB"),131,700,width,height,true);		
+		setFieldPosition(startMap.get("S1GELB"),151,646,width,height,true);
+		setFieldPosition(startMap.get("S2GELB"),76,646,width,height,true);
+		setFieldPosition(startMap.get("S3GELB"),66,723,width,height,true);
+		setFieldPosition(startMap.get("S4GELB"),144,721,width,height,true);		
 	}
 	
 	private void setEndFieldPositions(int width, int height) {
 		//EndfelderButtonsRot
-		setFieldPosition(endMap.get("E1ROT"),100,343,width,height,false);
-		setFieldPosition(endMap.get("E2ROT"),187,343,width,height,false);
-		setFieldPosition(endMap.get("E3ROT"),274,343,width,height,false);
-		setFieldPosition(endMap.get("E4ROT"),363,343,width,height,false);
+		setFieldPosition(endMap.get("E1ROT"),120,373,width,height,false);
+		setFieldPosition(endMap.get("E2ROT"),205,373,width,height,false);
+		setFieldPosition(endMap.get("E3ROT"),285,372,width,height,false);
+		setFieldPosition(endMap.get("E4ROT"),371,373,width,height,false);
 		//EndfelderButtonsBlau
-		setFieldPosition(endMap.get("E1BLAU"),443,33,width,height,false);
-		setFieldPosition(endMap.get("E2BLAU"),443,108,width,height,false);
-		setFieldPosition(endMap.get("E3BLAU"),443,183,width,height,false);
-		setFieldPosition(endMap.get("E4BLAU"),443,263,width,height,false);
+		setFieldPosition(endMap.get("E1BLAU"),445,68,width,height,false);
+		setFieldPosition(endMap.get("E2BLAU"),445,143,width,height,false);
+		setFieldPosition(endMap.get("E3BLAU"),445,217,width,height,false);
+		setFieldPosition(endMap.get("E4BLAU"),445,293,width,height,false);
 		//EndfelderButtonsGruen
-		setFieldPosition(endMap.get("E1GRUEN"),782,343,width,height,false);
-		setFieldPosition(endMap.get("E2GRUEN"),694,343,width,height,false);
-		setFieldPosition(endMap.get("E3GRUEN"),607,343,width,height,false);
-		setFieldPosition(endMap.get("E4GRUEN"),523,343,width,height,false);
+		setFieldPosition(endMap.get("E1GRUEN"),772,373,width,height,false);
+		setFieldPosition(endMap.get("E2GRUEN"),689,373,width,height,false);
+		setFieldPosition(endMap.get("E3GRUEN"),604,373,width,height,false);
+		setFieldPosition(endMap.get("E4GRUEN"),521,371,width,height,false);
 		//EndfelderButtonsGelb
-		setFieldPosition(endMap.get("E1GELB"),443,651,width,height,false);
-		setFieldPosition(endMap.get("E2GELB"),443,576,width,height,false);
-		setFieldPosition(endMap.get("E3GELB"),443,496,width,height,false);
-		setFieldPosition(endMap.get("E4GELB"),443,421,width,height,false);		
+		setFieldPosition(endMap.get("E1GELB"),445,675,width,height,false);
+		setFieldPosition(endMap.get("E2GELB"),445,600,width,height,false);
+		setFieldPosition(endMap.get("E3GELB"),445,520,width,height,false);
+		setFieldPosition(endMap.get("E4GELB"),445,445,width,height,false);		
 	}
 	
 	private void setStandardFieldPositions(int width, int height) {
 		//StandardFelder fuer Spieler ROT
-		setFieldPosition(sMap.get("1"),13,263,width,height,false);
-		setFieldPosition(sMap.get("2"),100,263,width,height,false);
-		setFieldPosition(sMap.get("3"),187,263,width,height,false);
-		setFieldPosition(sMap.get("4"),274,263,width,height,false);
-		setFieldPosition(sMap.get("5"),363,263,width,height,false);
-		setFieldPosition(sMap.get("6"),363,183,width,height,false);
-		setFieldPosition(sMap.get("7"),363,108,width,height,false);
-		setFieldPosition(sMap.get("8"),363,33,width,height,false);
-		setFieldPosition(sMap.get("9"),363,-43,width,height,false);
-		setFieldPosition(sMap.get("10"),443,-43,width,height,false);
+		setFieldPosition(sMap.get("1"),33,290,width,height,false);  //fixed y
+		setFieldPosition(sMap.get("2"),120,290,width,height,false); //fixed y
+		setFieldPosition(sMap.get("3"),205,290,width,height,false); //fixed y
+		setFieldPosition(sMap.get("4"),284,290,width,height,false); //fixed y
+		setFieldPosition(sMap.get("5"),371,290,width,height,false); //fixed y 
+		setFieldPosition(sMap.get("6"),371,213,width,height,false); //fixed y
+		setFieldPosition(sMap.get("7"),371,138,width,height,false); //fixed y
+		setFieldPosition(sMap.get("8"),371,63,width,height,false); //fixed y
+		setFieldPosition(sMap.get("9"),371,-8,width,height,false); //fixed y
+		setFieldPosition(sMap.get("10"),443,-8,width,height,false); //fixed y +35
 		//StandardFelder fuer Spieler BLAU
-		setFieldPosition(sMap.get("11"),523,-43,width,height,false);
-		setFieldPosition(sMap.get("12"),523,33,width,height,false);
-		setFieldPosition(sMap.get("13"),523,108,width,height,false);
-		setFieldPosition(sMap.get("14"),523,183,width,height,false);
-		setFieldPosition(sMap.get("15"),523,263,width,height,false);
-		setFieldPosition(sMap.get("16"),607,263,width,height,false);
-		setFieldPosition(sMap.get("17"),694,263,width,height,false);
-		setFieldPosition(sMap.get("18"),782,263,width,height,false);
-		setFieldPosition(sMap.get("19"),871,263,width,height,false);
-		setFieldPosition(sMap.get("20"),871,343,width,height,false);
+		setFieldPosition(sMap.get("11"),521,-8,width,height,false); //fixed y
+		setFieldPosition(sMap.get("12"),521,63,width,height,false);  //fixed y
+		setFieldPosition(sMap.get("13"),521,138,width,height,false); //fixed y +33
+		setFieldPosition(sMap.get("14"),521,213,width,height,false); //fixed y
+		setFieldPosition(sMap.get("15"),521,293,width,height,false); //fixed y
+		setFieldPosition(sMap.get("16"),604,293,width,height,false); //fixed y
+		setFieldPosition(sMap.get("17"),689,293,width,height,false); //fixed y 
+		setFieldPosition(sMap.get("18"),772,293,width,height,false); //fixed y
+		setFieldPosition(sMap.get("19"),854,293,width,height,false); //fixed y
+		setFieldPosition(sMap.get("20"),854,371,width,height,false); //fixed y
 		//StandardFelder fuer Spieler GRUEN
-		setFieldPosition(sMap.get("21"),871,421,width,height,false);
-		setFieldPosition(sMap.get("22"),782,421,width,height,false);
-		setFieldPosition(sMap.get("23"),694,421,width,height,false);
-		setFieldPosition(sMap.get("24"),607,421,width,height,false);
-		setFieldPosition(sMap.get("25"),523,421,width,height,false);
-		setFieldPosition(sMap.get("26"),523,496,width,height,false);
-		setFieldPosition(sMap.get("27"),523,576,width,height,false);
-		setFieldPosition(sMap.get("28"),523,651,width,height,false);
-		setFieldPosition(sMap.get("29"),523,728,width,height,false);
-		setFieldPosition(sMap.get("30"),443,728,width,height,false);
+		setFieldPosition(sMap.get("21"),852,447,width,height,false); //fixed y
+		setFieldPosition(sMap.get("22"),772,447,width,height,false); //fixed y	
+		setFieldPosition(sMap.get("23"),689,447,width,height,false); //fixed y
+		setFieldPosition(sMap.get("24"),604,447,width,height,false); //fixed y +20?
+		setFieldPosition(sMap.get("25"),521,447,width,height,false); //fixed y
+		setFieldPosition(sMap.get("26"),521,523,width,height,false); //fixed y
+		setFieldPosition(sMap.get("27"),521,598,width,height,false); //fixed y 
+		setFieldPosition(sMap.get("28"),521,673,width,height,false); //fixed y 
+		setFieldPosition(sMap.get("29"),521,748,width,height,false); //fixed y
+		setFieldPosition(sMap.get("30"),443,748,width,height,false); //fixed y
 		//StandardFelder fuer Spieler GELB
-		setFieldPosition(sMap.get("31"),363,728,width,height,false);
-		setFieldPosition(sMap.get("32"),363,651,width,height,false);
-		setFieldPosition(sMap.get("33"),363,576,width,height,false);
-		setFieldPosition(sMap.get("34"),363,496,width,height,false);
-		setFieldPosition(sMap.get("35"),363,421,width,height,false);
-		setFieldPosition(sMap.get("36"),274,421,width,height,false);
-		setFieldPosition(sMap.get("37"),187,421,width,height,false);
-		setFieldPosition(sMap.get("38"),100,421,width,height,false);
-		setFieldPosition(sMap.get("39"),13,421,width,height,false);
-		setFieldPosition(sMap.get("40"),13,343,width,height,false);
+		setFieldPosition(sMap.get("31"),370,748,width,height,false); //fixed y
+		setFieldPosition(sMap.get("32"),370,673,width,height,false);
+		setFieldPosition(sMap.get("33"),370,598,width,height,false);
+		setFieldPosition(sMap.get("34"),370,523,width,height,false);
+		setFieldPosition(sMap.get("35"),370,447,width,height,false); //fixed y
+		setFieldPosition(sMap.get("36"),284,447,width,height,false); //fixed y
+		setFieldPosition(sMap.get("37"),199,445,width,height,false); //fixed y
+		setFieldPosition(sMap.get("38"),117,445,width,height,false); //fixed y
+		setFieldPosition(sMap.get("39"),35,447,width,height,false); //fixed y
+		setFieldPosition(sMap.get("40"),35,370,width,height,false); //fixed y
 	}
 	
 	private void createPanelNORTH() {
 		norden.add(labelMap.get("header"));
+		labelMap.get("header").setForeground(Color.gray);
+		norden.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(norden,BorderLayout.NORTH);
 	}
 	private void createPanelEAST() {
@@ -478,32 +487,43 @@ public class GUI {
 		osten.setLayout(gl);
 		JPanel dicePanel= new JPanel();
 		dicePanel.add(naviMap.get("diceGame"));
+		dicePanel.setBackground(Color.DARK_GRAY);
 		osten.add(dicePanel);
 		JPanel startPanel= new JPanel();
 		startPanel.add(naviMap.get("startGame"));
+		startPanel.setBackground(Color.DARK_GRAY);
 		osten.add(startPanel);
 		JPanel newPanel= new JPanel();
 		newPanel.add(naviMap.get("newGame"));
+		newPanel.setBackground(Color.DARK_GRAY);
 		osten.add(newPanel);
 		JPanel savePanel=new JPanel();
 		savePanel.add(naviMap.get("saveGame"));
+		savePanel.setBackground(Color.DARK_GRAY);
 		osten.add(savePanel);
 		JPanel loadPanel= new JPanel();
 		loadPanel.add(naviMap.get("loadGame"));
+		loadPanel.setBackground(Color.DARK_GRAY);
 		osten.add(loadPanel);
 		JPanel sendPanel= new JPanel();
 		sendPanel.add(naviMap.get("sendGame"));
+		sendPanel.setBackground(Color.DARK_GRAY);
 		osten.add(sendPanel);
 		JPanel endPanel=new JPanel();
 		endPanel.add(naviMap.get("endGame"));
+		endPanel.setBackground(Color.DARK_GRAY);
 		osten.add(endPanel);
-
+		osten.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(osten,BorderLayout.EAST);
 	}
 	private void createPanelSOUTH() {
 		sueden.add(labelMap.get("consoleHeader"));
 		sueden.add(console);
+		labelMap.get("consoleHeader").setForeground(Color.GRAY);
+		sueden.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(sueden, BorderLayout.SOUTH);
+		console.setBackground(Color.DARK_GRAY);
+		console.setForeground(Color.gray);
 		console.add(new JScrollBar());
 		sueden.add(new JScrollPane(console));
 		System.out.println("Test standard");
@@ -517,6 +537,8 @@ public class GUI {
 	private void createPanelWEST() {
 		setDiceImage("Dice6");
 		westen.add(labelMap.get("dice"));
+		labelMap.get("dice").setForeground(Color.gray);
+		westen.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(westen, BorderLayout.WEST);
 	}
 	private void createPanelCENTER() {
@@ -542,10 +564,10 @@ public class GUI {
 		    mitte.add(value);
 		}
 		mitte.add(labelMap.get("game"));
-		labelMap.get("game").setBounds(0,0,975, 875);
+		labelMap.get("game").setBounds(0,0,986, 886);
 		//this.pane = new JLayeredPane();
 		//mitte.add(pane);
-		mitte.setPreferredSize(new Dimension(975,875));
+		mitte.setPreferredSize(new Dimension(986,886));
 		mitte.add(startMap.get("S1ROT"), new Integer(2));
 		mitte.add(startMap.get("S2ROT"), new Integer(2));
 		mitte.add(startMap.get("S3ROT"), new Integer(3));
