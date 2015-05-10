@@ -439,7 +439,8 @@ public class Eventhandler implements ActionListener {
 		
 		if(e.getSource()==naviMap.get("sendGame")){
 			Mailversand mv = null;
-
+			String lol="";
+			File datei = null;
 			Object[] optionen = { "PDF", "Serialisiert" };
 			Object typ = JOptionPane.showOptionDialog(frame,
 					"Serialisiert oder PDF?", "Wie magstn Laden dude?",
@@ -447,7 +448,6 @@ public class Eventhandler implements ActionListener {
 					JOptionPane.QUESTION_MESSAGE, null, optionen, optionen[1]);
 
 			if (typ.equals(0)) {
-				File datei = null;
 
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
 						"PDF-Dateien", "pdf");
@@ -458,16 +458,15 @@ public class Eventhandler implements ActionListener {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					datei = fileGrabber.getSelectedFile();
 					
-					String lol = datei.getPath();
+					lol = datei.getAbsolutePath();
 					savePDF.spielSpeichern(spielbrettGUI, savePDF.openFile(lol,1337));
-					mv = new Mailversand(lol);
 					
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
 
 			} else if (typ.equals(1)) {
-				File datei = null;
+
 
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
 						"Serialisierte Objektdateien", "ser");
@@ -477,8 +476,7 @@ public class Eventhandler implements ActionListener {
 				int returnVal = fileGrabber.showOpenDialog(this.frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					datei = fileGrabber.getSelectedFile();
-					String lol = datei.getPath();
-					mv = new Mailversand(lol);
+					lol = datei.getAbsolutePath();
 
 				} else {
 					System.out.println("Speichern abgebrochen");
@@ -486,15 +484,8 @@ public class Eventhandler implements ActionListener {
 
 			}
 			
+			mv = new Mailversand(lol);
 			
-			
-			try{
-			mv.run();	
-			}
-			
-			catch(Exception ex){
-				ex.printStackTrace();
-			}
 		}
 
 	}

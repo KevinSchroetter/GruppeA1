@@ -1,5 +1,6 @@
 package GUI;
 
+import java.io.File;
 import java.util.Date;
 import java.util.Properties;
 
@@ -31,6 +32,7 @@ public class Mailversand extends Thread{
 	private String password = null;
 	private String sendTo = null;
 	private String pfad;
+	private File datei;
 	
 	private class MailAuthenticator extends Authenticator{
 		private String user, password;
@@ -47,17 +49,10 @@ public class Mailversand extends Thread{
 	
 	public Mailversand(String pfad){
 		//Loginanfrage
+		datei = new File(pfad);
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Passwort:");
-		JLabel label2 = new JLabel("Name:");
 		JLabel label3 = new JLabel("Zieladresse:");
-		JTextField nick = new JTextField(10);
 		JTextField to = new JTextField(20);
-		JPasswordField pass = new JPasswordField(10);
-		panel.add(label2);
-		panel.add(nick);
-		panel.add(label);
-		panel.add(pass);
 		panel.add(label3);
 		panel.add(to);
 		
@@ -74,9 +69,6 @@ public class Mailversand extends Thread{
 		                         null, options, options[1]);
 		if(option == 0) //OK button
 		{
-			this.username = nick.getText();
-		    char[] password = pass.getPassword();
-		    this.password = new String(password);
 		    this.sendTo = to.getText();
 		}
 		
@@ -84,42 +76,21 @@ public class Mailversand extends Thread{
 		
 		props = new Properties();
 		String putMeIn;
-		final String[] adressen = {
-		 "Alexander.Brueckner@Student.Reutlingen-University.de",
-		 "Kevin.Schroetter@Student.Reutlingen-University.de",
-		 "Anna.Rosa@Student.Reutlingen-University.de",
-		 "Felix_Frederic.Rosa@Reutlingen-Unsiversity.de"}; 
-		
-		if(this.username == null) return;
-		
-		if(this.username.equals("brueckna")){
-			putMeIn = adressen[0];			 
-		}
-		else if(this.username.equals("schroett")){
-			putMeIn = adressen[1];
-		}
-		else if(this.username.equals("rosaa")){
-			putMeIn = adressen[2];
-		}
-		
-		else if (this.username.equals("rosa")){
-			putMeIn = adressen[3];
-		}
-		else{
-			throw new IllegalArgumentException("Benutzer nicht Teil von Gruppe A1!");
-		}
-		
-		props.put("mail.smtp.host", "maildap.reutlingen-university.de");
-		props.put("mail.smtp.user", this.username);
-		props.put("mail.smtp.password", this.password);
-		props.put("mail.smtp.socketFactory.port","465");
-		props.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
-		props.put("mail.smtp.auth",true);
-		props.put("mail.smtp.port", 465);
-		props.put("von",putMeIn);
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.user", "GruppeA1INF2SS15");
+		props.put("mail.smtp.password", "ezgamemadn");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.EnableSSL.enable", "true");
+		props.put("mail.smtp.auth","true");
+		props.put("mail.smtp.port","587");
+		props.put("von","screamer27th@gmail.com");
 		props.put("an",this.sendTo);
 		props.put("betreff","Spielstandversand MADN - Gruppe A1");
 		props.put("text",anschreiben);
+		props.put("mail.smtp.socketFactory.port", "587");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.fallback", "false");
+		this.start();
 		
 		
 		
@@ -131,6 +102,7 @@ public class Mailversand extends Thread{
 	public void run(){
 		
 		try{
+			
 			System.out.println("Starte Mailversand an "+props.getProperty("an"));
 			MailAuthenticator auth = new MailAuthenticator();
 			Session session = Session.getDefaultInstance(props,auth);
@@ -144,13 +116,19 @@ public class Mailversand extends Thread{
 			bodyNachricht.setText(props.getProperty("text"));
 			Multipart body = new MimeMultipart();
 			body.addBodyPart(bodyNachricht);
-			if(pfad != null){
+			
 				MimeBodyPart bodyAnhang = new MimeBodyPart();
-				DataSource source = new FileDataSource(pfad);
+				DataSource source = new FileDataSource(datei);
+				
 				bodyAnhang.setDataHandler(new DataHandler(source));
-				bodyAnhang.setFileName("Savegame_MADN");
+				if(datei.getPath().endsWith(".ser")){
+					bodyAnhang.setFileName("Savegame_MADN.ser");
+				}
+				else if(datei.getPath().endsWith(".pdf")){
+					bodyAnhang.setFileName("Savegame_MADN.pdf");
+				}
 				body.addBodyPart(bodyAnhang);
-			}
+			
 			msg.setContent(body);
 			msg.setSentDate(new Date());
 			Transport.send(msg);
@@ -159,6 +137,7 @@ public class Mailversand extends Thread{
 		catch(Exception e){
 			System.out.println("Mailversand an " + props.getProperty("an")+" fehlgeschlagen!");
 			e.printStackTrace();
+			System.err.println(e.getCause());
 		}
 	}
 	
