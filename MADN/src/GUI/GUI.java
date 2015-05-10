@@ -11,6 +11,8 @@ import java.util.HashMap;
 
 import javax.swing.*;
 
+import java.awt.Color;
+
 import Spiel.ButtonsNavi;
 
 
@@ -31,7 +33,7 @@ public class GUI {
 	private JPanel sueden = new JPanel();
 	private JPanel osten = new JPanel();
 	private JPanel westen = new JPanel();
-	private JPanel mitte = new JPanel();
+	private JLayeredPane mitte = new JLayeredPane();
 	private JTextArea console = new JTextArea(8,100);
 	private JFileChooser dateiGrabber = new JFileChooser();
 
@@ -518,7 +520,8 @@ public class GUI {
 		frame.getContentPane().add(westen, BorderLayout.WEST);
 	}
 	private void createPanelCENTER() {
-		mitte.setLayout(null);
+		//mitte.setLayout(null);
+		this.mitte = new JLayeredPane();
 		setStandardFieldPositions(90,121);
 		setStartFieldPositions(90,121);
 		setEndFieldPositions(90,121);
@@ -538,9 +541,85 @@ public class GUI {
 		    JButton value = entry.getValue();
 		    mitte.add(value);
 		}
-	    mitte.add(labelMap.get("game"));
+		mitte.add(labelMap.get("game"));
 		labelMap.get("game").setBounds(0,0,975, 875);
-		frame.getContentPane().add(mitte,BorderLayout.CENTER);
+		//this.pane = new JLayeredPane();
+		//mitte.add(pane);
+		mitte.setPreferredSize(new Dimension(975,875));
+		mitte.add(startMap.get("S1ROT"), new Integer(2));
+		mitte.add(startMap.get("S2ROT"), new Integer(2));
+		mitte.add(startMap.get("S3ROT"), new Integer(3));
+		mitte.add(startMap.get("S4ROT"), new Integer(3));
+		mitte.add(startMap.get("S1BLAU"), new Integer(2));
+		mitte.add(startMap.get("S2BLAU"), new Integer(2));
+		mitte.add(startMap.get("S3BLAU"), new Integer(3));
+		mitte.add(startMap.get("S4BLAU"), new Integer(3));
+		mitte.add(startMap.get("S1GRUEN"), new Integer(10));
+		mitte.add(startMap.get("S2GRUEN"), new Integer(10));
+		mitte.add(startMap.get("S3GRUEN"), new Integer(11));
+		mitte.add(startMap.get("S4GRUEN"), new Integer(11));
+		mitte.add(startMap.get("S1GELB"), new Integer(10));
+		mitte.add(startMap.get("S2GELB"), new Integer(10));
+		mitte.add(startMap.get("S3GELB"), new Integer(11));
+		mitte.add(startMap.get("S4GELB"), new Integer(11));
+		mitte.add(endMap.get("E4GELB"), new Integer(7));
+		mitte.add(endMap.get("E3GELB"), new Integer(8));
+		mitte.add(endMap.get("E2GELB"), new Integer(9));
+		mitte.add(endMap.get("E1GELB"), new Integer(10));
+		mitte.add(sMap.get("1"), new Integer(5));
+		mitte.add(sMap.get("2"), new Integer(5));
+		mitte.add(sMap.get("3"), new Integer(5));
+		mitte.add(sMap.get("4"), new Integer(5));
+		mitte.add(sMap.get("9"), new Integer(1));
+		mitte.add(sMap.get("8"), new Integer(2));
+		mitte.add(sMap.get("7"), new Integer(3));
+		mitte.add(sMap.get("6"), new Integer(5));
+		mitte.add(sMap.get("5"), new Integer(5));
+		mitte.add(endMap.get("E1ROT"), new Integer(6));
+		mitte.add(endMap.get("E2ROT"), new Integer(6));
+		mitte.add(endMap.get("E3ROT"), new Integer(6));
+		mitte.add(endMap.get("E4ROT"), new Integer(6));
+		mitte.add(sMap.get("10"), new Integer(1));
+		mitte.add(sMap.get("11"), new Integer(1));
+		mitte.add(endMap.get("E1BLAU"), new Integer(2));
+		mitte.add(endMap.get("E2BLAU"), new Integer(3));
+		mitte.add(endMap.get("E3BLAU"), new Integer(4));
+		mitte.add(endMap.get("E4BLAU"), new Integer(5));
+		mitte.add(sMap.get("12"), new Integer(3));
+		mitte.add(sMap.get("13"), new Integer(4));
+		mitte.add(sMap.get("14"), new Integer(5));
+		mitte.add(sMap.get("15"), new Integer(5));
+		mitte.add(sMap.get("16"), new Integer(5));
+		mitte.add(sMap.get("17"), new Integer(5));
+		mitte.add(sMap.get("18"), new Integer(5));
+		mitte.add(sMap.get("19"), new Integer(5));
+		mitte.add(endMap.get("E1GRUEN"), new Integer(6));
+		mitte.add(endMap.get("E2GRUEN"), new Integer(6));
+		mitte.add(endMap.get("E3GRUEN"), new Integer(6));
+		mitte.add(endMap.get("E4GRUEN"), new Integer(6));
+		mitte.add(sMap.get("20"), new Integer(6));
+		mitte.add(sMap.get("21"), new Integer(7));
+		mitte.add(sMap.get("22"), new Integer(7));
+		mitte.add(sMap.get("23"), new Integer(7));
+		mitte.add(sMap.get("24"), new Integer(7));
+		mitte.add(sMap.get("25"), new Integer(7));
+		mitte.add(sMap.get("26"), new Integer(8));
+		mitte.add(sMap.get("27"), new Integer(9));
+		mitte.add(sMap.get("28"), new Integer(10));
+		mitte.add(sMap.get("29"), new Integer(11));
+		mitte.add(sMap.get("30"), new Integer(11));	
+		mitte.add(sMap.get("34"), new Integer(8));		
+		mitte.add(sMap.get("33"), new Integer(9));
+		mitte.add(sMap.get("32"), new Integer(10));
+		mitte.add(sMap.get("31"), new Integer(11));
+		mitte.add(sMap.get("35"), new Integer(7));
+		mitte.add(sMap.get("36"), new Integer(7));
+		mitte.add(sMap.get("37"), new Integer(7));
+		mitte.add(sMap.get("38"), new Integer(7));
+		mitte.add(sMap.get("39"), new Integer(7));
+		mitte.add(sMap.get("40"), new Integer(6));
+		frame.getContentPane().add(mitte, BorderLayout.CENTER);
+		
 	}
 	
 	public void makeVisible(){

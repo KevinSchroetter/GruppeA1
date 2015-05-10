@@ -20,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -34,7 +35,7 @@ import Spiel.iBediener;
 import Spiel.iDatenzugriff;
 
 public class Eventhandler implements ActionListener {
-	private JPanel spielbrettGUI = null;
+	private JLayeredPane spielbrettGUI = null;
 	private iBediener myGame = new Spiel();
 	private GUI myGUI = null;
 	private iDatenzugriff saveSer = new DatenzugriffSerialisiert();
@@ -68,7 +69,7 @@ public class Eventhandler implements ActionListener {
 			HashMap<String, ImageIcon> imagesMap,
 			HashMap<String, JButton> stdFieldsMap,
 			HashMap<String, JButton> startFieldsMap,
-			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber, JPanel spielbrettGUI, GUI myGui) {
+			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber, JLayeredPane spielbrettGUI, GUI myGui) {
 		if (naviMap == null || fileGrabber == null || labelMap == null
 				|| imagesMap == null || stdFieldsMap == null
 				|| startFieldsMap == null || endFieldsMap == null)
