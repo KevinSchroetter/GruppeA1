@@ -56,7 +56,7 @@ public class GUI {
 		createPanelSOUTH();
 		createPanelWEST();
 		createPanelCENTER();
-		makeVisible();
+		//makeVisible();
 		
 	 //   disableAllFields();
 	    frame.setBounds(400, 100, 1280, 1080);
