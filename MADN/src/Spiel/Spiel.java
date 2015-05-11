@@ -820,7 +820,7 @@ public class Spiel implements iBediener, Serializable {
 		if (!targetColor.equals(myColor)) {
 			
 			figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
-			//System.err.printf("%s schlägt %s\n", figur, zuSchlagen);
+			System.err.printf("%s schlägt %s\n", figur, zuSchlagen);
 			getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 			figur.incSchritteGelaufen(getAugenzahl());
 			
@@ -832,6 +832,10 @@ public class Spiel implements iBediener, Serializable {
 					zuSchlagen.resetFelderGelaufen();
 					zuSchlagen.setMeinFeld(getSpielbrett()
 							.getAlleStartFelderEinerFarbe(targetColor)[i]);
+					zuSchlagen.setBinIchAufEndposition(false);
+					zuSchlagen.setKannSchlagen(false);
+					zuSchlagen.setKannInsZiel(false);
+					zuSchlagen.setIstImZiel(false);
 					targetArea = zuSchlagen.getMeinFeld().getGuiID();
 					break;
 				}
@@ -894,7 +898,12 @@ public class Spiel implements iBediener, Serializable {
 					zuSchlagen.resetFelderGelaufen();
 					zuSchlagen.setMeinFeld(getSpielbrett()
 							.getAlleStartFelderEinerFarbe(targetColor)[i]);
+					zuSchlagen.setBinIchAufEndposition(false);
+					zuSchlagen.setKannSchlagen(false);
+					zuSchlagen.setKannInsZiel(false);
+					zuSchlagen.setIstImZiel(false);
 					targetArea = zuSchlagen.getMeinFeld().getGuiID();
+
 					break;
 				}
 			}
@@ -1806,9 +1815,10 @@ public class Spiel implements iBediener, Serializable {
 	public ArrayList<String> getZugInfo() {
 		if (!this.zugFiguren.isEmpty()) {
 			ArrayList<String> infos = new ArrayList<String>();
-			for (Spielfigur fig : zugFiguren) {
+			for (Spielfigur fig : zugFiguren){
 				infos.add(fig.getMeinFeld().getGuiID());
 			}
+			
 			return infos;
 		} else
 			return null;
@@ -1819,6 +1829,36 @@ public class Spiel implements iBediener, Serializable {
 		return this.getHatBegonnen();
 	}
 
+	@Override
+	public ArrayList<String> updateGUIFigures() {
+		ArrayList<String>alleFiguren=new ArrayList<String>();
+		alleFiguren.add("Spieler "+this.getIstAmZug().getName()+" "+this.getIstAmZug().getFarbe()+" ist am Zug!");
+		alleFiguren.add("Z"+this.getAugenzahl());
+		System.out.println(spieler.length);
+		for(int i = 0;i<spieler.length;i++){
+			if(spieler[i]!=null){
+				for(Spielfigur f: spieler[i].alleFiguren()){
+					alleFiguren.add(f.getMeinFeld().getGuiID()+"-"+f.getName());
+				}
+					
+			}
+		}	
+		
+		if (alleFiguren.size()==0)throw new RuntimeException("wtf");
+		return alleFiguren;
+	}
+
+	@Override
+	public Boolean[] updateGUIInfo() {
+		Boolean infos[] = new Boolean[2];
+		infos[0] = this.getZugMoeglich();
+		if (this.istAmZug.getBedienung()==null)
+			infos[1] = false;
+		else
+			infos[1] = true;
+		
+		return infos;
+	}
 	public Boolean getBeendet() {
 		return this.istBeendet;
 	}

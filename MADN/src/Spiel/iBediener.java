@@ -29,6 +29,8 @@ public interface iBediener {
 	public boolean ausgabeSpielerAmZug();
 	public String[] zugDurchfuehrenKI();
 	public boolean getStatus();
+	public ArrayList<String> updateGUIFigures();
+	public Boolean[] updateGUIInfo();
 	public Boolean getBeendet();
 	
 
