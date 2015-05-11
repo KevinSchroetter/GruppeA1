@@ -22,6 +22,7 @@ public class GUI {
 	
 	private HashMap<String, JButton> naviMap = new HashMap<String, JButton>();
 	private HashMap<String, ImageIcon> imagesMap = new HashMap<String, ImageIcon>();
+	private HashMap<String, ImageIcon> gifMap = new HashMap<String, ImageIcon>();
 	private HashMap<String, JLabel> labelMap = new HashMap<String, JLabel>();
 	private HashMap<String, JButton> startMap = new HashMap<String, JButton>();
 	private HashMap<String, JButton> endMap = new HashMap<String,JButton>();
@@ -50,6 +51,7 @@ public class GUI {
 		frame.setLayout(bl);
 		initLabelMap();
 		initImagesMap();
+		initGifMap();
 		initNaviButtonsByLanguage(index);
 		initAllFieldButtons();
 		
@@ -136,7 +138,7 @@ public class GUI {
 	}
 
 	private void setEventhandler() {
-		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap,sMap,startMap,endMap,dateiGrabber,mitte,this);	
+		this.myHandler = new Eventhandler(naviMap,labelMap,imagesMap, gifMap,sMap,startMap,endMap,dateiGrabber,mitte,this);	
 		myHandler.addGUI(frame);
 		/*for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();
@@ -172,6 +174,11 @@ public class GUI {
 		icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_SMOOTH));
 		imagesMap.put(imageName, icon);
 	}
+	private void addIconToGifMap(String imageName, String path, int width, int length){
+		ImageIcon icon = new ImageIcon(path);
+			icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_FAST));
+			gifMap.put(imageName, icon);
+	}
 	private void initLabelMap(){
 		JLabel header = new JLabel("MADN - Gore Edition");
 		labelMap.put("header",header);
@@ -206,6 +213,25 @@ public class GUI {
 		addIconToImagesMap("figYellow2","images/figYellow2.png",90,121);
 		addIconToImagesMap("figYellow3","images/figYellow3.png",90,121);
 		addIconToImagesMap("figYellow4","images/figYellow4.png",90,121);
+	}
+	
+	private void initGifMap(){
+		addIconToGifMap("figRed1", "images/figRed1.gif", 90, 121);
+		addIconToGifMap("figRed2", "images/figRed2.gif", 90, 121);
+		addIconToGifMap("figRed3", "images/figRed3.gif", 90, 121);
+		addIconToGifMap("figRed4", "images/figRed4.gif", 90, 121);
+		addIconToGifMap("figBlue1", "images/figBlue1.gif", 90, 121);
+		addIconToGifMap("figBlue2", "images/figBlue2.gif", 90, 121);
+		addIconToGifMap("figBlue3", "images/figBlue3.gif", 90, 121);
+		addIconToGifMap("figBlue4", "images/figBlue4.gif", 90, 121);
+		addIconToGifMap("figGreen1", "images/figGreen1.gif", 90, 121);
+		addIconToGifMap("figGreen2", "images/figGreen2.gif", 90, 121);
+		addIconToGifMap("figGreen3", "images/figGreen3.gif", 90, 121);
+		addIconToGifMap("figGreen4", "images/figGreen4.gif", 90, 121);
+		addIconToGifMap("figYellow1", "images/figYellow1.gif", 90, 121);
+		addIconToGifMap("figYellow1", "images/figYellow2.gif", 90, 121);
+		addIconToGifMap("figYellow1", "images/figYellow3.gif", 90, 121);
+		addIconToGifMap("figYellow1", "images/figYellow4.gif", 90, 121);
 	}
 	private void setFieldBackgroundImage(String image){ 
 		if(labelMap.isEmpty()) throw new RuntimeException("labelMap leer");

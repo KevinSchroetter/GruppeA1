@@ -50,6 +50,7 @@ public class Eventhandler implements ActionListener {
 	private HashMap<String, JButton> endFieldsMap = null;
 	private HashMap<String, JLabel> labelMap = null;
 	private HashMap<String, ImageIcon> imagesMap = null;
+	private HashMap<String, ImageIcon> gifMap = null;
 	private HashMap<String, JButton> actionMap = new HashMap<String, JButton>();
 	private AnzahlSpielerFenster tempASF = null;
 	private SpielerHinzufuegenFenster tempSHF = null;
@@ -70,6 +71,7 @@ public class Eventhandler implements ActionListener {
 	public Eventhandler(HashMap<String, JButton> naviMap,
 			HashMap<String, JLabel> labelMap,
 			HashMap<String, ImageIcon> imagesMap,
+			HashMap<String, ImageIcon> gifMap,
 			HashMap<String, JButton> stdFieldsMap,
 			HashMap<String, JButton> startFieldsMap,
 			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber,
@@ -82,6 +84,7 @@ public class Eventhandler implements ActionListener {
 		this.fileGrabber = fileGrabber;
 		this.labelMap = labelMap;
 		this.imagesMap = imagesMap;
+		this.gifMap = gifMap;
 		this.stdFieldsMap = stdFieldsMap;
 		this.startFieldsMap = startFieldsMap;
 		this.endFieldsMap = endFieldsMap;
@@ -323,7 +326,7 @@ public class Eventhandler implements ActionListener {
 								buf = startFieldsMap.get(button);
 								buf.setEnabled(true);
 								buf.addActionListener(this);
-								buf.setVisible(true);
+								buf.setVisible(true);								
 								button = button.substring(0, 2);
 								actionMap.put(button, buf);
 							} else if (button.matches("E.*") == true) {
