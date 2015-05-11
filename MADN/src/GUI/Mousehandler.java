@@ -28,53 +28,111 @@ public class Mousehandler implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == naviMap.get("diceGame")) {
+		ImageIcon ii= new ImageIcon("images/rollDicehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("diceGame").setIcon(ii);
+		
+	}
 
-//			naviMap.get("diceGame").setIcon(arg0);
-		}
+	if (e.getSource() == naviMap.get("startGame")) {
+		ImageIcon ii= new ImageIcon("images/StartGamehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("startGame").setIcon(ii);
+		
+	}
+	if(e.getSource()==naviMap.get("endGame")){
+		ImageIcon ii= new ImageIcon("images/EndGamehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("endGame").setIcon(ii);
+	}
+	if (e.getSource() == naviMap.get("newGame")) {
+		ImageIcon ii= new ImageIcon("images/NewGamehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("newGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("startGame")) {
-		}
-		if (e.getSource() == naviMap.get("newGame")) {
+	}
 
-		}
+	if (e.getSource() == naviMap.get("saveGame")) {
+		ImageIcon ii= new ImageIcon("images/SaveGamehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("saveGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("saveGame")) {
+	}
 
-		}
+	if (e.getSource() == naviMap.get("loadGame")) {
+		ImageIcon ii= new ImageIcon("images/LoadGamehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("loadGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("loadGame")) {
+	}
 
-		}
+	if (e.getSource() == naviMap.get("sendGame")) {
+		ImageIcon ii= new ImageIcon("images/SendGamehoovered.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("sendGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("sendGame")) {
+	}
 
-		}
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() == naviMap.get("diceGame")) {
+		ImageIcon ii= new ImageIcon("images/rollDiceNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("diceGame").setIcon(ii);
+		
+	}
 
-		}
+	if (e.getSource() == naviMap.get("startGame")) {
+		ImageIcon ii= new ImageIcon("images/StartGameNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("startGame").setIcon(ii);
+		
+	}
+	if(e.getSource()==naviMap.get("endGame")){
+		ImageIcon ii= new ImageIcon("images/EndGameNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("endGame").setIcon(ii);
+	}
+	if (e.getSource() == naviMap.get("newGame")) {
+		ImageIcon ii= new ImageIcon("images/NewGameNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("newGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("startGame")) {
-		}
-		if (e.getSource() == naviMap.get("newGame")) {
+	}
 
-		}
+	if (e.getSource() == naviMap.get("saveGame")) {
+		ImageIcon ii= new ImageIcon("images/SaveGameNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("saveGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("saveGame")) {
+	}
 
-		}
+	if (e.getSource() == naviMap.get("loadGame")) {
+		ImageIcon ii= new ImageIcon("images/LoadGameNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("loadGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("loadGame")) {
+	}
 
-		}
+	if (e.getSource() == naviMap.get("sendGame")) {
+		ImageIcon ii= new ImageIcon("images/SendGameNormal.png");
+		ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+		naviMap.get("sendGame").setIcon(ii);
+		
 
-		if (e.getSource() == naviMap.get("sendGame")) {
+	}
 
-		}
 
 	}
 
@@ -135,25 +193,25 @@ public class Mousehandler implements MouseListener{
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if (e.getSource() == naviMap.get("diceGame")) {
-			ImageIcon ii= new ImageIcon("images/rollDiceNormal.png");
+			ImageIcon ii= new ImageIcon("images/rollDicehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("diceGame").setIcon(ii);
 			
 		}
 
 		if (e.getSource() == naviMap.get("startGame")) {
-			ImageIcon ii= new ImageIcon("images/StartGameNormal.png");
+			ImageIcon ii= new ImageIcon("images/StartGamehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("startGame").setIcon(ii);
 			
 		}
 		if(e.getSource()==naviMap.get("endGame")){
-			ImageIcon ii= new ImageIcon("images/EndGameNormal.png");
+			ImageIcon ii= new ImageIcon("images/EndGamehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("endGame").setIcon(ii);
 		}
 		if (e.getSource() == naviMap.get("newGame")) {
-			ImageIcon ii= new ImageIcon("images/NewGameNormal.png");
+			ImageIcon ii= new ImageIcon("images/NewGamehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("newGame").setIcon(ii);
 			
@@ -161,7 +219,7 @@ public class Mousehandler implements MouseListener{
 		}
 
 		if (e.getSource() == naviMap.get("saveGame")) {
-			ImageIcon ii= new ImageIcon("images/SaveGameNormal.png");
+			ImageIcon ii= new ImageIcon("images/SaveGamehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("saveGame").setIcon(ii);
 			
@@ -169,7 +227,7 @@ public class Mousehandler implements MouseListener{
 		}
 
 		if (e.getSource() == naviMap.get("loadGame")) {
-			ImageIcon ii= new ImageIcon("images/LoadGameNormal.png");
+			ImageIcon ii= new ImageIcon("images/LoadGamehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("loadGame").setIcon(ii);
 			
@@ -177,9 +235,10 @@ public class Mousehandler implements MouseListener{
 		}
 
 		if (e.getSource() == naviMap.get("sendGame")) {
-			ImageIcon ii= new ImageIcon("images/SendGameNormal.png");
+			ImageIcon ii= new ImageIcon("images/SendGamehoovered.png");
 			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
 			naviMap.get("sendGame").setIcon(ii);
+			
 			
 
 		}
