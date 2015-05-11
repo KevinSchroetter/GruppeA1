@@ -28,6 +28,7 @@ public class GUI {
 	private JFrame frame = null;
 	private ArrayList<ArrayList<ImageIcon>> language = new ArrayList<ArrayList<ImageIcon>>();
 	private Eventhandler myHandler = null;
+	private Mousehandler moha= null;
 	private int zeilen = 0;
 	private int spalten = 0;
 	private JPanel norden = new JPanel();
@@ -50,6 +51,7 @@ public class GUI {
 		initAllFieldButtons();
 		
 		setEventhandler();
+		setMousehandler();
 		
 		createPanelNORTH();
 		createPanelEAST();
@@ -154,7 +156,14 @@ public class GUI {
 		    value.addActionListener(myHandler);
 		}
 	}
-
+	private void setMousehandler() {
+		this.moha = new Mousehandler(naviMap);
+		
+		for(java.util.Map.Entry<String, JButton> entry : naviMap.entrySet()) {
+		    JButton value = entry.getValue();
+		    value.addMouseListener(moha);
+		}
+	}
 	private void addIconToImagesMap(String imageName, String path, int width, int length){
 		ImageIcon icon = new ImageIcon(path);
 		icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_SMOOTH));
@@ -208,13 +217,13 @@ public class GUI {
 	}
 	private void initNaviButtonsByLanguage(int index){
 		ArrayList<ImageIcon> DE= new ArrayList<ImageIcon>();
-		DE.add(new ImageIcon("images/werfen.png"));
-		DE.add(new ImageIcon("images/spielstarten.png"));
-		DE.add(new ImageIcon("images/spielbeenden.png"));
-		DE.add(new ImageIcon("images/neuesspiel.png"));
-		DE.add(new ImageIcon("images/spielspeichern.png"));
-		DE.add(new ImageIcon("images/spielladen.png"));
-		DE.add(new ImageIcon("images/standversenden.png"));
+		DE.add(new ImageIcon("images/rollDiceNormalS.png"));
+		DE.add(new ImageIcon("images/StartGameNormalS.png"));
+		DE.add(new ImageIcon("images/EndGameNormalS.png"));
+		DE.add(new ImageIcon("images/NewGameNormalS.png"));
+		DE.add(new ImageIcon("images/SaveGameNormalS.png"));
+		DE.add(new ImageIcon("images/LoadGameNormalS.png"));
+		DE.add(new ImageIcon("images/SendGameNormalS.png"));
 		for( ImageIcon x:DE){
 			x.setImage(x.getImage().getScaledInstance(170,70,  1));
 		}

@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +36,7 @@ import Spiel.Spiel;
 import Spiel.iBediener;
 import Spiel.iDatenzugriff;
 
-public class Eventhandler implements ActionListener {
+public class Eventhandler implements ActionListener, MouseListener {
 	private JLayeredPane spielbrettGUI = null;
 	private iBediener myGame = new Spiel();
 	private GUI myGUI = null;
@@ -69,7 +71,8 @@ public class Eventhandler implements ActionListener {
 			HashMap<String, ImageIcon> imagesMap,
 			HashMap<String, JButton> stdFieldsMap,
 			HashMap<String, JButton> startFieldsMap,
-			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber, JLayeredPane spielbrettGUI, GUI myGui) {
+			HashMap<String, JButton> endFieldsMap, JFileChooser fileGrabber,
+			JLayeredPane spielbrettGUI, GUI myGui) {
 		if (naviMap == null || fileGrabber == null || labelMap == null
 				|| imagesMap == null || stdFieldsMap == null
 				|| startFieldsMap == null || endFieldsMap == null)
@@ -87,8 +90,8 @@ public class Eventhandler implements ActionListener {
 		vorhandeneFarben.add(FarbEnum.GRUEN);
 		vorhandeneFarben.add(FarbEnum.GELB);
 		this.spielbrettGUI = spielbrettGUI;
-		this.myGUI=myGui;
-				
+		this.myGUI = myGui;
+
 	}
 
 	public void addStuff(HashMap<String, JButton> eventMap, JFrame frame,
@@ -120,10 +123,10 @@ public class Eventhandler implements ActionListener {
 		JButton buf;
 		if (e.getSource() == naviMap.get("endGame")) {
 			guiFrame.dispose();
-			if(tempASF != null)
+			if (tempASF != null)
 				tempASF.dispose();
 			tempASF = null;
-			if(tempSHF != null)
+			if (tempSHF != null)
 				tempSHF.dispose();
 			tempSHF = null;
 		}
@@ -201,49 +204,47 @@ public class Eventhandler implements ActionListener {
 			int number = myGame.rollTheDice();
 			labelMap.get("dice").setIcon(imagesMap.get("Dice" + number));
 			if (myGame.getZugInfo() != null) {
-				
+
 				if (myGame.ausgabeSpielerAmZug() == true) {
-					String[] zugFelder=null;
-					zugFelder= myGame.zugDurchfuehrenKI();
-					// Hier folgt Umgang mit zugFeldern -> setzen der Figuren-> Have fun, Kevster ;) 
-					for(String a:zugFelder){
-						System.out.println("REINGEKOMMENE FELDNAMEN: "+a);
+					String[] zugFelder = null;
+					zugFelder = myGame.zugDurchfuehrenKI();
+					// Hier folgt Umgang mit zugFeldern -> setzen der Figuren->
+					// Have fun, Kevster ;)
+					for (String a : zugFelder) {
+						System.out.println("REINGEKOMMENE FELDNAMEN: " + a);
 					}
 					JButton home = null;
 					JButton target = null;
 					JButton targetKilled = null;
-					if(zugFelder[0].matches("S.*")==true)
+					if (zugFelder[0].matches("S.*") == true)
 						home = startFieldsMap.get(zugFelder[0]);
-					else if(zugFelder[0].matches("E.*")==true)
+					else if (zugFelder[0].matches("E.*") == true)
 						home = endFieldsMap.get(zugFelder[0]);
 					else
 						home = stdFieldsMap.get(zugFelder[0]);
-					if(zugFelder[1].matches("S.*")==true)
+					if (zugFelder[1].matches("S.*") == true)
 						target = startFieldsMap.get(zugFelder[1]);
-					else if(zugFelder[1].matches("E.*")==true)
+					else if (zugFelder[1].matches("E.*") == true)
 						target = endFieldsMap.get(zugFelder[1]);
 					else
 						target = stdFieldsMap.get(zugFelder[1]);
-					if(zugFelder[2]!=null){
-						targetKilled=startFieldsMap.get(zugFelder[2]);
+					if (zugFelder[2] != null) {
+						targetKilled = startFieldsMap.get(zugFelder[2]);
 						Icon killed = target.getIcon();
 						targetKilled.setIcon(killed);
 						targetKilled.setVisible(true);
 					}
-					
+
 					Icon icon = home.getIcon();
 					target.setIcon(icon);
 					home.setIcon(null);
 					home.setVisible(false);
 					target.setVisible(true);
-					
-					
-				}
-				else{
-				
-				
-				for (String button : myGame.getZugInfo()) {
-					
+
+				} else {
+
+					for (String button : myGame.getZugInfo()) {
+
 						if (button.matches("S.*") == true) {
 							buf = startFieldsMap.get(button);
 							buf.setEnabled(true);
@@ -278,22 +279,22 @@ public class Eventhandler implements ActionListener {
 				button = button.substring(0, 2);
 			} else if (button.matches("E.*") == true) {
 				button = button.substring(0, 2);
-			}			
-			
+			}
+
 			String[] zugFelder = myGame.zugDurchfuehren(button);
 			String zID = zugFelder[1];
 			JButton target = null;
 			JButton targetKilled = null;
 			if (zID.matches("S.*") == true) {
 				target = startFieldsMap.get(zID);
-				
+
 			} else if (zID.matches("E.*") == true) {
 				target = endFieldsMap.get(zID);
 			} else {
 				target = stdFieldsMap.get(zID);
 			}
-			if(zugFelder[2]!=null){
-				targetKilled=startFieldsMap.get(zugFelder[2]);
+			if (zugFelder[2] != null) {
+				targetKilled = startFieldsMap.get(zugFelder[2]);
 				Icon killed = target.getIcon();
 				targetKilled.setIcon(killed);
 				targetKilled.setVisible(true);
@@ -333,7 +334,6 @@ public class Eventhandler implements ActionListener {
 			vorhandeneFarben.add(FarbEnum.GELB);
 			myGUI.restartGame();
 		}
-
 
 		if (e.getSource() == naviMap.get("saveGame")) {
 
@@ -406,7 +406,7 @@ public class Eventhandler implements ActionListener {
 					String lol = datei.getPath();
 					myGame = (iBediener) saveCsv.spielLaden(saveCsv.openFile(
 							lol, 1));
-					this.geladenAngefangen=myGame.getStatus();
+					this.geladenAngefangen = myGame.getStatus();
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
@@ -425,21 +425,21 @@ public class Eventhandler implements ActionListener {
 					String lol = datei.getPath();
 					myGame = (iBediener) saveSer.spielLaden(saveSer.openFile(
 							lol, 1));
-					this.geladenAngefangen=myGame.getStatus();
+					this.geladenAngefangen = myGame.getStatus();
 
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
 
 			}
-			if(myGame.getStatus()==true)
+			if (myGame.getStatus() == true)
 				naviMap.get("startGame").setEnabled(false);
 
 		}
-		
-		if(e.getSource()==naviMap.get("sendGame")){
+
+		if (e.getSource() == naviMap.get("sendGame")) {
 			Mailversand mv = null;
-			String lol="";
+			String lol = "";
 			File datei = null;
 			Object[] optionen = { "PDF", "Serialisiert" };
 			Object typ = JOptionPane.showOptionDialog(frame,
@@ -457,16 +457,16 @@ public class Eventhandler implements ActionListener {
 				int returnVal = fileGrabber.showOpenDialog(this.frame);
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					datei = fileGrabber.getSelectedFile();
-					
+
 					lol = datei.getAbsolutePath();
-					savePDF.spielSpeichern(spielbrettGUI, savePDF.openFile(lol,1337));
-					
+					savePDF.spielSpeichern(spielbrettGUI,
+							savePDF.openFile(lol, 1337));
+
 				} else {
 					System.out.println("Speichern abgebrochen");
 				}
 
 			} else if (typ.equals(1)) {
-
 
 				FileNameExtensionFilter filter = new FileNameExtensionFilter(
 						"Serialisierte Objektdateien", "ser");
@@ -483,9 +483,177 @@ public class Eventhandler implements ActionListener {
 				}
 
 			}
-			
+
 			mv = new Mailversand(lol);
+
+		}
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == naviMap.get("diceGame")) {
+
+//			naviMap.get("diceGame").setIcon(arg0);
+		}
+
+		if (e.getSource() == naviMap.get("startGame")) {
+		}
+		if (e.getSource() == naviMap.get("newGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("saveGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("loadGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("sendGame")) {
+
+		}
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == naviMap.get("diceGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("startGame")) {
+		}
+		if (e.getSource() == naviMap.get("newGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("saveGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("loadGame")) {
+
+		}
+
+		if (e.getSource() == naviMap.get("sendGame")) {
+
+		}
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource() == naviMap.get("diceGame")) {
+			ImageIcon ii= new ImageIcon("images/rollDicePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("diceGame").setIcon(ii);
 			
+		}
+
+		if (e.getSource() == naviMap.get("startGame")) {
+			ImageIcon ii= new ImageIcon("images/StartGamePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("startGame").setIcon(ii);
+			
+		}
+		if(e.getSource()==naviMap.get("endGame")){
+			ImageIcon ii= new ImageIcon("images/EndGamePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("endGame").setIcon(ii);
+		}
+		if (e.getSource() == naviMap.get("newGame")) {
+			ImageIcon ii= new ImageIcon("images/NewGamePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("newGame").setIcon(ii);
+			
+
+		}
+
+		if (e.getSource() == naviMap.get("saveGame")) {
+			ImageIcon ii= new ImageIcon("images/SaveGamePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("saveGame").setIcon(ii);
+			
+
+		}
+
+		if (e.getSource() == naviMap.get("loadGame")) {
+			ImageIcon ii= new ImageIcon("images/LoadGamePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("loadGame").setIcon(ii);
+			
+
+		}
+
+		if (e.getSource() == naviMap.get("sendGame")) {
+			ImageIcon ii= new ImageIcon("images/SendGamePressedS");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("sendGame").setIcon(ii);
+			
+
+		}
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if (e.getSource() == naviMap.get("diceGame")) {
+			ImageIcon ii= new ImageIcon("images/rollDiceNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("diceGame").setIcon(ii);
+			
+		}
+
+		if (e.getSource() == naviMap.get("startGame")) {
+			ImageIcon ii= new ImageIcon("images/StartGameNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("startGame").setIcon(ii);
+			
+		}
+		if(e.getSource()==naviMap.get("endGame")){
+			ImageIcon ii= new ImageIcon("images/EndGameNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("endGame").setIcon(ii);
+		}
+		if (e.getSource() == naviMap.get("newGame")) {
+			ImageIcon ii= new ImageIcon("images/NewGameNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("newGame").setIcon(ii);
+			
+
+		}
+
+		if (e.getSource() == naviMap.get("saveGame")) {
+			ImageIcon ii= new ImageIcon("images/SaveGameNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("saveGame").setIcon(ii);
+			
+
+		}
+
+		if (e.getSource() == naviMap.get("loadGame")) {
+			ImageIcon ii= new ImageIcon("images/LoadGameNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("loadGame").setIcon(ii);
+			
+
+		}
+
+		if (e.getSource() == naviMap.get("sendGame")) {
+			ImageIcon ii= new ImageIcon("images/SendGameNormalS.png");
+			ii.setImage(ii.getImage().getScaledInstance(170,70,  1));
+			naviMap.get("sendGame").setIcon(ii);
+			
+
 		}
 
 	}
