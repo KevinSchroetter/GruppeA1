@@ -10,7 +10,7 @@ import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class PlaySounds {
+public class PlaySounds{
 	
 	private static Object lock = new Object();
 	

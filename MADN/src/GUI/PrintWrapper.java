@@ -2,7 +2,7 @@ package GUI;
 
 import java.io.OutputStream;
 import java.io.PrintStream;
-
+import Einstellungen.SoundEnum;
 import javax.swing.JOptionPane;
 
 public class PrintWrapper extends PrintStream {
@@ -21,11 +21,18 @@ public class PrintWrapper extends PrintStream {
 	public void println(Object o){
 		if(o instanceof Exception){
 			Exception e = (Exception) o;
+			if(!(e.getMessage().equals(""))){
+				
+			}
+		SoundEnum.ERROR.play();
 			JOptionPane.showMessageDialog(null,
-				    e.getMessage(),
+				    e,
 				    "Fehler",
 				    JOptionPane.ERROR_MESSAGE);
+			
 		}
+		
+		print(o+"\n");
 	}
 
 }

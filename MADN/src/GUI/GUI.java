@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
-
+import Einstellungen.SoundEnum;
 import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
 
@@ -18,6 +18,7 @@ import Spiel.ButtonsNavi;
 
 
 public class GUI {
+
 	
 	private HashMap<String, JButton> naviMap = new HashMap<String, JButton>();
 	private HashMap<String, ImageIcon> imagesMap = new HashMap<String, ImageIcon>();
@@ -42,6 +43,8 @@ public class GUI {
 	
 
 	public GUI(String titel, int spalten, int zeilen, int index){
+		SoundEnum.init();
+		SoundEnum.volume = SoundEnum.Volume.MEDIUM;
 		frame = new JFrame(titel);
 		BorderLayout bl = new BorderLayout();
 		frame.setLayout(bl);

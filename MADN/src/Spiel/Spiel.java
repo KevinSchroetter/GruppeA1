@@ -13,6 +13,7 @@ import Basisklassen.*;
 import Einstellungen.FarbEnum;
 import Einstellungen.PlaySounds;
 import Einstellungen.Settings;
+import Einstellungen.SoundEnum;
 import Hilfsklassen.*;
 
 /**
@@ -408,7 +409,7 @@ public class Spiel implements iBediener, Serializable {
 			throw new RuntimeException(
 					"Ein Spiel braucht mindestens einen Spieler!");
 		setHatBegonnen(true);
-		// PlaySounds.playStart();
+		SoundEnum.START.play();
 		if (spieler[0] != null) {
 			spieler[0].setAmZug(true);
 			setIstAmZug(spieler[0]);
@@ -876,12 +877,11 @@ public class Spiel implements iBediener, Serializable {
 				}
 			}
 		}
-		// if (firstBlood == false) {
-		// PlaySounds.kill();
-		// PlaySounds.firstblood();
-		// firstBlood = true;
-		// } else
-		// PlaySounds.kill();
+		 if (firstBlood == false) {
+		 SoundEnum.KILL.play();
+		 SoundEnum.FIRSTBLOOD.play();
+		 firstBlood = true;
+		 } else	SoundEnum.KILL.play();
 
 		return targetArea;
 	}
@@ -942,12 +942,12 @@ public class Spiel implements iBediener, Serializable {
 					break;
 				}
 			}
-		// if (firstBlood == false) {
-		// PlaySounds.kill();
-		// PlaySounds.firstblood();
-		// firstBlood = true;
-		// } else
-		// PlaySounds.kill();
+		 if (firstBlood == false) {
+		 SoundEnum.KILL.play();
+		 SoundEnum.FIRSTBLOOD.play();
+		 firstBlood = true;
+		 } else
+		SoundEnum.KILL.play();
 		return targetArea;
 	}
 
