@@ -270,6 +270,11 @@ public class Eventhandler implements ActionListener {
 					}
 				}
 			}
+			if(myGame.getBeendet()==true){
+				System.out.println("Spiel ist beendet!");
+				naviMap.get("diceGame").setEnabled(false);
+				return;
+			}
 		}
 		if (actionMap != null && actionMap.size() != 0
 				&& actionMap.containsValue(e.getSource())) {
@@ -309,6 +314,11 @@ public class Eventhandler implements ActionListener {
 			target = null;
 			buf = null;
 			zID = null;
+			if(myGame.getBeendet()==true){
+				System.out.println("Spiel ist beendet!");
+				naviMap.get("diceGame").setEnabled(false);
+				return;
+			}
 		}
 
 		if (e.getSource() == naviMap.get("startGame")) {
