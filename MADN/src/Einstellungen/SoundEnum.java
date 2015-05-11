@@ -16,6 +16,7 @@ public enum SoundEnum{
 	   START("sounds/connected.wav"),  
 	   ERROR("sounds/error.wav"),
 	   BATT("sounds/batt.wav"),
+	   ALFRED("sounds/alfred.wav"),
 	   GAMEOVER("sounds/gameover.wav");
 	   
 	   // Innere Klasse für Lautstärke
@@ -32,6 +33,7 @@ public enum SoundEnum{
 	   SoundEnum(String soundFileName) {
 	      try {
 	    	  File f = new File(soundFileName);
+
 	         // Set up an audio input stream piped from the sound file.
 	         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(f);
 	         // Get a clip resource.
