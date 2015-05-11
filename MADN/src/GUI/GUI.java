@@ -217,13 +217,13 @@ public class GUI {
 	}
 	private void initNaviButtonsByLanguage(int index){
 		ArrayList<ImageIcon> DE= new ArrayList<ImageIcon>();
-		DE.add(new ImageIcon("images/rollDiceNormalS.png"));
-		DE.add(new ImageIcon("images/StartGameNormalS.png"));
-		DE.add(new ImageIcon("images/EndGameNormalS.png"));
-		DE.add(new ImageIcon("images/NewGameNormalS.png"));
-		DE.add(new ImageIcon("images/SaveGameNormalS.png"));
-		DE.add(new ImageIcon("images/LoadGameNormalS.png"));
-		DE.add(new ImageIcon("images/SendGameNormalS.png"));
+		DE.add(new ImageIcon("images/rollDiceNormal.png"));
+		DE.add(new ImageIcon("images/StartGameNormal.png"));
+		DE.add(new ImageIcon("images/EndGameNormal.png"));
+		DE.add(new ImageIcon("images/NewGameNormal.png"));
+		DE.add(new ImageIcon("images/SaveGameNormal.png"));
+		DE.add(new ImageIcon("images/LoadGameNormal.png"));
+		DE.add(new ImageIcon("images/SendGameNormal.png"));
 		for( ImageIcon x:DE){
 			x.setImage(x.getImage().getScaledInstance(170,70,  1));
 		}
