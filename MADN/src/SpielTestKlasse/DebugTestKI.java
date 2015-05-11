@@ -26,17 +26,6 @@ public class DebugTestKI extends Thread {
 		FileOutputStream fileOut = null;
 		Date time;
 
-		time = new Date();
-		datei = new File(String.format("ErrorLog-%d%d%d.log", time.getHours(),
-				time.getMinutes(), time.getSeconds()));
-		try {
-			fileOut = new FileOutputStream(datei, false);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		logOutput = new PrintStream(fileOut);
-
 		DebugTestKI dTKI = new DebugTestKI();
 		try {
 			dTKI.start();

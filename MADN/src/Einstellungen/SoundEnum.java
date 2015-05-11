@@ -10,11 +10,13 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public enum SoundEnum {
+public enum SoundEnum{
 	   FIRSTBLOOD("sounds/firstblood.wav"),   
 	   KILL("sounds/girldie.wav"),         
 	   START("sounds/connected.wav"),  
-	   ERROR("sounds/error.wav");
+	   ERROR("sounds/error.wav"),
+	   BATT("sounds/batt.wav"),
+	   GAMEOVER("sounds/gameover.wav");
 	   
 	   // Innere Klasse für Lautstärke
 	   public static enum Volume {
@@ -59,4 +61,5 @@ public enum SoundEnum {
 	   public static void init() {
 	      values(); // calls the constructor for all the elements
 	   }
+
 	}

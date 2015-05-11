@@ -30,6 +30,7 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import Einstellungen.FarbEnum;
+import Einstellungen.SoundEnum;
 import Spiel.DatenzugriffCSV;
 import Spiel.DatenzugriffSerialisiert;
 import Spiel.Spiel;
@@ -403,6 +404,7 @@ public class Eventhandler implements ActionListener {
 			}
 
 			String tempName = name.getText();
+			if(tempName.equals("Batt")) SoundEnum.BATT.play();
 			boolean erfolgreich = myGame.neuerSpieler(tempName, farbId,
 					kIAuswahl);
 			if (erfolgreich == true) {

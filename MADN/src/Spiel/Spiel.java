@@ -856,7 +856,7 @@ public class Spiel implements iBediener, Serializable {
 		if (!targetColor.equals(myColor)) {
 			
 			figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
-			System.err.printf("%s schlägt %s\n", figur, zuSchlagen);
+			//System.err.printf("%s schlägt %s\n", figur, zuSchlagen);
 			getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 			figur.incSchritteGelaufen(getAugenzahl());
 			
@@ -1469,8 +1469,9 @@ public class Spiel implements iBediener, Serializable {
 								+ " "
 								+ farbeIstAmZug
 								+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
+				
 				setIstBeendet(true);
-				// PlaySounds.gameOver();
+				SoundEnum.GAMEOVER.play();
 			}
 			return zugFelder;
 		}
