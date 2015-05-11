@@ -1245,9 +1245,7 @@ public class Spiel implements iBediener, Serializable {
 		}
 		if ((alleZugFiguren().size() != 0)
 				|| (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
-			throw new RuntimeException(
-					getIstAmZug().getName()
-							+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
+				return;
 		if (getHatBegonnen() == false)
 			throw new RuntimeException("Spiel hat noch nicht begonnen");
 
