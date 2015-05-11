@@ -101,7 +101,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param zugMoeglich
 	 *            - true oder false boolean
 	 */
-	private void setZugMoeglich(boolean zugMoeglich) {
+	void setZugMoeglich(boolean zugMoeglich) {
 		this.zugMoeglich = zugMoeglich;
 	}
 
@@ -1878,8 +1878,6 @@ public class Spiel implements iBediener, Serializable {
 					
 			}
 		}	
-		
-		if (alleFiguren.size()==0)throw new RuntimeException("wtf");
 		return alleFiguren;
 	}
 
@@ -1896,6 +1894,11 @@ public class Spiel implements iBediener, Serializable {
 	}
 	public Boolean getBeendet() {
 		return this.istBeendet;
+	}
+
+	@Override
+	public int augenzahl() {
+		return this.getAugenzahl();
 	}
 
 }

@@ -104,7 +104,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			String[] binIchDran = new String[4];
 			int[][] figurenSchritte = new int[buf.getAnzahlSpieler()][4];
 
-			String[] spielStatus = new String[2];
+			String[] spielStatus = new String[3];
 
 			if (buf.getHatBegonnen()) {
 				spielStatus[0] = "true";
@@ -117,6 +117,12 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			} else if (!buf.getIstBeendet()) {
 				spielStatus[1] = "false";
 			}
+			
+			if (buf.updateGUIInfo()[0])
+				spielStatus[2] = "true";
+			else if(!buf.updateGUIInfo()[0])
+				spielStatus[2] = "false";
+				
 
 			gamer = buf.getSpieler();
 			for (int i = 0; i < gamer.length; i++) {
@@ -158,13 +164,13 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				//Variablen fertig, wrapping in Outputstring via String.format
 
 				speicherMichIchBinFertig[i] = String.format(
-						"%s,%s,%s,%s;%s.%d,%s.%d,%s.%d,%s.%d;%s,%s \n",
+						"%s,%s,%s,%s;%s.%d,%s.%d,%s.%d,%s.%d;%s,%s,%s \n",
 						spielerNamen[i], gamer[i].getFarbe(), verhalten,
 						binIchDran[i], figurFeldIDs[i][0],
 						figurenSchritte[i][0], figurFeldIDs[i][1],
 						figurenSchritte[i][1], figurFeldIDs[i][2],
 						figurenSchritte[i][2], figurFeldIDs[i][3],
-						figurenSchritte[i][3], spielStatus[0], spielStatus[1]);
+						figurenSchritte[i][3], spielStatus[0], spielStatus[1],spielStatus[2]);
 			}
 
 			
@@ -172,7 +178,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			try {
 				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
 				//saver.flush();
-				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet\n");
+				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich\n");
 				saver.flush();
 
 			} catch (IOException e) {
@@ -366,6 +372,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 					figurenDieEndlichFertigSind[i][j] = new Spielfigur(i,
 							((farben[i].name()) + " " + (figCounter++)));
 				}
+				figCounter=1;
 			}
 			Spiel gibMichZurueck = new Spiel();
 			
@@ -387,7 +394,11 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			for(int i = 0; i<4; i++){
 				if(spielerNamen[i]==null || farben[i] == null
 					|| stF[i] == null || eF[i] == null || spielerVerhalten[i] == null) continue;
-				else fastFertig[i] = new Spieler(spielerNamen[i],farben[i],stF[i],eF[i],spielerVerhalten[i],gibMichZurueck);
+				else{
+					if(spielerVerhalten[i].equals("mensch"))fastFertig[i] = new Spieler(spielerNamen[i],farben[i],stF[i],eF[i],gibMichZurueck);
+					else
+					fastFertig[i] = new Spieler(spielerNamen[i],farben[i],stF[i],eF[i],spielerVerhalten[i],gibMichZurueck);
+			}
 			}
 
 			for(int i = 0; i<4; i++){
@@ -421,8 +432,9 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				here = null;
 				}
 			}
+			Boolean zM=false;
 			
-			
+			gibMichZurueck.setZugMoeglich(zM);
 			for(int i = 0; i<4; i++){
 				if(spielerSchnitt[i][3] == null) continue;
 					fastFertig[i].setAmZug(spielerSchnitt[i][3].equals("true"));	

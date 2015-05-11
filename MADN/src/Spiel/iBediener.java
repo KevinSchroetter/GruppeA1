@@ -32,6 +32,7 @@ public interface iBediener {
 	public ArrayList<String> updateGUIFigures();
 	public Boolean[] updateGUIInfo();
 	public Boolean getBeendet();
+	public int augenzahl();
 	
 
 }

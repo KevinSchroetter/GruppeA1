@@ -114,6 +114,234 @@ public class Eventhandler implements ActionListener {
 	public void addGUI(JFrame frame) {
 		this.guiFrame = frame;
 	}
+	
+	public void restartGUI(){
+		for(java.util.Map.Entry<String, JButton> entry : startFieldsMap.entrySet()) {
+			JButton value = entry.getValue();
+			value.setVisible(true);
+			value.setIcon(null);
+		}
+		for(java.util.Map.Entry<String, JButton> entry : stdFieldsMap.entrySet()) {
+			JButton value = entry.getValue();
+			value.setVisible(false);
+			value.setIcon(null);
+		}
+		for(java.util.Map.Entry<String, JButton> entry : endFieldsMap.entrySet()) {
+			JButton value = entry.getValue();
+			value.setVisible(false);
+			value.setIcon(null);
+		}
+			startFieldsMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+			startFieldsMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+			startFieldsMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+			startFieldsMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+
+			startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
+			startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
+			startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
+			startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));			
+
+			startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
+			startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
+			startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
+			startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));	
+
+			startFieldsMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+			startFieldsMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+			startFieldsMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+			startFieldsMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
+		
+	}
+	public void loadGUIStatus(){
+		JButton buf = null;
+		int cRed=0;
+		int cBlue=0;
+		int cGreen=0;
+		int cYellow=0;
+		
+		for(java.util.Map.Entry<String, JButton> entry : startFieldsMap.entrySet()) {
+			JButton value = entry.getValue();
+			value.setVisible(false);
+			value.setIcon(null);
+		}
+		for(java.util.Map.Entry<String, JButton> entry : stdFieldsMap.entrySet()) {
+			JButton value = entry.getValue();
+			value.setVisible(false);
+			value.setIcon(null);
+		}
+		for(java.util.Map.Entry<String, JButton> entry : endFieldsMap.entrySet()) {
+			JButton value = entry.getValue();
+			value.setVisible(false);
+			value.setIcon(null);
+		}
+		
+		if(myGame.getStatus()==true){
+			naviMap.get("startGame").setEnabled(false);
+			naviMap.get("diceGame").setEnabled(true);
+			naviMap.get("newGame").setEnabled(true);
+			naviMap.get("saveGame").setEnabled(true);
+		}
+		String zahl = null;
+		String name = null;
+		String field = null;
+		ArrayList<String>figuren = myGame.updateGUIFigures();
+		for(String fig:figuren){
+			if(fig.contains("ROT")){
+				cRed++;
+			}
+			else if(fig.contains("BLAU")){
+				cBlue++;
+			}
+			else if(fig.contains("GRUEN")){
+				cGreen++;
+			}
+			else if(fig.contains("GELB")){
+				cYellow++;
+			}				
+			JButton target = null;
+			if (fig.matches("Spieler.*"))
+				System.out.println(""+fig);
+			else if (fig.matches("Z.*")) 
+				zahl = fig.substring(1);
+			else if (fig.matches("S.*") == true) {
+				String[] nameSplit = fig.split("-");
+				name = nameSplit[1];
+				field = nameSplit[0];
+				target = startFieldsMap.get(field);
+				
+			} else if (fig.matches("E.*") == true) {
+				String[] nameSplit = fig.split("-");
+				name = nameSplit[1];
+				field = nameSplit[0];
+				target = endFieldsMap.get(field);
+			} else {
+				String[] nameSplit = fig.split("-");
+				name = nameSplit[1];
+				field = nameSplit[0];
+				target = stdFieldsMap.get(field);
+			}
+			if(target!=null){
+				if(name.matches("ROT.*")){
+					name = "figRed"+name.substring(4);
+				}
+				else if(name.matches("BLAU.*")){
+					name = "figBlue"+name.substring(5);
+				}
+				else if(name.matches("GRUEN.*")){
+					name = "figGreen"+name.substring(6);
+				}
+				else if(name.matches("GELB.*")){
+					name = "figYellow"+name.substring(5);
+				}	
+				target.setEnabled(true);
+				target.setIcon(imagesMap.get(name));
+				target.setVisible(true);
+			}			
+		}	
+		if(cRed==0){
+			startFieldsMap.get("S1ROT").setEnabled(true);
+			startFieldsMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+			startFieldsMap.get("S1ROT").setVisible(true);
+			startFieldsMap.get("S2ROT").setEnabled(true);
+			startFieldsMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+			startFieldsMap.get("S2ROT").setVisible(true);
+			startFieldsMap.get("S3ROT").setEnabled(true);
+			startFieldsMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+			startFieldsMap.get("S3ROT").setVisible(true);
+			startFieldsMap.get("S4ROT").setEnabled(true);
+			startFieldsMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+			startFieldsMap.get("S4ROT").setVisible(true);
+		}
+		if(cBlue==0){
+			startFieldsMap.get("S1BLAU").setEnabled(true);
+			startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
+			startFieldsMap.get("S1BLAU").setVisible(true);
+			startFieldsMap.get("S2BLAU").setEnabled(true);
+			startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
+			startFieldsMap.get("S2BLAU").setVisible(true);
+			startFieldsMap.get("S3BLAU").setEnabled(true);
+			startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
+			startFieldsMap.get("S3BLAU").setVisible(true);
+			startFieldsMap.get("S4BLAU").setEnabled(true);
+			startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));	
+			startFieldsMap.get("S4BLAU").setVisible(true);
+		}
+		if(cGreen==0){
+			startFieldsMap.get("S1GRUEN").setEnabled(true);
+			startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
+			startFieldsMap.get("S1GRUEN").setVisible(true);
+			startFieldsMap.get("S2GRUEN").setEnabled(true);
+			startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
+			startFieldsMap.get("S2GRUEN").setVisible(true);
+			startFieldsMap.get("S3GRUEN").setEnabled(true);
+			startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
+			startFieldsMap.get("S3GRUEN").setVisible(true);
+			startFieldsMap.get("S4GRUEN").setEnabled(true);
+			startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));	
+			startFieldsMap.get("S4GRUEN").setVisible(true);
+		}
+		if(cYellow==0){
+			startFieldsMap.get("S1GELB").setEnabled(true);
+			startFieldsMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+			startFieldsMap.get("S1GELB").setVisible(true);
+			startFieldsMap.get("S2GELB").setEnabled(true);
+			startFieldsMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+			startFieldsMap.get("S2GELB").setVisible(true);
+			startFieldsMap.get("S3GELB").setEnabled(true);
+			startFieldsMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+			startFieldsMap.get("S3GELB").setVisible(true);
+			startFieldsMap.get("S4GELB").setEnabled(true);
+			startFieldsMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
+			startFieldsMap.get("S4GELB").setVisible(true);
+		}		
+	/*if(myGame.ausgabeZugFiguren()!=null)System.out.println("Der Spieler Am Zug Exisitiert");
+		else
+			System.out.println("KeineZugFigurenvorhangen");
+		
+		System.out.println(myGame.updateGUIFigures().get(0));
+		System.out.println("ZUGMOEGLICH: "+myGame.updateGUIInfo()[0]);
+		System.out.println("KI?: "+myGame.updateGUIInfo()[1]);
+		
+		System.out.println("");
+		System.out.println("");
+		System.out.println("");*/
+		if (geladenAngefangen==false) labelMap.get("dice").setIcon(imagesMap.get("Dice6"));
+		if (myGame.augenzahl()==0) labelMap.get("dice").setIcon(imagesMap.get("Dice6"));
+		else labelMap.get("dice").setIcon(imagesMap.get("Dice"+zahl));
+		if (myGame.updateGUIInfo()!=null){
+			if (myGame.updateGUIInfo()[1]==false){
+				if(myGame.updateGUIInfo()[0]==true){
+					if (myGame.getZugInfo()!=null){
+						for (String button : myGame.getZugInfo()) {
+							if (button.matches("S.*") == true) {
+								buf = startFieldsMap.get(button);
+								buf.setEnabled(true);
+								buf.addActionListener(this);
+								buf.setVisible(true);
+								button = button.substring(0, 2);
+								actionMap.put(button, buf);
+							} else if (button.matches("E.*") == true) {
+								buf = endFieldsMap.get(button);
+								buf.setEnabled(true);
+								buf.addActionListener(this);
+								buf.setVisible(true);
+								button = button.substring(0, 2);
+								actionMap.put(button, buf);
+							} else {
+								buf = stdFieldsMap.get(button);
+								buf.setEnabled(true);
+								buf.addActionListener(this);
+								buf.setVisible(true);
+								actionMap.put(button, buf);
+							}
+							button = null;
+						}	
+					}
+				}
+			}
+		}
+
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -208,11 +436,7 @@ public class Eventhandler implements ActionListener {
 				if (myGame.ausgabeSpielerAmZug() == true) {
 					String[] zugFelder = null;
 					zugFelder = myGame.zugDurchfuehrenKI();
-					// Hier folgt Umgang mit zugFeldern -> setzen der Figuren->
-					// Have fun, Kevster ;)
-					for (String a : zugFelder) {
-						System.out.println("REINGEKOMMENE FELDNAMEN: " + a);
-					}
+					
 					JButton home = null;
 					JButton target = null;
 					JButton targetKilled = null;
@@ -335,14 +559,14 @@ public class Eventhandler implements ActionListener {
 			naviMap.get("startGame").setEnabled(true);
 			naviMap.get("diceGame").setEnabled(false);
 			naviMap.get("saveGame").setEnabled(false);
-			myGame.neuesSpielErstellen();
+			myGame = new Spiel();
 			System.out.println("Neues Spiel wurde erstellt!");
 			vorhandeneFarben.clear();
 			vorhandeneFarben.add(FarbEnum.ROT);
 			vorhandeneFarben.add(FarbEnum.BLAU);
 			vorhandeneFarben.add(FarbEnum.GRUEN);
 			vorhandeneFarben.add(FarbEnum.GELB);
-			myGUI.restartGame();
+			restartGUI();
 		}
 
 		if (e.getSource() == naviMap.get("saveGame")) {
@@ -416,9 +640,10 @@ public class Eventhandler implements ActionListener {
 					String lol = datei.getPath();
 					myGame = (iBediener) saveCsv.spielLaden(saveCsv.openFile(
 							lol, 1));
-					this.geladenAngefangen = myGame.getStatus();
+					this.geladenAngefangen=myGame.getStatus();
+					loadGUIStatus();
 				} else {
-					System.out.println("Speichern abgebrochen");
+					System.out.println("Laden abgebrochen");
 				}
 
 			} else if (typ.equals(1)) {
@@ -435,16 +660,15 @@ public class Eventhandler implements ActionListener {
 					String lol = datei.getPath();
 					myGame = (iBediener) saveSer.spielLaden(saveSer.openFile(
 							lol, 1));
-					this.geladenAngefangen = myGame.getStatus();
+					this.geladenAngefangen=myGame.getStatus();
+					loadGUIStatus();
 
 				} else {
-					System.out.println("Speichern abgebrochen");
+					System.out.println("Laden abgebrochen");
 				}
 
 			}
-			if (myGame.getStatus() == true)
-				naviMap.get("startGame").setEnabled(false);
-
+			
 		}
 
 		if (e.getSource() == naviMap.get("sendGame")) {
