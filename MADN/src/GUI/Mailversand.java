@@ -71,6 +71,10 @@ public class Mailversand extends Thread{
 		{
 		    this.sendTo = to.getText();
 		}
+		else if (option == 1){
+			System.out.println("Speichern abgebrochen");
+			return;
+		}
 		
 		
 		

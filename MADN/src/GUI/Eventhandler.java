@@ -469,7 +469,10 @@ public class Eventhandler implements ActionListener {
 					datei = fileGrabber.getSelectedFile();
 
 					lol = datei.getAbsolutePath();
-					savePDF.spielSpeichern(spielbrettGUI,
+					if(!(lol.endsWith(".pdf"))){
+						lol +=".pdf";
+					}
+					savePDF.spielSpeichern(this.myGUI,
 							savePDF.openFile(lol, 1337));
 
 				} else {
@@ -487,6 +490,9 @@ public class Eventhandler implements ActionListener {
 				if (returnVal == JFileChooser.APPROVE_OPTION) {
 					datei = fileGrabber.getSelectedFile();
 					lol = datei.getAbsolutePath();
+					if(!(lol.endsWith(".ser"))){
+						lol+=".ser";
+					}
 
 				} else {
 					System.out.println("Speichern abgebrochen");

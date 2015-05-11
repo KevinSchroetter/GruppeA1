@@ -695,5 +695,10 @@ public class GUI {
 		disableEndFields();
 		disableStandardFields();
 	}
+
+	public JFrame getFrame() {
+		// TODO Auto-generated method stub
+		return this.frame;
+	}
 }
 
