@@ -21,8 +21,9 @@ public class PrintWrapper extends PrintStream {
 	public void println(Object o){
 		if(o instanceof Exception){
 			Exception e = (Exception) o;
-			if(!(e.getMessage().equals(""))){
-				
+			if((e.getMessage().contains("muessen erst einen Zug"))){
+				print(e.getMessage()+"\n");
+				return;
 			}
 		SoundEnum.ERROR.play();
 			JOptionPane.showMessageDialog(null,
