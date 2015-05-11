@@ -540,85 +540,120 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
 		Endfeld[] endfelderIstAmZug = getIstAmZug().getEndFelder();
-		if (figur.getMeinFeld() instanceof Standardfeld) {
+		boolean zug = false;
 			if (zuZiehen > Settings.maxFiguren)
 				return false;
-			if (zuZiehen == 1) {
-				if (endfelderIstAmZug[0].getFigur() == null)
-					return true;
-			}
-			if (zuZiehen == 2) {
-				if (endfelderIstAmZug[1].getFigur() == null
-						&& kannZiehenEndfelder(figur, 1) == true)
-					return true;
-			}
-			if (zuZiehen == 3) {
-				if (endfelderIstAmZug[2].getFigur() == null
-						&& kannZiehenEndfelder(figur, 2) == true) {
-					return true;
-				}
-			}
-			if (zuZiehen == 4) {
-				if (endfelderIstAmZug[3].getFigur() == null
-						&& kannZiehenEndfelder(figur, 3) == true) {
-					return true;
-				}
-			}
-
-			else
-				return false;
-		} else if (figur.getMeinFeld() instanceof Endfeld) {
-			if (figur.getMeinFeld().getID()
-					.equals(endfelderIstAmZug[0].getID())) {
-				if (zuZiehen > 3)
-					return false;
+			if(figur.getMeinFeld() instanceof Standardfeld){
 				if (zuZiehen == 1) {
-					if (endfelderIstAmZug[1].getFigur() == null)
+					if (endfelderIstAmZug[0].getFigur() == null){
 						return true;
+					}
 					else
 						return false;
 				}
 				if (zuZiehen == 2) {
-					if (kannZiehenEndfelder(figur, 1) == true
-							&& endfelderIstAmZug[2].getFigur() == null)
+					if (endfelderIstAmZug[1].getFigur() == null && endfelderIstAmZug[0].getFigur()==null){
 						return true;
+					}
 					else
 						return false;
 				}
 				if (zuZiehen == 3) {
-					if (kannZiehenEndfelder(figur, 2) == true
-							&& endfelderIstAmZug[3].getFigur() == null)
+					if (endfelderIstAmZug[2].getFigur() == null && endfelderIstAmZug[1].getFigur()==null && endfelderIstAmZug[0].getFigur()==null) {
 						return true;
+					}
 					else
 						return false;
 				}
+				if (zuZiehen == 4) {
+					if (endfelderIstAmZug[3].getFigur() == null && endfelderIstAmZug[2].getFigur()==null && endfelderIstAmZug[1].getFigur()==null && endfelderIstAmZug[0].getFigur()==null) {
+						return true;
+					}
+					else
+						return false;
+			
+				}
 			}
-			if (figur.getMeinFeld().getID()
-					.equals(endfelderIstAmZug[1].getID())) {
-				if (zuZiehen > 2)
-					return false;
+			else{
+				for (Endfeld e:endfelderIstAmZug){
+					if(e.getFigur()!=null){
+					if(e == figur.getMeinFeld())System.out.println("== TRUE");
+					else
+						System.out.println("== FALSE");
+					if(e.equals(figur.getMeinFeld()))System.out.println("equals TREU");
+					else
+						System.out.println("equals FALSE");
+					System.out.println("FIGURVORHANDEN FELDNAME: "+e+" FIGUR AUF DIESEM FELD: "+e.getFigur().getName()+" MEINE FIGUR: "+figur.getName()+" MEIN FELD: "+figur.getMeinFeld());
+					}
+					else{
+						
+						if(e == figur.getMeinFeld())System.out.println("== TRUE");
+						else
+							System.out.println("== FALSE");	
+						if(e.equals(figur.getMeinFeld()))System.out.println("equals TREU");
+						else
+							System.out.println("equals FALSE");
+						System.out.println("KEINEFIGURVORHANEN! ");
+					}
+				}
+				
+				
 				if (zuZiehen == 1) {
-					if (endfelderIstAmZug[2].getFigur() == null)
-						return true;
-					else
+					if (figur.getMeinFeld()==endfelderIstAmZug[3]){
 						return false;
-				}
-				if (zuZiehen == 2)
-					if (kannZiehenEndfelder(figur, 1) == true// fehler
-							&& endfelderIstAmZug[2].getFigur() == null)
+					}
+					if (figur.getMeinFeld()==endfelderIstAmZug[2]&&endfelderIstAmZug[3].getFigur()==null){
 						return true;
-			}
-			if (figur.getMeinFeld().getID()
-					.equals(endfelderIstAmZug[2].getID())) {
-				if (zuZiehen > 1)
+					}
+					if(figur.getMeinFeld()==endfelderIstAmZug[1] && endfelderIstAmZug[2].getFigur()==null){
+						return true;
+					}
+
+					if (figur.getMeinFeld()==endfelderIstAmZug[0] && endfelderIstAmZug[1].getFigur()==null){
+						return true;
+					}
+
+				}
+			
+				else if (zuZiehen == 2) {
+					if (figur.getMeinFeld()==endfelderIstAmZug[3]){
+						return false;
+					}
+					else if (figur.getMeinFeld()==endfelderIstAmZug[2]){
+						return false;
+					}
+					else if (figur.getMeinFeld()==endfelderIstAmZug[1] && endfelderIstAmZug[2].getFigur()==null && endfelderIstAmZug[3].getFigur()==null){
+						return true;
+					}
+					else if (figur.getMeinFeld()==endfelderIstAmZug[0] && endfelderIstAmZug[1].getFigur()==null && endfelderIstAmZug[2].getFigur()==null){
+						return true;
+					}					
+				}
+				
+				else if (zuZiehen == 3) {
+					if (figur.getMeinFeld()==endfelderIstAmZug[3]){
+						return false;
+					}
+					else if (figur.getMeinFeld()==endfelderIstAmZug[2]){
+						return false;
+					}
+					else if (figur.getMeinFeld()==endfelderIstAmZug[1]){
+						return false;
+					}
+					else if (figur.getMeinFeld()==endfelderIstAmZug[0] && endfelderIstAmZug[1].getFigur()==null & endfelderIstAmZug[2].getFigur()==null && endfelderIstAmZug[3].getFigur()==null){
+						return true;
+					}
+					else{
+						return false;
+					}
+					
+				}
+				else if (zuZiehen == 4) {
 					return false;
-				if (endfelderIstAmZug[3].getFigur() == null)
-					return true;
-				else
-					return false;
+				}
 			}
-		}
-		return false;
+			System.out.println("Daraus folgt ZUG = "+zug);
+		return zug;
 	}
 
 	/**
