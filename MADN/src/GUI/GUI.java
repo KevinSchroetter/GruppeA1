@@ -537,7 +537,8 @@ public class GUI {
 		sueden.add(new JScrollPane(console));
 		System.out.println("Test standard");
 		//Stromumleiten
-		System.setOut(new PrintStream(new Stromwrapper(this.console)));
+		System.setOut(new PrintWrapper(new Stromwrapper(this.console)));
+	
 		this.console.setVisible(true);
 		System.out.println("Test GUI");
 		
