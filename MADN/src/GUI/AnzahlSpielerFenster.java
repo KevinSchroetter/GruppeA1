@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Color;
+import java.awt.Paint;
 import java.awt.GridLayout;
 import java.util.HashMap;
 
@@ -30,14 +32,27 @@ public class AnzahlSpielerFenster extends JFrame{
 		JPanel auswahl= new JPanel();
 		JLabel anzahlSpieler= new JLabel("Wieviele Spieler sollen mitspielen?");
 		frage.add(anzahlSpieler);
+		frage.setBackground(Color.DARK_GRAY);
+		frage.setForeground(Color.GRAY);
+		auswahl.setBackground(Color.DARK_GRAY);
+		auswahl.setForeground(Color.GRAY);
+		anzahlSpieler.setBackground(Color.DARK_GRAY);
+		anzahlSpieler.setForeground(Color.GRAY);
 		this.add(frage);
 		this.add(auswahl);
 		
 		
+		
 		auswahlAnzahl.setEnabled(true);
 		auswahl.add(auswahlAnzahl);
+		auswahlAnzahl.setBackground(Color.DARK_GRAY);
+		auswahlAnzahl.setForeground(Color.GRAY);
 		JPanel okbutton= new JPanel();
 		JButton ok= new JButton("OK");
+		okbutton.setBackground(Color.DARK_GRAY);
+		okbutton.setForeground(Color.GRAY);
+		ok.setBackground(Color.DARK_GRAY);
+		ok.setForeground(Color.GRAY);
 		
 		okbutton.add(ok);
 		this.add(okbutton);
