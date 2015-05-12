@@ -110,22 +110,22 @@ public class GUI {
 		    JButton value = entry.getValue();
 		    value.setIcon(imagesMap.get(imageName));
 		}
-		startMap.get("S1ROT").setIcon(imagesMap.get("images/figRed1.gif"));
-		startMap.get("S2ROT").setIcon(imagesMap.get("images/figRed2.gif"));
-		startMap.get("S3ROT").setIcon(imagesMap.get("images/figRed3.gif"));
-		startMap.get("S4ROT").setIcon(imagesMap.get("images/figRed4.gif"));
-		startMap.get("S1BLAU").setIcon(imagesMap.get("images/figBlue1.gif"));
-		startMap.get("S2BLAU").setIcon(imagesMap.get("images/figBlue2.gif"));
-		startMap.get("S3BLAU").setIcon(imagesMap.get("images/figBlue3.gif"));
-		startMap.get("S4BLAU").setIcon(imagesMap.get("images/figBlue4.gif"));
-		startMap.get("S1GRUEN").setIcon(imagesMap.get("images/figGreen1.gif"));
-		startMap.get("S2GRUEN").setIcon(imagesMap.get("images/figGreen2.gif"));
-		startMap.get("S3GRUEN").setIcon(imagesMap.get("images/figGreen3.gif"));
-		startMap.get("S4GRUEN").setIcon(imagesMap.get("images/figGreen4.gif"));
-		startMap.get("S1GELB").setIcon(imagesMap.get("images/figYellow1.gif"));
-		startMap.get("S2GELB").setIcon(imagesMap.get("images/figYellow2.gif"));
-		startMap.get("S3GELB").setIcon(imagesMap.get("images/figYellow3.gif"));
-		startMap.get("S4GELB").setIcon(imagesMap.get("images/figYellow4.gif"));
+		startMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+		startMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+		startMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+		startMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+		startMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
+		startMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
+		startMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
+		startMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
+		startMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
+		startMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
+		startMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
+		startMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
+		startMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+		startMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+		startMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+		startMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
 		
 	}
 
@@ -197,41 +197,41 @@ public class GUI {
 		addIconToImagesMap("Dice4","images/dice_04.jpg",101,101);
 		addIconToImagesMap("Dice5","images/dice_05.jpg",101,101);
 		addIconToImagesMap("Dice6","images/dice_06.jpg",101,101);
-		addIconToImagesMap("images/figRed1.gif","images/figRed1.png",90,121);
-		addIconToImagesMap("images/figRed2.gif","images/figRed2.png",90,121);
-		addIconToImagesMap("images/figRed3.gif","images/figRed3.png",90,121);
-		addIconToImagesMap("images/figRed4.gif","images/figRed4.png",90,121);
-		addIconToImagesMap("images/figBlue1.gif","images/figBlue1.png",90,121);
-		addIconToImagesMap("images/figBlue2.gif","images/figBlue2.png",90,121);
-		addIconToImagesMap("images/figBlue3.gif","images/figBlue3.png",90,121);
-		addIconToImagesMap("images/figBlue4.gif","images/figBlue4.png",90,121);
-		addIconToImagesMap("images/figGreen1.gif","images/figGreen1.png",90,121);
-		addIconToImagesMap("images/figGreen2.gif","images/figGreen2.png",90,121);
-		addIconToImagesMap("images/figGreen3.gif","images/figGreen3.png",90,121);
-		addIconToImagesMap("images/figGreen4.gif","images/figGreen4.png",90,121);
-		addIconToImagesMap("images/figYellow1.gif","images/figYellow1.png",90,121);
-		addIconToImagesMap("images/figYellow2.gif","images/figYellow2.png",90,121);
-		addIconToImagesMap("images/figYellow3.gif","images/figYellow3.png",90,121);
-		addIconToImagesMap("images/figYellow4.gif","images/figYellow4.png",90,121);
+		addIconToImagesMap("figRed1","images/figRed1.png",90,121);
+		addIconToImagesMap("figRed2","images/figRed2.png",90,121);
+		addIconToImagesMap("figRed3","images/figRed3.png",90,121);
+		addIconToImagesMap("figRed4","images/figRed4.png",90,121);
+		addIconToImagesMap("figBlue1","images/figBlue1.png",90,121);
+		addIconToImagesMap("figBlue2","images/figBlue2.png",90,121);
+		addIconToImagesMap("figBlue3","images/figBlue3.png",90,121);
+		addIconToImagesMap("figBlue4","images/figBlue4.png",90,121);
+		addIconToImagesMap("figGreen1","images/figGreen1.png",90,121);
+		addIconToImagesMap("figGreen2","images/figGreen2.png",90,121);
+		addIconToImagesMap("figGreen3","images/figGreen3.png",90,121);
+		addIconToImagesMap("figGreen4","images/figGreen4.png",90,121);
+		addIconToImagesMap("figYellow1","images/figYellow1.png",90,121);
+		addIconToImagesMap("figYellow2","images/figYellow2.png",90,121);
+		addIconToImagesMap("figYellow3","images/figYellow3.png",90,121);
+		addIconToImagesMap("figYellow4","images/figYellow4.png",90,121);
 	}
 	
 	private void initGifMap(){
-		addIconToGifMap("images/figRed1.png", "images/figRed1.gif", 90, 121);
-		addIconToGifMap("images/figRed2.png", "images/figRed2.gif", 90, 121);
-		addIconToGifMap("images/figRed3.png", "images/figRed3.gif", 90, 121);
-		addIconToGifMap("images/figRed4.png", "images/figRed4.gif", 90, 121);
-		addIconToGifMap("images/figBlue1.png", "images/figBlue1.gif", 90, 121);
-		addIconToGifMap("images/figBlue2.png", "images/figBlue2.gif", 90, 121);
-		addIconToGifMap("images/figBlue3.png", "images/figBlue3.gif", 90, 121);
-		addIconToGifMap("images/figBlue4.png", "images/figBlue4.gif", 90, 121);
-		addIconToGifMap("images/figGreen1.png", "images/figGreen1.gif", 90, 121);
-		addIconToGifMap("images/figGreen2.png", "images/figGreen2.gif", 90, 121);
-		addIconToGifMap("images/figGreen3.png", "images/figGreen3.gif", 90, 121);
-		addIconToGifMap("images/figGreen4.png", "images/figGreen4.gif", 90, 121);
-		addIconToGifMap("images/figYellow1.png", "images/figYellow1.gif", 90, 121);
-		addIconToGifMap("images/figYellow2.png", "images/figYellow2.gif", 90, 121);
-		addIconToGifMap("images/figYellow3.png", "images/figYellow3.gif", 90, 121);
-		addIconToGifMap("images/figYellow4.png", "images/figYellow4.gif", 90, 121);
+		addIconToGifMap("figRed1", "images/figRed1.gif", 90, 121);
+		addIconToGifMap("figRed2", "images/figRed2.gif", 90, 121);
+		addIconToGifMap("figRed3", "images/figRed3.gif", 90, 121);
+		addIconToGifMap("figRed4", "images/figRed4.gif", 90, 121);
+		addIconToGifMap("figBlue1", "images/figBlue1.gif", 90, 121);
+		addIconToGifMap("figBlue2", "images/figBlue2.gif", 90, 121);
+		addIconToGifMap("figBlue3", "images/figBlue3.gif", 90, 121);
+		addIconToGifMap("figBlue4", "images/figBlue4.gif", 90, 121);
+		addIconToGifMap("figGreen1", "images/figGreen1.gif", 90, 121);
+		addIconToGifMap("figGreen2", "images/figGreen2.gif", 90, 121);
+		addIconToGifMap("figGreen3", "images/figGreen3.gif", 90, 121);
+		addIconToGifMap("figGreen4", "images/figGreen4.gif", 90, 121);
+		addIconToGifMap("figYellow1", "images/figYellow1.gif", 90, 121);
+		addIconToGifMap("figYellow2", "images/figYellow2.gif", 90, 121);
+		addIconToGifMap("figYellow3", "images/figYellow3.gif", 90, 121);
+		addIconToGifMap("figYellow4", "images/figYellow4.gif", 90, 121);
 	}
 	private void setFieldBackgroundImage(String image){ 
 		if(labelMap.isEmpty()) throw new RuntimeException("labelMap leer");
@@ -413,7 +413,7 @@ public class GUI {
 		field.setText("");
 		field.setFocusPainted(false);
 		field.setBorderPainted(false);
-		field.setRolloverEnabled(true);
+		field.setRolloverEnabled(false);
 		field.setVisible(visible);
 		
 	}
@@ -586,9 +586,9 @@ public class GUI {
 		setStartFieldPositions(90,121);
 		setEndFieldPositions(90,121);
 		setFieldBackgroundImage("field");
-		setStandardFieldImage("images/figBlue1.gif");
+		setStandardFieldImage("figBlue1");
 		setStartFieldImage("Dice2");
-		setEndFieldImage("images/figRed1.gif");
+		setEndFieldImage("figRed1");
 		for(java.util.Map.Entry<String, JButton> entry : sMap.entrySet()) {
 		    JButton value = entry.getValue();
 		    mitte.add(value);

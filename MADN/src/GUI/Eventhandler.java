@@ -138,25 +138,25 @@ public class Eventhandler implements ActionListener {
 			value.setVisible(false);
 			value.setIcon(null);
 		}
-		startFieldsMap.get("S1ROT").setIcon(imagesMap.get("images/figRed1.gif"));
-		startFieldsMap.get("S2ROT").setIcon(imagesMap.get("images/figRed2.gif"));
-		startFieldsMap.get("S3ROT").setIcon(imagesMap.get("images/figRed3.gif"));
-		startFieldsMap.get("S4ROT").setIcon(imagesMap.get("images/figRed4.gif"));
+		startFieldsMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+		startFieldsMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+		startFieldsMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+		startFieldsMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
 
-		startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("images/figBlue1.gif"));
-		startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("images/figBlue2.gif"));
-		startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("images/figBlue3.gif"));
-		startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("images/figBlue4.gif"));
+		startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
+		startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
+		startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
+		startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
 
-		startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("images/figGreen1.gif"));
-		startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("images/figGreen2.gif"));
-		startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("images/figGreen3.gif"));
-		startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("images/figGreen4.gif"));
+		startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
+		startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
+		startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
+		startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
 
-		startFieldsMap.get("S1GELB").setIcon(imagesMap.get("images/figYellow1.gif"));
-		startFieldsMap.get("S2GELB").setIcon(imagesMap.get("images/figYellow2.gif"));
-		startFieldsMap.get("S3GELB").setIcon(imagesMap.get("images/figYellow3.gif"));
-		startFieldsMap.get("S4GELB").setIcon(imagesMap.get("images/figYellow4.gif"));
+		startFieldsMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+		startFieldsMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+		startFieldsMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+		startFieldsMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
 
 	}
 
@@ -230,13 +230,13 @@ public class Eventhandler implements ActionListener {
 			}
 			if (target != null) {
 				if (name.matches("ROT.*")) {
-					name = "images/figRed" + name.substring(4)+".gif";
+					name = "figRed" + name.substring(4);
 				} else if (name.matches("BLAU.*")) {
-					name = "images/figBlue" + name.substring(5)+".gif";
+					name = "figBlue" + name.substring(5);
 				} else if (name.matches("GRUEN.*")) {
-					name = "images/figGreen" + name.substring(6)+".gif";
+					name = "figGreen" + name.substring(6);
 				} else if (name.matches("GELB.*")) {
-					name = "images/figYellow" + name.substring(5) +".gif";
+					name = "figYellow" + name.substring(5);
 				}
 				target.setEnabled(true);
 				target.setIcon(imagesMap.get(name));
@@ -245,58 +245,58 @@ public class Eventhandler implements ActionListener {
 		}
 		if (cRed == 0) {
 			startFieldsMap.get("S1ROT").setEnabled(true);
-			startFieldsMap.get("S1ROT").setIcon(imagesMap.get("images/figRed1.gif"));
+			startFieldsMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
 			startFieldsMap.get("S1ROT").setVisible(true);
 			startFieldsMap.get("S2ROT").setEnabled(true);
-			startFieldsMap.get("S2ROT").setIcon(imagesMap.get("images/figRed2.gif"));
+			startFieldsMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
 			startFieldsMap.get("S2ROT").setVisible(true);
 			startFieldsMap.get("S3ROT").setEnabled(true);
-			startFieldsMap.get("S3ROT").setIcon(imagesMap.get("images/figRed3.gif"));
+			startFieldsMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
 			startFieldsMap.get("S3ROT").setVisible(true);
 			startFieldsMap.get("S4ROT").setEnabled(true);
-			startFieldsMap.get("S4ROT").setIcon(imagesMap.get("images/figRed4.gif"));
+			startFieldsMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
 			startFieldsMap.get("S4ROT").setVisible(true);
 		}
 		if (cBlue == 0) {
 			startFieldsMap.get("S1BLAU").setEnabled(true);
-			startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("images/figBlue1.gif"));
+			startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
 			startFieldsMap.get("S1BLAU").setVisible(true);
 			startFieldsMap.get("S2BLAU").setEnabled(true);
-			startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("images/figBlue2.gif"));
+			startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
 			startFieldsMap.get("S2BLAU").setVisible(true);
 			startFieldsMap.get("S3BLAU").setEnabled(true);
-			startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("images/figBlue3.gif"));
+			startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
 			startFieldsMap.get("S3BLAU").setVisible(true);
 			startFieldsMap.get("S4BLAU").setEnabled(true);
-			startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("images/figBlue4.gif"));
+			startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
 			startFieldsMap.get("S4BLAU").setVisible(true);
 		}
 		if (cGreen == 0) {
 			startFieldsMap.get("S1GRUEN").setEnabled(true);
-			startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("images/figGreen1.gif"));
+			startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
 			startFieldsMap.get("S1GRUEN").setVisible(true);
 			startFieldsMap.get("S2GRUEN").setEnabled(true);
-			startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("images/figGreen2.gif"));
+			startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
 			startFieldsMap.get("S2GRUEN").setVisible(true);
 			startFieldsMap.get("S3GRUEN").setEnabled(true);
-			startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("images/figGreen3.gif"));
+			startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
 			startFieldsMap.get("S3GRUEN").setVisible(true);
 			startFieldsMap.get("S4GRUEN").setEnabled(true);
-			startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("images/figGreen4.gif"));
+			startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
 			startFieldsMap.get("S4GRUEN").setVisible(true);
 		}
 		if (cYellow == 0) {
 			startFieldsMap.get("S1GELB").setEnabled(true);
-			startFieldsMap.get("S1GELB").setIcon(imagesMap.get("images/figYellow1.gif"));
+			startFieldsMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
 			startFieldsMap.get("S1GELB").setVisible(true);
 			startFieldsMap.get("S2GELB").setEnabled(true);
-			startFieldsMap.get("S2GELB").setIcon(imagesMap.get("images/figYellow2.gif"));
+			startFieldsMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
 			startFieldsMap.get("S2GELB").setVisible(true);
 			startFieldsMap.get("S3GELB").setEnabled(true);
-			startFieldsMap.get("S3GELB").setIcon(imagesMap.get("images/figYellow3.gif"));
+			startFieldsMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
 			startFieldsMap.get("S3GELB").setVisible(true);
 			startFieldsMap.get("S4GELB").setEnabled(true);
-			startFieldsMap.get("S4GELB").setIcon(imagesMap.get("images/figYellow4.gif"));
+			startFieldsMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
 			startFieldsMap.get("S4GELB").setVisible(true);
 		}
 		/*
@@ -324,23 +324,29 @@ public class Eventhandler implements ActionListener {
 						for (String button : myGame.getZugInfo()) {
 							if (button.matches("S.*") == true) {
 								buf = startFieldsMap.get(button);
+								String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 								buf.setEnabled(true);
 								buf.addActionListener(this);
 								buf.setVisible(true);								
 								button = button.substring(0, 2);
+								buf.setIcon(gifMap.get(temp));
 								actionMap.put(button, buf);
 							} else if (button.matches("E.*") == true) {
 								buf = endFieldsMap.get(button);
+								String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 								buf.setEnabled(true);
 								buf.addActionListener(this);
 								buf.setVisible(true);
 								button = button.substring(0, 2);
+								buf.setIcon(gifMap.get(temp));
 								actionMap.put(button, buf);
 							} else {
 								buf = stdFieldsMap.get(button);
+								String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 								buf.setEnabled(true);
 								buf.addActionListener(this);
 								buf.setVisible(true);
+								buf.setIcon(gifMap.get(temp));
 								actionMap.put(button, buf);
 							}
 							button = null;
@@ -488,33 +494,39 @@ public class Eventhandler implements ActionListener {
 				} else {
 
 					for (String button : myGame.getZugInfo()) {
-
+						
+						
+						
 						if (button.matches("S.*") == true) {
 							buf = startFieldsMap.get(button);
+							String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 							buf.setEnabled(true);
 							buf.addActionListener(this);
 							buf.setVisible(true);
 							button = button.substring(0, 2);
-
-							//System.out.println(buf.getIcon().toString());
+							buf.setIcon(gifMap.get(temp));
 							actionMap.put(button, buf);
 						} else if (button.matches("E.*") == true) {
 							buf = endFieldsMap.get(button);
+							String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 							buf.setEnabled(true);
 							buf.addActionListener(this);
 							buf.setVisible(true);
 							button = button.substring(0, 2);
-
+							buf.setIcon(gifMap.get(temp));
 							actionMap.put(button, buf);
 						} else {
 							buf = stdFieldsMap.get(button);
+							String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 							buf.setEnabled(true);
 							buf.addActionListener(this);
 							buf.setVisible(true);
-
+							buf.setIcon(gifMap.get(temp));
 							actionMap.put(button, buf);
 						}
 						button = null;
+						System.out.println("-------");
+						System.out.println(actionMap.size());
 					}
 				}
 			}
@@ -554,15 +566,37 @@ public class Eventhandler implements ActionListener {
 			}
 			buf.setVisible(false);
 			Icon icon = buf.getIcon();
+			String temp = buf.getIcon().toString().substring(7, buf.getIcon().toString().length()-4);
 			buf.setIcon(null);
 			target.setVisible(true);
-			target.setIcon(icon);
-			/*for(java.util.Map.Entry<String, JButton> entry: actionMap.entrySet()){
+			target.setIcon(imagesMap.get(temp));
+			String bname=buf.getToolTipText();	
+			if (bname.matches("S.*") == true) {
+				
+				bname = bname.substring(0, 2);
+				actionMap.remove(bname);
+				actionMap.put(target.getToolTipText(), target);
+			} else if (bname.matches("E.*") == true) {
+
+				bname = bname.substring(0, 2);
+				actionMap.remove(bname);
+				actionMap.put(target.getToolTipText(), target);
+
+			} else {
+				actionMap.remove(bname);
+				actionMap.put(target.getToolTipText(), target);
+			}
+			
+
+			for(java.util.Map.Entry<String, JButton> entry: actionMap.entrySet()){
 				JButton value = entry.getValue();
-				//value.setIcon(imagesMap.get(value.getIcon().toString()));
-				value.setIcon(imagesMap.get("images/figRed1.gif"));
-			}*/
+				String key = entry.getKey();
+				value.setIcon(imagesMap.get(value.getIcon().toString().substring(7, value.getIcon().toString().length()-4)));
+				System.out.println(value);
+			}
+			System.out.println("reach?");
 			actionMap.clear();
+			System.out.println(actionMap.size());
 			button = null;
 			target = null;
 			buf = null;
