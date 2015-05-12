@@ -34,11 +34,11 @@ public enum SoundEnum{
 	      try {
 	    	  File f = new File(soundFileName);
 
-	         // Set up an audio input stream piped from the sound file.
+	        
 	         AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(f);
-	         // Get a clip resource.
+
 	         clip = AudioSystem.getClip();
-	         // Open audio clip and load samples from the audio input stream.
+
 	         clip.open(audioInputStream);
 	      } catch (UnsupportedAudioFileException e) {
 	         e.printStackTrace();
@@ -49,19 +49,19 @@ public enum SoundEnum{
 	      }
 	   }
 	   
-	   // Play or Re-play the sound effect from the beginning, by rewinding.
+
 	   public void play() {
 	      if (volume != Volume.MUTE) {
 	         if (clip.isRunning())
-	            clip.stop();   // Stop the player if it is still running
-	         clip.setFramePosition(0); // rewind to the beginning
-	         clip.start();     // Start playing
+	            clip.stop();   // Stop
+	         clip.setFramePosition(0);
+	         clip.start();     // Start
 	      }
 	   }
 	   
-	   // Optional static method to pre-load all the sound files.
+	   //Pre-Load
 	   public static void init() {
-	      values(); // calls the constructor for all the elements
+	      values(); 
 	   }
 
 	}
