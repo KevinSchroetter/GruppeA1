@@ -564,7 +564,6 @@ public class GUI {
 		console.setForeground(Color.gray);
 		console.add(new JScrollBar());
 		sueden.add(new JScrollPane(console));
-		System.out.println("Test standard");
 		//Stromumleiten
 		System.setOut(new PrintWrapper(new Stromwrapper(this.console)));
 	
