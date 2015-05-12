@@ -495,8 +495,7 @@ public class Eventhandler implements ActionListener {
 							buf.addActionListener(this);
 							buf.setVisible(true);
 							button = button.substring(0, 2);
-							if(buf.getIcon()!=null){
-							buf.setIcon(gifMap.get(buf.getIcon().toString()));}
+
 							//System.out.println(buf.getIcon().toString());
 							actionMap.put(button, buf);
 						} else if (button.matches("E.*") == true) {
@@ -505,16 +504,14 @@ public class Eventhandler implements ActionListener {
 							buf.addActionListener(this);
 							buf.setVisible(true);
 							button = button.substring(0, 2);
-							if(buf.getIcon()!=null){
-							buf.setIcon(gifMap.get(buf.getIcon().toString()));}
+
 							actionMap.put(button, buf);
 						} else {
 							buf = stdFieldsMap.get(button);
 							buf.setEnabled(true);
 							buf.addActionListener(this);
 							buf.setVisible(true);
-							if(buf.getIcon()!=null){
-							buf.setIcon(gifMap.get(buf.getIcon().toString()));}
+
 							actionMap.put(button, buf);
 						}
 						button = null;
@@ -559,12 +556,12 @@ public class Eventhandler implements ActionListener {
 			Icon icon = buf.getIcon();
 			buf.setIcon(null);
 			target.setVisible(true);
-			target.setIcon(imagesMap.get(buf.getIcon().toString()));
-			for(java.util.Map.Entry<String, JButton> entry: actionMap.entrySet()){
+			target.setIcon(icon);
+			/*for(java.util.Map.Entry<String, JButton> entry: actionMap.entrySet()){
 				JButton value = entry.getValue();
 				//value.setIcon(imagesMap.get(value.getIcon().toString()));
 				value.setIcon(imagesMap.get("images/figRed1.gif"));
-			}
+			}*/
 			actionMap.clear();
 			button = null;
 			target = null;
