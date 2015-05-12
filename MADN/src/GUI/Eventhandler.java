@@ -138,25 +138,25 @@ public class Eventhandler implements ActionListener {
 			value.setVisible(false);
 			value.setIcon(null);
 		}
-		startFieldsMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
-		startFieldsMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
-		startFieldsMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
-		startFieldsMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+		startFieldsMap.get("S1ROT").setIcon(imagesMap.get("images/figRed1.gif"));
+		startFieldsMap.get("S2ROT").setIcon(imagesMap.get("images/figRed2.gif"));
+		startFieldsMap.get("S3ROT").setIcon(imagesMap.get("images/figRed3.gif"));
+		startFieldsMap.get("S4ROT").setIcon(imagesMap.get("images/figRed4.gif"));
 
-		startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
-		startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
-		startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
-		startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
+		startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("images/figBlue1.gif"));
+		startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("images/figBlue2.gif"));
+		startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("images/figBlue3.gif"));
+		startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("images/figBlue4.gif"));
 
-		startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
-		startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
-		startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
-		startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
+		startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("images/figGreen1.gif"));
+		startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("images/figGreen2.gif"));
+		startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("images/figGreen3.gif"));
+		startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("images/figGreen4.gif"));
 
-		startFieldsMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
-		startFieldsMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
-		startFieldsMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
-		startFieldsMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
+		startFieldsMap.get("S1GELB").setIcon(imagesMap.get("images/figYellow1.gif"));
+		startFieldsMap.get("S2GELB").setIcon(imagesMap.get("images/figYellow2.gif"));
+		startFieldsMap.get("S3GELB").setIcon(imagesMap.get("images/figYellow3.gif"));
+		startFieldsMap.get("S4GELB").setIcon(imagesMap.get("images/figYellow4.gif"));
 
 	}
 
@@ -230,13 +230,13 @@ public class Eventhandler implements ActionListener {
 			}
 			if (target != null) {
 				if (name.matches("ROT.*")) {
-					name = "figRed" + name.substring(4);
+					name = "images/figRed" + name.substring(4)+".gif";
 				} else if (name.matches("BLAU.*")) {
-					name = "figBlue" + name.substring(5);
+					name = "images/figBlue" + name.substring(5)+".gif";
 				} else if (name.matches("GRUEN.*")) {
-					name = "figGreen" + name.substring(6);
+					name = "images/figGreen" + name.substring(6)+".gif";
 				} else if (name.matches("GELB.*")) {
-					name = "figYellow" + name.substring(5);
+					name = "images/figYellow" + name.substring(5) +".gif";
 				}
 				target.setEnabled(true);
 				target.setIcon(imagesMap.get(name));
@@ -245,58 +245,58 @@ public class Eventhandler implements ActionListener {
 		}
 		if (cRed == 0) {
 			startFieldsMap.get("S1ROT").setEnabled(true);
-			startFieldsMap.get("S1ROT").setIcon(imagesMap.get("figRed1"));
+			startFieldsMap.get("S1ROT").setIcon(imagesMap.get("images/figRed1.gif"));
 			startFieldsMap.get("S1ROT").setVisible(true);
 			startFieldsMap.get("S2ROT").setEnabled(true);
-			startFieldsMap.get("S2ROT").setIcon(imagesMap.get("figRed2"));
+			startFieldsMap.get("S2ROT").setIcon(imagesMap.get("images/figRed2.gif"));
 			startFieldsMap.get("S2ROT").setVisible(true);
 			startFieldsMap.get("S3ROT").setEnabled(true);
-			startFieldsMap.get("S3ROT").setIcon(imagesMap.get("figRed3"));
+			startFieldsMap.get("S3ROT").setIcon(imagesMap.get("images/figRed3.gif"));
 			startFieldsMap.get("S3ROT").setVisible(true);
 			startFieldsMap.get("S4ROT").setEnabled(true);
-			startFieldsMap.get("S4ROT").setIcon(imagesMap.get("figRed4"));
+			startFieldsMap.get("S4ROT").setIcon(imagesMap.get("images/figRed4.gif"));
 			startFieldsMap.get("S4ROT").setVisible(true);
 		}
 		if (cBlue == 0) {
 			startFieldsMap.get("S1BLAU").setEnabled(true);
-			startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("figBlue1"));
+			startFieldsMap.get("S1BLAU").setIcon(imagesMap.get("images/figBlue1.gif"));
 			startFieldsMap.get("S1BLAU").setVisible(true);
 			startFieldsMap.get("S2BLAU").setEnabled(true);
-			startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("figBlue2"));
+			startFieldsMap.get("S2BLAU").setIcon(imagesMap.get("images/figBlue2.gif"));
 			startFieldsMap.get("S2BLAU").setVisible(true);
 			startFieldsMap.get("S3BLAU").setEnabled(true);
-			startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("figBlue3"));
+			startFieldsMap.get("S3BLAU").setIcon(imagesMap.get("images/figBlue3.gif"));
 			startFieldsMap.get("S3BLAU").setVisible(true);
 			startFieldsMap.get("S4BLAU").setEnabled(true);
-			startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("figBlue4"));
+			startFieldsMap.get("S4BLAU").setIcon(imagesMap.get("images/figBlue4.gif"));
 			startFieldsMap.get("S4BLAU").setVisible(true);
 		}
 		if (cGreen == 0) {
 			startFieldsMap.get("S1GRUEN").setEnabled(true);
-			startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("figGreen1"));
+			startFieldsMap.get("S1GRUEN").setIcon(imagesMap.get("images/figGreen1.gif"));
 			startFieldsMap.get("S1GRUEN").setVisible(true);
 			startFieldsMap.get("S2GRUEN").setEnabled(true);
-			startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("figGreen2"));
+			startFieldsMap.get("S2GRUEN").setIcon(imagesMap.get("images/figGreen2.gif"));
 			startFieldsMap.get("S2GRUEN").setVisible(true);
 			startFieldsMap.get("S3GRUEN").setEnabled(true);
-			startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("figGreen3"));
+			startFieldsMap.get("S3GRUEN").setIcon(imagesMap.get("images/figGreen3.gif"));
 			startFieldsMap.get("S3GRUEN").setVisible(true);
 			startFieldsMap.get("S4GRUEN").setEnabled(true);
-			startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("figGreen4"));
+			startFieldsMap.get("S4GRUEN").setIcon(imagesMap.get("images/figGreen4.gif"));
 			startFieldsMap.get("S4GRUEN").setVisible(true);
 		}
 		if (cYellow == 0) {
 			startFieldsMap.get("S1GELB").setEnabled(true);
-			startFieldsMap.get("S1GELB").setIcon(imagesMap.get("figYellow1"));
+			startFieldsMap.get("S1GELB").setIcon(imagesMap.get("images/figYellow1.gif"));
 			startFieldsMap.get("S1GELB").setVisible(true);
 			startFieldsMap.get("S2GELB").setEnabled(true);
-			startFieldsMap.get("S2GELB").setIcon(imagesMap.get("figYellow2"));
+			startFieldsMap.get("S2GELB").setIcon(imagesMap.get("images/figYellow2.gif"));
 			startFieldsMap.get("S2GELB").setVisible(true);
 			startFieldsMap.get("S3GELB").setEnabled(true);
-			startFieldsMap.get("S3GELB").setIcon(imagesMap.get("figYellow3"));
+			startFieldsMap.get("S3GELB").setIcon(imagesMap.get("images/figYellow3.gif"));
 			startFieldsMap.get("S3GELB").setVisible(true);
 			startFieldsMap.get("S4GELB").setEnabled(true);
-			startFieldsMap.get("S4GELB").setIcon(imagesMap.get("figYellow4"));
+			startFieldsMap.get("S4GELB").setIcon(imagesMap.get("images/figYellow4.gif"));
 			startFieldsMap.get("S4GELB").setVisible(true);
 		}
 		/*
