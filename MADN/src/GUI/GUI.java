@@ -729,5 +729,9 @@ public class GUI {
 		// TODO Auto-generated method stub
 		return this.frame;
 	}
+	
+	public JTextArea getCons(){
+		return this.console;	
+	}
 }
 

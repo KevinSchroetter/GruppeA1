@@ -27,6 +27,7 @@ import javax.swing.JTextField;
 
 
 public class Mailversand extends Thread{
+	private GUI myGUI;
 	private Properties props;
 	private String username = null;
 	private String password = null;
@@ -47,8 +48,10 @@ public class Mailversand extends Thread{
 
 	
 	
-	public Mailversand(String pfad){
+	public Mailversand(String pfad,GUI myGUI){
 		//Loginanfrage
+		this.myGUI = myGUI;
+		System.setOut(new PrintWrapper(new Stromwrapper(myGUI.getCons())));
 		datei = new File(pfad);
 		JPanel panel = new JPanel();
 		JLabel label3 = new JLabel("Zieladresse:");
@@ -141,7 +144,7 @@ public class Mailversand extends Thread{
 		catch(Exception e){
 			System.out.println("Mailversand an " + props.getProperty("an")+" fehlgeschlagen!");
 			e.printStackTrace();
-			System.err.println(e.getCause());
+		//	System.err.println(e.getCause());
 		}
 	}
 	

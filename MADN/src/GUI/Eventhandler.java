@@ -787,7 +787,8 @@ public class Eventhandler implements ActionListener {
 
 			}
 
-			mv = new Mailversand(lol);
+			
+			mv = new Mailversand(lol,myGUI);
 
 		}
 
