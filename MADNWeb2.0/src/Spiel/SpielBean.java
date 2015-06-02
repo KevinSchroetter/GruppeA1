@@ -67,6 +67,7 @@ public class SpielBean implements iBediener, Serializable {
 	 * Attribut spielbrett.
 	 */
 	public SpielBean() {
+		//War wohl doch schon da..
 		setSpielbrett(new Spielbrett());
 	}
 
