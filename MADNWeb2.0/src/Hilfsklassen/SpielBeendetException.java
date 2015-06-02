@@ -3,7 +3,7 @@ package Hilfsklassen;
 import java.io.Serializable;
 
 /**
- * Diese Exception wird geworfen, wenn ein Spiel beendet ist.
+ * Diese Exception wird geworfen, wenn ein SpielBean beendet ist.
  * @author Kevin Schroetter
  * @version 4.0
  * @since v3.0

@@ -27,8 +27,8 @@ public class KI_Defensiv extends KI implements Serializable {
 	
 	/**
 	 * Methode, die nach den Prioritaeten entscheidet, welche Figur laufen soll.
-	 * Moegliche Faelle: 1. Es ist mindestens eine Figur im Spiel, dann laeuft die Spielfigur, die noch im
-	 * Spiel und schon am Weitesten gelaufen ist, 2. es ist keine Figur aktiv im Spiel, dann wird 
+	 * Moegliche Faelle: 1. Es ist mindestens eine Figur im SpielBean, dann laeuft die Spielfigur, die noch im
+	 * SpielBean und schon am Weitesten gelaufen ist, 2. es ist keine Figur aktiv im SpielBean, dann wird 
 	 * gespawnt. Die dritte Prioritaet schlagen kann vernachlaessigt werden, da entweder die weiteste
 	 * Figur zieht, egal ob sie schlagen kann oder nicht, oder irgendeinen Figur spawnt und mit Glueck dabei
 	 * schlaegt.

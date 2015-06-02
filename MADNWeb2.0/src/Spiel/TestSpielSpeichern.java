@@ -11,8 +11,8 @@ public class TestSpielSpeichern {
 	public static void main(String[] args) {
 
 
-		//Spiel anlegen und irgendwas machen
-		Spiel speicherMich = new Spiel();
+		//SpielBean anlegen und irgendwas machen
+		SpielBean speicherMich = new SpielBean();
 		speicherMich.neuerSpieler("Hans-Joachim", 1, 1);
 		speicherMich.neuerSpieler("Detlef", 2, 2);
 		

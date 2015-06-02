@@ -85,16 +85,16 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 		//Parameterchecks
 		if (saveme == null || stream == null)
-			throw new IllegalArgumentException("Strom oder Spiel ungültig!");
-		if ((!(saveme instanceof Spiel))
+			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");
+		if ((!(saveme instanceof SpielBean))
 				|| (!(stream instanceof BufferedWriter)))
-			throw new IllegalArgumentException("Strom oder Spiel ungültig!");
+			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");
 		else {
 			
 			//Anlegen von Variablen, Strom
 
 			BufferedWriter saver = (BufferedWriter) stream;
-			Spiel buf = (Spiel) saveme;
+			SpielBean buf = (SpielBean) saveme;
 			Spieler[] gamer = new Spieler[4];
 			String[] speicherMichIchBinFertig = new String[buf
 					.getAnzahlSpieler()];
@@ -208,7 +208,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 	
 	/**
-	 * spielLaden - nimmt einen BufferedReader entgegen und versucht damit, ein Spiel zu laden
+	 * spielLaden - nimmt einen BufferedReader entgegen und versucht damit, ein SpielBean zu laden
 	 * @param stream - Object
 	 * @return Object
 	 * @Exception IOException
@@ -374,7 +374,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				}
 				figCounter=1;
 			}
-			Spiel gibMichZurueck = new Spiel();
+			SpielBean gibMichZurueck = new SpielBean();
 			
 
 			Spieler[] fastFertig = new Spieler[4];

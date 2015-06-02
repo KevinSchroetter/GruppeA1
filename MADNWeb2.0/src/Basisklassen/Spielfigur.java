@@ -97,7 +97,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Gibt Aufschluss ob Figur im Spiel ist
+	 * Gibt Aufschluss ob Figur im SpielBean ist
 	 * 
 	 * @return boolean istGespawnt
 	 */
@@ -107,7 +107,7 @@ public class Spielfigur implements Serializable {
 	}
 
 	/**
-	 * Gibt Aufschluss ob Figur aus dem Spiel ist (Auf Endfeld)
+	 * Gibt Aufschluss ob Figur aus dem SpielBean ist (Auf Endfeld)
 	 * 
 	 * @return boolean istImZiel
 	 */
@@ -163,7 +163,7 @@ public class Spielfigur implements Serializable {
 	/**
 	 * Oeffentlicher Setter fuer Schrittzaehler - inkrementiert um Anzahl der
 	 * Felder die die Figur gelaufen ist wird bei Kill der Figur resetted
-	 * (Deshalb Public, erfolgt spaeter in Klasse Spiel)
+	 * (Deshalb Public, erfolgt spaeter in Klasse SpielBean)
 	 * 
 	 * @param felderGelaufen
 	 *            - int
@@ -282,7 +282,7 @@ public class Spielfigur implements Serializable {
 	 * Farbe uebergeben wurde, falls nicht, wirft eine
 	 * IllegalArgumentException. Gibt es bereits 16 Figuren,
 	 * wirft er eine RuntimeException. ! Im Verlauf der
-	 * Implementierung von Klasse Spiel werden eigene Exceptions
+	 * Implementierung von Klasse SpielBean werden eigene Exceptions
 	 * generiert - Runtime - und IllegalArgumentException dienen
 	 * lediglich als Platzhalter !
 	 */
@@ -323,7 +323,7 @@ public class Spielfigur implements Serializable {
 		return false;
 	}
 	/**
-	 * Prueft, ob die Figur im Spiel ist.. Gibt True zurueck, wenn sie NICHT auf
+	 * Prueft, ob die Figur im SpielBean ist.. Gibt True zurueck, wenn sie NICHT auf
 	 * einem Startfeld steht, nicht im Ziel ist (kann aber auf einem Endfeld
 	 * stehen) und das Feld gueltig ist. Gibt sonst false zurueck.
 	 * 
@@ -442,7 +442,7 @@ public class Spielfigur implements Serializable {
 				this.getID(), this.getMeinFeld(), this.getFarbe().toString());
 	}
 	/**
-	 * HilfsMethode zum Loeschen der static anzaglFiguren (Wird in Spiel benoetigt, daher public)
+	 * HilfsMethode zum Loeschen der static anzaglFiguren (Wird in SpielBean benoetigt, daher public)
 	 */
 	public static void deleteAnzahlFiguren(){
 		Spielfigur.anzahlFiguren=0;

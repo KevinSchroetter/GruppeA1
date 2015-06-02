@@ -25,7 +25,7 @@ public class Endfeld extends Spielfeld implements Serializable {
 	 * Konstruktor fuer ein Endfeld. Ueber das Attribut iD wird dem Feld eine
 	 * genaue ID zugewiesen ueber die das Feld in Kombination mit seiner Farbe
 	 * identifizierbar ist. Mit dem Attribut Farbe wird dem Feld eine Farbe
-	 * zugewiesen ueber die das Feld im Spiel einem Spieler zugewiesen wird!
+	 * zugewiesen ueber die das Feld im SpielBean einem Spieler zugewiesen wird!
 	 * Liegt die Eingabe der ID nicht im Wertebereich E1-E4 wird eine
 	 * RuntimeException geworfen!
 	 * 

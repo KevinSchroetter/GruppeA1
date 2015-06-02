@@ -63,7 +63,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 	/**
 	 *
-	 * spielSpeichern - speichert serialisiert ein Spiel
+	 * spielSpeichern - speichert serialisiert ein SpielBean
 	 * @param saveme - Object
 	 * @param stream - Object
 	 * @Exception IOException
@@ -75,7 +75,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 		
 		//Parameterchecks
 
-		if (!(stream instanceof FileOutputStream) || !(saveme instanceof Spiel)) {
+		if (!(stream instanceof FileOutputStream) || !(saveme instanceof SpielBean)) {
 			throw new IllegalArgumentException(
 					"Ungültiger Dateistrom/Spielobjekt ungültig");
 		}
@@ -105,7 +105,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 	}
 
 	/**
-	 * SpielLaden - Lädt ein Spiel serialisiert as einer Datei
+	 * SpielLaden - Lädt ein SpielBean serialisiert as einer Datei
 	 * @return Object
 	 * @param stream - Object
 	 * @Exception IllegalArgumentException
@@ -128,7 +128,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 				ObjectInputStream ois = new ObjectInputStream(
 						(FileInputStream) stream);
 				Object buf = ois.readObject();
-				if ((buf == null) || (!(buf instanceof Spiel))) {
+				if ((buf == null) || (!(buf instanceof SpielBean))) {
 					throw new IOException("Spielobjekt ungültig!");
 				} else
 					return buf;

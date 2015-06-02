@@ -10,7 +10,7 @@ import Spiel.*;
 
 /**
  * Die Klasse Spieler fuer das MADN-Projekt Sie beinhaltet alle Attribute und
- * Methoden, auf die ein Spieler spaeter im Spiel Zugriff erhaelt.
+ * Methoden, auf die ein Spieler spaeter im SpielBean Zugriff erhaelt.
  * 
  * @author Kevin Schroetter
  * @version 4.0
@@ -69,9 +69,9 @@ public class Spieler implements Serializable {
 	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf.
 	 * @param startfelder - Die Zugehoerigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
 	 * @param endfelder - Die Zugehoerigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
-	 * @param s - Spiel, das der Spieler kennen muss als KI
+	 * @param s - SpielBean, das der Spieler kennen muss als KI
 	 */
-	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, Spiel s) {
+	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, SpielBean s) {
 		setSpielernummer();
 		setMeineNummer();
 		setName(name);
@@ -93,9 +93,9 @@ public class Spieler implements Serializable {
 	 * @param startfelder - Die Zugehoerigen Startfelder eines Spielers, auf die dieFiguren gesetzt werden.
 	 * @param endfelder - Die Zugehoerigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
 	 * @param verhalten - Bedienung des Spielers vom Typ String, ueber den eine Kuenstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
-	 * @param s - Spiel, das der Spieler kennen muss als KI
+	 * @param s - SpielBean, das der Spieler kennen muss als KI
 	 */
-	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, String verhalten, Spiel s) {
+	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, String verhalten, SpielBean s) {
 		
 		this(name, farbe, startfelder, endfelder, s);		
 		KI bot = null;
@@ -341,7 +341,7 @@ public class Spieler implements Serializable {
 	/**
 	 * Getter fuer das boolean Attribut imSpiel.
 	 * 
-	 * @return imSpiel - Boolean, der anzeigt, ob sich ein Spieler noch im Spiel
+	 * @return imSpiel - Boolean, der anzeigt, ob sich ein Spieler noch im SpielBean
 	 *         befindet oder bereits alle Figuren in den Zielfeldern hat.
 	 */
 	private boolean getImSpiel() {
@@ -386,7 +386,7 @@ public class Spieler implements Serializable {
 		return bedienung;
 	}
 	
-	private void setIBediener(Spiel s){
+	private void setIBediener(SpielBean s){
 		this.iB=s;
 	}
 	protected iBediener getIBediener(){
@@ -456,7 +456,7 @@ public class Spieler implements Serializable {
 		return figuren;
 	}
 	/**
-	 * HilfsMethode, um die Anzahl der Figuren des Spielers zu bekommen (Wird in Spiel benoetigt, daher public)
+	 * HilfsMethode, um die Anzahl der Figuren des Spielers zu bekommen (Wird in SpielBean benoetigt, daher public)
 	 * @return anz - int, Anzahl der Figuren des Spielers
 	 */
 	public int getAnzFiguren() {
@@ -467,7 +467,7 @@ public class Spieler implements Serializable {
 		return anz;
 	}
 	/**
-	 * HilfsMethode zum Loeschen der static Spielernummer (Wird in Spiel benoetigt, daher public)
+	 * HilfsMethode zum Loeschen der static Spielernummer (Wird in SpielBean benoetigt, daher public)
 	 */
 	public void deleteSpielernummer(){
 		Spieler.spielernummer=0;

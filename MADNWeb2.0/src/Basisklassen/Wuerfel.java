@@ -2,7 +2,7 @@ package Basisklassen;
 
 import java.io.Serializable;
 
-/** Dies ist die Klasse Wuerfel fuer das MADN-Spiel.
+/** Dies ist die Klasse Wuerfel fuer das MADN-SpielBean.
  * Die Klasse besitzt die Eigenschaft gewuerfelteZahl, in der sie die zuletzt mit der werfen-Methode gewuerfelte Zahl speichert.
  *@author Anna Rosa
  *@version 4.0

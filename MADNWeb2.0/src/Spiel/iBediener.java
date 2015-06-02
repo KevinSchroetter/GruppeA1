@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Basisklassen.Spieler;
 import Basisklassen.Spielfigur;
 /**
- * Interface, ueber das das Spiel bedient wird
+ * Interface, ueber das das SpielBean bedient wird
  * @author Alexander Brueckner
  * @version 3.0
  * @since v2.2

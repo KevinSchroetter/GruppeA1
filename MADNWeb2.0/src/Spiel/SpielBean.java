@@ -17,7 +17,7 @@ import Einstellungen.SoundEnum;
 import Hilfsklassen.*;
 
 /**
- * Klasse Spiel als Regelwerk fuer MADN. Sie beinhaltet alle notwendigen
+ * Klasse SpielBean als Regelwerk fuer MADN. Sie beinhaltet alle notwendigen
  * Methoden, um einen reibungslosen Spielfluss zu gewaehrleisten. In dieser
  * Klasse sind DebugMethoden implementiert, sie sind ganz am Ende der Datei zu
  * finden.
@@ -27,7 +27,7 @@ import Hilfsklassen.*;
  *
  */
 
-public class Spiel implements iBediener, Serializable {
+public class SpielBean implements iBediener, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -63,10 +63,10 @@ public class Spiel implements iBediener, Serializable {
 	private boolean alleAufSpawn;
 
 	/**
-	 * Konstruktor fuer ein Spiel. Er schreibt ein Spielbrett direkt in das
+	 * Konstruktor fuer ein SpielBean. Er schreibt ein Spielbrett direkt in das
 	 * Attribut spielbrett.
 	 */
-	public Spiel() {
+	public SpielBean() {
 		setSpielbrett(new Spielbrett());
 	}
 
@@ -78,7 +78,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param sIAZ
 	 *            - Uebergebener Spieler, der gespeichert werden soll.
 	 */
-	protected void setIstAmZug(Spieler sIAZ) {
+	public void setIstAmZug(Spieler sIAZ) {
 		if (!(sIAZ instanceof Spieler))
 			throw new RuntimeException(
 					"Es kann nur ein Spielerobjekt am Zug sein!");
@@ -92,7 +92,7 @@ public class Spiel implements iBediener, Serializable {
 	 */
 	public Spieler getIstAmZug() {
 		if (getHatBegonnen() == false)
-			throw new RuntimeException("Spiel hat noch nicht gestartet!");
+			throw new RuntimeException("SpielBean hat noch nicht gestartet!");
 		return this.istAmZug;
 	}
 
@@ -102,7 +102,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param zugMoeglich
 	 *            - true oder false boolean
 	 */
-	void setZugMoeglich(boolean zugMoeglich) {
+	public void setZugMoeglich(boolean zugMoeglich) {
 		this.zugMoeglich = zugMoeglich;
 	}
 
@@ -122,7 +122,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param spielbrett
 	 *            - Objekt der Klasse Spielbrett.
 	 */
-	private void setSpielbrett(Spielbrett spielbrett) {
+	public void setSpielbrett(Spielbrett spielbrett) {
 		if (!(spielbrett instanceof Spielbrett))
 			throw new RuntimeException("Kein Spielfeld gesetzt");
 		this.spielbrett = spielbrett;
@@ -133,7 +133,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return spielbrett - Objekt der Klasse Spielbrett.
 	 */
-	protected Spielbrett getSpielbrett() {
+	public Spielbrett getSpielbrett() {
 		return this.spielbrett;
 	}
 
@@ -149,7 +149,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return anzahlSpieler - Anzahl der Spieler vom Typ int
 	 */
-	protected int getAnzahlSpieler() {
+	public int getAnzahlSpieler() {
 		return this.anzahlSpieler;
 	}
 
@@ -159,7 +159,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param hatBegonnen
 	 *            - boolean
 	 */
-	private void setHatBegonnen(boolean hatBegonnen) {
+	public void setHatBegonnen(boolean hatBegonnen) {
 		this.hatBegonnen = hatBegonnen;
 	}
 
@@ -168,7 +168,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return hatbegonnen - boolean
 	 */
-	protected boolean getHatBegonnen() {
+	public boolean getHatBegonnen() {
 		return this.hatBegonnen;
 	}
 
@@ -178,7 +178,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param istBeendet
 	 *            - boolean
 	 */
-	private void setIstBeendet(boolean istBeendet) {
+	public void setIstBeendet(boolean istBeendet) {
 		this.istBeendet = istBeendet;
 	}
 
@@ -187,7 +187,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return istBeendet - boolean
 	 */
-	protected boolean getIstBeendet() {
+	public boolean getIstBeendet() {
 		return this.istBeendet;
 	}
 
@@ -203,7 +203,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return anzWuerfe - int
 	 */
-	private int getAnzWuerfe() {
+	public int getAnzWuerfe() {
 		return this.anzWuerfe;
 	}
 
@@ -214,7 +214,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param augenzahl
 	 *            - Augenzahl als int
 	 */
-	private void setAugenzahl(int augenzahl) {
+	public void setAugenzahl(int augenzahl) {
 		if (augenzahl < 1 || augenzahl > 6)
 			throw new RuntimeException("Fehlerhaftes Wuerfelergebnis");
 		this.augenzahl = augenzahl;
@@ -225,7 +225,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return augenzahl - int Wert
 	 */
-	private int getAugenzahl() {
+	public int getAugenzahl() {
 		return this.augenzahl;
 	}
 
@@ -250,7 +250,7 @@ public class Spiel implements iBediener, Serializable {
 	 * 
 	 * @return anzZugFiguren - int Wert
 	 */
-	private int getAnzZugFiguren() {
+	public int getAnzZugFiguren() {
 		return this.anzZugFiguren;
 	}
 
@@ -264,7 +264,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param figur
 	 *            - Objekt vom Typ Figur
 	 */
-	private void setZugFiguren(Spielfigur figur) {
+	public void setZugFiguren(Spielfigur figur) {
 		if (!(figur instanceof Spielfigur))
 			throw new RuntimeException("Keine Spielfigur ausgewaehlt");
 		if (!(figur.getFarbe().equals(getIstAmZug().getFarbe())))
@@ -292,7 +292,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param alleAufSpawn
 	 *            - boolean
 	 */
-	private void setAlleAufSpawn(boolean alleAufSpawn) {
+	public void setAlleAufSpawn(boolean alleAufSpawn) {
 		this.alleAufSpawn = alleAufSpawn;
 	}
 
@@ -302,13 +302,13 @@ public class Spiel implements iBediener, Serializable {
 	 * @return alleAufSpawn - boolean
 	 */
 
-	protected boolean getAlleAufSpawn() {
+	public boolean getAlleAufSpawn() {
 		return this.alleAufSpawn;
 	}
 
 	/**
-	 * Methode zum Hinzufuegen eines neuen Spielers, solange das Spiel noch
-	 * nicht gestartet ist. Sind Spieler im Spiel, so wird Spiel automatisch
+	 * Methode zum Hinzufuegen eines neuen Spielers, solange das SpielBean noch
+	 * nicht gestartet ist. Sind Spieler im SpielBean, so wird SpielBean automatisch
 	 * begonnen.
 	 * 
 	 * @param name
@@ -322,7 +322,7 @@ public class Spiel implements iBediener, Serializable {
 	protected boolean spielerHinzufuegen(String name, int farbID,
 			int verhaltenID) {
 		if (getHatBegonnen() == true)
-			throw new RuntimeException("Spiel hat schon begonnen");
+			throw new RuntimeException("SpielBean hat schon begonnen");
 		if (getAnzahlSpieler() > farben.size())
 			throw new RuntimeException(
 					"Maximale Spieleranzahl kann nicht ueberschritten werden!");
@@ -371,7 +371,7 @@ public class Spiel implements iBediener, Serializable {
 	}
 
 	/**
-	 * Lädt einen bereits bestehenden Spieler ins Spiel
+	 * Lädt einen bereits bestehenden Spieler ins SpielBean
 	 * 
 	 * @param loadMe
 	 *            - Spieler
@@ -391,7 +391,7 @@ public class Spiel implements iBediener, Serializable {
 	}
 
 	/**
-	 * Methode, die das Spiel startet, so dass keine Spieler mehr hinzugefuegt
+	 * Methode, die das SpielBean startet, so dass keine Spieler mehr hinzugefuegt
 	 * werden koennen. Sie setzt den ersten Spieler im Spieler Array als den
 	 * Spieler, der am Zug ist.
 	 * 
@@ -404,10 +404,10 @@ public class Spiel implements iBediener, Serializable {
 			UnsupportedAudioFileException, LineUnavailableException,
 			InterruptedException {
 		if (getHatBegonnen() == true)
-			throw new RuntimeException("Spiel hat bereits begonnen!");
+			throw new RuntimeException("SpielBean hat bereits begonnen!");
 		if (spieler[0] == null)
 			throw new RuntimeException(
-					"Ein Spiel braucht mindestens einen Spieler!");
+					"Ein SpielBean braucht mindestens einen Spieler!");
 		setHatBegonnen(true);
 		SoundEnum.START.play();
 		if (spieler[0] != null) {
@@ -1139,7 +1139,7 @@ public class Spiel implements iBediener, Serializable {
 	 *            Wuerfelergebnisse fuer Tests zu erarbeiten. Dies wird im
 	 *            spaeteren Verlauf herausgenommen.
 	 * @throws RuntimeException
-	 *             - Wenn ein Spiel noch nicht begonnen hat
+	 *             - Wenn ein SpielBean noch nicht begonnen hat
 	 * @throws SpielBeendetException
 	 *             - Wenn ein Siel bereits beendet ist
 	 */
@@ -1158,7 +1158,7 @@ public class Spiel implements iBediener, Serializable {
 					getIstAmZug().getName()
 							+ ", Sie muessen erst einen Zug ausfuehren, bevor nochmals gewuerfelt werden kann!");
 		if (getHatBegonnen() == false)
-			throw new RuntimeException("Spiel hat noch nicht begonnen");
+			throw new RuntimeException("SpielBean hat noch nicht begonnen");
 
 		int spawncounter = 0;
 		incAnzWuerfe();
@@ -1231,9 +1231,9 @@ public class Spiel implements iBediener, Serializable {
 	 * @author Kevin Schroetter
 	 * @since version 2.2
 	 * @throws RuntimeException
-	 *             - Wenn ein Spiel noch nicht begonnen hat
+	 *             - Wenn ein SpielBean noch nicht begonnen hat
 	 * @throws SpielBeendetException
-	 *             - Wenn ein Spiel bereits beendet ist
+	 *             - Wenn ein SpielBean bereits beendet ist
 	 */
 	private void wuerfelnOriginal() {
 		if (getIstBeendet() == true)
@@ -1247,7 +1247,7 @@ public class Spiel implements iBediener, Serializable {
 				|| (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
 				return;
 		if (getHatBegonnen() == false)
-			throw new RuntimeException("Spiel hat noch nicht begonnen");
+			throw new RuntimeException("SpielBean hat noch nicht begonnen");
 
 		int spawncounter = 0;
 		incAnzWuerfe();
@@ -1421,7 +1421,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param ID
 	 *            - String
 	 * @throws SpielBeendetException
-	 *             - Wenn ein Spiel bereits beendet ist
+	 *             - Wenn ein SpielBean bereits beendet ist
 	 * @throws FigurKannNichtZiehenException
 	 *             - Wenn eine Figur nicht ziehen kann
 	 * @throws NullPointerException
@@ -1709,7 +1709,7 @@ public class Spiel implements iBediener, Serializable {
 	public void neuesSpiel() {
 		if (getAnzahlSpieler() == 0)
 			throw new RuntimeException(
-					"Es kann kein neues Spiel erstellt werden!");
+					"Es kann kein neues SpielBean erstellt werden!");
 		deleteSpieler();
 		for (int i = 0; i < 4; i++) {
 			spieler[i] = null;
@@ -1773,7 +1773,7 @@ public class Spiel implements iBediener, Serializable {
 			if (getHatBegonnen() == false) {
 				startSpiel();
 				System.out
-						.println("\n++++++++++Spiel gestartet!++++++++++\n\nSpieler "
+						.println("\n++++++++++SpielBean gestartet!++++++++++\n\nSpieler "
 								+ getIstAmZug().getName()
 								+ " bitte wuerfeln!\n\n");
 			}
@@ -1821,7 +1821,7 @@ public class Spiel implements iBediener, Serializable {
 		String[] zugFelder = null;
 		try {
 			if (getIstBeendet() == true)
-				throw new SpielBeendetException("Spiel ist schon beendet.");
+				throw new SpielBeendetException("SpielBean ist schon beendet.");
 			if (istAmZug.getBedienung() == null)
 				throw new MethodeFuerKiException("Spieler ist keine KI!");
 			else
