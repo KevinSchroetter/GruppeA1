@@ -8,7 +8,11 @@
 </head>
 <body>
 <h1>Ich bin ein Platzhalter für die Spiel JSP</h1>
-
+<% if (application.getAttribute("game")!=null){%>
+		<h1>SpielBean angelegt</h1>
+	<% }else{%>
+		<h1>keine SpielBean angelegt</h1>
+<%} %>
 
 <table name="navi">
 

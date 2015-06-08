@@ -37,21 +37,26 @@
   		</select>
   		<br> 
   		<h2>Spieler <%out.println(anzahl);%> anlegen</h2>
-  		Name: <input type="text" size="20">
+  		Name: <input type="text" name="name" size="20">
   		<p>Spielerfarbe</p>
-  		<select name="spielerFarbe" size="1">
+  		<select name="farbe" size="1">
   			<option selected value="rot">ROT</option>
   			<option value="blau">BLAU</option>
   			<option value="gruen">GRUEN</option>
   			<option value="gelb">GELB</option>
   		</select>
+  		<select name="verhalten" size="1">
+  			<option selected value="mensch">Mensch</option>
+  			<option value="ki_aggressiv">KI Aggressiv</option>
+  			<option value="ki_defensiv">KI Defensiv</option>
+  		</select>
 <%}
 	else {%>
 		<br> 
   		<h2>Spieler <% out.println(application.getAttribute("anzahlSpieler"));%> anlegen</h2>
-  		Name: <input type="text" size="20">
+  		Name: <input type="text" name="name" size="20">
   		<p>Spielerfarbe</p>
-  		<select name="spielerFarbe" size="1">
+  		<select name="farbe" size="1">
   		<%
   		if(application.getAttribute("s1Farbe")!=null){
   			s1 = (String)application.getAttribute("s1Farbe");
@@ -75,6 +80,11 @@
   		if((!s1.equals("gelb")) && (!s2.equals("gelb")) && (!s3.equals("gelb"))){ %>
 			<option value="gelb">GELB</option>
 			<%} %>
+  		</select>
+  		  <select name="verhalten" size="1">
+  			<option selected value="mensch">Mensch</option>
+  			<option value="ki_aggressiv">KI Aggressiv</option>
+  			<option value="ki_defensiv">KI Defensiv</option>
   		</select>
 		<hr>
 <%} 
