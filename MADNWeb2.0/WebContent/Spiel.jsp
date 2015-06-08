@@ -10,30 +10,56 @@
 <h1>Ich bin ein Platzhalter für die Spiel JSP</h1>
 
 
+<table name="navi">
 
-<form action="wuerfelnServlet" method="post">
-	<input type="submit" name="wuerfeln" id="wuerfeln" value="Wuerfeln">
-</form>
+<td width="200">
+	<tr>
+		<form action="refreshServlet" method="post">
+		<input type="submit" name="refresh" id="refresh" value="Refresh">
+	</form>
+	</tr>
+	<tr>
+	</tr>
+</td>
+<td>
+</td>
+<td width="200">
+	ich hasse tabellen..
+</td>
+<td>
+	
+	<form action="wuerfelnServlet" method="post">
+		<input type="submit" name="wuerfeln" id="wuerfeln" value="Wuerfeln">
+	</form>
+	
+	
+	<form action="neuesSpielServlet" method="post">
+		<input type="submit" name="neuesSpiel" id="neuesSpiel" value="Neues Spiel">
+	</form>
+	
+	
+	<form action="speichernServlet" method="post">
+		<input type="submit" name="speichern" id="speichern" value="Spiel Speichern">
+	</form>
+	
+	
+	<form action="ladenServlet" method="post">
+		<input type="submit" name="laden" id="laden" value=" Spiel Laden">
+	</form>
+	
+	
+	<form action="sendGameServlet" method="post">
+		<input type="submit" name="sendGame" id="sendGame" value="Spielstand versenden">
+	</form>
+	
+	
+	<form action="beendenServlet" method="post">
+		<input type="submit" name="beenden" id="beenden" value="Spiel beenden">
+	</form>
+	
+</td>
 
-<form action="neuesSpielServlet" method="post">
-	<input type="submit" name="neuesSpiel" id="neuesSpiel" value="Neues Spiel">
-</form>
-
-<form action="speichernServlet" method="post">
-	<input type="submit" name="speichern" id="speichern" value="Spiel Speichern">
-</form>
-
-<form action="ladenServlet" method="post">
-	<input type="submit" name="laden" id="laden" value=" Spiel Laden">
-</form>
-
-<form action="sendGameServlet" method="post">
-	<input type="submit" name="sendGame" id="sendGame" value="Spielstand versenden">
-</form>
-
-<form action="beendenServlet" method="post">
-	<input type="submit" name="beenden" id="beenden" value="Spiel beenden">
-</form>
+</table>
 
 
 </body>
