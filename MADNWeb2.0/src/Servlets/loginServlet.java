@@ -41,19 +41,30 @@ public class loginServlet extends HttpServlet {
 		
 		
 		HttpSession sess=request.getSession(true);
-		String a = request.getParameter("spielerAnzahl");
-		PrintWriter out = response.getWriter();
-		out.println("<html><head></head><body>");
-		out.println(a);
-		if(a!=null)
-		sess.setAttribute("anzahlSpieler",a);
-		else
-			sess.setAttribute("anzahlSpieler","blaaaa");
 		
-		request.getParameter("spielerAnzahl");
-		out.println("</body></html>");
+		if(request.getParameter("maxSpielerAnzahl")!=null){
+		String maxSpieler = request.getParameter("maxSpielerAnzahl");
+		sess.getServletContext().setAttribute("maxSpieler",maxSpieler);
+		}
+		int checkSpieler = Integer.parseInt(sess.getServletContext().getAttribute("maxSpieler").toString());
+		String name = request.getParameter("name");
+		String farbe = request.getParameter("farbe");
+		String spielerNummer = request.getParameter("anzahlSpieler");
+		sess.setAttribute("name", name);
+		sess.setAttribute("farbe", farbe);
+		sess.setAttribute("spielerNummer", spielerNummer);
+
+
 		
-		response.sendRedirect("Login.jsp");
+		
+		int anzahl = (int) sess.getServletContext().getAttribute("anzahlSpieler");
+		sess.getServletContext().setAttribute("anzahlSpieler", ++anzahl);
+		sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe);
+
+		if(anzahl > checkSpieler)
+			response.sendRedirect("LoginDone.jsp");
+		else		
+			response.sendRedirect("Login.jsp");
 	}
 
 }
