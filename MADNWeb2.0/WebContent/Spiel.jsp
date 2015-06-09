@@ -56,7 +56,7 @@
 	</form>
 	
 	
-	<form action="speichernServlet" method="post">
+	<form action="spielSpeichern.jsp" method="post">
 		<input type="submit" name="speichern" id="speichern" value="Spiel Speichern">
 	</form>
 	

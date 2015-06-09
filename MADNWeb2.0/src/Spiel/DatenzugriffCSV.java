@@ -84,11 +84,15 @@ public class DatenzugriffCSV implements iDatenzugriff {
 		// TODO Auto-generated method stub
 
 		//Parameterchecks
-		if (saveme == null || stream == null)
-			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");
+		if (saveme == null || stream == null){
+			System.out.println(saveme);
+			System.out.println(stream);
+			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");}
 		if ((!(saveme instanceof SpielBean))
-				|| (!(stream instanceof BufferedWriter)))
-			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");
+				|| (!(stream instanceof BufferedWriter))){
+			System.out.println(saveme);
+			System.out.println(stream);
+			throw new IllegalArgumentException("Strom bzw SpielBean keine Instanz von geg. Klasse!");}
 		else {
 			
 			//Anlegen von Variablen, Strom
@@ -176,9 +180,9 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			
 			//Dateikopf mit Strukturbeschreibung
 			try {
-				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
-				//saver.flush();
-				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich\n");
+//				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
+//				saver.flush();
+				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich %n");
 				saver.flush();
 
 			} catch (IOException e) {
@@ -189,7 +193,8 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			for (int i = 0; i < speicherMichIchBinFertig.length; i++) {
 				try {
 					saver.write(speicherMichIchBinFertig[i]);
-					
+					saver.write(System.lineSeparator());
+					saver.flush();
 				} catch (IOException e) {
 					System.out.println("Fehler: " + e);
 					e.printStackTrace();
