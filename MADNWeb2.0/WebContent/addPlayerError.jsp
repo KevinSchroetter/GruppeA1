@@ -7,7 +7,7 @@
 <title>Spieler Hinzufuegen Fehler</title>
 </head>
 <body>
-<h1> Fehler: </h1>
+<h1> Fehler::: </h1>
 <% out.println(application.getAttribute("error")); %>
 <form action="Login.jsp" method="post">
 <input type="submit" name="ok" id="ok" value="Zurueck zum LoginScreen!">
