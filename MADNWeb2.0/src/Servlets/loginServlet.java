@@ -51,6 +51,7 @@ public class loginServlet extends HttpServlet {
 		if(sess.getServletContext().getAttribute("game")==null){
 			sess.getServletContext().setAttribute("game", new SpielBean());
 			game = (SpielBean) sess.getServletContext().getAttribute("game");
+			
 		}
 		else
 			game = (SpielBean) sess.getServletContext().getAttribute("game");

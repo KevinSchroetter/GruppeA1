@@ -179,15 +179,15 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 			
 			//Dateikopf mit Strukturbeschreibung
-			try {
-//				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
-//				saver.flush();
-				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich %n");
-				saver.flush();
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+//			try {
+////				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
+////				saver.flush();
+////				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich %n");
+////				saver.flush();
+//
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
 
 			//Schreiben
 			for (int i = 0; i < speicherMichIchBinFertig.length; i++) {

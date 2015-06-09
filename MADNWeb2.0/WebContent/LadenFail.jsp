@@ -8,15 +8,5 @@
 </head>
 <body>
 
-	<form action="ladenServlet" method="post">
-		<select name="ladenTyp" size="1">
-			<option selected value="CSV">CSV</option>
-			<option value="SER">SER</option>
-			<option value="XML">XML</option>
-			<option value="PDF">PDF</option>
-		</select> <input type="submit" name="typ" id="laden" value="Laden">
-	</form>
-
-
 </body>
 </html>

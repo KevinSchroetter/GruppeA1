@@ -57,6 +57,7 @@ public class speichernServlet extends HttpServlet {
 		HttpSession sess = request.getSession(true);
 		SpielBean saveme = null;
 		String zugriffsTyp = request.getParameter("Zugriffstyp");
+//		String dateiName = request.getParameter("dateiname");
 
 		saveme = (SpielBean) sess.getServletContext().getAttribute("game");
 		if (zugriffsTyp.equals("SER")) {

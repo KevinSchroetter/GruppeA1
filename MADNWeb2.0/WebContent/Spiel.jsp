@@ -61,7 +61,7 @@
 	</form>
 	
 	
-	<form action="ladenServlet" method="post">
+	<form action="spielLaden.jsp" method="post">
 		<input type="submit" name="laden" id="laden" value=" Spiel Laden">
 	</form>
 	
