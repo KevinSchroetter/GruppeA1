@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h1>Well shit, da lief was falsch.. Versuchs nochmal</h1>
+<a href = "Spiel.jsp"> Zurück zum Spiel</a>
 </body>
 </html>

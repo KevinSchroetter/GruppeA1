@@ -14,6 +14,7 @@
 			<option value="SER">SER</option>
 			<option value="XML">XML</option>
 			<option value="PDF">PDF</option>
+			Dateipfad: <input type="text" name="path" size="20">
 		</select> <input type="submit" name="typ" id="laden" value="Laden">
 	</form>
 

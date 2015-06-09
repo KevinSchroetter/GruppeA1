@@ -8,5 +8,6 @@
 </head>
 <body>
 <% out.println(application.getAttribute("game")); %>
+<a href = "Spiel.jsp"> Zurück zum Spiel</a>
 </body>
 </html>

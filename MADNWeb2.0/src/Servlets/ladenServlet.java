@@ -61,12 +61,12 @@ public class ladenServlet extends HttpServlet {
 
 			FileInputStream fis = null;
 			iD = new DatenzugriffSerialisiert();
-			fis = (FileInputStream) iD.openFile("C:\\ame.ser", 1);
+			fis = (FileInputStream) iD.openFile("C:\\"+ request.getParameter("path")+".ser", 1);
 
 			try {
 				loadme = (SpielBean) iD.spielLaden(fis);
 				sess.getServletContext().setAttribute("game", loadme);
-				iD.closeFile(fis);
+				fis.close();
 				if (loadme != null) {
 					response.sendRedirect("ladenWin.jsp");
 				} else
@@ -82,11 +82,11 @@ public class ladenServlet extends HttpServlet {
 			try {
 				iD = new DatenzugriffCSV();
 				BufferedReader bR = (BufferedReader) iD.openFile(
-						"D:\\Spiel.csv", 1);
+						"D:\\" + request.getParameter("path")+".csv", 1);
 				loadme = (SpielBean) iD.spielLaden(bR);
 				sess.getServletContext()
 						.setAttribute("game", loadme);
-				
+				bR.close();
 				if(loadme == null){
 					response.sendRedirect("LadenFail.jsp");
 				} else response.sendRedirect("ladenWin.jsp");

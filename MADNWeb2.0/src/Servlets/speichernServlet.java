@@ -64,7 +64,7 @@ public class speichernServlet extends HttpServlet {
 			try {
 				iD = new DatenzugriffSerialisiert();
 				FileOutputStream fos = (FileOutputStream) iD.openFile(
-						"C:\\game.ser", 2);
+						"C:\\" + request.getParameter("path")+".ser", 2);
 				iD.spielSpeichern(saveme, fos);
 				this.getServletContext().setAttribute("erfolg", "ja");
 				response.sendRedirect("speichernErfolg.jsp");
@@ -80,7 +80,7 @@ public class speichernServlet extends HttpServlet {
 				System.out.println("Beginne Speichern mit CSV");
 				iD = new DatenzugriffCSV();
 				BufferedWriter bW = (BufferedWriter) iD.openFile(
-						"D:\\Spiel.csv", 2);
+						"C:\\" + request.getParameter("path")+".csv", 2);
 				iD.spielSpeichern(saveme, bW);
 				this.getServletContext().setAttribute("erfolg", "ja");
 				System.out.println("Speichern erfolgreich!");
