@@ -35,13 +35,8 @@ public class beendenServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.println("<html><head></head><body>");
-		
-		out.println("<h1>Ich bin das beendenServlet</h1>");
-
-		out.println("</body></html>");
-		out.close();
+		this.getServletContext().setAttribute("beendet", "beendet");
+		response.sendRedirect("Spiel.jsp");
 	}
 
 }

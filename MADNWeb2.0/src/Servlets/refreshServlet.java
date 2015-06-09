@@ -36,12 +36,8 @@ public class refreshServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-		out.println("<html><head></head><body>");
-		
-		out.println("<h1>Ich bin das refreshServlet</h1>");
-
-		out.println("</body></html>");
-		out.close();
+		this.getServletContext().setAttribute("refresh", "refresh");
+		response.sendRedirect("Spiel.jsp");
 	}
 
 }

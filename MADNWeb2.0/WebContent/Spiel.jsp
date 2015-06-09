@@ -8,6 +8,20 @@
 </head>
 <body>
 <h1>Ich bin ein Platzhalter für die Spiel JSP</h1>
+<% if (application.getAttribute("beendet")!=null){
+		response.sendRedirect("spielBeendet.jsp");
+		%>
+		
+		
+	<% }%>
+<% if (application.getAttribute("refresh")!=null){
+		application.removeAttribute("refresh");   %>
+		<center>Seite wurde neu geladen</center>
+		
+	<% }{%>
+		
+<%} %>
+
 <% if (application.getAttribute("game")!=null){%>
 		<h1>SpielBean angelegt</h1>
 	<% }else{%>
