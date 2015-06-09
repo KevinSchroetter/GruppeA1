@@ -52,6 +52,7 @@ public class DatenzugriffSerialisiert implements iDatenzugriff {
 
 			catch (FileNotFoundException e) {
 				System.out.println("Fehler beim Erstellen der Datei!");
+				e.printStackTrace();
 				return null;
 			}
 

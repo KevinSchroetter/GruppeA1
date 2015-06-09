@@ -53,58 +53,53 @@ public class speichernServlet extends HttpServlet {
 		// out.println("</body></html>");
 		// out.close();
 
+		iDatenzugriff iD = null;
+		HttpSession sess = request.getSession(true);
+		SpielBean saveme = null;
+		String zugriffsTyp = request.getParameter("Zugriffstyp");
 
-			iDatenzugriff iD = null;
-			HttpSession sess = request.getSession(true);
-			SpielBean saveme = null;
-			String zugriffsTyp = request.getParameter("Zugriffstyp");
-
-			saveme = (SpielBean) sess.getServletContext().getAttribute("game");
-			if (zugriffsTyp.equals("SER")) {
-				try{	
-					iD = new DatenzugriffSerialisiert();
-					FileOutputStream fos = (FileOutputStream) iD.openFile("D:\\Spiel.ser", 2);
-					iD.spielSpeichern(saveme, fos);
-					this.getServletContext().setAttribute("erfolg", "ja");
-				}
-				catch(Exception e){
-					this.getServletContext().setAttribute("erfolg", null);
-				}
-				finally{
-					response.sendRedirect("spielSpeichern.jsp");
-					System.out.println("Speichern ser beendet");
-				}
-
-
-			} else if (zugriffsTyp.equals("CSV")) {
-				try {
-					System.out.println("Beginne Speichern mit CSV");
-					iD = new DatenzugriffCSV();
-					BufferedWriter bW = (BufferedWriter) iD.openFile(
-							"D:\\Spiel.csv", 2);
-					iD.spielSpeichern(saveme,
-							bW);
-					this.getServletContext().setAttribute("erfolg", "ja");
-					System.out.println("Speichern erfolgreich!");
-				} catch (Exception e) {
-					System.out.println("Fehler beim Speichern!");
-					e.printStackTrace();
-					this.getServletContext().setAttribute("erfolg", null);
-				} finally {
-					iD.closeFile("D:\\Spiel.csv");
-					response.sendRedirect("spielSpeichern.jsp");
-					System.out.println("Speichern CSV beendet.");
-				}
+		saveme = (SpielBean) sess.getServletContext().getAttribute("game");
+		if (zugriffsTyp.equals("SER")) {
+			try {
+				iD = new DatenzugriffSerialisiert();
+				FileOutputStream fos = (FileOutputStream) iD.openFile(
+						"C:\\game.ser", 2);
+				iD.spielSpeichern(saveme, fos);
+				this.getServletContext().setAttribute("erfolg", "ja");
+				response.sendRedirect("speichernErfolg.jsp");
+			} catch (Exception e) {
+				this.getServletContext().setAttribute("erfolg", null);
+				response.sendRedirect("speichernFail.jsp");
+			} finally {
+				System.out.println("Speichern ser beendet");
 			}
 
-			else if (zugriffsTyp.equals("XML")) {
-
-			} else if (zugriffsTyp.equals("PDF")) {
-
+		} else if (zugriffsTyp.equals("CSV")) {
+			try {
+				System.out.println("Beginne Speichern mit CSV");
+				iD = new DatenzugriffCSV();
+				BufferedWriter bW = (BufferedWriter) iD.openFile(
+						"D:\\Spiel.csv", 2);
+				iD.spielSpeichern(saveme, bW);
+				this.getServletContext().setAttribute("erfolg", "ja");
+				System.out.println("Speichern erfolgreich!");
+				response.sendRedirect("speichernErfolg.jsp");
+			} catch (Exception e) {
+				System.out.println("Fehler beim Speichern!");
+				e.printStackTrace();
+				this.getServletContext().setAttribute("erfolg", null);
+				response.sendRedirect("speichernFail.jsp");
+			} finally {
+			iD.closeFile("C:\\Spiel.csv");
+			System.out.println("Speichern CSV beendet.");
 			}
+		}
 
+		else if (zugriffsTyp.equals("XML")) {
+
+		} else if (zugriffsTyp.equals("PDF")) {
 
 		}
+
 	}
-
-
+}

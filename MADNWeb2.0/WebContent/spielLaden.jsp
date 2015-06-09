@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Speichern fehlgeschlagen</title>
+<title>Insert title here</title>
 </head>
 <body>
-<h1>Well shit, da lief was falsch.. Versuchs nochmal</h1>
-<a href = "Spiel.jsp"> Zurück zum Spiel</a>
+
 </body>
 </html>

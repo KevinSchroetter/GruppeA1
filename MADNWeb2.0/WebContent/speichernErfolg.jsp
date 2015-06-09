@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Speichern SUCCESS</title>
 </head>
 <body>
-
+<h1>Hat geklappt! Datei sollte jetzt auf C:\ liegen!</h1>
+<a href = "Spiel.jsp"> Zurück zum Spiel</a>
 </body>
 </html>
