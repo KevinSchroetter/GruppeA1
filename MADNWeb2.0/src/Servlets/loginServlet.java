@@ -54,7 +54,6 @@ public class loginServlet extends HttpServlet {
 		}
 		else
 			game = (SpielBean) sess.getServletContext().getAttribute("game");
-		System.out.println("Spieler angelegt");
 		int checkSpieler = Integer.parseInt(sess.getServletContext().getAttribute("maxSpieler").toString());
 		String name = request.getParameter("name");
 		String farbe = request.getParameter("farbe");
@@ -74,9 +73,8 @@ public class loginServlet extends HttpServlet {
 			farbID = 3;
 		else if (farbe.equals("gelb"))
 			farbID = 4;
-		
+		try{
 		game.neuerSpieler(name, farbID, verhaltenID);
-		
 		String spielerNummer = request.getParameter("anzahlSpieler");
 		sess.setAttribute("name", name);
 		sess.setAttribute("farbe", farbe);
@@ -88,13 +86,19 @@ public class loginServlet extends HttpServlet {
 		int anzahl = (int) sess.getServletContext().getAttribute("anzahlSpieler");
 		sess.getServletContext().setAttribute("anzahlSpieler", ++anzahl);
 		sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe);
-
+		System.out.println("Spieler angelegt");
 		if(anzahl > checkSpieler){
 			response.sendRedirect("LoginDone.jsp");
 			game.starteSpiel();
 		}
 		else		
 			response.sendRedirect("Login.jsp");
+		}
+		catch(Exception e){
+			sess.getServletContext().setAttribute("error", e);
+			response.sendRedirect("addPlayerError.jsp");
+		}
+		
 	}
 
 }

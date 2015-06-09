@@ -45,6 +45,7 @@
   			<option value="gruen">GRUEN</option>
   			<option value="gelb">GELB</option>
   		</select>
+  		<p>Spielerverhalten</p>
   		<select name="verhalten" size="1">
   			<option selected value="mensch">Mensch</option>
   			<option value="ki_aggressiv">KI Aggressiv</option>
@@ -81,25 +82,16 @@
 			<option value="gelb">GELB</option>
 			<%} %>
   		</select>
+  		<p>Spielerverhalten</p>
   		  <select name="verhalten" size="1">
   			<option selected value="mensch">Mensch</option>
   			<option value="ki_aggressiv">KI Aggressiv</option>
   			<option value="ki_defensiv">KI Defensiv</option>
   		</select>
 		<hr>
-<%} 
- 
-  
- 
-  if (session.getAttribute("anzahlSpieler")==null) 
-	  out.println("kein Spieler vorhanden");
-  else
-	  out.println("Spieler anzahl: "+session.getAttribute("anzahlSpieler"));
-  if (application.getAttribute("anzahlSpieler")==null) 
-	  out.println("kein Spieler vorhanden");
-  else
-	  out.println("Spieler anzahl: "+application.getAttribute("anzahlSpieler"));   %></p>
-  
+<%}  %>
+  <br>
+  <br>
   
   
   <input type="submit" name="submit" value="Spieler anlegen">

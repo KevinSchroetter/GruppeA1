@@ -11,13 +11,13 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public enum SoundEnum{
-	   FIRSTBLOOD("sounds/firstblood.wav"),   
-	   KILL("sounds/girldie.wav"),         
-	   START("sounds/connected.wav"),  
-	   ERROR("sounds/error.wav"),
-	   BATT("sounds/batt.wav"),
-	   ALFRED("sounds/alfred.wav"),
-	   GAMEOVER("sounds/gameover.wav");
+	   FIRSTBLOOD("Servlets.sounds/firstblood.wav"),   
+	   KILL("Servlets.sounds/girldie.wav"),         
+	   START("Servlets.sounds/connected.wav"),  
+	   ERROR("Servlets.sounds/error.wav"),
+	   BATT("Servlets.sounds/batt.wav"),
+	   ALFRED("Servlets.sounds/alfred.wav"),
+	   GAMEOVER("Servlets.sounds/gameover.wav");
 	   
 	   // Innere Klasse für Lautstärke
 	   public static enum Volume {

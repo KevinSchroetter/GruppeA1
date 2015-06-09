@@ -410,7 +410,7 @@ public class SpielBean implements iBediener, Serializable {
 			throw new RuntimeException(
 					"Ein SpielBean braucht mindestens einen Spieler!");
 		setHatBegonnen(true);
-		SoundEnum.START.play();
+		//SoundEnum.START.play();
 		if (spieler[0] != null) {
 			spieler[0].setAmZug(true);
 			setIstAmZug(spieler[0]);
@@ -878,12 +878,12 @@ public class SpielBean implements iBediener, Serializable {
 				}
 			}
 		}
-		 if (firstBlood == false) {
+		/* if (firstBlood == false) {
 		 SoundEnum.KILL.play();
 		 SoundEnum.FIRSTBLOOD.play();
 		 firstBlood = true;
 		 } else	SoundEnum.KILL.play();
-
+		 */
 		return targetArea;
 	}
 
@@ -943,12 +943,12 @@ public class SpielBean implements iBediener, Serializable {
 					break;
 				}
 			}
-		 if (firstBlood == false) {
+	/*	 if (firstBlood == false) {
 		 SoundEnum.KILL.play();
 		 SoundEnum.FIRSTBLOOD.play();
 		 firstBlood = true;
 		 } else
-		SoundEnum.KILL.play();
+		SoundEnum.KILL.play();*/
 		return targetArea;
 	}
 
@@ -1470,7 +1470,7 @@ public class SpielBean implements iBediener, Serializable {
 								+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
 				
 				setIstBeendet(true);
-				SoundEnum.GAMEOVER.play();
+				//SoundEnum.GAMEOVER.play();
 			}
 			return zugFelder;
 		}
@@ -1681,7 +1681,7 @@ public class SpielBean implements iBediener, Serializable {
 	@Override
 	public boolean neuerSpieler(String name, int farbID, int verhaltenID) {
 		boolean erfolgreich = false;
-		try {
+		//try {
 
 			erfolgreich = spielerHinzufuegen(name, farbID, verhaltenID);
 			System.out.println("Spieler " + getAnzahlSpieler() + ": "
@@ -1692,12 +1692,12 @@ public class SpielBean implements iBediener, Serializable {
 				setHatBegonnen(false);
 				starteSpiel();
 			}
-		} catch (RuntimeException e) {
-			e.printStackTrace();
-			System.out.println(e);
-		} finally {
+		//} catch (RuntimeException e) {
+		//	e.printStackTrace();
+		//	System.out.println(e);
+		//} finally {
 			return erfolgreich;
-		}
+		//}
 	}
 
 	/**
