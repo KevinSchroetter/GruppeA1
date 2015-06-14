@@ -9,13 +9,16 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.regex.Pattern;
 
 /**
- * Klasse DatenzugriffCSV - Implementiert iDatenzugriff und bietet Operationen zum Gebrauch von CSV
- * Dateien an.
+ * Klasse DatenzugriffCSV - Implementiert iDatenzugriff und bietet Operationen
+ * zum Gebrauch von CSV Dateien an.
+ * 
  * @author Alexander Brückner
  * @version 3.0
  * @since 3.0
@@ -26,10 +29,14 @@ import java.util.regex.Pattern;
 public class DatenzugriffCSV implements iDatenzugriff {
 
 	/**
-	 * openFile - öffnet Datei an angegebenen Pfad mit übergebenem Modus (1 = Input, 2 = Output)
-	 * Gibt abhängig von "mode" einen BufferedReader oder BufferedWriter zurück
-	 * @param path - String
-	 * @param mode - int
+	 * openFile - öffnet Datei an angegebenen Pfad mit übergebenem Modus (1 =
+	 * Input, 2 = Output) Gibt abhängig von "mode" einen BufferedReader oder
+	 * BufferedWriter zurück
+	 * 
+	 * @param path
+	 *            - String
+	 * @param mode
+	 *            - int
 	 * @return Object
 	 * @Exception IOException
 	 * @Exception IllegalArgumentException
@@ -46,7 +53,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			if (mode == 2) {
 
 				try {
-					BufferedWriter bw = new BufferedWriter(new FileWriter(path));
+					PrintWriter bw = new PrintWriter(new FileWriter(path));
 					return bw;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -71,11 +78,13 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	}
 
 	/**
-	 * spielSpeichern - speichert "saveme" in den Strom "stream".
-	 * Output als .CSV datei
+	 * spielSpeichern - speichert "saveme" in den Strom "stream". Output als
+	 * .CSV datei
 	 *
-	 * @param saveme - Object
-	 * @param stream - Object
+	 * @param saveme
+	 *            - Object
+	 * @param stream
+	 *            - Object
 	 * @Exception IOException
 	 * @Exception IllegalArgumentException
 	 * **/
@@ -83,21 +92,23 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	public void spielSpeichern(Object saveme, Object stream) {
 		// TODO Auto-generated method stub
 
-		//Parameterchecks
-		if (saveme == null || stream == null){
+		// Parameterchecks
+		if (saveme == null || stream == null) {
 			System.out.println(saveme);
 			System.out.println(stream);
-			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");}
+			throw new IllegalArgumentException("Strom oder SpielBean ungültig!");
+		}
 		if ((!(saveme instanceof SpielBean))
-				|| (!(stream instanceof BufferedWriter))){
+				|| (!(stream instanceof PrintWriter))) {
 			System.out.println(saveme);
 			System.out.println(stream);
-			throw new IllegalArgumentException("Strom bzw SpielBean keine Instanz von geg. Klasse!");}
-		else {
-			
-			//Anlegen von Variablen, Strom
+			throw new IllegalArgumentException(
+					"Strom bzw SpielBean keine Instanz von geg. Klasse!");
+		} else {
 
-			BufferedWriter saver = (BufferedWriter) stream;
+			// Anlegen von Variablen, Strom
+
+			PrintWriter saver = (PrintWriter) stream;
 			SpielBean buf = (SpielBean) saveme;
 			Spieler[] gamer = new Spieler[4];
 			String[] speicherMichIchBinFertig = new String[buf
@@ -121,12 +132,11 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			} else if (!buf.getIstBeendet()) {
 				spielStatus[1] = "false";
 			}
-			
+
 			if (buf.updateGUIInfo()[0])
 				spielStatus[2] = "true";
-			else if(!buf.updateGUIInfo()[0])
+			else if (!buf.updateGUIInfo()[0])
 				spielStatus[2] = "false";
-				
 
 			gamer = buf.getSpieler();
 			for (int i = 0; i < gamer.length; i++) {
@@ -164,45 +174,57 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				} else if (gamer[i].getBedienung() == null) {
 					verhalten = "mensch";
 				}
-				
-				//Variablen fertig, wrapping in Outputstring via String.format
 
-				speicherMichIchBinFertig[i] = String.format(
-						"%s,%s,%s,%s;%s.%d,%s.%d,%s.%d,%s.%d;%s,%s,%s \n",
-						spielerNamen[i], gamer[i].getFarbe(), verhalten,
-						binIchDran[i], figurFeldIDs[i][0],
-						figurenSchritte[i][0], figurFeldIDs[i][1],
-						figurenSchritte[i][1], figurFeldIDs[i][2],
-						figurenSchritte[i][2], figurFeldIDs[i][3],
-						figurenSchritte[i][3], spielStatus[0], spielStatus[1],spielStatus[2]);
+				// Variablen fertig, wrapping in Outputstring via String.format
+
+				if (i == 0) {
+					speicherMichIchBinFertig[i] = String.format(
+							"%s,%s,%s,%s;%s-%d,%s-%d,%s-%d,%s-%d",
+							spielerNamen[i], gamer[i].getFarbe(), verhalten,
+							binIchDran[i], figurFeldIDs[i][0],
+							figurenSchritte[i][0], figurFeldIDs[i][1],
+							figurenSchritte[i][1], figurFeldIDs[i][2],
+							figurenSchritte[i][2], figurFeldIDs[i][3],
+							figurenSchritte[i][3]);
+				} else {
+					speicherMichIchBinFertig[i] = String.format(
+							"_%s,%s,%s,%s;%s-%d,%s-%d,%s-%d,%s-%d",
+							spielerNamen[i], gamer[i].getFarbe(), verhalten,
+							binIchDran[i], figurFeldIDs[i][0],
+							figurenSchritte[i][0], figurFeldIDs[i][1],
+							figurenSchritte[i][1], figurFeldIDs[i][2],
+							figurenSchritte[i][2], figurFeldIDs[i][3],
+							figurenSchritte[i][3]);
+				}
 			}
 
-			
-			//Dateikopf mit Strukturbeschreibung
-//			try {
-////				saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
-////				saver.flush();
-////				saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich %n");
-////				saver.flush();
-//
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
+			// Dateikopf mit Strukturbeschreibung
+			// try {
+			// //
+			// saver.write("/Inhalte die mit einem Slash beginnen werden ignoriert\n");
+			// // saver.flush();
+			// //
+			// saver.write("/Name,Farbe,verhalten,binIchDran;Figur1Feld.SchritteGelaufen,Figur2Feld.SchritteGelaufen,Figur3Feld.SchritteGelaufen,Figur4Feld.SchritteGelaufen,hatBegonnen,istBeendet,zugMoeglich %n");
+			// // saver.flush();
+			//
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
 
-			//Schreiben
+			// Schreiben
 			for (int i = 0; i < speicherMichIchBinFertig.length; i++) {
 				try {
 					saver.write(speicherMichIchBinFertig[i]);
-					saver.write(System.lineSeparator());
-					saver.flush();
-				} catch (IOException e) {
+				} catch (Exception e) {
 					System.out.println("Fehler: " + e);
 					e.printStackTrace();
 				}
 			}
+			saver.write(String.format("_GameParam:%s,%s,%s", spielStatus[0],
+					spielStatus[1], spielStatus[2]));
 			try {
 				saver.flush();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -211,255 +233,288 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 	}
 
-	
 	/**
-	 * spielLaden - nimmt einen BufferedReader entgegen und versucht damit, ein SpielBean zu laden
-	 * @param stream - Object
+	 * spielLaden - nimmt einen BufferedReader entgegen und versucht damit, ein
+	 * SpielBean zu laden
+	 * 
+	 * @param stream
+	 *            - Object
 	 * @return Object
 	 * @Exception IOException
-	 * @Exception IllegalArgumentException 
+	 * @Exception IllegalArgumentException
 	 * 
 	 * 
 	 **/
-	
-	//TODO Code aufräumen, ggf. überarbeiten
+
+	// TODO Code aufräumen, ggf. überarbeiten
 	@Override
 	public Object spielLaden(Object stream) {
-		// Parametercheck	
+		// Parametercheck
 		
+
 		if (!(stream instanceof BufferedReader))
-			throw new IllegalArgumentException("Strom fehlerhaft/Ungültig");
-		else {
+			throw new IllegalArgumentException("Kein BR!");
 
-			BufferedReader bw = (BufferedReader) stream;
+		BufferedReader reader = (BufferedReader) stream;
+		int lineCounter = 0;
+		String data = "";
 
-			//Daten aus Datei laden
-			String readBuf = "";
-			String[] saved = new String[4];
-			int meep = 0;
-			while (readBuf != null) {
+		try {
+			data = reader.readLine();
+			System.out.println("Daten geladen: " + data);
+		} catch (Exception e) {
+			System.err
+					.println("Fehler beim Laden aus der CSV Datei - StackTrace: ");
+			e.printStackTrace();
+		}
+		String[] firstSplit = new String[5];
+		if (data != null && data.length() > 0 && data != "") {
+			firstSplit = data.split("_");
+			System.out.println("Chunk von firstSplit erfolgreich: ");
+			for (String s : firstSplit) {
+				if (s != null)
+					System.out.println(s);
+				else
+					System.out.println("String ist null");
+			}
+		} else {
+			System.err
+					.println("Fehler beim Verarbeiten der Daten beim ersten Chunk");
+			return null;
+		}
 
-				try {
+		String[] firstChunks = new String[(firstSplit.length) - 1];
+		String gameParam = new String();
 
-					readBuf = bw.readLine();
-					if ((!(readBuf == null)) && readBuf.startsWith("/"))
-						continue;
-					saved[meep] = readBuf;
-					meep++;
+		for (int i = 0; i < firstSplit.length; i++) {
+			if (firstSplit[i].startsWith("GameParam")) {
+				gameParam = firstSplit[i];
+				continue;
+			} else
+				firstChunks[i] = firstSplit[i];
+		}
 
-				} catch (IOException e) {
+		System.out.println("\n--- Ausgabe Chunks: ");
+		for (String s : firstChunks) {
+			if (s != null)
+				System.out.println(s);
+			else
+				System.out.println("String ist null");
+		}
+		System.out.println();
+		System.out.print("Ausgabe Spielparameter: ");
+		System.out.println(gameParam);
+		System.out.println("--- Ende Ausgabe Chunk 1 ---");
 
-					e.printStackTrace();
+		String[][] secondChunks = new String[(firstSplit.length) - 1][2];
+
+		for (int i = 0; i < secondChunks.length; i++) {
+			secondChunks[i] = firstChunks[i].split(";");
+		}
+
+		System.out.println("Ausgabe Chunks Stufe 2");
+		for (int i = 0; i < secondChunks.length; i++) {
+			for (int j = 0; j < secondChunks[i].length; j++) {
+				System.out.printf("secondChunks[%d][%d]: %s\n", i, j,
+						secondChunks[i][j]);
+			}
+		}
+
+		String[] spielerChunks = new String[secondChunks.length];
+		for (int i = 0; i < spielerChunks.length; i++) {
+			spielerChunks[i] = secondChunks[i][0];
+			System.out.println(spielerChunks[i]);
+		}
+
+		String[][] spielerDaten = new String[secondChunks.length][4];
+
+		for (int i = 0; i < spielerDaten.length; i++) {
+			spielerDaten[i] = spielerChunks[i].split(",");
+		}
+
+		System.out.println("Chunkation von spielerChunks in nutzbare Daten");
+
+		for (int i = 0; i < spielerDaten.length; i++) {
+			for (int j = 0; j < spielerDaten[i].length; j++) {
+				System.out.print(spielerDaten[i][j] + " ");
+
+			}
+			System.out.println();
+		}
+
+		System.out.println("Chunkation von secondChunks in FigurenChunks");
+		String[] figurenChunks = new String[secondChunks.length];
+		for (int i = 0; i < figurenChunks.length; i++) {
+			figurenChunks[i] = secondChunks[i][1];
+			System.out.println(figurenChunks[i]);
+		}
+
+		System.out.println("Chunkation von FigurChunks in nutzbare Daten");
+
+		String[][] figurenDaten = new String[figurenChunks.length][4];
+
+		for (int i = 0; i < figurenDaten.length; i++) {
+			figurenDaten[i] = figurenChunks[i].split(",");
+		}
+
+		for (int i = 0; i < figurenDaten.length; i++) {
+			for (int j = 0; j < figurenDaten[i].length; j++) {
+				System.out.println("Figurenchunk: " + figurenDaten[i][j]);
+			}
+		}
+
+		String[][][] figurenFertig = new String[figurenDaten.length][4][2];
+
+		for (int i = 0; i < figurenFertig.length; i++) {
+			for (int j = 0; j < figurenFertig[i].length; j++) {
+				figurenFertig[i][j] = figurenDaten[i][j].split("-");
+			}
+		}
+
+		for (int i = 0; i < figurenFertig.length; i++) {
+			for (int j = 0; j < figurenFertig[i].length; j++) {
+				for (int k = 0; k < figurenFertig[i][k].length; k++) {
+					System.out.println(figurenFertig[i][j][k]);
 				}
 			}
+		}
 
-			try {
-				bw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+		String[] spielerNamenS = new String[4];
+		String[] spielerFarbenS = new String[4];
+		String[] spielerVerhaltenS = new String[4];
+		String[] spielerAmZugS = new String[4];
+
+		for (int i = 0; i < spielerDaten.length; i++) {
+			spielerNamenS[i] = spielerDaten[i][0];
+			spielerFarbenS[i] = spielerDaten[i][1];
+			spielerVerhaltenS[i] = spielerDaten[i][2];
+			spielerAmZugS[i] = spielerDaten[i][3];
+		}
+
+		System.out.println("Spieler jetzt ladebereit");
+		for (int i = 0; i < 4; i++) {
+			if (spielerNamenS[i] == null)
+				continue;
+			System.out.println(spielerNamenS[i]);
+			System.out.println(spielerFarbenS[i]);
+			System.out.println(spielerVerhaltenS[i]);
+			System.out.println(spielerAmZugS[i]);
+		}
+
+		String[] spielParaSplit = gameParam.split(":");
+		String[] spielParaFertig = spielParaSplit[1].split(",");
+
+		// Spieldaten vorbereiten, Objekt erzeugen
+
+		Spieler[] players = new Spieler[4];
+		Spielfigur[][] figuren = new Spielfigur[4][4];
+
+		SpielBean game = new SpielBean();
+		Spielbrett sB = new Spielbrett();
+		game.setSpielbrett(sB);
+
+		FarbEnum farbBuf = null;
+		for (int i = 0; i < spielerNamenS.length; i++) {
+			if(spielerFarbenS[i]==null) continue;
+			if (spielerFarbenS[i].equals("ROT")) {
+				farbBuf = FarbEnum.ROT;
+			} else if (spielerFarbenS[i].equals("BLAU")) {
+				farbBuf = FarbEnum.BLAU;
+			} else if (spielerFarbenS[i].equals("GRUEN")) {
+				farbBuf = FarbEnum.GRUEN;
+			} else if (spielerFarbenS[i].equals("GELB")) {
+				farbBuf = FarbEnum.GELB;
 			}
 
-			// Verarbeitung
-			String[][] ersterSplit = new String[4][3];
-			String[] ersterFigurenSplit = new String[4];
-			String[][] zweiterFigurenSplit = new String[4][4];
-			String[][][] dritterFigurenSplit = new String[4][4][2];
-			String[][] figurenIDs = new String[4][4];
-			int[][] figurenSchritte = new int[4][4];
-			String[][] spielerSchnitt = new String[4][4];
-			String[] farbenSplit = new String[4];
-			String[] spielerNamen = new String[4];
-			String[] spielerVerhalten = new String[4];
-			String[] spielBegonnen = new String[4];
-			String[] spielBeendet = new String[4];
-			String[] amZug = new String[4];
-			FarbEnum[] farben = new FarbEnum[4];
-			int spielerAmZugID;
+			players[i] = new Spieler(spielerNamenS[i], farbBuf,
+					sB.getAlleStartFelderEinerFarbe(farbBuf),
+					sB.getAlleEndFelderEinerFarbe(farbBuf),
+					spielerVerhaltenS[i], game);
 
-			for (int i = 0; i < 4; i++) {
-				if (saved[i] == null)
-					continue;
-				ersterSplit[i] = saved[i].split(";");
+			if (spielerAmZugS[i].equals("true")) {
+				players[i].setAmZug(true);
+				continue;
 			}
-
-			for (int i = 0; i < 4; i++) {
-				if (ersterSplit[i][0] == null)
-					continue;
-				spielerSchnitt[i] = ersterSplit[i][0].split(",");
-				spielerNamen[i] = spielerSchnitt[i][0];
-				farbenSplit[i] = spielerSchnitt[i][1];
-				spielerVerhalten[i] = spielerSchnitt[i][2];
-				amZug[i] = spielerSchnitt[i][3];
-			}
-
-			for (int i = 0; i < 4; i++) {
-				if (farbenSplit[i] == null)
-					continue;
-				switch (farbenSplit[i]) {
-				case "ROT":
-					farben[i] = FarbEnum.ROT;
-					continue;
-				case "BLAU":
-					farben[i] = FarbEnum.BLAU;
-					continue;
-				case "GRUEN":
-					farben[i] = FarbEnum.GRUEN;
-					continue;
-				case "GELB":
-					farben[i] = FarbEnum.GELB;
-					continue;
-				}
-			}
-
-			for (int i = 0; i < 4; i++) {
-				if (ersterSplit[i] == null || ersterSplit[i][1] == null
-						|| ersterSplit.length == 0
-						|| ersterSplit[i].length == 0)
-					continue;
-				ersterFigurenSplit[i] = ersterSplit[i][1];
-			}
-
-			for (int i = 0; i < 4; i++) {
-				if (ersterFigurenSplit[i] == null)
-					continue;
-				zweiterFigurenSplit[i] = ersterFigurenSplit[i].split(",");
-			}
-
-			// ACHTUNG! Die folgenden Zeilen bereiten dem Leser eventuell genau
-			// so viele Kopfschmerzen, wie mir, dem Programmierer.
-			// Eine ganze Kanne Kaffee wurde in the making of the following
-			// for-loop-ception konsumiert.
-			// Eigentlich Schwachsinn, aber warum nicht etwas überdramatisieren?
-
-			for (int i = 0; i < 4; i++) {
-				if (zweiterFigurenSplit[i] == null)
-					continue;
-				for (int j = 0; j < 4; j++) {
-					if (zweiterFigurenSplit[i][j] == null)
-						continue;
-					for (int k = 0; k < 4; k++) {
-						if (zweiterFigurenSplit[j][k] == null)
-							continue;
-						dritterFigurenSplit[j][k] = zweiterFigurenSplit[j][k]
-								.split(Pattern.quote("."));
-					}
-				}
-			}
-
-			// Damit sind die Figuren gespalten genug, um sie nun wieder
-			// zusammen zu setzen
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					if (dritterFigurenSplit[i][j][0] == null)
-						continue;
-					figurenIDs[i][j] = dritterFigurenSplit[i][j][0];
-				}
-			}
-
-			for (int i = 0; i < 4; i++) {
-				for (int j = 0; j < 4; j++) {
-					if (dritterFigurenSplit[i][j][1] == null)
-						continue;
-					figurenSchritte[i][j] = Integer
-							.parseInt(dritterFigurenSplit[i][j][1]);
-				}
-			}
-
-			Spielfigur[][] figurenDieEndlichFertigSind = new Spielfigur[4][4];
-			Spielfigur.deleteAnzahlFiguren();
-
-			int figCounter = 1;
-			for (int i = 0; i < 4; i++) {
-				if (saved[i] == null)
-					continue; // Damit auch nur so viele Figurenarrays errzeugt
-								// werden wie es spieler gibt
-				for (int j = 0; j < 4; j++) {
-					figurenDieEndlichFertigSind[i][j] = new Spielfigur(i,
-							((farben[i].name()) + " " + (figCounter++)));
-				}
-				figCounter=1;
-			}
-			SpielBean gibMichZurueck = new SpielBean();
-			
-
-			Spieler[] fastFertig = new Spieler[4];
-			Startfeld[][] stF = new Startfeld[4][4];
-			Endfeld[][] eF = new Endfeld[4][4];
-			Standardfeld[] stanF = gibMichZurueck.getSpielbrett().getStandardFelder();			
-
-			for (int i = 0; i < 4; i++) {
-				if(farben[i] == null) continue;
-				stF[i] = gibMichZurueck.getSpielbrett()
-						.getAlleStartFelderEinerFarbe(farben[i]);
-				
-				eF[i] = gibMichZurueck.getSpielbrett()
-						.getAlleEndFelderEinerFarbe(farben[i]);
-			}
-			
-			for(int i = 0; i<4; i++){
-				if(spielerNamen[i]==null || farben[i] == null
-					|| stF[i] == null || eF[i] == null || spielerVerhalten[i] == null) continue;
-				else{
-					if(spielerVerhalten[i].equals("mensch"))fastFertig[i] = new Spieler(spielerNamen[i],farben[i],stF[i],eF[i],gibMichZurueck);
-					else
-					fastFertig[i] = new Spieler(spielerNamen[i],farben[i],stF[i],eF[i],spielerVerhalten[i],gibMichZurueck);
-			}
-			}
-
-			for(int i = 0; i<4; i++){
-				if(fastFertig[i]==null || figurenDieEndlichFertigSind[i]==null) continue;
-				fastFertig[i].figurenLaden(figurenDieEndlichFertigSind[i]);
-				gibMichZurueck.spielerLaden(fastFertig[i]);
-			}
-			
-
-			Spielfeld here = null;
-			
-			
-			for(int i = 0; i<4; i++){
-				for(int j = 0; j<4; j++){
-					if(figurenIDs[i][j] == null || farben[i] == null) continue;
-				
-					if(figurenIDs[i][j].startsWith("S")){
-						here = (Startfeld) here;
-						
-					}
-					else if(figurenIDs[i][j].startsWith("E")){
-						here = (Endfeld) here;
-					}
-					else here = (Standardfeld) here;
-						
-					
-				
-				here = gibMichZurueck.getSpielbrett().getFeld(figurenIDs[i][j], farben[i]);
-				figurenDieEndlichFertigSind[i][j].setMeinFeld(here);
-				here.setFigur(figurenDieEndlichFertigSind[i][j]);
-				here = null;
-				}
-			}
-			Boolean zM=false;
-			
-			gibMichZurueck.setZugMoeglich(zM);
-			for(int i = 0; i<4; i++){
-				if(spielerSchnitt[i][3] == null) continue;
-					fastFertig[i].setAmZug(spielerSchnitt[i][3].equals("true"));	
-					gibMichZurueck.setIstAmZug(fastFertig[i]);
-					
-			}
-
-			gibMichZurueck.starteSpiel();
-		return gibMichZurueck;
+			continue;
 
 		}
 
+
+		
+		String[][] figurenFelder = new String[figurenFertig.length][figurenFertig[0].length];
+		int[][] figurenSchritte = new int[figurenFertig.length][figurenFertig[0].length];
+		
+//		for(int i = 0; i<figurenFelder.length; i++){
+//			for(int j = 0; j<figurenFelder[i].length; j++){
+//				figurenFelder[i][j] = figurenFertig[i][j][0];
+//				figurenSchritte[i][j] = Integer.parseInt(figurenFertig[i][j][1]);
+//				players[i].alleFiguren()[j].setMeinFeld(game.getSpielbrett().getFeld(figurenFelder[i][j], players[i].getFarbe()));
+//			}
+//		}
+		
+		int farbID = 0;
+		
+		for(int i = 0; i<figuren.length;i++){
+			if(players[i] == null) continue;
+			for(int j = 0; j<figuren[i].length; j++){
+				if(players[i].getFarbe() == FarbEnum.ROT){
+					farbID = 0;
+				}
+				else if(players[i].getFarbe() == FarbEnum.BLAU){
+					farbID = 1;
+				}
+				else if(players[i].getFarbe() == FarbEnum.GRUEN){
+					farbID = 2;
+				}
+				else if(players[i].getFarbe() == FarbEnum.GELB){
+					farbID = 3;
+				}
+				figuren[i][j] = new Spielfigur(farbID, "yolo");
+			}
+			
+		}
+		
+		
+		for(int i = 0; i<players.length; i++){
+			if(players[i] == null) continue;
+			players[i].figurenLaden(figuren[i]);
+		}
+		
+		for (int i = 0; i < players.length; i++) {
+			if(players[i] == null) continue;
+			game.spielerLaden(players[i]);
+		}
+		
+		
+		boolean spielBeendet = false;
+		boolean spielBegonnen = false;
+//		boolean updateGUI = false;
+//		
+
+		if(spielParaFertig[1].equals("true")){
+			spielBeendet = true;
+		}
+		if(spielParaFertig[0].equals("true")){
+			spielBegonnen = true;
+		}
+//		if(spielParaFertig[2].equals("true")){
+//			updateGUI = true;
+//		}
+//		
+		game.setIstBeendet(spielBeendet);
+		game.setHatBegonnen(spielBegonnen);
+
+		return (Object) game;
 	}
-	
+
 	/***
 	 * 
 	 * closeFile
 	 * 
 	 * Schließt den übergebenen Datenstrom
-	 * @param o - Object
+	 * 
+	 * @param o
+	 *            - Object
 	 * @Exception IOException
 	 * 
 	 * 

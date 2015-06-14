@@ -37,19 +37,28 @@ public class TestSpielLaden {
 		ladeMich = null;
 		
 		//CSV Laden
+		try{
 		System.out.println("--------CSV--------");
 		BufferedReader br = (BufferedReader) dCSV.openFile("meep.csv", 1);
-		ladeMich = (SpielBean) dCSV.spielLaden(br);
-		dCSV.closeFile(br);		
-		ladeMich.ausgabeSpielerListe();
-		ladeMich.ausgabeFiguren();	
-		ladeMich.werfen(6);
-		ladeMich.zugDurchfuehrenKI();
-		ladeMich.werfen(6);
-		ladeMich.zugDurchfuehrenKI();
-		ladeMich.ausgabeFiguren();
+		SpielBean ladeMich1 = (SpielBean) dCSV.spielLaden(br);
+				
+		ladeMich1.ausgabeSpielerListe();
+		ladeMich1.ausgabeFiguren();	
+		ladeMich1.werfen(6);
+		ladeMich1.zugDurchfuehrenKI();
+		ladeMich1.werfen(6);
+		ladeMich1.zugDurchfuehrenKI();
+		ladeMich1.ausgabeFiguren();
+		System.out.println("Spiel erfolgreich geladen und getestet");
+	//	ladeMich1 = null;
+		dCSV.closeFile(br);	
+		}
+		catch(Exception e){
+			System.out.println("Im Catchblock");
+			e.printStackTrace();
+			return;
+		}
 
-		ladeMich = null;
 		
 	}
 

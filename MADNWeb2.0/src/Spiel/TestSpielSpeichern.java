@@ -42,7 +42,7 @@ public class TestSpielSpeichern {
 		
 		//CSV
 		iDatenzugriff dCSV = new DatenzugriffCSV();
-		BufferedWriter bw = (BufferedWriter) dCSV.openFile("tutCSVDenn.csv", 2);
+		PrintWriter bw = (PrintWriter) dCSV.openFile("meep.csv", 2);
 		dCSV.spielSpeichern(speicherMich, bw);
 		dCSV.closeFile(bw);
 		//Serialsiert
