@@ -96,6 +96,13 @@ public class SpielBean implements iBediener, Serializable {
 			throw new RuntimeException("SpielBean hat noch nicht gestartet!");
 		return this.istAmZug;
 	}
+	public String getSpielerFarbe(int nr){
+		if (nr > this.getAnzahlSpieler()){
+			return null;
+		}
+		else
+			return spieler[nr-1].getFarbe().toString();
+	}
 
 	/**
 	 * Setter fuer zugMoeglich
