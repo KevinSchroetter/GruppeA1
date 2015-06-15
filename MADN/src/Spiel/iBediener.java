@@ -27,6 +27,7 @@ public interface iBediener {
 	public String[] zugDurchfuehren(String ID);
 	public int rollTheDice();
 	public boolean ausgabeSpielerAmZug();
+	public String zugFarbe();
 	public String[] zugDurchfuehrenKI();
 	public boolean getStatus();
 	public ArrayList<String> updateGUIFigures();

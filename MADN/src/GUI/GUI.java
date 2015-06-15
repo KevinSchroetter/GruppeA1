@@ -182,6 +182,8 @@ public class GUI {
 	private void initLabelMap(){
 		JLabel header = new JLabel("MADN - Gore Edition");
 		labelMap.put("header",header);
+		JLabel zugFarbe = new JLabel(" ");
+		labelMap.put("zugFarbe", zugFarbe);
 		JLabel dice = new JLabel("DICE");
 		labelMap.put("dice",dice);
 		JLabel consoleHeader = new JLabel("Console");
@@ -517,6 +519,8 @@ public class GUI {
 	private void createPanelNORTH() {
 		norden.add(labelMap.get("header"));
 		labelMap.get("header").setForeground(Color.gray);
+		norden.add(labelMap.get("zugFarbe"));
+		labelMap.get("zugFarbe").setForeground(Color.gray);
 		norden.setBackground(Color.DARK_GRAY);
 		frame.getContentPane().add(norden,BorderLayout.NORTH);
 	}

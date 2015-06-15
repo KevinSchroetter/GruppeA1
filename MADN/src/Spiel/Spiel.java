@@ -1460,6 +1460,11 @@ public class Spiel implements iBediener, Serializable {
 			System.out.println("Zug erfolgreich!");
 			System.out.println(figur.getName() + " zieht von Feld " + f.getID()
 					+ " auf Feld " + zielFeld.getID() + "\n\n");
+			if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true
+					&& getAugenzahl() != 6) {
+				naechsterSpieler();
+			}
+			System.out.println("Naechster Spieler: "+this.getIstAmZug().getFarbe().toString());
 			if (endCounter == 3 && figur.getBinIchAufEndpostion() == true) {
 				System.out
 						.println("++++++++++++++++++++++++++++++++++"
@@ -1471,6 +1476,7 @@ public class Spiel implements iBediener, Serializable {
 				setIstBeendet(true);
 				SoundEnum.GAMEOVER.play();
 			}
+
 			return zugFelder;
 		}
 
@@ -1828,8 +1834,9 @@ public class Spiel implements iBediener, Serializable {
 				throw new SpielBeendetException("Spiel ist schon beendet.");
 			if (istAmZug.getBedienung() == null)
 				throw new MethodeFuerKiException("Spieler ist keine KI!");
-			else
+			else{
 				zugFelder = istAmZug.getBedienung().zugWaehlen();
+			}
 			return zugFelder;
 		} catch (SpielBeendetException e) {
 			System.out.println(e.getMessage());
@@ -1902,6 +1909,12 @@ public class Spiel implements iBediener, Serializable {
 	@Override
 	public int augenzahl() {
 		return this.getAugenzahl();
+	}
+
+	@Override
+	public String zugFarbe() {
+		return istAmZug.getFarbe().toString(); 
+		
 	}
 
 }

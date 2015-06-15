@@ -444,6 +444,7 @@ public class Eventhandler implements ActionListener {
 							vorhandeneFarben);
 				else {
 					myGame.starteSpiel();
+					labelMap.get("zugFarbe").setText("-- AM ZUG: -- " +myGame.zugFarbe()+" --");
 				}
 				naviMap.get("diceGame").setEnabled(true);
 				naviMap.get("loadGame").setEnabled(true);
@@ -456,12 +457,14 @@ public class Eventhandler implements ActionListener {
 			HashMap<String, JButton> tempMap = null;
 			buf = (JButton) e.getSource();
 			int number = myGame.rollTheDice();
+			labelMap.get("zugFarbe").setText("-- AM ZUG: -- " +myGame.zugFarbe()+" --");
 			labelMap.get("dice").setIcon(imagesMap.get("Dice" + number));
 			if (myGame.getZugInfo() != null) {
 
 				if (myGame.ausgabeSpielerAmZug() == true) {
 					String[] zugFelder = null;
 					zugFelder = myGame.zugDurchfuehrenKI();
+					labelMap.get("zugFarbe").setText("-- AM ZUG: -- " +myGame.zugFarbe()+" --");
 
 					JButton home = null;
 					JButton target = null;
@@ -547,6 +550,7 @@ public class Eventhandler implements ActionListener {
 			}
 
 			String[] zugFelder = myGame.zugDurchfuehren(button);
+			labelMap.get("zugFarbe").setText("-- AM ZUG: -- " +myGame.zugFarbe()+" --");
 			String zID = zugFelder[1];
 			JButton target = null;
 			JButton targetKilled = null;
