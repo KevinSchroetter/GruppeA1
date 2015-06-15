@@ -23,6 +23,7 @@
 	}
 	if (application.getAttribute("game")!=null){
  		out.println("<h2>" + this.getServletContext().getAttribute("amZug") + " ist am Zug</h2>"); 
+ 		out.println("<h2>Wuerfelergebnis: "+application.getAttribute("wuerfel")+"<h2>");
 		out.println("Ihre Sitzung: ");
  		out.println("Name = "+session.getAttribute("name")+" ");
 		out.println(session.getAttribute("farbe")+"<br>");
@@ -39,6 +40,7 @@
 	</form>
 	<br>
 <%	boolean sessCheck = false;
+
 	String myId=session.getId();
 	String s1 = (String)application.getAttribute("s1Session");
 	String s2 = (String)application.getAttribute("s2Session");
@@ -61,7 +63,14 @@
 		session.setAttribute("name","GAST");
 		session.setAttribute("farbe","ZUSCHAUER");
 	}
-	if (sessCheck==true){
+	boolean zug = false;
+	String amZugColor = this.getServletContext().getAttribute("amZug").toString();
+	String myColor = session.getAttribute("farbe").toString();;
+	if (myColor.equals(amZugColor)){
+		zug = true;
+	}
+	
+	if (sessCheck==true && zug==true){
 		out.println("<table name='buttons'>");
 			out.println("<tr>");
 				out.println("<td>");

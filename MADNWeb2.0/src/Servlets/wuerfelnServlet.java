@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import Spiel.SpielBean;
 
 /**
  * Servlet implementation class wuerfelnServlet
@@ -34,12 +37,20 @@ public class wuerfelnServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
-		out.println("<html><head></head><body>");
-		
-		out.println("<h1>Ich bin das wuerfelnServlet</h1>");
+		SpielBean game= null;
+		HttpSession sess=request.getSession(true);
+		if(this.getServletContext().getAttribute("game")!=null){
+			game = (SpielBean)this.getServletContext().getAttribute("game");
+			int erg = game.rollTheDice();
+			this.getServletContext().setAttribute("wuerfel", erg);
 
-		out.println("</body></html>");
-		out.close();
+					sess.getServletContext().removeAttribute("amZug");
+					sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString());
+			
+			System.out.println("AMZUGFARBE: "+sess.getServletContext().getAttribute("amZug"));
+			
+			
+		}
+		response.sendRedirect("Spiel.jsp");
 	}
 }
