@@ -33,7 +33,10 @@ public class refreshServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		this.getServletContext().setAttribute("refresh", "refresh");
-		response.sendRedirect("Spiel.jsp");
+		if(this.getServletContext().getAttribute("gestartet")==null)
+			response.sendRedirect("Login.jsp");
+		else
+			response.sendRedirect("Spiel.jsp");
 	}
 
 }

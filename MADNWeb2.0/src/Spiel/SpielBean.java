@@ -1370,6 +1370,13 @@ public class SpielBean implements iBediener, Serializable {
 		else
 			return null;
 	}
+	public ArrayList<Spielfigur> getZugFiguren() {
+		ArrayList<Spielfigur> figurenListe = alleZugFiguren();
+		if (!figurenListe.isEmpty())
+			return figurenListe;
+		else
+			return null;
+	}
 
 	/**
 	 * Methode ausgabeZugFiguren - gibt ArrayList aller Figuren zurueck die im

@@ -83,6 +83,10 @@ public class loginServlet extends HttpServlet {
 				sess.getServletContext().setAttribute("lastKI", "ja");
 				System.out.println("Spieler "+(anzahl-1) +" angelegt KI");
 				System.out.println("");
+				sess.getServletContext().setAttribute(farbe+"S1",farbe.substring(0, 2)+1);
+				sess.getServletContext().setAttribute(farbe+"S2",farbe.substring(0, 2)+2);
+				sess.getServletContext().setAttribute(farbe+"S3",farbe.substring(0, 2)+3);
+				sess.getServletContext().setAttribute(farbe+"S4",farbe.substring(0, 2)+4);
 			}
 			else{
 				game.neuerSpieler(name, farbID, verhaltenID);
@@ -96,6 +100,10 @@ public class loginServlet extends HttpServlet {
 				sess.getServletContext().removeAttribute("sessID");
 				sess.getServletContext().removeAttribute("lastKI");
 				System.out.println("Spieler "+(anzahl-1) +" angelegt");
+				sess.getServletContext().setAttribute(farbe+"S1",farbe.substring(0, 2)+1);
+				sess.getServletContext().setAttribute(farbe+"S2",farbe.substring(0, 2)+2);
+				sess.getServletContext().setAttribute(farbe+"S3",farbe.substring(0, 2)+3);
+				sess.getServletContext().setAttribute(farbe+"S4",farbe.substring(0, 2)+4);
 				System.out.println("");
 			}
 			if(anzahl > checkSpieler){
@@ -104,6 +112,7 @@ public class loginServlet extends HttpServlet {
 				game.starteSpiel();
 				sess.getServletContext().setAttribute("gestartet","ja");
 				sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe());	
+				
 			}
 			else{		
 				sess.getServletContext().setAttribute("sessId", sess.getId());
