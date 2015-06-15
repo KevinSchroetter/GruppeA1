@@ -1,8 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +19,6 @@ public class beendenServlet extends HttpServlet {
      */
     public beendenServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -38,5 +35,4 @@ public class beendenServlet extends HttpServlet {
 		this.getServletContext().setAttribute("beendet", "beendet");
 		response.sendRedirect("Spiel.jsp");
 	}
-
 }

@@ -21,7 +21,6 @@ public class wuerfelnServlet extends HttpServlet {
      */
     public wuerfelnServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -43,5 +42,4 @@ public class wuerfelnServlet extends HttpServlet {
 		out.println("</body></html>");
 		out.close();
 	}
-
 }

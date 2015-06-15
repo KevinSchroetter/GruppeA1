@@ -1,8 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +19,6 @@ public class refreshServlet extends HttpServlet {
      */
     public refreshServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,7 +32,6 @@ public class refreshServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		this.getServletContext().setAttribute("refresh", "refresh");
 		response.sendRedirect("Spiel.jsp");
 	}

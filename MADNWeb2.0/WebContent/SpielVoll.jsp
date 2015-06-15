@@ -4,13 +4,10 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<title>Spieler Hinzufuegen Fehler</title>
+	<title>Insert title here</title>
 </head>
 <body>
-	<h1> Fehler::: </h1>
-<% 	out.println(application.getAttribute("error"));%>
-	<form action="Login.jsp" method="post">
-		<input type="submit" name="ok" id="ok" value="Zurueck zum LoginScreen!">
-	</form>
+	<h1>Spiel wurde bereits mit <%out.println(application.getAttribute("maxSpieler"));%> Spielern angelegt. Kein weiterer Login moeglich!</h1>
+	<h1><a href='Spiel.jsp'>zurueck zum Spiel..</a></h1>
 </body>
 </html>

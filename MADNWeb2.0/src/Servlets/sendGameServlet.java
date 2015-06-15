@@ -21,7 +21,6 @@ public class sendGameServlet extends HttpServlet {
      */
     public sendGameServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -43,5 +42,4 @@ public class sendGameServlet extends HttpServlet {
 		out.println("</body></html>");
 		out.close();
 	}
-
 }

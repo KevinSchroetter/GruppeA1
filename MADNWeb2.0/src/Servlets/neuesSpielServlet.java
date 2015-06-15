@@ -1,9 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Enumeration;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +19,6 @@ public class neuesSpielServlet extends HttpServlet {
      */
     public neuesSpielServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -61,8 +57,19 @@ public class neuesSpielServlet extends HttpServlet {
 			this.getServletContext().removeAttribute("check");
 		if (this.getServletContext().getAttribute("exist")!=null)
 			this.getServletContext().removeAttribute("exist");
-		
+		if (this.getServletContext().getAttribute("s1Session")!=null)
+			this.getServletContext().removeAttribute("s1Session");
+		if (this.getServletContext().getAttribute("s2Session")!=null)
+			this.getServletContext().removeAttribute("s2Session");
+		if (this.getServletContext().getAttribute("s3Session")!=null)
+			this.getServletContext().removeAttribute("s3Session");
+		if (this.getServletContext().getAttribute("s4Session")!=null)
+			this.getServletContext().removeAttribute("s4Session");
+		if (this.getServletContext().getAttribute("lastKI")!=null)
+			this.getServletContext().removeAttribute("lastKI");
+		if (this.getServletContext().getAttribute("gestartet")!=null)
+			this.getServletContext().removeAttribute("gestartet");
+		System.out.println("NEUES SPIEL GESTARTET!");
 		response.sendRedirect("Login.jsp");
 	}
-
 }
