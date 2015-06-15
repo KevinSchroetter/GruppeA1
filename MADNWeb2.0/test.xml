@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spiel>
+    <spielerListe>
+        <name>Hans-Joachim</name>
+        <farbe>ROT</farbe>
+        <istAmZug>true</istAmZug>
+        <bedienung>aggressiv</bedienung>
+        <nummer>0</nummer>
+    </spielerListe>
+    <spielerListe>
+        <name>Detlef</name>
+        <farbe>BLAU</farbe>
+        <istAmZug>false</istAmZug>
+        <bedienung>defensiv</bedienung>
+        <nummer>0</nummer>
+    </spielerListe>
+    <figurenListe>
+        <name>ROT 0</name>
+        <feldID>7</feldID>
+        <schritteGelaufen>7</schritteGelaufen>
+        <farbe>ROT</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>ROT 1</name>
+        <feldID>S2</feldID>
+        <schritteGelaufen>0</schritteGelaufen>
+        <farbe>ROT</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>ROT 2</name>
+        <feldID>S3</feldID>
+        <schritteGelaufen>0</schritteGelaufen>
+        <farbe>ROT</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>ROT 3</name>
+        <feldID>S4</feldID>
+        <schritteGelaufen>0</schritteGelaufen>
+        <farbe>ROT</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>BLAU 0</name>
+        <feldID>S1</feldID>
+        <schritteGelaufen>0</schritteGelaufen>
+        <farbe>BLAU</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>BLAU 1</name>
+        <feldID>S2</feldID>
+        <schritteGelaufen>0</schritteGelaufen>
+        <farbe>BLAU</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>BLAU 2</name>
+        <feldID>S3</feldID>
+        <schritteGelaufen>0</schritteGelaufen>
+        <farbe>BLAU</farbe>
+    </figurenListe>
+    <figurenListe>
+        <name>BLAU 3</name>
+        <feldID>23</feldID>
+        <schritteGelaufen>13</schritteGelaufen>
+        <farbe>BLAU</farbe>
+    </figurenListe>
+    <istGestartet>false</istGestartet>
+    <istBeendet>false</istBeendet>
+</spiel>

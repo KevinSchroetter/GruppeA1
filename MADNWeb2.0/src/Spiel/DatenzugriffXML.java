@@ -6,6 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+
+import Hilfsklassen.SpielXMLWrapper;
+
 public class DatenzugriffXML implements iDatenzugriff {
 
 	@Override
@@ -40,21 +45,43 @@ public class DatenzugriffXML implements iDatenzugriff {
 
 	@Override
 	public void spielSpeichern(Object saveme, Object stream) {
-		// TODO Auto-generated method stub
+		if ((!(saveme instanceof SpielXMLWrapper))
+				|| (!(stream instanceof FileWriter)))
+			throw new IllegalArgumentException(
+					"Strom oder Wrapperobjekt ungültig");
+
+		else
+			try {
+
+				saveme = ((SpielXMLWrapper) saveme);
+				stream = ((FileWriter) stream);
+				
+			SpielXMLWrapper	spiel = (SpielXMLWrapper) saveme;
+			FileWriter schreiber = (FileWriter) stream;
+				
+				
+				JAXBContext context = JAXBContext.newInstance(SpielXMLWrapper.class);
+				Marshaller marshall = context.createMarshaller();
+				marshall.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+				marshall.marshal(spiel, schreiber);
+
+			}
+
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 
 	}
 
 	@Override
 	public Object spielLaden(Object stream) {
-		// TODO Auto-generated method stub
+		// TODO
 		return null;
 	}
 
 	@Override
 	public void closeFile(Object o) {
-		if ((!(o instanceof FileReader)) || (!(o instanceof FileWriter)))
-			throw new IllegalArgumentException("Zu schließender Strom ungültig");
-		else if (o instanceof FileReader) {
+		if (o instanceof FileReader) {
 			try {
 				((FileReader) o).close();
 			} catch (IOException e) {
