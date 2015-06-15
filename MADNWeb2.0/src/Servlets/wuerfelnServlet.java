@@ -43,13 +43,8 @@ public class wuerfelnServlet extends HttpServlet {
 			game = (SpielBean)this.getServletContext().getAttribute("game");
 			int erg = game.rollTheDice();
 			this.getServletContext().setAttribute("wuerfel", erg);
-
-					sess.getServletContext().removeAttribute("amZug");
-					sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString());
-			
-			System.out.println("AMZUGFARBE: "+sess.getServletContext().getAttribute("amZug"));
-			
-			
+			sess.getServletContext().removeAttribute("amZug");
+			sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString());		
 		}
 		response.sendRedirect("Spiel.jsp");
 	}
