@@ -93,6 +93,107 @@ public class neuesSpielServlet extends HttpServlet {
 		if (this.getServletContext().getAttribute("wuerfel")!=null){
 			this.getServletContext().removeAttribute("wuerfel");
 		}
+		if (this.getServletContext().getAttribute("ROTS1")!=null){
+			this.getServletContext().removeAttribute("ROTS1");
+		}
+		if (this.getServletContext().getAttribute("ROTS2")!=null){
+			this.getServletContext().removeAttribute("ROTS2");
+		}
+		if (this.getServletContext().getAttribute("ROTS3")!=null){
+			this.getServletContext().removeAttribute("ROTS3");
+		}
+		if (this.getServletContext().getAttribute("ROTS4")!=null){
+			this.getServletContext().removeAttribute("ROTS4");
+		}
+		if (this.getServletContext().getAttribute("ROTE1")!=null){
+			this.getServletContext().removeAttribute("ROTE1");
+		}
+		if (this.getServletContext().getAttribute("ROTE2")!=null){
+			this.getServletContext().removeAttribute("ROTE2");
+		}
+		if (this.getServletContext().getAttribute("ROTE3")!=null){
+			this.getServletContext().removeAttribute("ROTE3");
+		}
+		if (this.getServletContext().getAttribute("ROTE4")!=null){
+			this.getServletContext().removeAttribute("ROTE4");
+		}
+		if (this.getServletContext().getAttribute("BLAUS1")!=null){
+			this.getServletContext().removeAttribute("BLAUS1");
+		}
+		if (this.getServletContext().getAttribute("BLAUS2")!=null){
+			this.getServletContext().removeAttribute("BLAUS2");
+		}
+		if (this.getServletContext().getAttribute("BLAUS3")!=null){
+			this.getServletContext().removeAttribute("BLAUS3");
+		}
+		if (this.getServletContext().getAttribute("BLAUS4")!=null){
+			this.getServletContext().removeAttribute("BLAUS4");
+		}
+		if (this.getServletContext().getAttribute("BLAUE1")!=null){
+			this.getServletContext().removeAttribute("BLAUE1");
+		}
+		if (this.getServletContext().getAttribute("BLAUE2")!=null){
+			this.getServletContext().removeAttribute("BLAUE2");
+		}
+		if (this.getServletContext().getAttribute("BLAUE3")!=null){
+			this.getServletContext().removeAttribute("BLAUE3");
+		}
+		if (this.getServletContext().getAttribute("BLAUE4")!=null){
+			this.getServletContext().removeAttribute("BLAUE4");
+		}
+		if (this.getServletContext().getAttribute("GRUENS1")!=null){
+			this.getServletContext().removeAttribute("GRUENS1");
+		}
+		if (this.getServletContext().getAttribute("GRUENS2")!=null){
+			this.getServletContext().removeAttribute("GRUENS2");
+		}
+		if (this.getServletContext().getAttribute("GRUENS3")!=null){
+			this.getServletContext().removeAttribute("GRUENS3");
+		}
+		if (this.getServletContext().getAttribute("GRUENS4")!=null){
+			this.getServletContext().removeAttribute("GRUENS4");
+		}
+		if (this.getServletContext().getAttribute("GRUENE1")!=null){
+			this.getServletContext().removeAttribute("GRUENE1");
+		}
+		if (this.getServletContext().getAttribute("GRUENE2")!=null){
+			this.getServletContext().removeAttribute("GRUENE2");
+		}
+		if (this.getServletContext().getAttribute("GRUENE3")!=null){
+			this.getServletContext().removeAttribute("GRUENE3");
+		}
+		if (this.getServletContext().getAttribute("GRUENE4")!=null){
+			this.getServletContext().removeAttribute("GRUENE4");
+		}
+		if (this.getServletContext().getAttribute("GELBS1")!=null){
+			this.getServletContext().removeAttribute("GRUENS1");
+		}
+		if (this.getServletContext().getAttribute("GELBS2")!=null){
+			this.getServletContext().removeAttribute("GELBS2");
+		}
+		if (this.getServletContext().getAttribute("GELBS3")!=null){
+			this.getServletContext().removeAttribute("GELBS3");
+		}
+		if (this.getServletContext().getAttribute("GELBS4")!=null){
+			this.getServletContext().removeAttribute("GELBS4");
+		}
+		if (this.getServletContext().getAttribute("GELBE1")!=null){
+			this.getServletContext().removeAttribute("GRUENE1");
+		}
+		if (this.getServletContext().getAttribute("GELBE2")!=null){
+			this.getServletContext().removeAttribute("GELBE2");
+		}
+		if (this.getServletContext().getAttribute("GELBE3")!=null){
+			this.getServletContext().removeAttribute("GELBE3");
+		}
+		if (this.getServletContext().getAttribute("GELBE4")!=null){
+			this.getServletContext().removeAttribute("GELBE4");
+		}
+		for (int i = 1;i<=40;i++){
+			if(this.getServletContext().getAttribute(""+i+"")!=null){
+				this.getServletContext().removeAttribute(""+i+"");
+			}
+		}
 		System.out.println("NEUES SPIEL GESTARTET!");
 		response.sendRedirect("Login.jsp");
 	}

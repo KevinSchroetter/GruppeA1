@@ -15,8 +15,8 @@
 	</style>
 </head>
 <body>
-<% 
-	if (application.getAttribute("beendet")!=null){
+
+<%	if (application.getAttribute("beendet")!=null){
 		response.sendRedirect("spielBeendet.jsp");
 	}	
 	if(application.getAttribute("gestartet")==null){
@@ -188,7 +188,7 @@
 			<td bgcolor=#00BFFF>
 <%				if(application.getAttribute("BLAUS2")!=null){
 					if(zug==false && application.getAttribute("BLAUS2").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("BLAUS2").toString().substring(33, 36));
+						out.println(application.getAttribute("BLAUS2").toString().substring(33,36));
 					}
 					else
 						out.println(application.getAttribute("BLAUS2"));
