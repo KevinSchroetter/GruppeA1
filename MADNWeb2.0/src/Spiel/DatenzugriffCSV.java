@@ -457,7 +457,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 				} else if (players[i].getFarbe() == FarbEnum.GELB) {
 					farbID = 3;
 				}
-				figuren[i][j] = new Spielfigur(farbID, FarbEnum.values()[farbID].toString()+j );
+				figuren[i][j] = new Spielfigur(farbID, FarbEnum.values()[farbID].toString()+" "+j );
 			}
 
 		}
