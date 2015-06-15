@@ -5,6 +5,8 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 
+import Basisklassen.Spieler;
+
 /**
  * 
  * TestSpielLaden - Testet serialisiertes/CSV-basiertes Laden
@@ -41,16 +43,21 @@ public class TestSpielLaden {
 		System.out.println("--------CSV--------");
 		BufferedReader br = (BufferedReader) dCSV.openFile("meep.csv", 1);
 		SpielBean ladeMich1 = (SpielBean) dCSV.spielLaden(br);
-				
-		ladeMich1.ausgabeSpielerListe();
-		ladeMich1.ausgabeFiguren();	
+			for(Spieler s : ladeMich1.getSpieler())
+			{
+				System.out.println(s);
+			}
+
+	ladeMich1.ausgabeSpielerListe();
+	System.out.println(ladeMich1.getIstAmZug());
+	ladeMich1.ausgabeFiguren();	
 		ladeMich1.werfen(6);
 		ladeMich1.zugDurchfuehrenKI();
 		ladeMich1.werfen(6);
 		ladeMich1.zugDurchfuehrenKI();
 		ladeMich1.ausgabeFiguren();
 		System.out.println("Spiel erfolgreich geladen und getestet");
-	//	ladeMich1 = null;
+		ladeMich1 = null;
 		dCSV.closeFile(br);	
 		}
 		catch(Exception e){

@@ -250,7 +250,6 @@ public class DatenzugriffCSV implements iDatenzugriff {
 	@Override
 	public Object spielLaden(Object stream) {
 		// Parametercheck
-		
 
 		if (!(stream instanceof BufferedReader))
 			throw new IllegalArgumentException("Kein BR!");
@@ -415,7 +414,8 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 		FarbEnum farbBuf = null;
 		for (int i = 0; i < spielerNamenS.length; i++) {
-			if(spielerFarbenS[i]==null) continue;
+			if (spielerFarbenS[i] == null)
+				continue;
 			if (spielerFarbenS[i].equals("ROT")) {
 				farbBuf = FarbEnum.ROT;
 			} else if (spielerFarbenS[i].equals("BLAU")) {
@@ -439,71 +439,82 @@ public class DatenzugriffCSV implements iDatenzugriff {
 
 		}
 
-
-		
 		String[][] figurenFelder = new String[figurenFertig.length][figurenFertig[0].length];
 		int[][] figurenSchritte = new int[figurenFertig.length][figurenFertig[0].length];
-		
-//		for(int i = 0; i<figurenFelder.length; i++){
-//			for(int j = 0; j<figurenFelder[i].length; j++){
-//				figurenFelder[i][j] = figurenFertig[i][j][0];
-//				figurenSchritte[i][j] = Integer.parseInt(figurenFertig[i][j][1]);
-//				players[i].alleFiguren()[j].setMeinFeld(game.getSpielbrett().getFeld(figurenFelder[i][j], players[i].getFarbe()));
-//			}
-//		}
-		
+
 		int farbID = 0;
-		
-		for(int i = 0; i<figuren.length;i++){
-			if(players[i] == null) continue;
-			for(int j = 0; j<figuren[i].length; j++){
-				if(players[i].getFarbe() == FarbEnum.ROT){
+
+		for (int i = 0; i < figuren.length; i++) {
+			if (players[i] == null)
+				continue;
+			for (int j = 0; j < figuren[i].length; j++) {
+				if (players[i].getFarbe() == FarbEnum.ROT) {
 					farbID = 0;
-				}
-				else if(players[i].getFarbe() == FarbEnum.BLAU){
+				} else if (players[i].getFarbe() == FarbEnum.BLAU) {
 					farbID = 1;
-				}
-				else if(players[i].getFarbe() == FarbEnum.GRUEN){
+				} else if (players[i].getFarbe() == FarbEnum.GRUEN) {
 					farbID = 2;
-				}
-				else if(players[i].getFarbe() == FarbEnum.GELB){
+				} else if (players[i].getFarbe() == FarbEnum.GELB) {
 					farbID = 3;
 				}
-				figuren[i][j] = new Spielfigur(farbID, "yolo");
+				figuren[i][j] = new Spielfigur(farbID, FarbEnum.values()[farbID].toString()+j );
 			}
-			
+
 		}
-		
-		
-		for(int i = 0; i<players.length; i++){
-			if(players[i] == null) continue;
-			players[i].figurenLaden(figuren[i]);
-		}
+
 		
 		for (int i = 0; i < players.length; i++) {
-			if(players[i] == null) continue;
+			if (players[i] == null)
+				continue;
+			players[i].figurenLaden(figuren[i]);
+		}
+
+		for (int i = 0; i < players.length; i++) {
+			if (players[i] == null)
+				continue;
 			game.spielerLaden(players[i]);
 		}
+
+		for (int i = 0; i < figurenFelder.length; i++) {
+			for (int j = 0; j < figurenFelder[i].length; j++) {
+				figurenFelder[i][j] = figurenFertig[i][j][0];
+				figurenSchritte[i][j] = Integer
+						.parseInt(figurenFertig[i][j][1]);
+				players[i].alleFiguren()[j].setMeinFeld(game.getSpielbrett()
+						.getFeld(figurenFelder[i][j], players[i].getFarbe()));
+				players[i].alleFiguren()[j].setFelderGelaufen(figurenSchritte[i][j]);
+			}
+		}
 		
-		
+
 		boolean spielBeendet = false;
 		boolean spielBegonnen = false;
-//		boolean updateGUI = false;
-//		
+		// boolean updateGUI = false;
+		//
 
-		if(spielParaFertig[1].equals("true")){
+		if (spielParaFertig[1].equals("true")) {
 			spielBeendet = true;
 		}
-		if(spielParaFertig[0].equals("true")){
+		if (spielParaFertig[0].equals("true")) {
 			spielBegonnen = true;
 		}
-//		if(spielParaFertig[2].equals("true")){
-//			updateGUI = true;
-//		}
-//		
+		// if(spielParaFertig[2].equals("true")){
+		// updateGUI = true;
+		// }
+		//
 		game.setIstBeendet(spielBeendet);
 		game.setHatBegonnen(spielBegonnen);
 
+		for(int i = 0; i<players.length; i++){
+			if(players[i] == null) continue;
+			if(spielerAmZugS[i].equals("true")){
+				players[i].setAmZug(true);
+				game.setIstAmZug(players[i]);
+			}
+		}
+
+		
+		System.out.println(game);
 		return (Object) game;
 	}
 
