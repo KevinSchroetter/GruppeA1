@@ -79,7 +79,7 @@
   			s3 = (String)application.getAttribute("s3Farbe");
   		}
    		if((!s1.equals("ROT")) && (!s2.equals("ROT")) && (!s3.equals("ROT"))){%>
-   			<option selected value="rot">ROT</option>
+   			<option selected value="ROT">ROT</option>
 <%		} 
   		if((!s1.equals("BLAU")) && (!s2.equals("BLAU")) && (!s3.equals("BLAU"))){%>
   			<option value="BLAU">BLAU</option>
