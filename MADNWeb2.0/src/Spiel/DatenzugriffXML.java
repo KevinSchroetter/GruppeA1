@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import Hilfsklassen.SpielXMLWrapper;
 
@@ -75,8 +77,28 @@ public class DatenzugriffXML implements iDatenzugriff {
 
 	@Override
 	public Object spielLaden(Object stream) {
-		// TODO
-		return null;
+		
+		
+		
+		if(stream == null) throw new IllegalArgumentException("Strom null");
+		if(!(stream instanceof FileReader)) throw new IllegalArgumentException("FileReader vorrausgesetzt");
+		
+		FileReader fR = (FileReader) stream;
+		SpielXMLWrapper sXML = null;
+		
+		try {
+			JAXBContext context = JAXBContext.newInstance(SpielXMLWrapper.class);
+			Unmarshaller uM = context.createUnmarshaller();
+			sXML = (SpielXMLWrapper) uM.unmarshal(fR);
+			return sXML;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
+		
 	}
 
 	@Override

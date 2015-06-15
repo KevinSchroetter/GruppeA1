@@ -14,7 +14,7 @@ public class SpielerWrapper {
 	private String name;
 	private FarbEnum farbe;
 	private boolean istAmZug;
-	private String bedienung;
+	private String bedienung = null;
 	private int nummer;
 	
 	public SpielerWrapper(){

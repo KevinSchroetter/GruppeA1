@@ -61,7 +61,7 @@ public class TestSpielSpeichern {
 
 		iDatenzugriff dXML = new DatenzugriffXML();
 
-		FileWriter fW = (FileWriter) dXML.openFile("test.xml", 1);
+		FileWriter fW = (FileWriter) dXML.openFile("D:\\test.xml", 1);
 
 		SpielXMLWrapper sXML = new SpielXMLWrapper();
 		ArrayList<SpielerWrapper> wrapperListe = new ArrayList<SpielerWrapper>();
@@ -76,6 +76,7 @@ public class TestSpielSpeichern {
 				sW.setName(buf.getName());
 				sW.setFarbe(buf.getFarbe());
 				sW.setIstAmZug(buf.getAmZug());
+				sW.setNummer(i+1);
 				if (buf.getBedienung() == null) {
 					sW.setBedienung(null);
 				} else if (buf.getBedienung() instanceof KI_Aggressiv) {
@@ -98,6 +99,8 @@ public class TestSpielSpeichern {
 					fw.setFeldID(speicherMich.getSpieler()[i].alleFiguren()[j].getMeinFeld().getID());
 					fw.setSchritteGelaufen(speicherMich.getSpieler()[i].alleFiguren()[j].getFelderGelaufen());
 					fw.setName(fw.getFarbe().toString()+" "+j);
+					fw.setGespawnt(speicherMich.getSpieler()[i].alleFiguren()[j].getIstGespawnt());
+					fw.setEndposition(speicherMich.getSpieler()[i].alleFiguren()[j].getBinIchAufEndpostion());
 					figurenListe.add(fw);
 				}
 				

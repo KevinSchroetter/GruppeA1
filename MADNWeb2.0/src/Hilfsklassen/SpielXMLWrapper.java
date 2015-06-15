@@ -13,13 +13,15 @@ import Basisklassen.Spieler;
 
 
 @XmlRootElement(name = "spiel") 
-@XmlAccessorType(XmlAccessType.FIELD)
+//@XmlAccessorType(XmlAccessType.FIELD)
 public class SpielXMLWrapper {
 
 
 	private ArrayList<SpielerWrapper> spielerListe = new ArrayList<SpielerWrapper>(4);
 	private ArrayList<FigurenWrapper> figurenListe = new ArrayList<FigurenWrapper>(16);
+	@XmlElement(name = "gestartet", required = true)
 	private boolean istGestartet;
+
 	private boolean istBeendet;
 	
 	public void addSpieler(SpielerWrapper s){
@@ -32,8 +34,8 @@ public class SpielXMLWrapper {
 		else this.spielerListe = liste;
 	}
 	
-	//@XmlElementWrapper(name = "listeSpieler")
-	//@XmlElement(name = "spieler", required = true)
+	@XmlElementWrapper(name = "listeSpieler")
+	@XmlElement(name = "spieler", required = true)
 	public ArrayList<SpielerWrapper> getSpieler(){
 		return this.spielerListe;
 	}
@@ -48,10 +50,26 @@ public class SpielXMLWrapper {
 		else this.figurenListe = liste;
 	} 
 	
-	//@XmlElementWrapper(name = "listeFiguren")
-	//@XmlElement(name = "figur", required = true)
+	@XmlElementWrapper(name = "listeFiguren")
+	@XmlElement(name = "figur", required = true)
 	public ArrayList<FigurenWrapper> getFiguren(){
 		return this.figurenListe;		
+	}
+
+	public boolean isGestartet() {
+		return istGestartet;
+	}
+
+	public void setIstGestartet(boolean istGestartet) {
+		this.istGestartet = istGestartet;
+	}
+
+	public boolean isBeendet() {
+		return istBeendet;
+	}
+
+	public void setBeendet(boolean istBeendet) {
+		this.istBeendet = istBeendet;
 	}
 	
 	
