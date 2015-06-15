@@ -385,7 +385,7 @@ public class SpielBean implements iBediener, Serializable {
 	 *            - Spieler
 	 * @throws IllegalArgumentException
 	 * */
-	protected void spielerLaden(Spieler loadMe) {
+	public void spielerLaden(Spieler loadMe) {
 		if (loadMe == null | (!(loadMe instanceof Spieler))) {
 			throw new IllegalArgumentException("Spielerobjekt ungültig");
 		}
