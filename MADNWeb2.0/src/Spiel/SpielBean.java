@@ -1468,6 +1468,11 @@ public class SpielBean implements iBediener, Serializable {
 			System.out.println("Zug erfolgreich!");
 			System.out.println(figur.getName() + " zieht von Feld " + f.getID()
 					+ " auf Feld " + zielFeld.getID() + "\n\n");
+			if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true
+					&& getAugenzahl() != 6) {
+				naechsterSpieler();
+			}
+			System.out.println("Naechster Spieler: "+this.getIstAmZug().getFarbe().toString());
 			if (endCounter == 3 && figur.getBinIchAufEndpostion() == true) {
 				System.out
 						.println("++++++++++++++++++++++++++++++++++"

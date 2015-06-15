@@ -8,6 +8,7 @@
 </head>
 <body>
 	<h1>Alle Spieler angelegt. Spiel wurde gestartet!</h1>
+<%	application.setAttribute("wuerfel","DEFAULT");%>
 	<form action="Spiel.jsp" method="post">
 		<input type="submit" name="ok" value="Okay, auf geht's!">
 	</form>
