@@ -58,6 +58,8 @@
 	}
 	else{
 		sessCheck=false;
+		session.setAttribute("name","GAST");
+		session.setAttribute("farbe","ZUSCHAUER");
 	}
 	if (sessCheck==true){
 		out.println("<table name='buttons'>");
