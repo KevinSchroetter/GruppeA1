@@ -55,6 +55,13 @@ public class neuesSpielServlet extends HttpServlet {
 			this.getServletContext().removeAttribute("error");
 		if (this.getServletContext().getAttribute("beendet")!=null)
 			this.getServletContext().removeAttribute("beendet");
+		if (this.getServletContext().getAttribute("sessID")!=null)
+			this.getServletContext().removeAttribute("sessID");
+		if (this.getServletContext().getAttribute("check")!=null)
+			this.getServletContext().removeAttribute("check");
+		if (this.getServletContext().getAttribute("exist")!=null)
+			this.getServletContext().removeAttribute("exist");
+		
 		response.sendRedirect("Login.jsp");
 	}
 

@@ -8,7 +8,19 @@
 </head>
 <body>
 
+<%
 
+if(application.getAttribute("sessID")!=null && application.getAttribute("sessID")!=session.getId()){
+	response.sendRedirect("Warten.jsp");	
+}
+else if((application.getAttribute("anzahlSpieler")!=null && session.getAttribute("spielerNummer")!=null) && session.getAttribute("spielerNummer").toString()!=application.getAttribute("anzahlSpieler")&&application.getAttribute("exist")!=null){
+	response.sendRedirect("Warten.jsp");
+}
+else{
+	application.setAttribute("sessID",session.getId());
+	out.println(session.getId());
+
+%>
 
 <form action="loginServlet" method="post">
 
@@ -23,9 +35,10 @@
 	String s1 = "";
 	String s2 = "";
 	String s3 = "";
-	if (application.getAttribute("anzahlSpieler")==null){ 
+	if (application.getAttribute("exist")==null){ 
 		int anzahl = 1;
-		application.setAttribute("anzahlSpieler",anzahl);%>
+		application.setAttribute("anzahlSpieler",anzahl);
+		//session.setAttribute("spielerNummer",anzahl);%>
 		<h1>Willkommen zu MADN</h1>
 		<h2>Bitte wählen Sie die Anzahl der Spieler und legen den ersten Spieler an</h2>
    		<p>Spieleranzahl</p> 
@@ -40,10 +53,10 @@
   		Name: <input type="text" name="name" size="20">
   		<p>Spielerfarbe</p>
   		<select name="farbe" size="1">
-  			<option selected value="rot">ROT</option>
-  			<option value="blau">BLAU</option>
-  			<option value="gruen">GRUEN</option>
-  			<option value="gelb">GELB</option>
+  			<option selected value="ROT">ROT</option>
+  			<option value="BLAU">BLAU</option>
+  			<option value="GRUEN">GRUEN</option>
+  			<option value="GELB">GELB</option>
   		</select>
   		<p>Spielerverhalten</p>
   		<select name="verhalten" size="1">
@@ -69,17 +82,17 @@
   			s3 = (String)application.getAttribute("s3Farbe");
   		}
   		
-  		if((!s1.equals("rot")) && (!s2.equals("rot")) && (!s3.equals("rot"))){ %>
+  		if((!s1.equals("ROT")) && (!s2.equals("ROT")) && (!s3.equals("ROT"))){ %>
   			<option selected value="rot">ROT</option>
   			<%} 
-  		 if((!s1.equals("blau")) && (!s2.equals("blau")) && (!s3.equals("blau"))){ %>
-  			<option value="blau">BLAU</option>
+  		 if((!s1.equals("BLAU")) && (!s2.equals("BLAU")) && (!s3.equals("BLAU"))){ %>
+  			<option value="BLAU">BLAU</option>
   			<%}
-   		if((!s1.equals("gruen")) && (!s2.equals("gruen")) && (!s3.equals("gruen"))){ %>
-			<option value="gruen">GRUEN</option>
+   		if((!s1.equals("GRUEN")) && (!s2.equals("GRUEN")) && (!s3.equals("GRUEN"))){ %>
+			<option value="GRUEN">GRUEN</option>
 			<%} 
-  		if((!s1.equals("gelb")) && (!s2.equals("gelb")) && (!s3.equals("gelb"))){ %>
-			<option value="gelb">GELB</option>
+  		if((!s1.equals("GELB")) && (!s2.equals("GELB")) && (!s3.equals("GELB"))){ %>
+			<option value="GELB">GELB</option>
 			<%} %>
   		</select>
   		<p>Spielerverhalten</p>
@@ -96,6 +109,7 @@
   
   <input type="submit" name="submit" value="Spieler anlegen">
 </form>
+<%} %>
 <%} %>
 
 </body>

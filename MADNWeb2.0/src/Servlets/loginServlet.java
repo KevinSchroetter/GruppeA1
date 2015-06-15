@@ -43,6 +43,8 @@ public class loginServlet extends HttpServlet {
 		
 		
 		HttpSession sess=request.getSession(true);
+		sess.getServletContext().setAttribute("check","checked");
+		//response.setIntHeader("Refresh", 2);
 		SpielBean game = null;
 		if(request.getParameter("maxSpielerAnzahl")!=null){
 			String maxSpieler = request.getParameter("maxSpielerAnzahl");
@@ -66,34 +68,47 @@ public class loginServlet extends HttpServlet {
 			verhaltenID = 2;
 		
 		int farbID = 0;
-		if (farbe.equals("rot"))
+		if (farbe.equals("ROT"))
 			farbID = 1;
-		else if(farbe.equals("blau"))
+		else if(farbe.equals("BLAU"))
 			farbID = 2;
-		else if(farbe.equals("gruen"))
+		else if(farbe.equals("GRUEN"))
 			farbID = 3;
-		else if (farbe.equals("gelb"))
+		else if (farbe.equals("GELB"))
 			farbID = 4;
 		try{
-		game.neuerSpieler(name, farbID, verhaltenID);
-		String spielerNummer = request.getParameter("anzahlSpieler");
-		sess.setAttribute("name", name);
-		sess.setAttribute("farbe", farbe);
-		sess.setAttribute("spielerNummer", spielerNummer);
+			int anzahl = (int) sess.getServletContext().getAttribute("anzahlSpieler");
+			if(verhaltenID == 1 || verhaltenID==2){
+			game.neuerSpieler(name, farbID, verhaltenID);
+			
+			sess.getServletContext().setAttribute("anzahlSpieler", ++anzahl);
+			sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe);
+			sess.getServletContext().setAttribute("exist", "ja");
+			System.out.println("Spieler angelegt");
+			}
+			else{
+				game.neuerSpieler(name, farbID, verhaltenID);
+			String spielerNummer = request.getParameter("anzahlSpieler");
+			sess.setAttribute("name", name);
+			sess.setAttribute("farbe", farbe);
+			sess.setAttribute("spielerNummer", spielerNummer);
 
-
-		
-		
-		int anzahl = (int) sess.getServletContext().getAttribute("anzahlSpieler");
-		sess.getServletContext().setAttribute("anzahlSpieler", ++anzahl);
-		sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe);
-		System.out.println("Spieler angelegt");
-		if(anzahl > checkSpieler){
-			response.sendRedirect("LoginDone.jsp");
-			game.starteSpiel();
-		}
-		else		
-			response.sendRedirect("Login.jsp");
+			sess.getServletContext().setAttribute("anzahlSpieler", ++anzahl);
+			sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe);
+			sess.getServletContext().setAttribute("exist", "ja");
+			System.out.println("Spieler angelegt");
+			}
+			if(anzahl > checkSpieler){
+				response.sendRedirect("LoginDone.jsp");
+				game.starteSpiel();
+				sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe());
+				
+			}
+			else{		
+				sess.getServletContext().setAttribute("sessId", sess.getId());
+				response.sendRedirect("Login.jsp");
+				
+			}
 		}
 		catch(Exception e){
 			sess.getServletContext().setAttribute("error", e);
