@@ -1606,6 +1606,10 @@ public class Spiel implements iBediener, Serializable {
 			e.printStackTrace();
 			System.out.println(e);
 		}
+		if (getAnzWuerfe() == 3 && getAlleAufSpawn() == true
+				&& getAugenzahl() != 6) {
+			naechsterSpieler();
+		}
 		return getAugenzahl();
 	}
 
