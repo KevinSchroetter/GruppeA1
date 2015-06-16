@@ -14,6 +14,7 @@
   		}
 	</style>
 </head>
+
 <body>
 
 <%	if (application.getAttribute("beendet")!=null){
