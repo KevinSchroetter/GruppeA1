@@ -385,8 +385,8 @@ public class ladenServlet extends HttpServlet {
 						if (sW == null)
 							continue;
 						else {
-
-							if (sW.getBedienung() == null) {
+							System.out.println(sW.getBedienung());
+							if (sW.getBedienung() == null || sW.getBedienung().equals("") || sW.getBedienung().equals("null")) {
 								spieler[i] = new Spieler(sW.getName(), sW.getFarbe(),
 										spielbrett.getAlleStartFelderEinerFarbe(sW
 												.getFarbe()),
@@ -466,7 +466,7 @@ public class ladenServlet extends HttpServlet {
 					if(xmlFinal == null){
 						response.sendRedirect("LadenFail.jsp");
 					} else {
-						this.getServletContext().setAttribute("game", loadme);
+						this.getServletContext().setAttribute("game", xmlFinal);
 						if(sess.getAttribute("zug1")!=null)
 							sess.removeAttribute("zug1");
 						if(sess.getAttribute("zug2")!=null)
@@ -576,18 +576,18 @@ public class ladenServlet extends HttpServlet {
 								this.getServletContext().removeAttribute(""+i+"");
 							}
 						}
-						ArrayList<String> figuren1 = loadme.alleFigs();
-						figuren1 = loadme.alleFigs();
+						ArrayList<String> figuren1 = xmlFinal.alleFigs();
+						figuren1 = xmlFinal.alleFigs();
 						String[] split = new String[2];
 						for(String s:figuren1){
 							split=s.split("-");
 							sess.getServletContext().setAttribute(split[0], split[1].substring(0, 2)+split[2]);
 						}
-						if (loadme.getIstAmZug().getBedienung()==null){
-							sess.getServletContext().setAttribute("amZug", loadme.getIstAmZug().getFarbe().toString());	
+						if (xmlFinal.getIstAmZug().getBedienung()==null){
+							sess.getServletContext().setAttribute("amZug", xmlFinal.getIstAmZug().getFarbe().toString());	
 						}
 						else
-							sess.getServletContext().setAttribute("amZug", loadme.getIstAmZug().getFarbe().toString()+"-KI");
+							sess.getServletContext().setAttribute("amZug", xmlFinal.getIstAmZug().getFarbe().toString()+"-KI");
 						response.sendRedirect("ladenWin.jsp");
 					
 					}
