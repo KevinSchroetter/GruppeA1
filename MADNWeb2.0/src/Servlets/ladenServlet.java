@@ -406,6 +406,7 @@ public class ladenServlet extends HttpServlet {
 
 					FigurenWrapper fW = null;
 					Spielfigur.deleteAnzahlFiguren();
+
 					for (int i = 0; i < figuren.length; i++) {
 						if (spieler[i] == null)
 							continue;
@@ -428,7 +429,9 @@ public class ladenServlet extends HttpServlet {
 								farbID = 3;
 								break;
 							}
-							fW = sXML.getFiguren().get(j);
+							if(i < 0){
+							fW = sXML.getFiguren().get(i*j);}
+							else{ fW = sXML.getFiguren().get(j);}
 							figuren[i][j] = new Spielfigur(farbID, spieler[i]
 									.getFarbe().toString() + " " + j);
 							figuren[i][j].setMeinFeld(spielbrett.getFeld(
