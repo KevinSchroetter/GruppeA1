@@ -72,7 +72,7 @@ public class speichernServlet extends HttpServlet {
 		if (zugriffsTyp.equals("SER")) {
 			try {
 				iD = new DatenzugriffSerialisiert();
-				FileOutputStream fos = (FileOutputStream) iD.openFile("C:\\"
+				FileOutputStream fos = (FileOutputStream) iD.openFile("D:\\"
 						+ request.getParameter("path") + ".ser", 2);
 				iD.spielSpeichern(saveme, fos);
 				this.getServletContext().setAttribute("erfolg", "ja");
@@ -110,7 +110,7 @@ public class speichernServlet extends HttpServlet {
 
 				iDatenzugriff dXML = new DatenzugriffXML();
 				FileWriter fW = (FileWriter) dXML.openFile(
-						"C:\\" + request.getParameter("path") + ".xml", 1);
+						"D:\\" + request.getParameter("path") + ".xml", 1);
 
 				SpielXMLWrapper sXML = new SpielXMLWrapper();
 				ArrayList<SpielerWrapper> wrapperListe = new ArrayList<SpielerWrapper>();

@@ -47,12 +47,12 @@ public class DatenzugriffXML implements iDatenzugriff {
 
 	@Override
 	public void spielSpeichern(Object saveme, Object stream) {
-		if ((!(saveme instanceof SpielXMLWrapper))
-				|| (!(stream instanceof FileWriter)))
-			throw new IllegalArgumentException(
-					"Strom oder Wrapperobjekt ungültig");
-
-		else
+//		if ((!(saveme instanceof SpielXMLWrapper))
+//				|| (!(stream instanceof FileWriter)))
+//			throw new IllegalArgumentException(
+//					"Strom oder Wrapperobjekt ungültig");
+//
+//		else
 			try {
 
 				saveme = ((SpielXMLWrapper) saveme);
@@ -65,7 +65,7 @@ public class DatenzugriffXML implements iDatenzugriff {
 				JAXBContext context = JAXBContext.newInstance(SpielXMLWrapper.class);
 				Marshaller marshall = context.createMarshaller();
 				marshall.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-				marshall.marshal(spiel, schreiber);
+				marshall.marshal(saveme, schreiber);
 
 			}
 

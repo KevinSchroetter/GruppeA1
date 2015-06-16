@@ -69,7 +69,7 @@ public class ladenServlet extends HttpServlet {
 
 			FileInputStream fis = null;
 			iD = new DatenzugriffSerialisiert();
-			fis = (FileInputStream) iD.openFile("C:\\"+ request.getParameter("path")+".ser", 1);
+			fis = (FileInputStream) iD.openFile("D:\\"+ request.getParameter("path")+".ser", 1);
 
 			try {
 				loadme = (SpielBean) iD.spielLaden(fis);
@@ -212,7 +212,7 @@ public class ladenServlet extends HttpServlet {
 			try {
 				iD = new DatenzugriffCSV();
 				BufferedReader bR = (BufferedReader) iD.openFile(
-						"C:\\" + request.getParameter("path")+".csv", 1);
+						"D:\\" + request.getParameter("path")+".csv", 1);
 				loadme = (SpielBean) iD.spielLaden(bR);
 				sess.getServletContext()
 						.setAttribute("game", loadme);
@@ -363,7 +363,7 @@ public class ladenServlet extends HttpServlet {
 				iDatenzugriff dXML = new DatenzugriffXML();
 				try {
 					sXML = (SpielXMLWrapper) dXML.spielLaden(dXML.openFile(
-							"C:\\test.xml", 0));
+							"D:\\"  + request.getParameter("path")+".xml", 0));
 
 					// for (Object o : sXML.getSpieler().toArray()) {
 					// SpielerWrapper sW = (SpielerWrapper) o;
