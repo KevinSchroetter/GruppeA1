@@ -1426,6 +1426,16 @@ public class SpielBean implements iBediener, Serializable {
 		return spielerStrings;
 
 	}
+	public ArrayList<String> alleFigs(){
+		ArrayList<String> figuren = new ArrayList<String>(0);
+		
+		for(int i=0; i<anzahlSpieler;i++){
+			for (int j = 0; j<4;j++){
+				figuren.add(""+spieler[i].getFiguren(j+1).getMeinFeld().toString()+"-"+spieler[i].getFarbe().toString()+"-"+(j+1));
+			}
+		}
+		return figuren;
+	}
 
 	/**
 	 * Methode zugDurchfuehren Versucht einen Zug mit der gewaehlten Figur
@@ -1489,8 +1499,9 @@ public class SpielBean implements iBediener, Serializable {
 								+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
 				
 				setIstBeendet(true);
-				//SoundEnum.GAMEOVER.play();
+				SoundEnum.GAMEOVER.play();
 			}
+
 			return zugFelder;
 		}
 

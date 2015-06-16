@@ -50,8 +50,7 @@ public class wuerfelnServlet extends HttpServlet {
 				if (size>0){
 					for (int i = 0; i< size; i++){
 						sess.setAttribute("zug"+i,(figs.get(i).getMeinFeld().toString()));
-						System.out.println(sess.getAttribute("zug"+i).toString());
-						sess.getServletContext().setAttribute(sess.getAttribute("zug"+i).toString(),"<a href='zugDurchfuehrenServlet'>"+sess.getServletContext().getAttribute(sess.getAttribute("zug"+i).toString())+"</a>");
+						sess.getServletContext().setAttribute(sess.getAttribute("zug"+i).toString(),"<a href='zugDurchfuehrenServlet?zuZiehen="+sess.getAttribute("zug"+i).toString()+"'>"+sess.getServletContext().getAttribute(sess.getAttribute("zug"+i).toString())+"</a>");
 					}
 				}
 			}
