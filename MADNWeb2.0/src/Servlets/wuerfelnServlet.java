@@ -58,7 +58,11 @@ public class wuerfelnServlet extends HttpServlet {
 				System.out.println("ist null");
 			this.getServletContext().setAttribute("wuerfel", erg);
 			sess.getServletContext().removeAttribute("amZug");
-			sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString());		
+			if (game.getIstAmZug().getBedienung()==null){
+				sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString());	
+			}
+			else
+				sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString()+"-KI");	
 		}
 		response.sendRedirect("Spiel.jsp");
 	}

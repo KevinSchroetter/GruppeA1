@@ -78,7 +78,7 @@ public class loginServlet extends HttpServlet {
 			if(verhaltenID == 1 || verhaltenID==2){
 				game.neuerSpieler(name, farbID, verhaltenID);
 				sess.getServletContext().setAttribute("anzahlSpieler", ++anzahl);
-				sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe);
+				sess.getServletContext().setAttribute("s"+(anzahl-1)+"Farbe", farbe+"-KI");
 				sess.getServletContext().setAttribute("exist", "ja");
 				sess.getServletContext().setAttribute("lastKI", "ja");
 				System.out.println("Spieler "+(anzahl-1) +" angelegt KI");
@@ -111,8 +111,11 @@ public class loginServlet extends HttpServlet {
 				sess.getServletContext().setAttribute("sessID", "DONE");
 				game.starteSpiel();
 				sess.getServletContext().setAttribute("gestartet","ja");
-				sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe());	
-				
+				if (game.getIstAmZug().getBedienung()==null){
+					sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString());	
+				}
+				else
+					sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString()+"-KI");
 			}
 			else{		
 				sess.getServletContext().setAttribute("sessId", sess.getId());

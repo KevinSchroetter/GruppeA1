@@ -1853,6 +1853,7 @@ public class SpielBean implements iBediener, Serializable {
 	 */
 	@Override
 	public String[] zugDurchfuehrenKI() {
+		rollTheDice();
 		String[] zugFelder = null;
 		try {
 			if (getIstBeendet() == true)

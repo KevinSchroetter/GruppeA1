@@ -23,6 +23,25 @@
 		response.sendRedirect("spielBeendet.jsp");
 	}
 	if (application.getAttribute("game")!=null){
+		
+		String amZug = (String) this.getServletContext().getAttribute("amZug");
+		String s1 = (String) this.getServletContext().getAttribute("s1Farbe");
+		String s2 = (String) this.getServletContext().getAttribute("s2Farbe");
+		String s3 = (String) this.getServletContext().getAttribute("s3Farbe");
+		String s4 = (String) this.getServletContext().getAttribute("s4Farbe");
+	out.println("gleich: "+s1.equals(amZug));
+	out.println("<br>");
+	out.println(s1);
+	out.println(s2);
+	out.println(s3);
+	out.println(s4);
+	out.println(amZug);
+	
+		if ((amZug.contains("KI") && amZug.equals(s1)) || (amZug.contains("KI") && amZug.equals(s2)) || (amZug.contains("KI") && amZug.equals(s3)) || (amZug.contains("KI") && amZug.equals(s4))){
+			response.sendRedirect("zugDurchfuehrenKIServlet");
+		}
+
+		
  		out.println("<h2>" + this.getServletContext().getAttribute("amZug") + " ist am Zug</h2>"); 
  		out.println("<h2>Wuerfelergebnis: "+application.getAttribute("wuerfel")+"<h2>");
 		out.println("Ihre Sitzung: ");
@@ -85,12 +104,12 @@
 					out.println("</form>");
 				out.println("</td>");
 				out.println("<td>");
-					out.println("<form action='spielSpeichern' method='post'>");
+					out.println("<form action='spielSpeichern.jsp' method='post'>");
 						out.println("<input type='submit' name='speichern' id='speichern' value='Spiel Speichern'>");
 					out.println("</form>");
 				out.println("</td>");
 				out.println("<td>");
-					out.println("<form action='spielLaden' method='post'>");
+					out.println("<form action='spielLaden.jsp' method='post'>");
 						out.println("<input type='submit' name='laden' id='laden' value='Spiel Laden'>");
 					out.println("</form>");
 				out.println("</td>");
@@ -116,7 +135,7 @@
 			<td bgcolor=#FA5858>
 <%				if(application.getAttribute("ROTS2")!=null){
 					if(zug==false && application.getAttribute("ROTS2").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("ROTS2").toString().substring(45, 48));
+						out.println(application.getAttribute("ROTS2").toString().substring(48, 51));
 					}
 					else
 						out.println(application.getAttribute("ROTS2"));
@@ -128,7 +147,7 @@
 			<td bgcolor=#FA5858>
 <%				if(application.getAttribute("ROTS1")!=null){
 					if(zug==false && application.getAttribute("ROTS1").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("ROTS1").toString().substring(45, 48));
+						out.println(application.getAttribute("ROTS1").toString().substring(48, 51));
 					}
 					else
 						out.println(application.getAttribute("ROTS1"));
@@ -188,7 +207,7 @@
 			<td bgcolor=#00BFFF>
 <%				if(application.getAttribute("BLAUS2")!=null){
 					if(zug==false && application.getAttribute("BLAUS2").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("BLAUS2").toString().substring(45, 48));
+						out.println(application.getAttribute("BLAUS2").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("BLAUS2"));
@@ -200,7 +219,7 @@
 			<td bgcolor=#00BFFF>
 <%				if(application.getAttribute("BLAUS1")!=null){
 					if(zug==false && application.getAttribute("BLAUS1").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("BLAUS1").toString().substring(45, 48));
+						out.println(application.getAttribute("BLAUS1").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("BLAUS1"));
@@ -214,7 +233,7 @@
 			<td bgcolor=#FA5858>
 <%				if(application.getAttribute("ROTS3")!=null){
 					if(zug==false && application.getAttribute("ROTS3").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("ROTS3").toString().substring(45, 48));
+						out.println(application.getAttribute("ROTS3").toString().substring(48, 51));
 					}
 					else
 						out.println(application.getAttribute("ROTS3"));
@@ -226,7 +245,7 @@
 			<td bgcolor=#FA5858>
 <%				if(application.getAttribute("ROTS4")!=null){
 					if(zug==false && application.getAttribute("ROTS4").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("ROTS4").toString().substring(45, 48));
+						out.println(application.getAttribute("ROTS4").toString().substring(48, 51));
 					}
 					else
 						out.println(application.getAttribute("ROTS4"));
@@ -256,7 +275,7 @@
 			<td bgcolor=#00BFFF>
 <%				if(application.getAttribute("BLAUE1")!=null){
 					if(zug==false && application.getAttribute("BLAUE1").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("BLAUE1").toString().substring(45, 48));
+						out.println(application.getAttribute("BLAUE1").toString().substring(48, 51));
 					}
 					else
 						out.println(application.getAttribute("BLAUE1"));
@@ -286,7 +305,7 @@
 			<td bgcolor=#00BFFF>
 <%				if(application.getAttribute("BLAUS3")!=null){
 					if(zug==false && application.getAttribute("BLAUS3").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("BLAUS3").toString().substring(45, 48));
+						out.println(application.getAttribute("BLAUS3").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("BLAUS3"));
@@ -298,7 +317,7 @@
 			<td bgcolor=#00BFFF>
 <%				if(application.getAttribute("BLAUS4")!=null){
 					if(zug==false && application.getAttribute("BLAUS4").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("BLAUS4").toString().substring(45, 48));
+						out.println(application.getAttribute("BLAUS4").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("BLAUS4"));
@@ -953,7 +972,7 @@
 			<td bgcolor=#F4FA58>
 <%				if(application.getAttribute("GELBS2")!=null){
 					if(zug==false && application.getAttribute("GELBS2").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GELBS2").toString().substring(45, 48));
+						out.println(application.getAttribute("GELBS2").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("GELBS2"));
@@ -965,7 +984,7 @@
 			<td bgcolor=#F4FA58>
 <%				if(application.getAttribute("GELBS1")!=null){
 					if(zug==false && application.getAttribute("GELBS1").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GELBS1").toString().substring(45, 48));
+						out.println(application.getAttribute("GELBS1").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("GELBS1"));
@@ -1025,7 +1044,7 @@
 			<td bgcolor=#3ADF00>
 <%				if(application.getAttribute("GRUENS2")!=null){
 					if(zug==false && application.getAttribute("GRUENS2").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GRUENS2").toString().substring(45, 48));
+						out.println(application.getAttribute("GRUENS2").toString().substring(50, 53));
 					}
 					else
 						out.println(application.getAttribute("GRUENS2"));
@@ -1037,7 +1056,7 @@
 			<td bgcolor=#3ADF00>
 <%				if(application.getAttribute("GRUENS1")!=null){
 					if(zug==false && application.getAttribute("GRUENS1").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GRUENS1").toString().substring(45, 48));
+						out.println(application.getAttribute("GRUENS1").toString().substring(50, 53));
 					}
 					else
 						out.println(application.getAttribute("GRUENS1"));
@@ -1051,7 +1070,7 @@
 			<td bgcolor=#F4FA58>
 <%				if(application.getAttribute("GELBS3")!=null){
 					if(zug==false && application.getAttribute("GELBS3").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GELBS3").toString().substring(45, 48));
+						out.println(application.getAttribute("GELBS3").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("GELBS3"));
@@ -1063,7 +1082,7 @@
 			<td bgcolor=#F4FA58>
 <%				if(application.getAttribute("GELBS4")!=null){
 					if(zug==false && application.getAttribute("GELBS4").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GELBS4").toString().substring(45, 48));
+						out.println(application.getAttribute("GELBS4").toString().substring(49, 52));
 					}
 					else
 						out.println(application.getAttribute("GELBS4"));
@@ -1123,7 +1142,7 @@
 			<td bgcolor=#3ADF00>
 <%				if(application.getAttribute("GRUENS3")!=null){
 					if(zug==false && application.getAttribute("GRUENS3").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GRUENS3").toString().substring(45, 48));
+						out.println(application.getAttribute("GRUENS3").toString().substring(50, 53));
 					}
 					else
 						out.println(application.getAttribute("GRUENS3"));
@@ -1135,7 +1154,7 @@
 			<td bgcolor=#3ADF00>
 <%				if(application.getAttribute("GRUENS4")!=null){
 					if(zug==false && application.getAttribute("GRUENS4").toString().substring(0,1).equals("<")){
-						out.println(application.getAttribute("GRUENS4").toString().substring(45, 48));
+						out.println(application.getAttribute("GRUENS4").toString().substring(50, 53));
 					}
 					else
 						out.println(application.getAttribute("GRUENS4"));

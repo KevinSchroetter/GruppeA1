@@ -14,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import Spiel.SpielBean;
 
 /**
- * Servlet implementation class zugDurchfuehrenServlet
+ * Servlet implementation class zugDurchfuehrenKIServlet
  */
-@WebServlet("/zugDurchfuehrenServlet")
-public class zugDurchfuehrenServlet extends HttpServlet {
+@WebServlet("/zugDurchfuehrenKIServlet")
+public class zugDurchfuehrenKIServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public zugDurchfuehrenServlet() {
+    public zugDurchfuehrenKIServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,20 +39,15 @@ public class zugDurchfuehrenServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession sess=request.getSession(true);
 		SpielBean game = null;
 		if(this.getServletContext().getAttribute("game")!=null){
 			game = (SpielBean)this.getServletContext().getAttribute("game");
 		}
 		PrintWriter out = response.getWriter();
-		String zuZiehen = (String) request.getParameter("zuZiehen");
-		if(zuZiehen.contains(sess.getAttribute("farbe").toString())){
-			int chars = 0;
-			chars = sess.getAttribute("farbe").toString().length();
-			zuZiehen = zuZiehen.substring(chars);
-		}
-		out.println(zuZiehen);
-		game.zugDurchfuehren(zuZiehen);
+
+		game.zugDurchfuehrenKI();
 		if(sess.getAttribute("zug1")!=null)
 			sess.removeAttribute("zug1");
 		if(sess.getAttribute("zug2")!=null)
@@ -134,7 +129,7 @@ public class zugDurchfuehrenServlet extends HttpServlet {
 			this.getServletContext().removeAttribute("GRUENE4");
 		}
 		if (this.getServletContext().getAttribute("GELBS1")!=null){
-			this.getServletContext().removeAttribute("GELBS1");
+			this.getServletContext().removeAttribute("GRUENS1");
 		}
 		if (this.getServletContext().getAttribute("GELBS2")!=null){
 			this.getServletContext().removeAttribute("GELBS2");
@@ -146,7 +141,7 @@ public class zugDurchfuehrenServlet extends HttpServlet {
 			this.getServletContext().removeAttribute("GELBS4");
 		}
 		if (this.getServletContext().getAttribute("GELBE1")!=null){
-			this.getServletContext().removeAttribute("GELBE1");
+			this.getServletContext().removeAttribute("GRUENE1");
 		}
 		if (this.getServletContext().getAttribute("GELBE2")!=null){
 			this.getServletContext().removeAttribute("GELBE2");
@@ -176,6 +171,7 @@ public class zugDurchfuehrenServlet extends HttpServlet {
 			sess.getServletContext().setAttribute("amZug", game.getIstAmZug().getFarbe().toString()+"-KI");
 		
 		response.sendRedirect("Spiel.jsp");
+		
 		
 	}
 

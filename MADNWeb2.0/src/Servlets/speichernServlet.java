@@ -72,7 +72,7 @@ public class speichernServlet extends HttpServlet {
 		if (zugriffsTyp.equals("SER")) {
 			try {
 				iD = new DatenzugriffSerialisiert();
-				FileOutputStream fos = (FileOutputStream) iD.openFile("D:\\"
+				FileOutputStream fos = (FileOutputStream) iD.openFile("C:\\"
 						+ request.getParameter("path") + ".ser", 2);
 				iD.spielSpeichern(saveme, fos);
 				this.getServletContext().setAttribute("erfolg", "ja");
@@ -88,7 +88,7 @@ public class speichernServlet extends HttpServlet {
 			try {
 				System.out.println("Beginne Speichern mit CSV");
 				iD = new DatenzugriffCSV();
-				PrintWriter bW = (PrintWriter) iD.openFile("D:\\"
+				PrintWriter bW = (PrintWriter) iD.openFile("C:\\"
 						+ request.getParameter("path") + ".csv", 2);
 				iD.spielSpeichern(saveme, bW);
 				this.getServletContext().setAttribute("erfolg", "ja");
@@ -110,7 +110,7 @@ public class speichernServlet extends HttpServlet {
 
 				iDatenzugriff dXML = new DatenzugriffXML();
 				FileWriter fW = (FileWriter) dXML.openFile(
-						"D:\\" + request.getParameter("path") + ".xml", 1);
+						"C:\\" + request.getParameter("path") + ".xml", 1);
 
 				SpielXMLWrapper sXML = new SpielXMLWrapper();
 				ArrayList<SpielerWrapper> wrapperListe = new ArrayList<SpielerWrapper>();

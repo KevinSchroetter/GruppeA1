@@ -78,16 +78,16 @@
   		if(application.getAttribute("s3Farbe")!=null){
   			s3 = (String)application.getAttribute("s3Farbe");
   		}
-   		if((!s1.equals("ROT")) && (!s2.equals("ROT")) && (!s3.equals("ROT"))){%>
+   		if( ((!s1.equals("ROT")) && (!s2.equals("ROT")) && (!s3.equals("ROT"))) && ((!s1.equals("ROT-KI")) && (!s2.equals("ROT-KI")) && (!s3.equals("ROT-KI"))) ){%>
    			<option selected value="ROT">ROT</option>
 <%		} 
-  		if((!s1.equals("BLAU")) && (!s2.equals("BLAU")) && (!s3.equals("BLAU"))){%>
+   		if( ((!s1.equals("BLAU")) && (!s2.equals("BLAU")) && (!s3.equals("BLAU"))) && ((!s1.equals("BLAU-KI")) && (!s2.equals("BLAU-KI")) && (!s3.equals("BLAU-KI"))) ){%>
   			<option value="BLAU">BLAU</option>
 <% 		}
-   		if((!s1.equals("GRUEN")) && (!s2.equals("GRUEN")) && (!s3.equals("GRUEN"))){%>
+   		if( ((!s1.equals("GRUEN")) && (!s2.equals("GRUEN")) && (!s3.equals("GRUEN"))) && ((!s1.equals("GRUEN-KI")) && (!s2.equals("GRUEN-KI")) && (!s3.equals("GRUEN-KI"))) ){%>
    			<option value="GRUEN">GRUEN</option>
 <%		} 
-  		if((!s1.equals("GELB")) && (!s2.equals("GELB")) && (!s3.equals("GELB"))){%>
+   		if( ((!s1.equals("GELB")) && (!s2.equals("GELB")) && (!s3.equals("GELB"))) && ((!s1.equals("GELB-KI")) && (!s2.equals("GELB-KI")) && (!s3.equals("GELB-KI"))) ){%>
   			<option value="GELB">GELB</option>
 <%		}%>
  		</select>
