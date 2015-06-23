@@ -528,8 +528,8 @@ public class Eventhandler implements ActionListener {
 							actionMap.put(button, buf);
 						}
 						button = null;
-						System.out.println("-------");
-						System.out.println(actionMap.size());
+//						System.out.println("-------");
+//						System.out.println(actionMap.size());
 					}
 				}
 			}
@@ -596,11 +596,11 @@ public class Eventhandler implements ActionListener {
 				JButton value = entry.getValue();
 				String key = entry.getKey();
 				value.setIcon(imagesMap.get(value.getIcon().toString().substring(7, value.getIcon().toString().length()-4)));
-				System.out.println(value);
+//				System.out.println(value);
 			}
-			System.out.println("reach?");
+//			System.out.println("reach?");
 			actionMap.clear();
-			System.out.println(actionMap.size());
+//			System.out.println(actionMap.size());
 			button = null;
 			target = null;
 			buf = null;
