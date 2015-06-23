@@ -442,7 +442,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 					
 			}
 
-			gibMichZurueck.starteSpiel();
+		gibMichZurueck.starteSpiel();
 		return gibMichZurueck;
 
 		}

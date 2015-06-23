@@ -20,9 +20,10 @@ import Spiel.*;
 public class Spieler implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(EnumSet.allOf(FarbEnum.class));
-	
+
+	private static ArrayList<FarbEnum> farben = new ArrayList<FarbEnum>(
+			EnumSet.allOf(FarbEnum.class));
+
 	private static int spielernummer = 0;
 
 	private int meineNummer = 0;
@@ -52,26 +53,37 @@ public class Spieler implements Serializable {
 	private boolean amZug = false;
 
 	private boolean imSpiel = true;
-	/** Ein Spieler muss das ein Interface iBediener kennen, damit die KI Zugriff auf die Methoden
-	 *  des Interfaces hat.
+	/**
+	 * Ein Spieler muss das ein Interface iBediener kennen, damit die KI Zugriff
+	 * auf die Methoden des Interfaces hat.
 	 */
-	
+
 	private iBediener iB;
 
 	/**
 	 * Konstruktor zum erstellen eines Objektes, das von einem Menschen
-	 * gesteuert wird. Ein Spieler kann nicht ohne Name, Spielerfarbe und Wuerfel
-	 * existieren. Zusaetzlich wird eine statische Spielernummer beim erstellen
-	 * eines Objektes inkrementiert, durch diee in Spieler identifiziert werden
-	 * kann.
+	 * gesteuert wird. Ein Spieler kann nicht ohne Name, Spielerfarbe und
+	 * Wuerfel existieren. Zusaetzlich wird eine statische Spielernummer beim
+	 * erstellen eines Objektes inkrementiert, durch diee in Spieler
+	 * identifiziert werden kann.
 	 * 
-	 * @param name - Der Name vom Typ String, den sich ein Spieler geben darf.
-	 * @param farbe - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn des Spiels aussuchen darf.
-	 * @param startfelder - Die Zugehoerigen Startfelder eines Spielers, auf die die Figuren gesetzt werden.
-	 * @param endfelder - Die Zugehoerigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
-	 * @param s - Spiel, das der Spieler kennen muss als KI
-	 */
-	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, Spiel s) {
+	 * @param name
+	 *            - Der Name vom Typ String, den sich ein Spieler geben darf.
+	 * @param farbe
+	 *            - Eine Farbe vom Typ FarbEnum, die sich ein Spieler zu Beginn
+	 *            des Spiels aussuchen darf.
+	 * @param startfelder
+	 *            - Die Zugehoerigen Startfelder eines Spielers, auf die die
+	 *            Figuren gesetzt werden.
+	 * @param endfelder
+	 *            - Die Zugehoerigen Endfelder eines Spielers, auf die die
+	 *            Figuren ins Ziel kommen.
+	 * @param s
+	 *            - Spiel, das der Spieler kennen muss als KI
+	 */	
+	@Deprecated
+	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,
+			Endfeld[] endfelder, Spiel s) {
 		setSpielernummer();
 		setMeineNummer();
 		setName(name);
@@ -88,16 +100,29 @@ public class Spieler implements Serializable {
 	 * Erweiterung kommt jedoch die Variable "bedienung" hinzu, ueber die dem
 	 * KI-SPieler eine Verhaltensweise zugewiesen werden kann.
 	 * 
-	 * @param name - Name des Spielers vom Typ String
-	 * @param farbe - Farbe des Spielers vom Typ FarbEnum
-	 * @param startfelder - Die Zugehoerigen Startfelder eines Spielers, auf die dieFiguren gesetzt werden.
-	 * @param endfelder - Die Zugehoerigen Endfelder eines Spielers, auf die die Figuren ins Ziel kommen.
-	 * @param verhalten - Bedienung des Spielers vom Typ String, ueber den eine Kuenstliche Intelligenz zugeweisen wird (aggressiv oder defensiv).
-	 * @param s - Spiel, das der Spieler kennen muss als KI
+	 * UPDATE: Null jetzt Gültig, Spieler ist dann Menschlich...
+	 * 
+	 * @param name
+	 *            - Name des Spielers vom Typ String
+	 * @param farbe
+	 *            - Farbe des Spielers vom Typ FarbEnum
+	 * @param startfelder
+	 *            - Die Zugehoerigen Startfelder eines Spielers, auf die
+	 *            dieFiguren gesetzt werden.
+	 * @param endfelder
+	 *            - Die Zugehoerigen Endfelder eines Spielers, auf die die
+	 *            Figuren ins Ziel kommen.
+	 * @param verhalten
+	 *            - Bedienung des Spielers vom Typ String, ueber den eine
+	 *            Kuenstliche Intelligenz zugeweisen wird (aggressiv oder
+	 *            defensiv).
+	 * @param s
+	 *            - Spiel, das der Spieler kennen muss als KI
 	 */
-	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,Endfeld[] endfelder, String verhalten, Spiel s) {
-		
-		this(name, farbe, startfelder, endfelder, s);		
+	public Spieler(String name, FarbEnum farbe, Startfeld[] startfelder,
+			Endfeld[] endfelder, String verhalten, Spiel s) {
+
+		this(name, farbe, startfelder, endfelder, s);
 		KI bot = null;
 		if (verhalten.equals("aggressiv")) {
 			bot = new KI_Aggressiv(this);
@@ -105,9 +130,10 @@ public class Spieler implements Serializable {
 		} else if (verhalten.equals("defensiv")) {
 			bot = new KI_Defensiv(this);
 			this.setBedienung(bot);
-		} else
-			throw new IllegalArgumentException(
-					"KI darf nur aggressiv oder defensiv sein!");
+		} else if (verhalten == null || verhalten.equals("null")) {
+			this.setBedienung(null);
+		}
+
 	}
 
 	/**
@@ -171,14 +197,17 @@ public class Spieler implements Serializable {
 	}
 
 	/**
-	 * Setter fuer die Startfelder, die benoetigt werden, um den Spielfiguren bei
-	 * der Erstellung das korrekte Startfeld mit der Spielerfarbe zuzuweisen.
+	 * Setter fuer die Startfelder, die benoetigt werden, um den Spielfiguren
+	 * bei der Erstellung das korrekte Startfeld mit der Spielerfarbe
+	 * zuzuweisen.
 	 * 
 	 * @param startFelder
 	 *            - Array vom Typ Startfeld.
 	 */
 	private void setStartFelder(Startfeld[] startFelder) {
-		if(!startFelder[0].getFarbe().equals(getFarbe())) throw new RuntimeException("Ein Spieler kennt nur die Startfelder seiner Farbe!");
+		if (!startFelder[0].getFarbe().equals(getFarbe()))
+			throw new RuntimeException(
+					"Ein Spieler kennt nur die Startfelder seiner Farbe!");
 		this.startFelder = startFelder;
 	}
 
@@ -187,7 +216,8 @@ public class Spieler implements Serializable {
 	 * zugegriffen werden.
 	 * 
 	 * @param startFeld
-	 *            - Typ int als Index zur Rueckgabe eines bestimmten Startfeldes.
+	 *            - Typ int als Index zur Rueckgabe eines bestimmten
+	 *            Startfeldes.
 	 * @return Startfeld - das gewaehlte Startfeld
 	 */
 	private Startfeld getStartFelder(int startFeld) {
@@ -205,7 +235,9 @@ public class Spieler implements Serializable {
 	 *            - Array vom Typ Endfeld.
 	 */
 	private void setEndFelder(Endfeld[] endFelder) {
-		if(!endFelder[0].getFarbe().equals(getFarbe())) throw new RuntimeException("Ein Spieler kennt nur die Endfelder seiner Farbe!");
+		if (!endFelder[0].getFarbe().equals(getFarbe()))
+			throw new RuntimeException(
+					"Ein Spieler kennt nur die Endfelder seiner Farbe!");
 		this.endFelder = endFelder;
 	}
 
@@ -230,26 +262,30 @@ public class Spieler implements Serializable {
 	private void setFiguren(Startfeld[] startFelder) {
 		if (getFarbe() == null)
 			throw new RuntimeException("Es muss eine Farbe vergeben sein!");
-		int figCounter=1;
-		String name=getFarbe().name();
-		int farbID = farben.indexOf(getFarbe());		
+		int figCounter = 1;
+		String name = getFarbe().name();
+		int farbID = farben.indexOf(getFarbe());
 		for (int i = 0; i < Settings.maxFiguren; i++) {
-			figuren[i] = new Spielfigur(farbID,name+" "+figCounter);
+			figuren[i] = new Spielfigur(farbID, name + " " + figCounter);
 			figCounter++;
 			figuren[i].setMeinFeld(startFelder[i]);
 			figuren[i].setIstGespawnt(figuren[i].binIchGespawnt());
 			figuren[i].setBinIchAufEndposition(false);
 		}
 	}
-	
+
 	/**
-	 * Erhält ein Array aus Figuren und lädt diese in sich, sofern gültige Figuren
-	 * @param loadUs - Spielfigur[]
+	 * Erhält ein Array aus Figuren und lädt diese in sich, sofern gültige
+	 * Figuren
+	 * 
+	 * @param loadUs
+	 *            - Spielfigur[]
 	 * 
 	 * */
-	public void figurenLaden(Spielfigur[] loadUs){
-		if(loadUs == null || loadUs.length != 4) throw new IllegalArgumentException("Parameter ungültig");
-		else{
+	public void figurenLaden(Spielfigur[] loadUs) {
+		if (loadUs == null || loadUs.length != 4)
+			throw new IllegalArgumentException("Parameter ungültig");
+		else {
 			this.figuren = loadUs;
 		}
 	}
@@ -276,7 +312,9 @@ public class Spieler implements Serializable {
 	 * um auf die ArrayIndizes 0-3 zuzugreifen und so ein Spielfigur
 	 * zurueckzugeben.
 	 * 
-	 * @param figur - Ein int, bei dem die Werte 1-4 erlaubt sind, um auf eine Figur zuzugreifen.
+	 * @param figur
+	 *            - Ein int, bei dem die Werte 1-4 erlaubt sind, um auf eine
+	 *            Figur zuzugreifen.
 	 */
 	public void setZugFigur(Spielfigur figur) {
 		if (!figur.getFarbe().equals(getFarbe()))
@@ -296,7 +334,8 @@ public class Spieler implements Serializable {
 	}
 
 	/**
-	 * Getter fuer den Wuerfel des Spielers, mit dem er seinen Zug ausfuehren kann.
+	 * Getter fuer den Wuerfel des Spielers, mit dem er seinen Zug ausfuehren
+	 * kann.
 	 * 
 	 * @return meinWuerfel - Der Wuerfel eines Spielers vom Typ Wuerfel
 	 */
@@ -385,14 +424,14 @@ public class Spieler implements Serializable {
 	public KI getBedienung() {
 		return bedienung;
 	}
-	
-	private void setIBediener(Spiel s){
-		this.iB=s;
-	}
-	protected iBediener getIBediener(){
-		return iB;
+
+	private void setIBediener(Spiel s) {
+		this.iB = s;
 	}
 
+	protected iBediener getIBediener() {
+		return iB;
+	}
 
 	/**
 	 * Override der toString Methode.
@@ -402,8 +441,16 @@ public class Spieler implements Serializable {
 	 */
 	@Override
 	public String toString() {
+		
+		String bed = "Mensch";
+		if(this.bedienung instanceof KI_Aggressiv){
+			bed ="aggressiv";
+		} else if(this.bedienung instanceof KI_Defensiv){
+			
+			bed = "defensiv";
+		}
 		return "Spieler " + getMeineNummer() + " Name: " + getName()
-				+ " Farbe: " + getFarbe();
+				+ " Farbe: " + getFarbe() +" Verhalten: "+bed;
 	}
 
 	@Override
@@ -455,8 +502,11 @@ public class Spieler implements Serializable {
 	public Spielfigur[] alleFiguren() {
 		return figuren;
 	}
+
 	/**
-	 * HilfsMethode, um die Anzahl der Figuren des Spielers zu bekommen (Wird in Spiel benoetigt, daher public)
+	 * HilfsMethode, um die Anzahl der Figuren des Spielers zu bekommen (Wird in
+	 * Spiel benoetigt, daher public)
+	 * 
 	 * @return anz - int, Anzahl der Figuren des Spielers
 	 */
 	public int getAnzFiguren() {
@@ -466,10 +516,25 @@ public class Spieler implements Serializable {
 				anz++;
 		return anz;
 	}
+
 	/**
-	 * HilfsMethode zum Loeschen der static Spielernummer (Wird in Spiel benoetigt, daher public)
+	 * HilfsMethode zum Loeschen der static Spielernummer (Wird in Spiel
+	 * benoetigt, daher public)
 	 */
-	public void deleteSpielernummer(){
-		Spieler.spielernummer=0;
+	public static void deleteSpielernummer() {
+		Spieler.spielernummer = 0;
+	}
+
+	public String figurenAlsString() {
+
+		String figuren = "";
+
+		for (int i = 0; i < this.figuren.length; i++) {
+			figuren = figuren
+					+ String.format("%s,%s,", this.figuren[i].getMeinFeld()
+							.getID(), this.figuren[i].getFelderGelaufen());
+		}
+		return figuren;
+
 	}
 }

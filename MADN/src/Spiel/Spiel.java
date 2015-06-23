@@ -159,7 +159,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param hatBegonnen
 	 *            - boolean
 	 */
-	private void setHatBegonnen(boolean hatBegonnen) {
+	public void setHatBegonnen(boolean hatBegonnen) {
 		this.hatBegonnen = hatBegonnen;
 	}
 
@@ -178,7 +178,7 @@ public class Spiel implements iBediener, Serializable {
 	 * @param istBeendet
 	 *            - boolean
 	 */
-	private void setIstBeendet(boolean istBeendet) {
+	public void setIstBeendet(boolean istBeendet) {
 		this.istBeendet = istBeendet;
 	}
 
@@ -542,118 +542,127 @@ public class Spiel implements iBediener, Serializable {
 	private boolean kannZiehenEndfelder(Spielfigur figur, int zuZiehen) {
 		Endfeld[] endfelderIstAmZug = getIstAmZug().getEndFelder();
 		boolean zug = false;
-			if (zuZiehen > Settings.maxFiguren)
-				return false;
-			if(figur.getMeinFeld() instanceof Standardfeld){
-				if (zuZiehen == 1) {
-					if (endfelderIstAmZug[0].getFigur() == null){
-						return true;
-					}
-					else
-						return false;
-				}
-				if (zuZiehen == 2) {
-					if (endfelderIstAmZug[1].getFigur() == null && endfelderIstAmZug[0].getFigur()==null){
-						return true;
-					}
-					else
-						return false;
-				}
-				if (zuZiehen == 3) {
-					if (endfelderIstAmZug[2].getFigur() == null && endfelderIstAmZug[1].getFigur()==null && endfelderIstAmZug[0].getFigur()==null) {
-						return true;
-					}
-					else
-						return false;
-				}
-				if (zuZiehen == 4) {
-					if (endfelderIstAmZug[3].getFigur() == null && endfelderIstAmZug[2].getFigur()==null && endfelderIstAmZug[1].getFigur()==null && endfelderIstAmZug[0].getFigur()==null) {
-						return true;
-					}
-					else
-						return false;
-			
-				}
+		if (zuZiehen > Settings.maxFiguren)
+			return false;
+		if (figur.getMeinFeld() instanceof Standardfeld) {
+			if (zuZiehen == 1) {
+				if (endfelderIstAmZug[0].getFigur() == null) {
+					return true;
+				} else
+					return false;
 			}
-			else{
-				for (Endfeld e:endfelderIstAmZug){
-					if(e.getFigur()!=null){
-					if(e == figur.getMeinFeld())System.out.println("== TRUE");
+			if (zuZiehen == 2) {
+				if (endfelderIstAmZug[1].getFigur() == null
+						&& endfelderIstAmZug[0].getFigur() == null) {
+					return true;
+				} else
+					return false;
+			}
+			if (zuZiehen == 3) {
+				if (endfelderIstAmZug[2].getFigur() == null
+						&& endfelderIstAmZug[1].getFigur() == null
+						&& endfelderIstAmZug[0].getFigur() == null) {
+					return true;
+				} else
+					return false;
+			}
+			if (zuZiehen == 4) {
+				if (endfelderIstAmZug[3].getFigur() == null
+						&& endfelderIstAmZug[2].getFigur() == null
+						&& endfelderIstAmZug[1].getFigur() == null
+						&& endfelderIstAmZug[0].getFigur() == null) {
+					return true;
+				} else
+					return false;
+
+			}
+		} else {
+			for (Endfeld e : endfelderIstAmZug) {
+				if (e.getFigur() != null) {
+					if (e == figur.getMeinFeld())
+						System.out.println("== TRUE");
 					else
 						System.out.println("== FALSE");
-					if(e.equals(figur.getMeinFeld()))System.out.println("equals TREU");
+					if (e.equals(figur.getMeinFeld()))
+						System.out.println("equals TREU");
 					else
 						System.out.println("equals FALSE");
-					System.out.println("FIGURVORHANDEN FELDNAME: "+e+" FIGUR AUF DIESEM FELD: "+e.getFigur().getName()+" MEINE FIGUR: "+figur.getName()+" MEIN FELD: "+figur.getMeinFeld());
-					}
-					else{
-						
-						if(e == figur.getMeinFeld())System.out.println("== TRUE");
-						else
-							System.out.println("== FALSE");	
-						if(e.equals(figur.getMeinFeld()))System.out.println("equals TREU");
-						else
-							System.out.println("equals FALSE");
-						System.out.println("KEINEFIGURVORHANEN! ");
-					}
-				}
-				
-				
-				if (zuZiehen == 1) {
-					if (figur.getMeinFeld()==endfelderIstAmZug[3]){
-						return false;
-					}
-					if (figur.getMeinFeld()==endfelderIstAmZug[2]&&endfelderIstAmZug[3].getFigur()==null){
-						return true;
-					}
-					if(figur.getMeinFeld()==endfelderIstAmZug[1] && endfelderIstAmZug[2].getFigur()==null){
-						return true;
-					}
+					System.out.println("FIGURVORHANDEN FELDNAME: " + e
+							+ " FIGUR AUF DIESEM FELD: "
+							+ e.getFigur().getName() + " MEINE FIGUR: "
+							+ figur.getName() + " MEIN FELD: "
+							+ figur.getMeinFeld());
+				} else {
 
-					if (figur.getMeinFeld()==endfelderIstAmZug[0] && endfelderIstAmZug[1].getFigur()==null){
-						return true;
-					}
-
-				}
-			
-				else if (zuZiehen == 2) {
-					if (figur.getMeinFeld()==endfelderIstAmZug[3]){
-						return false;
-					}
-					else if (figur.getMeinFeld()==endfelderIstAmZug[2]){
-						return false;
-					}
-					else if (figur.getMeinFeld()==endfelderIstAmZug[1] && endfelderIstAmZug[2].getFigur()==null && endfelderIstAmZug[3].getFigur()==null){
-						return true;
-					}
-					else if (figur.getMeinFeld()==endfelderIstAmZug[0] && endfelderIstAmZug[1].getFigur()==null && endfelderIstAmZug[2].getFigur()==null){
-						return true;
-					}					
-				}
-				
-				else if (zuZiehen == 3) {
-					if (figur.getMeinFeld()==endfelderIstAmZug[3]){
-						return false;
-					}
-					else if (figur.getMeinFeld()==endfelderIstAmZug[2]){
-						return false;
-					}
-					else if (figur.getMeinFeld()==endfelderIstAmZug[1]){
-						return false;
-					}
-					else if (figur.getMeinFeld()==endfelderIstAmZug[0] && endfelderIstAmZug[1].getFigur()==null & endfelderIstAmZug[2].getFigur()==null && endfelderIstAmZug[3].getFigur()==null){
-						return true;
-					}
-					else{
-						return false;
-					}
-					
-				}
-				else if (zuZiehen == 4) {
-					return false;
+					if (e == figur.getMeinFeld())
+						System.out.println("== TRUE");
+					else
+						System.out.println("== FALSE");
+					if (e.equals(figur.getMeinFeld()))
+						System.out.println("equals TREU");
+					else
+						System.out.println("equals FALSE");
+					System.out.println("KEINEFIGURVORHANEN! ");
 				}
 			}
-			System.out.println("Daraus folgt ZUG = "+zug);
+
+			if (zuZiehen == 1) {
+				if (figur.getMeinFeld() == endfelderIstAmZug[3]) {
+					return false;
+				}
+				if (figur.getMeinFeld() == endfelderIstAmZug[2]
+						&& endfelderIstAmZug[3].getFigur() == null) {
+					return true;
+				}
+				if (figur.getMeinFeld() == endfelderIstAmZug[1]
+						&& endfelderIstAmZug[2].getFigur() == null) {
+					return true;
+				}
+
+				if (figur.getMeinFeld() == endfelderIstAmZug[0]
+						&& endfelderIstAmZug[1].getFigur() == null) {
+					return true;
+				}
+
+			}
+
+			else if (zuZiehen == 2) {
+				if (figur.getMeinFeld() == endfelderIstAmZug[3]) {
+					return false;
+				} else if (figur.getMeinFeld() == endfelderIstAmZug[2]) {
+					return false;
+				} else if (figur.getMeinFeld() == endfelderIstAmZug[1]
+						&& endfelderIstAmZug[2].getFigur() == null
+						&& endfelderIstAmZug[3].getFigur() == null) {
+					return true;
+				} else if (figur.getMeinFeld() == endfelderIstAmZug[0]
+						&& endfelderIstAmZug[1].getFigur() == null
+						&& endfelderIstAmZug[2].getFigur() == null) {
+					return true;
+				}
+			}
+
+			else if (zuZiehen == 3) {
+				if (figur.getMeinFeld() == endfelderIstAmZug[3]) {
+					return false;
+				} else if (figur.getMeinFeld() == endfelderIstAmZug[2]) {
+					return false;
+				} else if (figur.getMeinFeld() == endfelderIstAmZug[1]) {
+					return false;
+				} else if (figur.getMeinFeld() == endfelderIstAmZug[0]
+						&& endfelderIstAmZug[1].getFigur() == null
+						& endfelderIstAmZug[2].getFigur() == null
+						&& endfelderIstAmZug[3].getFigur() == null) {
+					return true;
+				} else {
+					return false;
+				}
+
+			} else if (zuZiehen == 4) {
+				return false;
+			}
+		}
+		System.out.println("Daraus folgt ZUG = " + zug);
 		return zug;
 	}
 
@@ -854,12 +863,12 @@ public class Spiel implements iBediener, Serializable {
 		FarbEnum targetColor = zuSchlagen.getFarbe();
 
 		if (!targetColor.equals(myColor)) {
-			
+
 			figur.setMeinFeld(getSpielbrett().getStandardFelder()[ZielfeldID]);
-			//System.err.printf("%s schlägt %s\n", figur, zuSchlagen);
+			// System.err.printf("%s schlägt %s\n", figur, zuSchlagen);
 			getSpielbrett().getStandardFelder()[aktFeldID].setFigur(null);
 			figur.incSchritteGelaufen(getAugenzahl());
-			
+
 			for (int i = 0; i < getSpielbrett().getAlleStartFelderEinerFarbe(
 					targetColor).length; i++) {
 				if (getSpielbrett().getAlleStartFelderEinerFarbe(targetColor)[i]
@@ -877,11 +886,12 @@ public class Spiel implements iBediener, Serializable {
 				}
 			}
 		}
-		 if (firstBlood == false) {
-		 SoundEnum.KILL.play();
-		 SoundEnum.FIRSTBLOOD.play();
-		 firstBlood = true;
-		 } else	SoundEnum.KILL.play();
+		if (firstBlood == false) {
+			SoundEnum.KILL.play();
+			SoundEnum.FIRSTBLOOD.play();
+			firstBlood = true;
+		} else
+			SoundEnum.KILL.play();
 
 		return targetArea;
 	}
@@ -942,12 +952,12 @@ public class Spiel implements iBediener, Serializable {
 					break;
 				}
 			}
-		 if (firstBlood == false) {
-		 SoundEnum.KILL.play();
-		 SoundEnum.FIRSTBLOOD.play();
-		 firstBlood = true;
-		 } else
-		SoundEnum.KILL.play();
+		if (firstBlood == false) {
+			SoundEnum.KILL.play();
+			SoundEnum.FIRSTBLOOD.play();
+			firstBlood = true;
+		} else
+			SoundEnum.KILL.play();
 		return targetArea;
 	}
 
@@ -1020,10 +1030,12 @@ public class Spiel implements iBediener, Serializable {
 		if (aktFeld instanceof Endfeld) {
 			for (int i = 0; i < getSpielbrett().getAlleEndFelderEinerFarbe(
 					figur.getFarbe()).length; i++) {
-				if (getSpielbrett().getAlleEndFelderEinerFarbe(
-						figur.getFarbe())[i].getID().equals(aktFeldIDS)) {
-					getSpielbrett().getAlleEndFelderEinerFarbe(
-							figur.getFarbe())[i].setFigur(null);
+				if (getSpielbrett()
+						.getAlleEndFelderEinerFarbe(figur.getFarbe())[i]
+						.getID().equals(aktFeldIDS)) {
+					getSpielbrett()
+							.getAlleEndFelderEinerFarbe(figur.getFarbe())[i]
+							.setFigur(null);
 				}
 			}
 		} else if (aktFeld instanceof Standardfeld) {
@@ -1199,13 +1211,13 @@ public class Spiel implements iBediener, Serializable {
 		}
 		;
 		// DEBUG SYSOS
-		// System.out.println("ZUGFIGUREN: "+alleZugFiguren().size());
-		// System.out.println("Anzahl wuerfe: "+getAnzWuerfe());
-		// System.out.println("Augenzahl: "+getAugenzahl());
-		// System.out.println("Am Zug: "+getIstAmZug());
-		// System.out.println("Zug Moeglich: "+getZugMoeglich());
-		// System.out.println("Alle auf Spawn: "+getAlleAufSpawn());
-		// System.out.println("");
+		System.out.println("ZUGFIGUREN: " + alleZugFiguren().size());
+		System.out.println("Anzahl wuerfe: " + getAnzWuerfe());
+		System.out.println("Augenzahl: " + getAugenzahl());
+		System.out.println("Am Zug: " + getIstAmZug());
+		System.out.println("Zug Moeglich: " + getZugMoeglich());
+		System.out.println("Alle auf Spawn: " + getAlleAufSpawn());
+		System.out.println("");
 	}
 
 	/**
@@ -1245,7 +1257,7 @@ public class Spiel implements iBediener, Serializable {
 		}
 		if ((alleZugFiguren().size() != 0)
 				|| (getAlleAufSpawn() == false && getAnzWuerfe() >= 1 && getAugenzahl() != 6))
-				return;
+			return;
 		if (getHatBegonnen() == false)
 			throw new RuntimeException("Spiel hat noch nicht begonnen");
 
@@ -1464,7 +1476,8 @@ public class Spiel implements iBediener, Serializable {
 					&& getAugenzahl() != 6) {
 				naechsterSpieler();
 			}
-			System.out.println("Naechster Spieler: "+this.getIstAmZug().getFarbe().toString());
+			System.out.println("Naechster Spieler: "
+					+ this.getIstAmZug().getFarbe().toString());
 			if (endCounter == 3 && figur.getBinIchAufEndpostion() == true) {
 				System.out
 						.println("++++++++++++++++++++++++++++++++++"
@@ -1472,7 +1485,7 @@ public class Spiel implements iBediener, Serializable {
 								+ " "
 								+ farbeIstAmZug
 								+ " hat GEWONNEN! SPIEL BEENDET!+++++++++++++++++++++++++++++++++++");
-				
+
 				setIstBeendet(true);
 				SoundEnum.GAMEOVER.play();
 			}
@@ -1482,9 +1495,12 @@ public class Spiel implements iBediener, Serializable {
 
 		catch (FigurKannNichtZiehenException e) {
 			// zugErfolgreich = false;
+			
 			System.out
 					.println("Zug fehlgeschlagen, diese Figur kann nicht ziehen!");
 			this.resetWuerfe();
+			synchronized(e){
+			e.printStackTrace();}
 			// return zugErfolgreich;
 			zugFelder = null;
 			return zugFelder;
@@ -1777,6 +1793,36 @@ public class Spiel implements iBediener, Serializable {
 		this.anzWuerfe = 0;
 	}
 
+	/***
+	 * @author Alexander Brückner Aktualisiert die Statuseigenschaften von den
+	 *         Spielfiguren
+	 ***/
+	public void update() {
+
+		for (Spieler s : this.spieler) {
+			if (s != null) {
+				for (Spielfigur f : s.alleFiguren()) {
+
+					if (f != null) {
+						if (f.getMeinFeld() instanceof Startfeld) {
+							f.setIstGespawnt(false);
+							f.setBinIchAufEndposition(false);
+							f.setIstImZiel(false);
+							// f.setKannZiehen(false);
+							f.setKannInsZiel(false);
+							f.setKannSchlagen(false);
+						} else if (f.getMeinFeld() instanceof Standardfeld) {
+							f.setIstGespawnt(true);
+						}
+
+					}
+
+				}
+			}
+		}
+
+	}
+
 	@Override
 	public void starteSpiel() {
 		try {
@@ -1834,7 +1880,7 @@ public class Spiel implements iBediener, Serializable {
 				throw new SpielBeendetException("Spiel ist schon beendet.");
 			if (istAmZug.getBedienung() == null)
 				throw new MethodeFuerKiException("Spieler ist keine KI!");
-			else{
+			else {
 				zugFelder = istAmZug.getBedienung().zugWaehlen();
 			}
 			return zugFelder;
@@ -1860,10 +1906,10 @@ public class Spiel implements iBediener, Serializable {
 	public ArrayList<String> getZugInfo() {
 		if (!this.zugFiguren.isEmpty()) {
 			ArrayList<String> infos = new ArrayList<String>();
-			for (Spielfigur fig : zugFiguren){
+			for (Spielfigur fig : zugFiguren) {
 				infos.add(fig.getMeinFeld().getGuiID());
 			}
-			
+
 			return infos;
 		} else
 			return null;
@@ -1876,18 +1922,20 @@ public class Spiel implements iBediener, Serializable {
 
 	@Override
 	public ArrayList<String> updateGUIFigures() {
-		ArrayList<String>alleFiguren=new ArrayList<String>();
-		alleFiguren.add("Spieler "+this.getIstAmZug().getName()+" "+this.getIstAmZug().getFarbe()+" ist am Zug!");
-		alleFiguren.add("Z"+this.getAugenzahl());
+		ArrayList<String> alleFiguren = new ArrayList<String>();
+		alleFiguren.add("Spieler " + this.getIstAmZug().getName() + " "
+				+ this.getIstAmZug().getFarbe() + " ist am Zug!");
+		alleFiguren.add("Z" + this.getAugenzahl());
 		System.out.println(spieler.length);
-		for(int i = 0;i<spieler.length;i++){
-			if(spieler[i]!=null){
-				for(Spielfigur f: spieler[i].alleFiguren()){
-					alleFiguren.add(f.getMeinFeld().getGuiID()+"-"+f.getName());
+		for (int i = 0; i < spieler.length; i++) {
+			if (spieler[i] != null) {
+				for (Spielfigur f : spieler[i].alleFiguren()) {
+					alleFiguren.add(f.getMeinFeld().getGuiID() + "-"
+							+ f.getName());
 				}
-					
+
 			}
-		}	
+		}
 		return alleFiguren;
 	}
 
@@ -1895,13 +1943,14 @@ public class Spiel implements iBediener, Serializable {
 	public Boolean[] updateGUIInfo() {
 		Boolean infos[] = new Boolean[2];
 		infos[0] = this.getZugMoeglich();
-		if (this.istAmZug.getBedienung()==null)
+		if (this.istAmZug.getBedienung() == null)
 			infos[1] = false;
 		else
 			infos[1] = true;
-		
+
 		return infos;
 	}
+
 	public Boolean getBeendet() {
 		return this.istBeendet;
 	}
@@ -1913,8 +1962,8 @@ public class Spiel implements iBediener, Serializable {
 
 	@Override
 	public String zugFarbe() {
-		return istAmZug.getFarbe().toString(); 
-		
+		return istAmZug.getFarbe().toString();
+
 	}
 
 }

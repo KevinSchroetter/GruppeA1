@@ -32,6 +32,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import Einstellungen.FarbEnum;
 import Einstellungen.SoundEnum;
 import Spiel.DatenzugriffCSV;
+import Spiel.DatenzugriffCSVNew;
 import Spiel.DatenzugriffSerialisiert;
 import Spiel.Spiel;
 import Spiel.iBediener;
@@ -42,7 +43,7 @@ public class Eventhandler implements ActionListener {
 	private iBediener myGame = new Spiel();
 	private GUI myGUI = null;
 	private iDatenzugriff saveSer = new DatenzugriffSerialisiert();
-	private iDatenzugriff saveCsv = new DatenzugriffCSV();
+	private iDatenzugriff saveCsv = new DatenzugriffCSVNew();
 	private iDatenzugriff savePDF = new DatenzugriffPDF();
 	private HashMap<String, JButton> naviMap = null;
 	private HashMap<String, JButton> stdFieldsMap = null;
@@ -528,8 +529,8 @@ public class Eventhandler implements ActionListener {
 							actionMap.put(button, buf);
 						}
 						button = null;
-						System.out.println("-------");
-						System.out.println(actionMap.size());
+//						System.out.println("-------");
+//						System.out.println(actionMap.size());
 					}
 				}
 			}
@@ -596,11 +597,11 @@ public class Eventhandler implements ActionListener {
 				JButton value = entry.getValue();
 				String key = entry.getKey();
 				value.setIcon(imagesMap.get(value.getIcon().toString().substring(7, value.getIcon().toString().length()-4)));
-				System.out.println(value);
+//				System.out.println(value);
 			}
-			System.out.println("reach?");
+//			System.out.println("reach?");
 			actionMap.clear();
-			System.out.println(actionMap.size());
+//			System.out.println(actionMap.size());
 			button = null;
 			target = null;
 			buf = null;

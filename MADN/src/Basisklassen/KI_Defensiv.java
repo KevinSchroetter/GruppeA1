@@ -58,4 +58,8 @@ public class KI_Defensiv extends KI implements Serializable {
 		return zugFelder;
 					
 	}
+	
+	public String getVerhalten(){
+		return "defensiv";
+	}
 }

@@ -5,12 +5,15 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.*;
+
 import Einstellungen.SoundEnum;
+
 import java.awt.Color;
 import java.awt.geom.RoundRectangle2D;
 
@@ -38,17 +41,25 @@ public class GUI {
 	private JPanel osten = new JPanel();
 	private JPanel westen = new JPanel();
 	private JLayeredPane mitte = new JLayeredPane();
-	private JTextArea console = new JTextArea(8,100);
+	private JTextArea console = new JTextArea(3,100);
 	private JFileChooser dateiGrabber = new JFileChooser();
+	private Ladebalken meep = null;
+	private JScrollPane gameScroller = null;
+	private JScrollPane windowScroller = null;
+	private JFrame papaFrame = null;
 
 	
 
-	public GUI(String titel, int spalten, int zeilen, int index){
+	public GUI(String titel, int spalten, int zeilen, int index,Ladebalken meep){
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		this.meep = meep;
 		SoundEnum.init();
 		SoundEnum.volume = SoundEnum.Volume.MEDIUM;
 		frame = new JFrame(titel);
+
 		BorderLayout bl = new BorderLayout();
 		frame.setLayout(bl);
+		
 		initLabelMap();
 		initImagesMap();
 		initGifMap();
@@ -57,7 +68,6 @@ public class GUI {
 		
 		setEventhandler();
 		setMousehandler();
-		
 		createPanelNORTH();
 		createPanelEAST();
 		createPanelSOUTH();
@@ -66,7 +76,7 @@ public class GUI {
 		//makeVisible();
 		
 	 //   disableAllFields();
-	    frame.setBounds(400, 100, 1280, 1080);
+	    frame.setBounds(0, 0, 1280, 1080);
 	    frame.setVisible(true);
 	    frame.setResizable(false);
 	    frame.getRootPane().setBackground(Color.DARK_GRAY);
@@ -77,6 +87,17 @@ public class GUI {
 	    
 	    //console.setBackground(Color.DARK_GRAY);
 	    //console.setForeground(Color.gray);
+	    gameScroller = new JScrollPane(mitte);
+	    frame.add(gameScroller);
+	    meep.setProgress(12);
+	    meep.kill();
+	    meep = null;
+	    
+	    windowScroller = new JScrollPane(frame);
+	    papaFrame = new JFrame();
+	    papaFrame.add(frame);
+	    papaFrame.setVisible(true);
+	    windowScroller.setVisible(true);
 	}
 
 	private void setEndFieldImage(String imageName) {
@@ -173,11 +194,13 @@ public class GUI {
 		ImageIcon icon = new ImageIcon(path);
 		icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_SMOOTH));
 		imagesMap.put(imageName, icon);
+		meep.setProgress(2);
 	}
 	private void addIconToGifMap(String imageName, String path, int width, int length){
 		ImageIcon icon = new ImageIcon(path);
 			icon.setImage(icon.getImage().getScaledInstance(width,length,Image.SCALE_FAST));
 			gifMap.put(imageName, icon);
+			meep.setProgress(2);
 	}
 	private void initLabelMap(){
 		JLabel header = new JLabel("MADN - Gore Edition");
@@ -190,6 +213,7 @@ public class GUI {
 		labelMap.put("consoleHeader",consoleHeader);
 		JLabel game = new JLabel();
 		labelMap.put("game",game);
+		meep.setProgress(10);
 	}
 	private void initImagesMap(){
 		addIconToImagesMap("field","images/game.png",986, 886);

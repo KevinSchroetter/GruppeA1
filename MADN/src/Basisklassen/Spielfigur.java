@@ -293,6 +293,19 @@ public class Spielfigur implements Serializable {
 		setID(++Spielfigur.anzahlFiguren);
 		setName(name);
 	}
+	
+	
+	/**
+	 * 
+	 * Konstruktor fuer Klasse Spielfigur mit Enum statt Integer fuer die Farbe
+	 * @author Alexander Brückner
+	 ***/
+	
+	public Spielfigur(FarbEnum farbe, String name) {
+		setFarbe(farbe);
+		setID(++Spielfigur.anzahlFiguren);
+		setName(name);
+	}
 
 	/**
 	 * Ermittelt, ob das Targetfeld gueltig ist, und ob eine Figur darauf steht.

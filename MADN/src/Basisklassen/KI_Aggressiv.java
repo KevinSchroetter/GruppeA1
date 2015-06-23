@@ -133,4 +133,8 @@ public class KI_Aggressiv extends KI {
 		return zugFelder;
 
 	}
+	
+	public String getVerhalten(){
+		return "aggressiv";
+	}
 }
