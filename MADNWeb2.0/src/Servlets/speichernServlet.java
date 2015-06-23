@@ -119,7 +119,7 @@ public class speichernServlet extends HttpServlet {
 				SpielBean speicherMich = (SpielBean) sess.getServletContext()
 						.getAttribute("game");
 
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < speicherMich.getSpieler().length; i++) {
 					if (speicherMich.getSpieler()[i] != null) {
 						SpielerWrapper sW = new SpielerWrapper();
 						Spieler buf = speicherMich.getSpieler()[i];

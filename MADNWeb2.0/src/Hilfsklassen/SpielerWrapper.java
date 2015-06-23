@@ -18,10 +18,10 @@ public class SpielerWrapper {
 	private int nummer;
 	
 	public SpielerWrapper(){
-		this.name ="yolo";
+		this.name ="nameless";
 		this.farbe = null;
 		this.istAmZug = false;
-		this.bedienung = "swag";
+		this.bedienung = null;//
 		this.nummer = 0;
 	}
 

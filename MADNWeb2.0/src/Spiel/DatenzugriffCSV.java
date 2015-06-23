@@ -172,7 +172,7 @@ public class DatenzugriffCSV implements iDatenzugriff {
 					verhalten = "defensiv";
 					;
 				} else if (gamer[i].getBedienung() == null) {
-					verhalten = "mensch";
+					verhalten = null;
 				}
 
 				// Variablen fertig, wrapping in Outputstring via String.format
@@ -425,11 +425,19 @@ public class DatenzugriffCSV implements iDatenzugriff {
 			} else if (spielerFarbenS[i].equals("GELB")) {
 				farbBuf = FarbEnum.GELB;
 			}
-
+			
+			if(!(spielerVerhaltenS[i].equals("null"))){
 			players[i] = new Spieler(spielerNamenS[i], farbBuf,
 					sB.getAlleStartFelderEinerFarbe(farbBuf),
 					sB.getAlleEndFelderEinerFarbe(farbBuf),
 					spielerVerhaltenS[i], game);
+			}
+			else{
+				players[i] = new Spieler(spielerNamenS[i], farbBuf,
+						sB.getAlleStartFelderEinerFarbe(farbBuf),
+						sB.getAlleEndFelderEinerFarbe(farbBuf),
+						game);
+			}
 
 			if (spielerAmZugS[i].equals("true")) {
 				players[i].setAmZug(true);
