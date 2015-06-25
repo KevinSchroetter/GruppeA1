@@ -43,12 +43,20 @@ public class TestSpielSpeichern {
 		//CSV
 		iDatenzugriff dCSV = new DatenzugriffCSV();
 		BufferedWriter bw = (BufferedWriter) dCSV.openFile("tutCSVDenn.csv", 2);
+		long before = System.nanoTime();
 		dCSV.spielSpeichern(speicherMich, bw);
+		long after = System.nanoTime();
+		long executiontime = (after-before)/1000000;
+		System.out.println("CSV nach "+executiontime+" ms beendet.");
 		dCSV.closeFile(bw);
 		//Serialsiert
 		iDatenzugriff ds = new DatenzugriffSerialisiert();
 		FileOutputStream closeMe = (FileOutputStream) ds.openFile("savegame.ser", 2);
+		before = System.nanoTime();
 		ds.spielSpeichern(speicherMich,closeMe);
+		after = System.nanoTime();
+		executiontime = (after-before)/1000000;
+		System.out.println("Serialisiert nach "+executiontime+" ms beendet.");
 		ds.closeFile(closeMe);
 		
 		

@@ -39,7 +39,11 @@ public class TestSpielLaden {
 		//CSV Laden
 		System.out.println("--------CSV--------");
 		BufferedReader br = (BufferedReader) dCSV.openFile("meep.csv", 1);
+		long before = System.nanoTime();
 		ladeMich = (Spiel) dCSV.spielLaden(br);
+		long after = System.nanoTime();
+		long time = (after-before) / 1000000;
+		System.out.println("Laden nach "+time+" ms beendet");
 		dCSV.closeFile(br);		
 		ladeMich.ausgabeSpielerListe();
 		ladeMich.ausgabeFiguren();	
